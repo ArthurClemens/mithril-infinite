@@ -1,0 +1,61 @@
+.scroll-view.images {
+    margin: 0 auto;
+    background: #fff;
+    
+    .scroll-content {
+        .page + .page {
+            border-top: 1px solid #ddd;
+        }
+        .page.odd {
+            background-color: #f0f0f0;
+
+            .list-item + .list-item {
+                border-top: 1px solid #ddd;
+            }
+        }
+        .page.even {
+            background-color: #e0e0e0;
+
+            .list-item + .list-item {
+                border-top: 1px solid #ccc;
+            }
+        }
+        .list-item {
+            position: relative;
+            display: block;
+            cursor: pointer;
+            
+            .image {
+                display: block;
+                height: 100%;
+                position: absolute;
+                left: 64px;
+                top: 0;
+                background-size: contain;
+                background-repeat: no-repeat;
+            }
+            .pageNum,
+            .toggle {
+                $_size: 40px;
+                position: absolute;
+                top: 8px;
+                display: block;
+                color: #222;
+                width: $_size;
+                height: $_size;
+                
+                text-align: center;
+                line-height: $_size;
+            }
+            .pageNum {
+                left: 8px;
+                font-size: 13px;
+                color: #999;
+            }
+            .toggle {
+                right: 24px;
+                background-color: #fff;
+            }
+        }
+    }
+}

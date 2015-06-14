@@ -1,0 +1,62 @@
+$_grid_spacing: 8px;
+$_item_size: 210px;
+
+.scroll-view.horizontal {
+    margin: 0;
+    height: $_item_size + 20; // add space for scrollbar
+    background: #fff;
+
+    .scroll-content {
+        padding: 0;
+        margin: 0;
+        font-size: 0;
+        
+        .content,
+        .paddingBefore,
+        .paddingAfter {
+            display: inline-block;
+        }
+
+        .content {
+            margin: 0;
+            font-size: 0;
+
+            .page {
+                display: inline-block;
+                height: $_item_size;
+            }
+
+            .grid-item {
+                display: inline-block;
+                height: $_item_size;
+                width: $_item_size;
+                background-color: #f0f0f0;
+                margin: 0 $_grid_spacing/2;
+
+                .image-holder {
+                    $_padding: 10px;
+                    height: $_item_size - 2*$_padding;
+                    width: $_item_size - 2*$_padding;
+                    overflow: hidden;
+                    position: relative;
+                    margin: $_padding;
+
+                    .image {
+                        position: absolute;
+                        left: auto;
+                        top: 0;
+                        right: auto;
+                        bottom: 0;
+                        width: 100%;
+                        background-size: contain;
+                        background-repeat: no-repeat;
+                        background-position-x: 50%;
+                        opacity: 0;
+                        transition: opacity .7s;
+                    }
+                }
+            }
+        }
+    }
+}
+
