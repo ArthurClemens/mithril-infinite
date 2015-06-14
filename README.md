@@ -1,5 +1,9 @@
 # Infinite scroll for Mithril
 
+## Examples
+
+[Infinite Scroll Examples](http://arthurclemens.github.io/mithril-infinite/index.html)
+
 
 ## Features
 
@@ -168,10 +172,6 @@ View the example site for example with `http-server`:
 
 ## About the examples 
 
-Examples are best experienced on mobile (but desktop will work fine too).
-
-
-
 ### Images
 
 A long list of images; each can be expanded. On a regular laptop/desktop screen, not more than 3 page elements (out of 20) exist at a time.
@@ -200,6 +200,7 @@ This is a bit more tricky because the horizonal width needs to be set ('auto' or
 In the demo we use `pageSize` that returns the item width * item count, making sure we have a default width in case the count is 0 (which happens when no data has been received yet).
 
 With CSS, the blocks 'content', 'paddingBefore' and 'paddingAfter' need to be set to `inline-block`.
+
 
 
 ## Future improvements
