@@ -1,0 +1,49 @@
+.scroll-view.grid {
+  margin: 0 auto;
+  background: #fff; }
+  .scroll-view.grid .scroll-content {
+    padding: 16px 0;
+    margin: -4px; }
+    .scroll-view.grid .scroll-content .content {
+      margin: 0 auto;
+      font-size: 0; }
+      .scroll-view.grid .scroll-content .content .grid-item {
+        display: inline-block;
+        height: 210px;
+        width: 210px;
+        background-color: #f0f0f0;
+        margin: 0 4px 8px 4px; }
+        .scroll-view.grid .scroll-content .content .grid-item .image-holder {
+          height: 190px;
+          width: 190px;
+          overflow: hidden;
+          position: relative;
+          margin: 10px; }
+          .scroll-view.grid .scroll-content .content .grid-item .image-holder .image {
+            position: absolute;
+            left: auto;
+            top: 0;
+            right: auto;
+            bottom: 0;
+            width: 100%;
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position-x: 50%;
+            opacity: 0;
+            transition: opacity .7s; }
+
+@media (min-width: 1122px) {
+  .scroll-view.grid .scroll-content .content {
+    width: 896px; } }
+@media (max-width: 1122px) {
+  .scroll-view.grid .scroll-content .content {
+    width: 896px; } }
+@media (max-width: 896px) {
+  .scroll-view.grid .scroll-content .content {
+    width: 670px; } }
+@media (max-width: 670px) {
+  .scroll-view.grid .scroll-content .content {
+    width: 444px; } }
+@media (max-width: 444px) {
+  .scroll-view.grid .scroll-content .content {
+    width: 218px; } }

@@ -1,0 +1,42 @@
+.scroll-view.images {
+  margin: 0 auto;
+  background: #fff; }
+  .scroll-view.images .scroll-content .page + .page {
+    border-top: 1px solid #ddd; }
+  .scroll-view.images .scroll-content .page.odd {
+    background-color: #f0f0f0; }
+    .scroll-view.images .scroll-content .page.odd .list-item + .list-item {
+      border-top: 1px solid #ddd; }
+  .scroll-view.images .scroll-content .page.even {
+    background-color: #e0e0e0; }
+    .scroll-view.images .scroll-content .page.even .list-item + .list-item {
+      border-top: 1px solid #ccc; }
+  .scroll-view.images .scroll-content .list-item {
+    position: relative;
+    display: block;
+    cursor: pointer; }
+    .scroll-view.images .scroll-content .list-item .image {
+      display: block;
+      height: 100%;
+      position: absolute;
+      left: 64px;
+      top: 0;
+      background-size: contain;
+      background-repeat: no-repeat; }
+    .scroll-view.images .scroll-content .list-item .pageNum,
+    .scroll-view.images .scroll-content .list-item .toggle {
+      position: absolute;
+      top: 8px;
+      display: block;
+      color: #222;
+      width: 40px;
+      height: 40px;
+      text-align: center;
+      line-height: 40px; }
+    .scroll-view.images .scroll-content .list-item .pageNum {
+      left: 8px;
+      font-size: 13px;
+      color: #999; }
+    .scroll-view.images .scroll-content .list-item .toggle {
+      right: 24px;
+      background-color: #fff; }
