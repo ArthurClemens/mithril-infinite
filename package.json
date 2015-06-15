@@ -4,7 +4,7 @@
   "description": "Infinite scroll with Mithril",
   "main": "index.js",
   "scripts": {
-    "postinstall": "node scripts/copy-libs-examples examples/src/lib",
+    "postinstall": "node scripts/copy-libs-examples.js examples/src/lib",
     "compile-examples-js": "babel examples/src/app/index/index.es6.js --out-file examples/src/app/index/index.js && babel examples/src/app/images/images.es6.js --out-file examples/src/app/images/images.js && babel examples/src/app/table/table.es6.js --out-file examples/src/app/table/table.js && babel examples/src/app/short/short.es6.js --out-file examples/src/app/short/short.js && babel examples/src/app/grid/grid.es6.js --out-file examples/src/app/grid/grid.js && babel examples/src/app/horizontal/horizontal.es6.js --out-file examples/src/app/horizontal/horizontal.js",
     "update-source": "sass --update --sourcemap=none lib/ && babel lib/infinite.es6.js --out-file lib/infinite.js && cp lib/infinite.js examples/src/lib/infinite/ && cp lib/infinite.css examples/src/lib/infinite/",
     "autoprefixer": "autoprefixer examples/src/app/**/*.css -b 'last 2 versions'",
