@@ -2,6 +2,8 @@ node_modules
 build
 *.js
 !*.es6.js
+!scripts/build-examples.js
+!scripts/copy-libs-examples.js
 *.css
 examples/src/lib
 examples/src/*.js
