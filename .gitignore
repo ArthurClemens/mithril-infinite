@@ -1,5 +1,6 @@
 node_modules
 build
+*.js
 !*.es6.js
 *.css
 examples/src/lib
