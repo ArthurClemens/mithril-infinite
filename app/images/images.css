@@ -1,6 +1,11 @@
 .scroll-view.images {
   margin: 0 auto;
   background: #fff; }
+  .scroll-view.images .scroll-content .before .list-item,
+  .scroll-view.images .scroll-content .after .list-item {
+    padding: 20px 0 20px 64px;
+    font-size: 16px;
+    min-height: 60px; }
   .scroll-view.images .scroll-content .page + .page {
     border-top: 1px solid #ddd; }
   .scroll-view.images .scroll-content .page.odd {
@@ -15,6 +20,10 @@
     position: relative;
     display: block;
     cursor: pointer; }
+    .scroll-view.images .scroll-content .list-item.open {
+      height: 160px; }
+    .scroll-view.images .scroll-content .list-item.closed {
+      height: auto; }
     .scroll-view.images .scroll-content .list-item .image {
       display: block;
       height: 100%;
