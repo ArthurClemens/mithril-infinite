@@ -61,7 +61,7 @@ Here we limit the number of pages to 16, pass a function to generate a JSON data
 | **item** | required | Function :: (Array, Object) => Mithril Template | | Function that creates an item from data | 
 | **class** | optional | String |  | Extra CSS class appended to 'scroll-view' |
 | **contentTag** | optional | String | 'div' | HTML tag for the content element | 
-| **pageTag** | optional | String | 'div' | HTML tag for the page element |
+| **pageTag** | optional | String | 'div' | HTML tag for the page element; note that pages have class `page` plus either `odd` or `even` |
 | **maxPages** | optional | Number | `Number.MAX_VALUE` | Maximum number of pages to draw |
 | **processPageData** | optional | Function :: (Array, Object options) => Array | | Function that maps over the page data and returns an item for each |
 | **preloadPages** | optional | Number | 1 | Number of pages to preload when the app starts; if room is available, this number will increase automatically |
