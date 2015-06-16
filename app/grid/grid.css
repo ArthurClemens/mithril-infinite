@@ -2,11 +2,12 @@
   margin: 0 auto;
   background: #fff; }
   .scroll-view.grid .scroll-content {
-    padding: 16px 0;
-    margin: -4px; }
+    padding: 16px 0; }
     .scroll-view.grid .scroll-content .content {
       margin: 0 auto;
       font-size: 0; }
+      .scroll-view.grid .scroll-content .content .page {
+        margin: 0 -4px; }
       .scroll-view.grid .scroll-content .content .grid-item {
         display: inline-block;
         height: 210px;
@@ -28,22 +29,20 @@
             width: 100%;
             background-size: contain;
             background-repeat: no-repeat;
-            background-position-x: 50%;
-            opacity: 0;
-            transition: opacity .7s; }
+            background-position-x: 50%; }
 
-@media (min-width: 1122px) {
+@media (min-width: 1082px) {
   .scroll-view.grid .scroll-content .content {
-    width: 896px; } }
-@media (max-width: 1122px) {
+    width: 864px; } }
+@media (max-width: 1082px) {
   .scroll-view.grid .scroll-content .content {
-    width: 896px; } }
-@media (max-width: 896px) {
+    width: 864px; } }
+@media (max-width: 864px) {
   .scroll-view.grid .scroll-content .content {
-    width: 670px; } }
-@media (max-width: 670px) {
+    width: 646px; } }
+@media (max-width: 646px) {
   .scroll-view.grid .scroll-content .content {
-    width: 444px; } }
-@media (max-width: 444px) {
+    width: 428px; } }
+@media (max-width: 428px) {
   .scroll-view.grid .scroll-content .content {
-    width: 218px; } }
+    width: 210px; } }
