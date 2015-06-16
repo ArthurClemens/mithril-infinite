@@ -1,5 +1,8 @@
 # Infinite scroll for Mithril
 
+Version 0.1.2
+
+
 ## Examples
 
 [Infinite Scroll Examples](http://arthurclemens.github.io/mithril-infinite/index.html)
@@ -64,6 +67,8 @@ Here we limit the number of pages to 16, pass a function to generate a JSON data
 | **preloadPages** | optional | Number | 1 | Number of pages to preload when the app starts; if room is available, this number will increase automatically |
 | **pageChange** | optional | Function :: (Number) | | Notifies the current page on change |
 | **axis** | optional | String | 'y' | The scroll axis, either 'y' or 'x' |
+| **before** | optional | Mithril template or component | | Content shown before the pages; has class `before` |
+| **after** | optional | Mithril template or component | | Content shown after the pages; has class `after` |
 | **pageSize** | optional | Function: Array => Number | Mainly to be used with horizontal scrolling; the function accepts the page content and returns the width | 
 
 
@@ -181,6 +186,8 @@ View the example site for example with `http-server`:
 ### Images
 
 A long list of images; each can be expanded. On a regular laptop/desktop screen, not more than 3 page elements (out of 20) exist at a time.
+
+This demo shows the parameters `before` and `after`.
 
 
 ### Grid

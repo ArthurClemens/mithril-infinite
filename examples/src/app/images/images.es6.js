@@ -67,8 +67,20 @@ component.view = () => {
         pageUrl: page => 'app/images/data/page-' + page + '.json',
         preloadPages: 3,
         class: 'images',
+        before: m('a', {
+            class: ['list-item', vm.isExpanded('before') ? 'open' : 'closed'].join(' '),
+            onclick: () => {
+                vm.toggle('before');
+            }}, [
+                m('div', m.trust('A list of pugs. I didn\'t know they were called like that. Courtesy the <a href="http://airbnb.io/infinity/demo-off.html">AirBnb Infinity demo</a>.')),
+                m('.toggle', vm.isExpanded('before') ? m.trust('&#150;') : m.trust('&#43;'))
+            ]
+        ),
+        after: m('div.list-item', m.trust('That was the last pug.')),
         pageChange: page => {
-            if (console) console.log('page', page);
+            if (console) {
+                console.log('page', page);
+            }
         }
     });
 };
