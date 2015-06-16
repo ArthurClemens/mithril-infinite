@@ -1,6 +1,6 @@
 # Infinite scroll for Mithril
 
-Version 0.1.2
+Version 0.1.3
 
 
 ## Examples
