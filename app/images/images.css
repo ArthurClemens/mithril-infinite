@@ -3,7 +3,7 @@
   background: #fff; }
   .scroll-view.images .scroll-content .before .list-item,
   .scroll-view.images .scroll-content .after .list-item {
-    padding: 20px 0 20px 64px;
+    padding: 20px 70px 20px 64px;
     font-size: 16px;
     min-height: 60px; }
   .scroll-view.images .scroll-content .page + .page {
