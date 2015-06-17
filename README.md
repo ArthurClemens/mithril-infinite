@@ -67,6 +67,8 @@ Here we limit the number of pages to 16, pass a function to generate a JSON data
 | **preloadPages** | optional | Number | 1 | Number of pages to preload when the app starts; if room is available, this number will increase automatically |
 | **pageChange** | optional | Function :: (Number) | | Notifies the current page on change |
 | **axis** | optional | String | 'y' | The scroll axis, either 'y' or 'x' |
+| **before** | optional | Mithril template or component | | Content shown before the pages; has class `before` |
+| **after** | optional | Mithril template or component | | Content shown after the pages; has class `after` |
 | **pageSize** | optional | Function: Array => Number | Mainly to be used with horizontal scrolling; the function accepts the page content and returns the width | 
 
 
