@@ -59,6 +59,7 @@ Here we limit the number of pages to 16, pass a function to generate a JSON data
 | ------------- | -------------- | -------- | ----------- | --------------- |
 | **pageUrl** | required | Function :: Number => String | | Function that accepts a page number and returns a URL String |
 | **item** | required | Function :: (Array, Object) => Mithril Template | | Function that creates an item from data | 
+| **scrollView** | optional | Selector String | | Pass an element's selector to assign another element as scrollView |
 | **class** | optional | String |  | Extra CSS class appended to 'scroll-view' |
 | **contentTag** | optional | String | 'div' | HTML tag for the content element | 
 | **pageTag** | optional | String | 'div' | HTML tag for the page element; note that pages have class `page` plus either `odd` or `even` |
@@ -119,7 +120,6 @@ Using `<table>` tags causes reflow problems. Use divs instead, with CSS styling 
     .list-item > div {
         display: table-cell;
     }
-
 
 
 ### Generated HTML
