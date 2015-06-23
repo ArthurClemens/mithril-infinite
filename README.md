@@ -5,7 +5,8 @@ Version 0.1.6
 
 ## Examples
 
-[Infinite Scroll Examples](http://arthurclemens.github.io/mithril-infinite/index.html)
+* [Infinite Scroll Examples](http://arthurclemens.github.io/mithril-infinite/index.html)
+* [Example with header panel (Polythene)](http://arthurclemens.github.io/Polythene-Examples/infinite.html)
 
 
 ## Features
@@ -33,6 +34,8 @@ Not included:
 
 
 ## Usage
+
+Install [Mithril](https://www.npmjs.com/package/mithril) and [Verge](https://www.npmjs.com/package/verge).
 
 	import infinite from 'infinite';
 
