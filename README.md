@@ -29,13 +29,17 @@ Not included:
 
 ## Installation
 
-* Download or clone from Github, or `npm install mithril-infinite`
-* In `mithril-infinite` directory: `npm install`
+Either:
+
+* Download or clone from Github
+* `npm install mithril-infinite`
+
+For development:
+
+* In the root directory: `npm install`
 
 
 ## Usage
-
-Install [Mithril](https://www.npmjs.com/package/mithril) and [Verge](https://www.npmjs.com/package/verge).
 
 	import infinite from 'infinite';
 
@@ -45,7 +49,7 @@ Install [Mithril](https://www.npmjs.com/package/mithril) and [Verge](https://www
         item: handlePageItem
     });
 
-Here we limit the number of pages to 16, pass a function to generate a JSON data URL, and pass a function that creates an item (Mithril template/component):
+We have limited the number of pages to 16, pass a function to generate a JSON data URL, and pass a function that creates an item (Mithril template/component):
 
     const handlePageItem = function(data, opts) {
     	return m('.item', [
@@ -54,13 +58,33 @@ Here we limit the number of pages to 16, pass a function to generate a JSON data
     	]);
     };
 
+### Custom requests
+
+By default, the resulting URL from `pageUrl` is passed to a `m.request` function. This works for simple cases where data is fetched from the same server. If you need to access another server, this will likely fail. Instead create your own request and pass this with parameter `pageData`:
+
+    const getPageData = (page) => {
+        return m.request({
+            method: 'GET',
+            url: 'http://mysite.com/data?pageSize=12&page= + page,
+            initialValue: [],
+            background: true,
+            dataType: 'jsonp'
+        });
+    };
+
+    m.component(infinite, {
+        maxPages: 16,
+        pageData: getPageData,
+        item: handlePageItem
+    });
 
 
 ### Configuration parameters
 
 | **Parameter** |  **Mandatory** | **Type** | **Default** | **Description** |
 | ------------- | -------------- | -------- | ----------- | --------------- |
-| **pageUrl** | required | Function :: Number => String | | Function that accepts a page number and returns a URL String |
+| **pageUrl** | either `pageData` or `pageUrl` | Function :: Number => String | | Function that accepts a page number and returns a URL String |
+| **pageData** | either `pageData` or `pageUrl` | Function :: Number => Promise | | Function that fetches data; accepts a page number and returns a promise |
 | **item** | required | Function :: (Array, Object) => Mithril Template | | Function that creates an item from data | 
 | **scrollView** | optional | Selector String | | Pass an element's selector to assign another element as scrollView |
 | **class** | optional | String |  | Extra CSS class appended to 'scroll-view' |
