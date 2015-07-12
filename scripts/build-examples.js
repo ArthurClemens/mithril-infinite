@@ -9,8 +9,7 @@ var filesToMinify = [
     BUILD_DIR + '/lib/system-css/css.js',
     BUILD_DIR + '/lib/system-text/text.js',
     BUILD_DIR + '/lib/systemjs/es6-module-loader.js',
-    BUILD_DIR + '/lib/systemjs/system.js',
-    BUILD_DIR + '/lib/infinite/infinite.js'
+    BUILD_DIR + '/lib/systemjs/system.js'
 ];
 
 var execute = function(command) {
@@ -36,7 +35,7 @@ var cmds = [
     '&&',
     'mkdir', '-p', BUILD_DIR + '/lib',
     '&&',
-    'cp', SRC_DIR + '/config.js', BUILD_DIR,
+    'cp', SRC_DIR + '/config-build.js', BUILD_DIR + '/config.js',
     '&&',
     'cp', '-R', SRC_DIR + '/lib/systemjs', BUILD_DIR + '/lib/',
     '&&',
@@ -45,6 +44,7 @@ var cmds = [
     'cp', '-R', SRC_DIR + '/lib/infinite', BUILD_DIR + '/lib/',
     '&&',
     'cp', '-R', SRC_DIR + '/app', BUILD_DIR,
+    // clean up
     '&&',
     'rm', appDir + '/**/*.scss',
     '&&',
@@ -62,11 +62,11 @@ filesToMinify.map(function(file) {
 });
 
 var builder = new Builder({
-    'baseURL': 'examples/src',
-    'transpiler': 'babel',
+    'baseURL': SRC_DIR,
     'paths': {
         '*': '*.js',
-        '*.css': '*.css'
+        '*.css': '*.css',
+        '*.svg': '*.svg'
     },
     'map': {
         'infinite': 'lib/infinite/infinite',
@@ -79,8 +79,7 @@ var builder = new Builder({
 
 var buildOpts = {
     minify: true,
-    sourceMaps: true,
-    lowResSourceMaps: true
+    sourceMaps: false
 };
 
 builder.build('app/index/index', BUILD_DIR + '/app/index/index.js', buildOpts).then(function() {
