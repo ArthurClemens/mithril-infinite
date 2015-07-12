@@ -6,7 +6,7 @@ System.config({
         '*.svg': '*.svg'
     },
     'map': {
-        'infinite': 'lib/infinite/infinite',
+        'mithril-infinite': 'lib/mithril-infinite/mithril-infinite',
         'verge': 'lib/verge/verge.min',
         'mithril': 'lib/mithril/mithril.min',
         'css': 'lib/system-css/css',

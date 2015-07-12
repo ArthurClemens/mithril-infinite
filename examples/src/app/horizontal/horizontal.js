@@ -1,4 +1,5 @@
 'use strict';
+
 Object.defineProperty(exports, '__esModule', {
     value: true
 });
@@ -9,9 +10,9 @@ var _mithril = require('mithril');
 
 var _mithril2 = _interopRequireDefault(_mithril);
 
-var _infinite = require('infinite');
+var _mithrilInfinite = require('mithril-infinite');
 
-var _infinite2 = _interopRequireDefault(_infinite);
+var _mithrilInfinite2 = _interopRequireDefault(_mithrilInfinite);
 
 require('./horizontal.css!');
 
@@ -49,7 +50,7 @@ var item = function item(data) {
             if (context.inited) {
                 return;
             }
-            if (_infinite2['default'].isElementInViewport({ el: el })) {
+            if (_mithrilInfinite2['default'].isElementInViewport({ el: el })) {
                 fadeInImage(el, data.src);
                 context.inited = true;
             }
@@ -74,7 +75,7 @@ function _ref4(page) {
 }
 
 component.view = function () {
-    return _mithril2['default'].component(_infinite2['default'], {
+    return _mithril2['default'].component(_mithrilInfinite2['default'], {
         maxPages: 16,
         item: item,
         pageUrl: _ref2,

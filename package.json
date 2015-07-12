@@ -5,11 +5,11 @@
   "main": "index.js",
   "scripts": {
     "postinstall": "node scripts/copy-libs-examples.js examples/src/lib",
-    "compile-examples-js": "babel examples/src/app/index/index.es6.js --out-file examples/src/app/index/index.js && babel examples/src/app/images/images.es6.js --out-file examples/src/app/images/images.js && babel examples/src/app/table/table.es6.js --out-file examples/src/app/table/table.js && babel examples/src/app/short/short.es6.js --out-file examples/src/app/short/short.js && babel examples/src/app/grid/grid.es6.js --out-file examples/src/app/grid/grid.js && babel examples/src/app/horizontal/horizontal.es6.js --out-file examples/src/app/horizontal/horizontal.js",
-    "update-source": "sass --update --sourcemap=none lib/ && babel lib/infinite.es6.js --out-file lib/infinite.js && cp lib/infinite.js examples/src/lib/infinite/ && cp lib/infinite.css examples/src/lib/infinite/",
+    "transpile-examples-js": "mkdir -p examples/src/lib/mithril-infinite/ && cp lib/mithril-infinite.js examples/src/lib/mithril-infinite/ && cp lib/mithril-infinite.css examples/src/lib/mithril-infinite/ && babel examples/src/app/index/index.es6.js --out-file examples/src/app/index/index.js && babel examples/src/app/images/images.es6.js --out-file examples/src/app/images/images.js && babel examples/src/app/table/table.es6.js --out-file examples/src/app/table/table.js && babel examples/src/app/short/short.es6.js --out-file examples/src/app/short/short.js && babel examples/src/app/grid/grid.es6.js --out-file examples/src/app/grid/grid.js && babel examples/src/app/horizontal/horizontal.es6.js --out-file examples/src/app/horizontal/horizontal.js",
+    "transpile-source": "sass --update --sourcemap=none lib/ && babel lib/mithril-infinite.es6.js --out-file lib/mithril-infinite.js",
     "autoprefixer": "autoprefixer examples/src/app/**/*.css -b 'last 2 versions'",
-    "compile-examples-css": "sass --update --sourcemap=none examples/src/app/ && npm run autoprefixer",
-    "compile-examples": "npm run compile-examples-css && npm run compile-examples-js",
+    "transpile-examples-css": "sass --update --sourcemap=none examples/src/app/ && npm run autoprefixer",
+    "transpile-examples": "npm run transpile-examples-css && npm run transpile-examples-js",
     "build-examples": "npm run compile-examples && node scripts/build-examples.js examples",
     "copy-to-gh": "cp -R examples/build/* ../gh-pages/",
     "github": "rm -rf ../gh-pages/app && rm -rf ../gh-pages/*.html && rm -rf ../gh-pages/lib && rm -rf ../gh-pages/config.js && npm run build-examples && npm run copy-to-gh"

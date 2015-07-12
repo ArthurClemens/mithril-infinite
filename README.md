@@ -41,7 +41,7 @@ For development:
 
 ## Usage
 
-	import infinite from 'infinite';
+	import infinite from 'mithril-infinite';
 
 	m.component(infinite, {
         maxPages: 16,

@@ -1,4 +1,5 @@
 'use strict';
+
 Object.defineProperty(exports, '__esModule', {
     value: true
 });
@@ -9,9 +10,9 @@ var _mithril = require('mithril');
 
 var _mithril2 = _interopRequireDefault(_mithril);
 
-var _infinite = require('infinite');
+var _mithrilInfinite = require('mithril-infinite');
 
-var _infinite2 = _interopRequireDefault(_infinite);
+var _mithrilInfinite2 = _interopRequireDefault(_mithrilInfinite);
 
 require('./short.css!');
 
@@ -36,7 +37,7 @@ function _ref2(page) {
 }
 
 short.view = function () {
-    return _mithril2['default'].component(_infinite2['default'], {
+    return _mithril2['default'].component(_mithrilInfinite2['default'], {
         item: short.item,
         maxPages: 21,
         preloadSlots: 1,

@@ -1,7 +1,7 @@
 'use strict';
-import m from 'mithril';
 
-import infinite from 'infinite';
+import m from 'mithril';
+import infinite from 'mithril-infinite';
 require('./horizontal.css!');
 
 const IMG_URL = 'http://arthurclemens.github.io/assets/mithril-infinite-scroll/thumbs/';

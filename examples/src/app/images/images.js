@@ -1,4 +1,5 @@
 'use strict';
+
 Object.defineProperty(exports, '__esModule', {
     value: true
 });
@@ -9,9 +10,9 @@ var _mithril = require('mithril');
 
 var _mithril2 = _interopRequireDefault(_mithril);
 
-var _infinite = require('infinite');
+var _mithrilInfinite = require('mithril-infinite');
 
-var _infinite2 = _interopRequireDefault(_infinite);
+var _mithrilInfinite2 = _interopRequireDefault(_mithrilInfinite);
 
 require('./images.css!');
 
@@ -61,7 +62,7 @@ var item = function item(data, opts) {
             if (context.inited && !isDirty) {
                 return;
             }
-            if (_infinite2['default'].isElementInViewport({ el: el })) {
+            if (_mithrilInfinite2['default'].isElementInViewport({ el: el })) {
                 var url = IMG_URL + data.src;
                 el.style.backgroundImage = el.style.backgroundImage = 'url(' + url + ')';
                 context.inited = true;
@@ -90,7 +91,7 @@ function _ref3(page) {
 }
 
 component.view = function () {
-    return _mithril2['default'].component(_infinite2['default'], {
+    return _mithril2['default'].component(_mithrilInfinite2['default'], {
         maxPages: 20,
         item: item,
         pageUrl: _ref,
