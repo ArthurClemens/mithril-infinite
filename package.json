@@ -10,7 +10,7 @@
     "autoprefixer": "autoprefixer examples/src/app/**/*.css -b 'last 2 versions'",
     "transpile-examples-css": "sass --update --sourcemap=none examples/src/app/ && npm run autoprefixer",
     "transpile-examples": "npm run transpile-examples-css && npm run transpile-examples-js",
-    "build-examples": "npm run compile-examples && node scripts/build-examples.js examples",
+    "build-examples": "npm run transpile-examples && node scripts/build-examples.js examples",
     "copy-to-gh": "cp -R examples/build/* ../gh-pages/",
     "github": "rm -rf ../gh-pages/app && rm -rf ../gh-pages/*.html && rm -rf ../gh-pages/lib && rm -rf ../gh-pages/config.js && npm run build-examples && npm run copy-to-gh"
   },

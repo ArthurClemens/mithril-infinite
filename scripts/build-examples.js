@@ -41,7 +41,7 @@ var cmds = [
     '&&',
     'cp', '-R', SRC_DIR + '/lib/system-css', BUILD_DIR + '/lib/',
     '&&',
-    'cp', '-R', SRC_DIR + '/lib/infinite', BUILD_DIR + '/lib/',
+    'cp', '-R', SRC_DIR + '/lib/mithril-infinite', BUILD_DIR + '/lib/',
     '&&',
     'cp', '-R', SRC_DIR + '/app', BUILD_DIR,
     // clean up
