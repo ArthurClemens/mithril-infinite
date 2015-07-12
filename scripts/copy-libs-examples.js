@@ -48,9 +48,9 @@ copy('verge', [
     'node_modules/verge/verge.min.js'
 ]);
 
-copy('infinite', [
-    'lib/infinite.js',
-    'lib/infinite.css'
+copy('mithril-infinite', [
+    'lib/mithril-infinite.js',
+    'lib/mithril-infinite.css'
 ]);
 
 
