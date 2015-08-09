@@ -99,7 +99,7 @@ component.view = function () {
         'class': 'images',
         before: (0, _mithril2['default'])('a', {
             'class': ['list-item', vm.isExpanded('before') ? 'open' : 'closed'].join(' '),
-            onclick: _ref2 }, [(0, _mithril2['default'])('div', _mithril2['default'].trust('A list of pugs. I didn\'t know they were called like that. Courtesy the <a href="http://airbnb.io/infinity/demo-off.html">AirBnb Infinity demo</a>.')), (0, _mithril2['default'])('.toggle', vm.isExpanded('before') ? _mithril2['default'].trust('&#150;') : _mithril2['default'].trust('&#43;'))]),
+            onclick: _ref2 }, [(0, _mithril2['default'])('div', _mithril2['default'].trust('A list of pugs. Courtesy the <a href="http://airbnb.io/infinity/demo-off.html">AirBnb Infinity demo</a>.')), (0, _mithril2['default'])('.toggle', vm.isExpanded('before') ? _mithril2['default'].trust('&#150;') : _mithril2['default'].trust('&#43;'))]),
         after: (0, _mithril2['default'])('div.list-item', _mithril2['default'].trust('That was the last pug.')),
         pageChange: _ref3
     });

@@ -83,8 +83,8 @@ var buildOpts = {
 };
 
 builder.build('app/index/index', BUILD_DIR + '/app/index/index.js', buildOpts).then(function() {
-        console.log('Build complete');
-    })
-    .catch(function(err) {
-        console.error(err);
-    });
+    console.log('Build complete');
+})
+.catch(function(err) {
+    console.error(err);
+});

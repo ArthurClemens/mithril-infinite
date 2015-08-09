@@ -72,7 +72,7 @@ component.view = () => {
             onclick: () => {
                 vm.toggle('before');
             }}, [
-                m('div', m.trust('A list of pugs. I didn\'t know they were called like that. Courtesy the <a href="http://airbnb.io/infinity/demo-off.html">AirBnb Infinity demo</a>.')),
+                m('div', m.trust('A list of pugs. Courtesy the <a href="http://airbnb.io/infinity/demo-off.html">AirBnb Infinity demo</a>.')),
                 m('.toggle', vm.isExpanded('before') ? m.trust('&#150;') : m.trust('&#43;'))
             ]
         ),
