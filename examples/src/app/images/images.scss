@@ -1,3 +1,5 @@
+$image_position: 56px;
+
 .scroll-view.images {
     margin: 0 auto;
     background: #fff;
@@ -6,10 +8,13 @@
         .before,
         .after {
             .list-item {
-                padding: 20px 70px 20px 64px;
+                padding: 20px 70px 20px $image_position;
                 font-size: 16px;
                 min-height: 60px;
             }
+        }
+        .page {
+            min-height: 400px; // prevent 'after' content to show up on every scroll
         }
         .page + .page {
             border-top: 1px solid #ddd;
@@ -43,7 +48,7 @@
                 display: block;
                 height: 100%;
                 position: absolute;
-                left: 64px;
+                left: $image_position;
                 top: 0;
                 background-size: contain;
                 background-repeat: no-repeat;
@@ -62,12 +67,12 @@
                 line-height: $_size;
             }
             .pageNum {
-                left: 8px;
+                left: 4px;
                 font-size: 13px;
                 color: #999;
             }
             .toggle {
-                right: 24px;
+                right: 10px;
                 background-color: #fff;
             }
         }

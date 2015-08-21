@@ -1,6 +1,7 @@
 'use strict';
 
 import m from 'mithril';
+import github from 'app/app/github';
 import infinite from 'mithril-infinite';
 require('./horizontal.css!');
 
@@ -49,19 +50,22 @@ const item = (data) => {
 
 let component = {};
 component.view = () => {
-    return m.component(infinite, {
-        maxPages: 16,
-        item: item,
-        pageUrl: page => 'app/horizontal/data/page-' + page + '.json',
-        class: 'horizontal',
-        axis: 'x',
-        pageSize: (content) => (content.length || 12) * (210 + 2 * 4), // values from CSS including margins
-        pageChange: page => {
-            if (console) {
-                console.log('page', page);
+    return [
+        m.component(infinite, {
+            maxPages: 16,
+            item: item,
+            pageUrl: page => 'app/horizontal/data/page-' + page + '.json',
+            class: 'horizontal',
+            axis: 'x',
+            pageSize: (content) => (content.length || 12) * (210 + 2 * 4), // values from CSS including margins
+            pageChange: page => {
+                if (console) {
+                    console.log('page', page);
+                }
             }
-        }
-    });
+        }),
+        github()
+    ];
 };
 
 export default component;

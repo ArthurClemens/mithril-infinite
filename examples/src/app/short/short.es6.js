@@ -23,7 +23,9 @@ short.view = () => {
         pageUrl: page => 'app/short/data/page-' + page + '.json',
         class: 'short',
         pageChange: page => {
-            if (console) console.log('page', page);
+            if (console) {
+                console.log('page', page);
+            }
         }
     });
 };

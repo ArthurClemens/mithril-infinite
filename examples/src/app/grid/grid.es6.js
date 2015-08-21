@@ -1,6 +1,7 @@
 'use strict';
 
 import m from 'mithril';
+import github from 'app/app/github';
 import infinite from 'mithril-infinite';
 require('./grid.css!');
 
@@ -58,7 +59,8 @@ component.view = () => {
             if (console) {
                 console.log('page', page);
             }
-        }
+        },
+        after: github()
     });
 };
 

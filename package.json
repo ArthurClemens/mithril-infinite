@@ -1,15 +1,15 @@
 {
   "name": "mithril-infinite",
-  "version": "0.1.12",
-  "description": "Infinite scroll with Mithril",
-  "main": "index.js",
+  "version": "0.1.13",
+  "description": "Infinite Scroll for Mithril",
+  "main": "lib/mithril-infinite.js",
   "scripts": {
-    "postinstall": "node scripts/copy-libs-examples.js examples/src/lib",
-    "transpile-examples-js": "mkdir -p examples/src/lib/mithril-infinite/ && cp lib/mithril-infinite.js examples/src/lib/mithril-infinite/ && cp lib/mithril-infinite.css examples/src/lib/mithril-infinite/ && babel examples/src/app/index/index.es6.js --out-file examples/src/app/index/index.js && babel examples/src/app/images/images.es6.js --out-file examples/src/app/images/images.js && babel examples/src/app/table/table.es6.js --out-file examples/src/app/table/table.js && babel examples/src/app/short/short.es6.js --out-file examples/src/app/short/short.js && babel examples/src/app/grid/grid.es6.js --out-file examples/src/app/grid/grid.js && babel examples/src/app/horizontal/horizontal.es6.js --out-file examples/src/app/horizontal/horizontal.js",
-    "transpile-source": "sass --update --sourcemap=none lib/ && babel lib/mithril-infinite.es6.js --out-file lib/mithril-infinite.js",
-    "autoprefixer": "autoprefixer examples/src/app/**/*.css -b 'last 2 versions'",
-    "transpile-examples-css": "sass --update --sourcemap=none examples/src/app/ && npm run autoprefixer",
+    "postinstall": "npm run copy-libs",
+    "transpile-source": "node scripts/watch-es6.js lib/ null once & node scripts/watch-scss.js lib/ null once",
+    "transpile-examples-js": "node scripts/watch-es6.js examples/src/ examples/src/lib/ once",
+    "transpile-examples-css": "node scripts/watch-scss.js examples/src/ examples/src/lib/ once",
     "transpile-examples": "npm run transpile-examples-css && npm run transpile-examples-js",
+    "transpile-all": "npm run transpile-source && npm run transpile-examples",
     "build-examples": "npm run transpile-examples && node scripts/build-examples.js examples",
     "watch-examples-es6": "node scripts/watch-es6.js examples/src/ examples/src/lib/",
     "watch-examples-css": "node scripts/watch-scss.js examples/src/ examples/src/lib/",
@@ -20,7 +20,7 @@
     "watch": "npm run watch-source & npm run watch-examples",
     "copy-libs": "node scripts/copy-libs-examples examples/src/lib",
     "copy-to-gh": "cp -R examples/build/* ../gh-pages/",
-    "github": "rm -rf ../gh-pages/app && rm -rf ../gh-pages/*.html && rm -rf ../gh-pages/lib && rm -rf ../gh-pages/config.js && npm run build-examples && npm run copy-to-gh"
+    "github": "rm -rf ../gh-pages/app && rm -rf ../gh-pages/*.html && rm -rf ../gh-pages/lib && rm -rf ../gh-pages/config.js && npm run transpile-all && npm run build-examples && npm run copy-to-gh"
   },
   "devDependencies": {
     "autoprefixer": "",

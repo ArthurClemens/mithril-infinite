@@ -1,11 +1,13 @@
 'use strict';
 import m from 'mithril';
+import github from 'app/app/github';
 import demoImages from 'app/images/images';
 import demoGrid from 'app/grid/grid';
 import demoTable from 'app/table/table';
 import demoShort from 'app/short/short';
 import demoHorizontal from 'app/horizontal/horizontal';
 
+require('app/app/common.css!');
 require('./index.css!');
 
 const menuData = [
@@ -49,8 +51,9 @@ const menu = m('ul.menu', [
 let app = {};
 app.view = () => {
     return m('div', [
-        m('h1', 'Infinite scroll for Mithril'),
-        menu
+        m('h1', 'Infinite Scroll for Mithril'),
+        menu,
+        github({home: true})
     ]);
 };
 

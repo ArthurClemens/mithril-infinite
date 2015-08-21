@@ -1,6 +1,7 @@
 'use strict';
 
 import m from 'mithril';
+import github from 'app/app/github';
 import infinite from 'mithril-infinite';
 require('./images.css!');
 
@@ -76,7 +77,7 @@ component.view = () => {
                 m('.toggle', vm.isExpanded('before') ? m.trust('&#150;') : m.trust('&#43;'))
             ]
         ),
-        after: m('div.list-item', m.trust('That was the last pug.')),
+        after: github(),
         pageChange: page => {
             if (console) {
                 console.log('page', page);

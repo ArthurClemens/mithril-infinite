@@ -1,0 +1,21 @@
+@import "./variables";
+
+.github {
+    $_side_padding: 16px;
+
+    width: $size_px - 2*$_side_padding;
+    margin: 32px auto 0 auto;
+    text-align: left;
+    padding: 24px $_side_padding;
+    font-size: 14px;
+    color: #90A4AE;
+    opacity: .85;
+
+    hr {
+        height: 1px;
+        border: none;
+        margin: 1em (-$_side_padding);
+        background-color: #CFD8DC;
+        opacity: .85;
+    }
+}

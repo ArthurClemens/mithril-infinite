@@ -1,4 +1,4 @@
-# Infinite scroll for Mithril
+# Infinite Scroll for Mithril on mobile and desktop
 
 Version 0.1.12
 
@@ -247,8 +247,8 @@ With CSS, the blocks 'content', 'paddingBefore' and 'paddingAfter' need to be se
 
 * Store current "page" in url so the location can be bookmarked.
 * Smarter handling of "no data found" (works fine if maxPages is set, otherwise gives 404 in console).
-* Optimize page load order
-* Support other types of data input
+* Optimize page load order, for example de-prioritize loading of the previous page.
+* `after` content does not work well with "loadable space" (example "short content").
 
 
 
