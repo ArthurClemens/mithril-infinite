@@ -2,15 +2,13 @@ System.config({
     'defaultJSExtensions': true,
     'baseURL': '.',
     'paths': {
-        '*': '*.js',
-        '*.css': '*.css',
-        '*.svg': '*.svg'
+        '*': '*.js'
     },
     'map': {
         'mithril': 'lib/mithril/mithril.min',
         'mithril-infinite': 'lib/mithril-infinite/mithril-infinite',
+        'mithril-infinite-style': 'lib/mithril-infinite/mithril-infinite-style',
         'verge': 'lib/verge/verge.min',
-        'css': 'lib/system-css/css',
-        'text': 'lib/system-text/text'
+        'j2c': 'lib/j2c/j2c.global.min'
     }
 });

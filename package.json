@@ -1,42 +1,34 @@
 {
   "name": "mithril-infinite",
-  "version": "0.1.13",
+  "version": "0.2.0",
   "description": "Infinite Scroll for Mithril",
   "main": "lib/mithril-infinite.js",
   "scripts": {
     "postinstall": "npm run copy-libs",
-    "transpile-source": "node scripts/watch-es6.js lib/ null once & node scripts/watch-scss.js lib/ null once",
-    "transpile-examples-js": "node scripts/watch-es6.js examples/src/ examples/src/lib/ once",
-    "transpile-examples-css": "node scripts/watch-scss.js examples/src/ examples/src/lib/ once",
-    "transpile-examples": "npm run transpile-examples-css && npm run transpile-examples-js",
-    "transpile-all": "npm run transpile-source && npm run transpile-examples",
+    "transpile-source": "node scripts/watch-es6.js lib/ null once",
+    "transpile-examples": "node scripts/watch-es6.js examples/src/ examples/src/lib/ once",
+    "transpile": "npm run transpile-source && npm run transpile-examples",
     "build-examples": "npm run transpile-examples && node scripts/build-examples.js examples",
-    "watch-examples-es6": "node scripts/watch-es6.js examples/src/ examples/src/lib/",
-    "watch-examples-css": "node scripts/watch-scss.js examples/src/ examples/src/lib/",
-    "watch-examples": "npm run watch-examples-es6 & npm run watch-examples-css",
-    "watch-source-css": "node scripts/watch-scss.js lib/",
-    "watch-source-es6": "node scripts/watch-es6.js lib/",
-    "watch-source": "npm run watch-source-css & npm run watch-source-es6",
+    "watch-examples": "node scripts/watch-es6.js examples/src/ examples/src/lib/",
+    "watch-source": "node scripts/watch-es6.js lib/",
     "watch": "npm run watch-source & npm run watch-examples",
     "copy-libs": "node scripts/copy-libs-examples examples/src/lib",
     "copy-to-gh": "cp -R examples/build/* ../gh-pages/",
     "github": "rm -rf ../gh-pages/app && rm -rf ../gh-pages/*.html && rm -rf ../gh-pages/lib && rm -rf ../gh-pages/config.js && npm run transpile-all && npm run build-examples && npm run copy-to-gh"
   },
-  "devDependencies": {
-    "autoprefixer": "",
-    "babel-core": "",
-    "babel-plugin-closure-elimination": "",
-    "chokidar": "",
-    "es6-module-loader": "",
-    "mithril": "^0.2.0",
-    "system-css": "",
-    "system-text": "",
-    "systemjs-builder": "",
-    "systemjs": "",
-    "uglifyjs": ""
-  },
   "dependencies": {
-    "verge": ""
+    "mithril": "^0.2.0",
+    "j2c": "^0.7.3",
+    "verge": "^1.9.1"
+  },
+  "devDependencies": {
+    "babel": "^5.8.23",
+    "babel-plugin-closure-elimination": "0.0.2",
+    "chokidar": "^1.0.6",
+    "es6-module-loader": "^0.17.7",
+    "systemjs": "^0.19.0",
+    "systemjs-builder": "^0.14.0",
+    "uglify-js": "^2.4.24"
   },
   "keywords": [
     "scroll",

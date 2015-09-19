@@ -2,7 +2,10 @@
 
 import m from 'mithril';
 import infinite from 'mithril-infinite';
-require('./short.css!');
+
+import styler from 'app/app/styler';
+import shortStyle from './short-style';
+styler.add('short', false, shortStyle);
 
 let short = {};
 short.item = data => {

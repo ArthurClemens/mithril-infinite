@@ -3,7 +3,11 @@
 import m from 'mithril';
 import github from 'app/app/github';
 import infinite from 'mithril-infinite';
-require('./grid.css!');
+
+import styler from 'app/app/styler';
+import gridStyle from './grid-style';
+styler.add('grid', false, gridStyle);
+
 
 const IMG_URL = 'http://arthurclemens.github.io/assets/mithril-infinite-scroll/thumbs/';
 

@@ -1,14 +1,21 @@
 'use strict';
 import m from 'mithril';
-import github from 'app/app/github';
-import demoImages from 'app/images/images';
-import demoGrid from 'app/grid/grid';
-import demoTable from 'app/table/table';
-import demoShort from 'app/short/short';
-import demoHorizontal from 'app/horizontal/horizontal';
 
-require('app/app/common.css!');
-require('./index.css!');
+import github from 'app/app/github';
+import images from 'app/images/images';
+import grid from 'app/grid/grid';
+import table from 'app/table/table';
+import short from 'app/short/short';
+import horizontal from 'app/horizontal/horizontal';
+
+import styler from 'app/app/styler';
+import style from 'mithril-infinite-style';
+styler.add('mithril-infinite', false, style);
+
+import commonStyle from 'app/app/common-style';
+import indexStyle from './index-style';
+styler.add('common', false, commonStyle);
+styler.add('index', false, indexStyle);
 
 const menuData = [
     {
@@ -57,12 +64,14 @@ app.view = () => {
     ]);
 };
 
+
 m.route.mode = 'hash';
 m.route(document.body, '/', {
     '/': app,
-    '/images': demoImages,
-    '/grid': demoGrid,
-    '/table': demoTable,
-    '/short': demoShort,
-    '/horizontal': demoHorizontal
+    '/images': images,
+    '/grid': grid,
+    '/table': table,
+    '/short': short,
+    '/horizontal': horizontal
 });
+

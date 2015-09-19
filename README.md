@@ -1,6 +1,6 @@
 # Infinite Scroll for Mithril on mobile and desktop
 
-Version 0.1.12
+Version 0.2.0
 
 
 ## Examples
@@ -32,11 +32,34 @@ Not included:
 Either:
 
 * Download or clone from Github
+* In the root directory: `npm install`
+
+Or:
+
 * `npm install mithril-infinite`
 
-For development:
 
-* In the root directory: `npm install`
+
+## Examples
+
+View the examples using a webserver, for instance:
+* `http-server ./examples/src/`
+
+
+## Developing
+
+For compiling/transpiling, you need to install the following:
+
+* `npm install babel -g`
+
+Compile (transpile) everything:
+
+* `npm run transpile` - compile all es6 files
+
+While developing:
+
+* `npm run watch` - watch changes to es6 files
+
 
 
 ## Usage
@@ -198,13 +221,17 @@ Or:
 
 ## Running the examples locally
 
-Examples are written in es6 and sass and are compiled to es5 and css:
-
-* `npm install && npm run compile-examples`
+Transpiled files are included, so the examples can be viewed without running transpilers.
 
 View the example site for example with `http-server`:
 
 * `http-server examples/src`
+
+
+In case you want to make changes, examples are written in es6 and are compiled to es5:
+
+* `npm run transpile-examples`
+
 
 
 

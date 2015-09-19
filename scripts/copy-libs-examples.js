@@ -24,19 +24,12 @@ execute(['mkdir', '-p', DESTINATION_DIR].join(' '));
 
 copy('systemjs', [
     'node_modules/systemjs/dist/system.js',
+    'node_modules/systemjs/dist/system.src.js',
     'node_modules/systemjs/dist/system.js.map',
     'node_modules/systemjs/dist/system-polyfills.js',
     'node_modules/systemjs/dist/system-polyfills.js.map',
     'node_modules/es6-module-loader/dist/es6-module-loader.js',
     'node_modules/es6-module-loader/dist/es6-module-loader.js.map'
-]);
-
-copy('system-css', [
-    'node_modules/system-css/css.js'
-]);
-
-copy('system-text', [
-    'node_modules/system-text/text.js'
 ]);
 
 copy('mithril', [
@@ -48,9 +41,12 @@ copy('verge', [
     'node_modules/verge/verge.min.js'
 ]);
 
-copy('mithril-infinite', [
-    'lib/mithril-infinite.js',
-    'lib/mithril-infinite.css'
+copy('j2c', [
+    'node_modules/j2c/dist/j2c.global.min.js'
 ]);
 
+copy('mithril-infinite', [
+    'lib/mithril-infinite.js',
+    'lib/mithril-infinite-style.js'
+]);
 

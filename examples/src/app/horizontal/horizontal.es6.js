@@ -3,7 +3,10 @@
 import m from 'mithril';
 import github from 'app/app/github';
 import infinite from 'mithril-infinite';
-require('./horizontal.css!');
+
+import styler from 'app/app/styler';
+import horizontalStyle from './horizontal-style';
+styler.add('horizontal', false, horizontalStyle);
 
 const IMG_URL = 'http://arthurclemens.github.io/assets/mithril-infinite-scroll/thumbs/';
 

@@ -3,7 +3,10 @@
 import m from 'mithril';
 import github from 'app/app/github';
 import infinite from 'mithril-infinite';
-require('./table.css!');
+
+import styler from 'app/app/styler';
+import tableStyle from './table-style';
+styler.add('table', false, tableStyle);
 
 let item = (data, opts) => {
     return m('.list-item', [
