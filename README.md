@@ -281,14 +281,14 @@ With CSS, the blocks 'content', 'paddingBefore' and 'paddingAfter' need to be se
 
 ## Size
 
-Minified and gzipped: 1.9 Kb
-
+Minified and gzipped: 2473 bytes (core) plus 284 bytes (style): ~ 2.8 Kb
 
 
 ## Dependencies
 
 * [Mithril](https://www.npmjs.com/package/mithril)
-* [Verge](https://www.npmjs.com/package/verge)
+* [j2c](https://github.com/pygy/j2c) - for creating js stylesheets
+* [Verge](https://www.npmjs.com/package/verge) - for measuring the viewport
 
 
 
