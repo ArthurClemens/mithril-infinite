@@ -10,12 +10,12 @@ import horizontal from 'app/horizontal/horizontal';
 
 import styler from 'app/app/styler';
 import style from 'mithril-infinite-style';
-styler.add('mithril-infinite', false, style);
+styler.add('mithril-infinite', style);
 
 import commonStyle from 'app/app/common-style';
 import indexStyle from './index-style';
-styler.add('common', false, commonStyle);
-styler.add('index', false, indexStyle);
+styler.add('common', commonStyle);
+styler.add('index', indexStyle);
 
 const menuData = [
     {

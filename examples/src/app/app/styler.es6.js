@@ -12,11 +12,7 @@ const removeStyle = (id) => {
 /*
 styles: list of lists
 */
-const addStyle = (id, overwrite, ...styles) => {
-	const exists = document.getElementById(id);
-	if (exists && !overwrite) {
-		return;
-	}
+const addStyle = (id, ...styles) => {
 	removeStyle(id);
 	const styleEl = document.createElement('style');
 	if (id) {

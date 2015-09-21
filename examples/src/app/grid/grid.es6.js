@@ -6,7 +6,7 @@ import infinite from 'mithril-infinite';
 
 import styler from 'app/app/styler';
 import gridStyle from './grid-style';
-styler.add('grid', false, gridStyle);
+styler.add('grid', gridStyle);
 
 
 const IMG_URL = 'http://arthurclemens.github.io/assets/mithril-infinite-scroll/thumbs/';

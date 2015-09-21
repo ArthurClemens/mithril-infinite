@@ -5,7 +5,7 @@ import infinite from 'mithril-infinite';
 
 import styler from 'app/app/styler';
 import shortStyle from './short-style';
-styler.add('short', false, shortStyle);
+styler.add('short', shortStyle);
 
 let short = {};
 short.item = data => {

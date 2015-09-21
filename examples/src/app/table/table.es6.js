@@ -6,7 +6,7 @@ import infinite from 'mithril-infinite';
 
 import styler from 'app/app/styler';
 import tableStyle from './table-style';
-styler.add('table', false, tableStyle);
+styler.add('table', tableStyle);
 
 let item = (data, opts) => {
     return m('.list-item', [

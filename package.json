@@ -1,6 +1,6 @@
 {
   "name": "mithril-infinite",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Infinite Scroll for Mithril",
   "main": "lib/mithril-infinite.js",
   "scripts": {
@@ -13,6 +13,7 @@
     "watch-source": "node scripts/watch-es6.js lib/",
     "watch": "npm run watch-source & npm run watch-examples",
     "copy-libs": "node scripts/copy-libs-examples examples/src/lib",
+	"standalone-css": "node scripts/create-standalone-css.js > lib/mithril-infinite.css",
     "copy-to-gh": "cp -R examples/build/* ../gh-pages/",
     "github": "rm -rf ../gh-pages/app && rm -rf ../gh-pages/*.html && rm -rf ../gh-pages/lib && rm -rf ../gh-pages/config.js && npm run transpile && npm run build-examples && npm run copy-to-gh"
   },
