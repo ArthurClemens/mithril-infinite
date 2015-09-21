@@ -1,7 +1,6 @@
 # Infinite Scroll for Mithril on mobile and desktop
 
-Version 0.2.1
-
+Version 0.2.2
 
 ## Examples
 
@@ -52,6 +51,8 @@ http-server ./examples/src/
 
 ## Developing
 
+### Developing with SystemJS
+
 For compiling/transpiling, you need to install the following:
 
 ~~~bash
@@ -73,6 +74,12 @@ npm run watch
 ~~~
 
 Watches changes to es6 files
+
+
+### Developing with Browserify
+
+The directory `example-builds` contains the setup to build the examples with Browserify. Follow instructions in the README there.
+
 
 
 
