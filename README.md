@@ -107,7 +107,7 @@ By default, the resulting URL from `pageUrl` is passed to a `m.request` function
 const getPageData = (page) => {
     return m.request({
         method: 'GET',
-        url: 'http://mysite.com/data?pageSize=12&page= + page,
+        url: 'http://mysite.com/data?pageSize=12&page=' + page,
         initialValue: [],
         background: true,
         dataType: 'jsonp'
@@ -250,7 +250,6 @@ Examples:
         "width": 500,
         "height": 375
     },
-    ...
 ]
 ~~~
 
@@ -259,7 +258,6 @@ Or:
 ~~~json
 [
     ["red", "#ff0000"],
-    ...
 ]
 ~~~
 
