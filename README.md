@@ -36,71 +36,90 @@ Either:
 
 Or:
 
-* `npm install mithril-infinite`
-
+~~~bash
+npm install mithril-infinite
+~~~
 
 
 ## Examples
 
 View the examples using a webserver, for instance:
-* `http-server ./examples/src/`
+
+~~~bash
+http-server ./examples/src/
+~~~
 
 
 ## Developing
 
 For compiling/transpiling, you need to install the following:
 
-* `npm install babel -g`
+~~~bash
+npm install babel -g
+~~~
 
 Compile (transpile) everything:
 
-* `npm run transpile` - compile all es6 files
+~~~bash
+npm run transpile
+~~~
+
+compiles all es6 files
 
 While developing:
 
-* `npm run watch` - watch changes to es6 files
+~~~bash
+npm run watch
+~~~
+
+Watches changes to es6 files
 
 
 
 ## Usage
 
-	import infinite from 'mithril-infinite';
+~~~javascript
+import infinite from 'mithril-infinite';
 
-	m.component(infinite, {
-        maxPages: 16,
-        pageUrl: function(page) {return 'app/data/page-' + page + '.json';},
-        item: handlePageItem
-    });
+m.component(infinite, {
+    maxPages: 16,
+    pageUrl: function(page) {return 'app/data/page-' + page + '.json';},
+    item: handlePageItem
+});
+~~~
 
 We have limited the number of pages to 16, pass a function to generate a JSON data URL, and pass a function that creates an item (Mithril template/component):
 
-    const handlePageItem = function(data, opts) {
-    	return m('.item', [
-    	    m('h2', data.title),
-    	    m('div', opts.page)
-    	]);
-    };
+~~~javascript
+const handlePageItem = function(data, opts) {
+	return m('.item', [
+	    m('h2', data.title),
+	    m('div', opts.page)
+	]);
+};
+~~~
 
 ### Custom requests
 
 By default, the resulting URL from `pageUrl` is passed to a `m.request` function. This works for simple cases where data is fetched from the same server. If you need to access another server, this will likely fail. Instead create your own request and pass this with parameter `pageData`:
 
-    const getPageData = (page) => {
-        return m.request({
-            method: 'GET',
-            url: 'http://mysite.com/data?pageSize=12&page= + page,
-            initialValue: [],
-            background: true,
-            dataType: 'jsonp'
-        });
-    };
-
-    m.component(infinite, {
-        maxPages: 16,
-        pageData: getPageData,
-        item: handlePageItem
+~~~javascript
+const getPageData = (page) => {
+    return m.request({
+        method: 'GET',
+        url: 'http://mysite.com/data?pageSize=12&page= + page,
+        initialValue: [],
+        background: true,
+        dataType: 'jsonp'
     });
+};
 
+m.component(infinite, {
+    maxPages: 16,
+    pageData: getPageData,
+    item: handlePageItem
+});
+~~~
 
 ### Configuration parameters
 
@@ -129,17 +148,19 @@ By default, the resulting URL from `pageUrl` is passed to a `m.request` function
 
 Images should be loaded only when they appear on the screen. To check if the image is in the viewport, you can use the function `infinite.isElementInViewport(el)`. For example:
 
-    m('.image', {
-        config: function(el, inited, context) {
-            if (context.inited) {
-                return;
-            }
-            if (infinite.isElementInViewport({el:el})) {
-                // use data.src
-                context.inited = true;
-            }
+~~~javascript
+m('.image', {
+    config: function(el, inited, context) {
+        if (context.inited) {
+            return;
         }
-    })
+        if (infinite.isElementInViewport({el:el})) {
+            // use data.src
+            context.inited = true;
+        }
+    }
+})
+~~~
 
 Options for `infinite.isElementInViewport`:
 
@@ -152,40 +173,44 @@ Options for `infinite.isElementInViewport`:
 
 Images should not be shown with the `<img/>` tag: while this works fine on desktop browsers, this causes redrawing glitches on iOS Safari. The solution is to use `background-image`. For example:
 
-    el.style.backgroundImage = 'url(' + url + ')'
+~~~javascript
+el.style.backgroundImage = 'url(' + url + ')'
+~~~
 
 
 ### Using table data
 
 Using `<table>` tags causes reflow problems. Use divs instead, with CSS styling for table features. For example:
 
-    .page {
-        display: table;
-        width: 100%;
-    }
-    .list-item {
-        width: 100%;
-        display: table-row;
-    }
-    .list-item > div {
-        display: table-cell;
-    }
-
+~~~css
+.page {
+    display: table;
+    width: 100%;
+}
+.list-item {
+    width: 100%;
+    display: table-row;
+}
+.list-item > div {
+    display: table-cell;
+}
+~~~
 
 ### Generated HTML
 
-    <div class="scroll-view scroll-view-y">
-        <div class="scroll-content">
-            <div style="height: 0px;"></div> <!-- padding before -->
-            <div class="content">
-                <div data-page="000001" class="page odd" style="height: auto;">
-                    <!-- list items -->
-                </div>
+~~~html
+<div class="scroll-view scroll-view-y">
+    <div class="scroll-content">
+        <div style="height: 0px;"></div> <!-- padding before -->
+        <div class="content">
+            <div data-page="000001" class="page odd" style="height: auto;">
+                <!-- list items -->
             </div>
-            <div style="height: 0px;"></div> <!-- padding after -->
         </div>
+        <div style="height: 0px;"></div> <!-- padding after -->
     </div>
-
+</div>
+~~~
 
 
 
@@ -199,14 +224,17 @@ Mithril Infinite comes with a JavaScript based styling that uses [j2c](https://g
 #### j2c styling
 
 The j2c way goes like this. In your application file:
-    
-    import style from 'mithril-infinite-style';
+
+~~~javascript    
+import style from 'mithril-infinite-style';
+~~~
 
 The examples app dir contains a convenience function to add the styles to the document head:
 
-    import styler from 'app/app/styler';
-    styler.add('mithril-infinite', style);
-    
+~~~javascript
+import styler from 'app/app/styler';
+styler.add('mithril-infinite', style);
+~~~
     
 
 ### Data structure
@@ -215,22 +243,25 @@ Data is handled per "results" page. Each page is a JSON data object that contain
 
 Examples:
 
-    [
-        {
-            "src": "cat.jpg",
-            "width": 500,
-            "height": 375
-        },
-        ...
-    ]
+~~~json
+[
+    {
+        "src": "cat.jpg",
+        "width": 500,
+        "height": 375
+    },
+    ...
+]
+~~~
 
 Or:
 
-    [
-        ["red", "#ff0000"],
-        ...
-    ]
-
+~~~json
+[
+    ["red", "#ff0000"],
+    ...
+]
+~~~
 
 
 
@@ -240,13 +271,15 @@ Transpiled files are included, so the examples can be viewed without running tra
 
 View the example site for example with `http-server`:
 
-* `http-server examples/src`
-
+~~~bash
+http-server examples/src
+~~~
 
 In case you want to make changes, examples are written in es6 and are compiled to es5:
 
-* `npm run transpile-examples`
-
+~~~bash
+npm run transpile-examples
+~~~
 
 
 
