@@ -1,6 +1,6 @@
 {
   "name": "mithril-infinite",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "description": "Infinite Scroll for Mithril",
   "main": "lib/mithril-infinite.js",
   "scripts": {
