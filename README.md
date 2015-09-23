@@ -1,6 +1,6 @@
 # Infinite Scroll for Mithril on mobile and desktop
 
-Version 0.2.3
+Version 0.2.4
 
 ## Examples
 
@@ -84,6 +84,10 @@ The directory `example-builds` contains the setup to build the examples with Bro
 
 
 ## Usage
+
+First, make sure to load the CSS styles, see [Styling](#styling) below.
+
+Then:
 
 ~~~javascript
 import infinite from 'mithril-infinite';
