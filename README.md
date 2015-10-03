@@ -1,6 +1,6 @@
 # Infinite Scroll for Mithril on mobile and desktop
 
-Version 0.2.4
+Version 0.2.5
 
 ## Examples
 
