@@ -41,5 +41,13 @@
     "url": "https://github.com/ArthurClemens/mithril-infinite.git"
   },
   "author": "Arthur Clemens <arthurclemens@gmail.com> (http://visiblearea.com)",
-  "license": "MIT"
+  "license": "MIT",
+  "jspm": {
+    "directories": {
+      "lib": "lib"
+    },
+    "files": [
+      "lib"
+    ]
+  }
 }
