@@ -34,6 +34,7 @@ const styles = [
                 ' .content': {
                     'margin': '0 auto',
                     'font-size': 0,
+                    'line-height': 0,
 
                     ' .page': {
                         'margin': '0 ' + (-gridSpacing / 2) + 'px'
