@@ -42,8 +42,8 @@ const styles = [
                         'display': 'inline-block',
                         'height': itemWidthPx,
                         'width': itemWidthPx,
-                        'background-color': '#fff',
-                        'margin': '0 ' + gridSpacing / 2 + 'px',
+                        'background-color': '#f0f0f0',
+                        'margin': [0, gridSpacing / 2, gridSpacing, gridSpacing / 2].map((v) => (v + 'px')).join(' '),
 
                         ' .image-holder': {
                             'height': itemWidth - 2 * imageHolderPadding + 'px',
