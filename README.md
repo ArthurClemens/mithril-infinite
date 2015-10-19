@@ -3,7 +3,7 @@
 ## Examples
 
 * [Infinite Scroll Examples](http://arthurclemens.github.io/mithril-infinite/index.html)
-* [Example with header panel (Polythene)](http://arthurclemens.github.io/Polythene-examples/infinite.html)
+* [Example with header panel (Polythene)](http://arthurclemens.github.io/Polythene-examples/index.html#/infinite)
 
 
 ## Features
