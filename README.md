@@ -1,11 +1,9 @@
 # Infinite Scroll for Mithril on mobile and desktop
 
-Version 0.2.5
-
 ## Examples
 
 * [Infinite Scroll Examples](http://arthurclemens.github.io/mithril-infinite/index.html)
-* [Example with header panel (Polythene)](http://arthurclemens.github.io/Polythene-Examples/infinite.html)
+* [Example with header panel (Polythene)](http://arthurclemens.github.io/Polythene-examples/infinite.html)
 
 
 ## Features
@@ -23,7 +21,7 @@ Version 0.2.5
 
 Not included:
 
-* Special support for older mobile browsers: no touch layer, requestAnimationFrame, absolute positioning or speed/deceleration calculations. There is a number of scroll libraries that help with that: [ScrollJs](http://scrolljs.com), [ftcroller](https://github.com/ftlabs/ftscroller). 
+* Special support for older mobile browsers: no touch layer, requestAnimationFrame, absolute positioning or speed/deceleration calculations. There is a number of scroll libraries that help with that: [ScrollJs](http://scrolljs.com), [ftcroller](https://github.com/ftlabs/ftscroller).
 
 
 ## Installation
@@ -138,10 +136,10 @@ m.component(infinite, {
 | ------------- | -------------- | -------- | ----------- | --------------- |
 | **pageUrl** | either `pageData` or `pageUrl` | Function :: Number => String | | Function that accepts a page number and returns a URL String |
 | **pageData** | either `pageData` or `pageUrl` | Function :: Number => Promise | | Function that fetches data; accepts a page number and returns a promise |
-| **item** | required | Function :: (Array, Object) => Mithril Template | | Function that creates an item from data | 
+| **item** | required | Function :: (Array, Object) => Mithril Template | | Function that creates an item from data |
 | **scrollView** | optional | Selector String | | Pass an element's selector to assign another element as scrollView |
 | **class** | optional | String |  | Extra CSS class appended to 'scroll-view' |
-| **contentTag** | optional | String | 'div' | HTML tag for the content element | 
+| **contentTag** | optional | String | 'div' | HTML tag for the content element |
 | **pageTag** | optional | String | 'div' | HTML tag for the page element; note that pages have class `page` plus either `odd` or `even` |
 | **maxPages** | optional | Number | `Number.MAX_VALUE` | Maximum number of pages to draw |
 | **processPageData** | optional | Function :: (Array, Object options) => Array | | Function that maps over the page data and returns an item for each |
@@ -150,7 +148,7 @@ m.component(infinite, {
 | **axis** | optional | String | 'y' | The scroll axis, either 'y' or 'x' |
 | **before** | optional | Mithril template or component | | Content shown before the pages; has class `before` |
 | **after** | optional | Mithril template or component | | Content shown after the pages; has class `after` |
-| **pageSize** | optional | Function: Array => Number | Mainly to be used with horizontal scrolling; the function accepts the page content and returns the width | 
+| **pageSize** | optional | Function: Array => Number | Mainly to be used with horizontal scrolling; the function accepts the page content and returns the width |
 
 
 
@@ -246,7 +244,7 @@ The examples app dir contains a convenience function to add the styles to the do
 import styler from 'app/app/styler';
 styler.add('mithril-infinite', style);
 ~~~
-    
+
 
 ### Data structure
 
@@ -292,7 +290,7 @@ npm run transpile-examples
 
 
 
-## About the examples 
+## About the examples
 
 ### Images
 
@@ -354,4 +352,3 @@ Optional dependency:
 ## Licence
 
 MIT
-
