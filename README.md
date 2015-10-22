@@ -21,7 +21,7 @@
 
 Not included:
 
-* Special support for older mobile browsers: no touch layer, requestAnimationFrame, absolute positioning or speed/deceleration calculations. There is a number of scroll libraries that help with that: [ScrollJs](http://scrolljs.com), [ftcroller](https://github.com/ftlabs/ftscroller).
+* Special support for older mobile browsers: no touch layer, requestAnimationFrame, absolute positioning or speed/deceleration calculations. For smooth programmatic scrolling a number of scroll libraries exist, for instance [ftcroller](https://github.com/ftlabs/ftscroller).
 
 
 ## Installation
