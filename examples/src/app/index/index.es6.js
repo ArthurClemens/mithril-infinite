@@ -7,6 +7,7 @@ import grid from 'app/grid/grid';
 import table from 'app/table/table';
 import short from 'app/short/short';
 import horizontal from 'app/horizontal/horizontal';
+import fixed from 'app/fixed/fixed';
 
 import styler from 'app/app/styler';
 import style from 'mithril-infinite-style';
@@ -42,6 +43,11 @@ const menuData = [
         href: '/horizontal',
         title: 'Horizontal',
         subtitle: 'Horizontal scroller'
+    },
+    {
+        href: '/fixed',
+        title: 'Fixed height',
+        subtitle: 'Preset the scroll height, don\'t update scroll height'
     }
 ];
 
@@ -72,6 +78,6 @@ m.route(document.body, '/', {
     '/grid': grid,
     '/table': table,
     '/short': short,
-    '/horizontal': horizontal
+    '/horizontal': horizontal,
+    '/fixed': fixed
 });
-

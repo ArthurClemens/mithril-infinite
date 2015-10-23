@@ -105,7 +105,8 @@ m.component(infinite, {
 | **axis** | optional | String | 'y' | The scroll axis, either 'y' or 'x' |
 | **before** | optional | Mithril template or component | | Content shown before the pages; has class `before` |
 | **after** | optional | Mithril template or component | | Content shown after the pages; has class `after` |
-| **pageSize** | optional | Function: Array => Number | Mainly to be used with horizontal scrolling; the function accepts the page content and returns the width |
+| **contentSize** | optional | Number (pixels) |  | Use when you know the number of items to display and the height of the content, and when  predictable scrollbar behaviour is desired (without jumps when content is loaded); pass a pixel value to set the size (height or width) of the scroll content, thereby overriding the dynamically calculated height; use together with `pageSize`  |
+| **pageSize** | optional | Function: Array => Number | Pass a pixel value to set the size (height or width) of each page; the function accepts the page content and returns the size |
 
 
 
@@ -282,6 +283,12 @@ In the demo we use `pageSize` that returns the item width * item count, making s
 With CSS, the blocks 'content', 'paddingBefore' and 'paddingAfter' need to be set to `inline-block`.
 
 
+### Fixed
+
+Sometimes it is useful to present the user predictable scrollbar behaviour: scrolling the scroll knob all the way down leads to the last content page. This is only possible when you know the size of the content (calculated by the number of pages times the height of each page). This example demonstrates the use of the param `contentSize` together with `pageSize`.
+
+
+
 ## Viewing the examples
 
 * `cd examples`
@@ -341,7 +348,7 @@ Watches changes to es6 files
 
 ## Size
 
-Minified and gzipped: 2473 bytes (core) plus 284 bytes (style): ~ 2.8 Kb
+Minified and gzipped: 2175 bytes (core) plus 281 bytes (style): ~ 2.5 Kb
 
 
 ## Dependencies
