@@ -1,3 +1,4 @@
+<!-- SystemJS version -->
 <!doctype html>
 <html>
 <head>
@@ -6,11 +7,11 @@
 	<meta name="mobile-web-app-capable" content="yes">
 	<meta name="apple-mobile-web-app-capable" content="yes">
 	<meta http-equiv="cleartype" content="on">
-	<script src="lib/systemjs/system.js"></script>
+    <script src="node_modules/systemjs/dist/system.js"></script>
 	<script src="config.js"></script>
-	<script>
-		System.import("app/index/index");
-	</script>
 </head>
     <body></body>
+    <script>
+		System.import("app/index/index");
+	</script>
 </html>

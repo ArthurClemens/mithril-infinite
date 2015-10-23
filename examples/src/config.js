@@ -1,14 +1,18 @@
 System.config({
-    'defaultJSExtensions': true,
-    'baseURL': '.',
-    'paths': {
-        '*': '*.js'
+    baseURL: '.',
+    defaultJSExtensions: true,
+    transpiler: 'babel',
+    babelOptions: {
+        'optional': [
+            'runtime',
+            'optimisation.modules.system'
+        ]
     },
-    'map': {
-        'mithril': 'lib/mithril/mithril.min',
-        'mithril-infinite': 'lib/mithril-infinite/mithril-infinite',
-        'mithril-infinite-style': 'lib/mithril-infinite/mithril-infinite-style',
-        'verge': 'lib/verge/verge.min',
-        'j2c': 'lib/j2c/j2c.global.min'
+    map: {
+        'j2c': 'node_modules/j2c/dist/j2c.global.min',
+        'mithril-infinite': 'node_modules/mithril-infinite/lib/mithril-infinite',
+        'mithril-infinite-style': 'node_modules/mithril-infinite/lib/mithril-infinite-style',
+        'mithril': 'node_modules/mithril/mithril.min',
+        'verge': 'node_modules/verge/verge.min'
     }
 });

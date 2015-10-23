@@ -1,11 +1,4 @@
 node_modules
-build
-!*.es6.js
-!scripts/build-examples.js
-!scripts/copy-libs-examples.js
-examples/src/lib
-.sass-cache
-.sass-cache/*
 .DS_Store
-example-builds/browserify/src/app
-example-builds/browserify/src/bundle.js
+tmp
+tmp-npm

@@ -4,31 +4,16 @@
   "description": "Infinite Scroll for Mithril",
   "main": "lib/mithril-infinite.js",
   "scripts": {
-    "postinstall": "npm run copy-libs",
-    "transpile-source": "node scripts/watch-es6.js lib/ null once",
-    "transpile-examples": "node scripts/watch-es6.js examples/src/ examples/src/lib/ once",
-    "transpile": "npm run transpile-source && npm run transpile-examples",
-    "build-examples": "npm run transpile-examples && node scripts/build-examples.js examples",
-    "watch-examples": "node scripts/watch-es6.js examples/src/ examples/src/lib/",
-    "watch-source": "node scripts/watch-es6.js lib/",
-    "watch": "npm run watch-source & npm run watch-examples",
-    "copy-libs": "node scripts/copy-libs-examples examples/src/lib",
-	"standalone-css": "node scripts/create-standalone-css.js > lib/mithril-infinite.css",
-    "copy-to-gh": "cp -R examples/build/* ../gh-pages/",
-    "github": "rm -rf ../gh-pages/app && rm -rf ../gh-pages/*.html && rm -rf ../gh-pages/lib && rm -rf ../gh-pages/config.js && npm run transpile && npm run build-examples && npm run copy-to-gh"
+    "transpile": "node scripts/transpile.js once lib node_modules",
+    "watch": "node scripts/transpile.js watch lib node_modules",
+    "standalone-css": "node scripts/create-standalone-css.js > lib/mithril-infinite.css"
   },
-  "dependencies": {
-    "mithril": "^0.2.0",
-    "j2c": "^0.7.3",
-    "verge": "^1.9.1"
-  },
+  "dependencies": {},
   "devDependencies": {
     "babel": "^5.8.23",
-    "babel-plugin-closure-elimination": "0.0.2",
     "chokidar": "^1.0.6",
-    "es6-module-loader": "^0.17.7",
-    "systemjs": "^0.19.0",
-    "systemjs-builder": "^0.14.0",
+    "mithril": "^0.2.0",
+    "transpile-watch": "0.0.2",
     "uglify-js": "^2.4.24"
   },
   "keywords": [
@@ -36,18 +21,13 @@
     "infinite",
     "mithril"
   ],
+  "files": [
+    "lib"
+  ],
   "repository": {
     "type": "git",
     "url": "https://github.com/ArthurClemens/mithril-infinite.git"
   },
   "author": "Arthur Clemens <arthurclemens@gmail.com> (http://visiblearea.com)",
-  "license": "MIT",
-  "jspm": {
-    "directories": {
-      "lib": "lib"
-    },
-    "files": [
-      "lib"
-    ]
-  }
+  "license": "MIT"
 }
