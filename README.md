@@ -291,7 +291,7 @@ Sometimes it is useful to present the user predictable scrollbar behaviour: scro
 
 ## Viewing the examples
 
-* `cd examples`
+* `cd examples/src`
 * `npm install`
 
 Start up a local server, for instance:
