@@ -18,7 +18,7 @@ let item = (data, opts) => {
 
 const PAGE_COUNT = 20;
 const PAGE_ITEMS = 20;
-const ITEM_HEIGHT = 35;
+const ITEM_HEIGHT = 36 + 1; // include border
 const AFTER_CONTENT_HEIGHT = 133;
 
 let component = {};
@@ -33,7 +33,6 @@ component.view = () => {
         pageSize: () => (PAGE_ITEMS * ITEM_HEIGHT),
         // set the total height
         contentSize: scrollHeight,
-        preloadPages: 2,
         after: github()
     });
 };

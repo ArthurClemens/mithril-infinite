@@ -3,8 +3,7 @@ const styles = [{
         ' .scroll-content': {
             ' .page': {
                 ' .list-item': {
-                    height: '35px',
-                    'max-height': '35px'
+                    'max-height': '36px'
                 }
             },
             ' .github': {
