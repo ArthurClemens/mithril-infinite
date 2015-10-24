@@ -280,7 +280,7 @@ Traditional approaches use a div at the bottom of the content; when it is scroll
 This is a bit more tricky because the horizonal width needs to be set ('auto' or '100%'' doesn't work).
 In the demo we use `pageSize` that returns the item width * item count, making sure we have a default width in case the count is 0 (which happens when no data has been received yet).
 
-With CSS, the blocks 'content', 'paddingBefore' and 'paddingAfter' need to be set to `inline-block`.
+With CSS, the blocks 'content', 'padding-before' and 'padding-after' need to be set to `inline-block`.
 
 
 ### Fixed

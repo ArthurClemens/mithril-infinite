@@ -16,7 +16,7 @@ const styles = [{
             margin: 0,
             'font-size': 0,
 
-            ' .content, .paddingBefore, .paddingAfter': {
+            ' .content, .padding-before, .padding-after': {
                 display: 'inline-block'
             },
             ' .content': {
