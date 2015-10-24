@@ -300,7 +300,7 @@ Start up a local server, for instance:
 
 Then:
 
-* `http-server src/`
+* `http-server .`
 
 
 ## Developing
