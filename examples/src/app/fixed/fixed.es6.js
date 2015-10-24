@@ -33,6 +33,7 @@ component.view = () => {
         pageSize: () => (PAGE_ITEMS * ITEM_HEIGHT),
         // set the total height
         contentSize: scrollHeight,
+        preloadPages: 2,
         after: github()
     });
 };

@@ -104,7 +104,7 @@ m.component(infinite, {
 | **pageChange** | optional | Function :: (Number) | | Notifies the current page on change |
 | **axis** | optional | String | 'y' | The scroll axis, either 'y' or 'x' |
 | **before** | optional | Mithril template or component | | Content shown before the pages; has class `before` |
-| **after** | optional | Mithril template or component | | Content shown after the pages; has class `after` |
+| **after** | optional | Mithril template or component | | Content shown after the pages; has class `after`; will be shown only when the last page is in view (when `maxPages` is defined) |
 | **contentSize** | optional | Number (pixels) |  | Use when you know the number of items to display and the height of the content, and when  predictable scrollbar behaviour is desired (without jumps when content is loaded); pass a pixel value to set the size (height or width) of the scroll content, thereby overriding the dynamically calculated height; use together with `pageSize`  |
 | **pageSize** | optional | Function: Array => Number | Pass a pixel value to set the size (height or width) of each page; the function accepts the page content and returns the size |
 
@@ -348,7 +348,7 @@ Watches changes to es6 files
 
 ## Size
 
-Minified and gzipped: 2175 bytes (core) plus 281 bytes (style): ~ 2.5 Kb
+Minified and gzipped: 2265 bytes (core) plus 281 bytes (style): ~ 2.5 Kb
 
 
 ## Dependencies

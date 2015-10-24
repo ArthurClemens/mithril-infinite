@@ -9,6 +9,7 @@ const styles = [{
         'text-align': 'left',
         padding: '24px ' + side_padding + 'px',
         'font-size': '14px',
+        'line-height': 1.3,
         color: '#90A4AE',
         opacity: '.85',
 
