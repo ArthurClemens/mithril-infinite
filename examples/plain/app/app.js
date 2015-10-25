@@ -59,4 +59,4 @@ component.view = function() {
     });
 };
 
-m.mount(document.getElementById('main'), component);
+m.mount(document.body, component);
