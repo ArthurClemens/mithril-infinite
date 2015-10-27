@@ -1,13 +1,12 @@
 'use strict';
 
-
 import m from 'mithril';
 import github from 'app/app/github';
 import infinite from 'mithril-infinite';
 import styler from 'app/app/styler';
 
-import exampleStyle from './images-style';
-styler.add('images', exampleStyle);
+import imagesStyle from './images-style';
+styler.add('images', imagesStyle);
 
 const IMG_URL = 'http://arthurclemens.github.io/assets/mithril-infinite-scroll/thumbs/';
 
