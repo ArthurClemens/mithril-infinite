@@ -1,44 +1,55 @@
 import vars from '../app/variables';
 
-const text_color_light = '#90A4AE';
-const index_block_background_color = '#CFD8DC';
-const index_block_text_color = 'rgba(0,0,0,.85)';
-const index_block_text_color_light = 'rgba(0,0,0,.4)';
-const menu_width = vars.size_px;
+const textColorLight = '#90A4AE';
+const indexBlockBackgroundColor = '#CFD8DC';
+const indexBlockTextColor = 'rgba(0,0,0,.85)';
+const indexBlockTextColorLight = 'rgba(0,0,0,.4)';
+const menuWidthPx = vars.size_px;
 
 const styles = [{
-    '.menu': {
-        width: menu_width,
-        margin: '20px auto',
-        padding: '0 0 20px 0',
-        'list-style': 'none',
+    '.index': {
+        ' h1': {
+            display: 'block',
+            margin: '40px auto 0 auto',
+            width: vars.size + 'px',
+            'text-align': 'center',
+            'font-size': '28px',
+            'font-weight': 'normal',
+            color: vars.text_color
+        },
+        ' .menu': {
+            width: menuWidthPx,
+            margin: '20px auto',
+            padding: '0 0 20px 0',
+            'list-style': 'none',
 
-        ' li': {
-            margin: '0 0 1px 0',
-            padding: 0,
+            ' li': {
+                margin: '0 0 1px 0',
+                padding: 0,
 
-            '&.header': {
-                'font-size': '18px',
-                color: text_color_light
-            },
-            '&.header, a': {
-                padding: '20px'
-            },
-            ' a': {
-                display: 'block',
-                'text-decoration': 'none',
-                'background-color': index_block_background_color,
-
-                ' .title': {
-                    display: 'block',
-                    color: index_block_text_color,
+                '&.header': {
                     'font-size': '18px',
-                    'line-height': 1.4 * 18 + 'px'
+                    color: textColorLight
                 },
-                ' .subtitle': {
+                '&.header, a': {
+                    padding: '20px'
+                },
+                ' a': {
                     display: 'block',
-                    color: index_block_text_color_light,
-                    'font-size': '14px'
+                    'text-decoration': 'none',
+                    'background-color': indexBlockBackgroundColor,
+
+                    ' .title': {
+                        display: 'block',
+                        color: indexBlockTextColor,
+                        'font-size': '18px',
+                        'line-height': 1.4 * 18 + 'px'
+                    },
+                    ' .subtitle': {
+                        display: 'block',
+                        color: indexBlockTextColorLight,
+                        'font-size': '14px'
+                    }
                 }
             }
         }

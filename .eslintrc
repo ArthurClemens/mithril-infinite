@@ -1,12 +1,37 @@
 {
-  "parser": "babel-eslint",
-  "rules": {
-    "strict": 0,
-    "quotes": [2, "single"],
-    "camelcase": 0
-  },
-  "env": {
-      "browser": true,
-      "node": true
-  }
+    "rules": {
+        "indent": [
+            2,
+            4
+        ],
+        "quotes": [
+            2,
+            "single"
+        ],
+        "linebreak-style": [
+            2,
+            "unix"
+        ],
+        "semi": [
+            2,
+            "always"
+        ],
+        "no-unused-vars": [
+            2, {
+                "vars": "all",
+                "args": "after-used"
+            }
+        ]
+    },
+    "globals": {
+        "require": true,
+        "console": true
+    },
+    "env": {
+        "es6": true,
+        "browser": true
+    },
+    "ecmaFeatures": {
+        "modules": true
+    }
 }

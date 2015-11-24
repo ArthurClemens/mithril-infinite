@@ -63,7 +63,7 @@ const menu = m('ul.menu', [
 
 let app = {};
 app.view = () => {
-    return m('div', [
+    return m('.index', [
         m('h1', 'Infinite Scroll for Mithril'),
         menu,
         github({home: true})
