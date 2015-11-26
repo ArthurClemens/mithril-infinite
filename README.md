@@ -87,6 +87,56 @@ m.component(infinite, {
 });
 ~~~
 
+#### Intercepting page count
+
+Assume the server delivers the total page count with json (and received with the function passed in `pageData`):
+
+~~~json
+"pageCount": 9,
+"results": ["one", "two", "three", ...]
+~~~
+
+"results" is the data for the requested page.
+
+The page count information can be used to set the component's `maxPages` parameter. We only need to grab the page count value before passing on the results.
+
+For instance in the controller:
+
+~~~javascript
+const getData = (page) => {
+    return m.request({
+        method: 'GET',
+        url: 'http://mysite.com/data?pageSize=12&page=' + page,
+        initialValue: [],
+        background: true,
+        dataType: 'jsonp'
+    });
+};
+const pageCount = m.prop();
+const pageData = (pageNum) => {
+    return getData(pageNum).then((response) => {
+        pageCount(response.pageCount);
+        m.redraw(); // because we are using "background: true" with m.request
+        return [response.results];
+    });
+};
+
+return {
+    pageData,
+    pageCount
+};
+~~~
+
+And in the view:
+
+~~~javascript
+return m('.results', m.component(infinite, {
+    maxPages: ctrl.pageCount(),
+    item: item,
+    pageData: ctrl.pageData
+}));
+~~~
+
 ### Configuration parameters
 
 | **Parameter** |  **Mandatory** | **Type** | **Default** | **Description** |
