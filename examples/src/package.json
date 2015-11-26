@@ -11,7 +11,7 @@
   "dependencies": {
     "j2c": "^0.7.3",
     "mithril": "^0.2.0",
-    "mithril-infinite": "^0.2.5",
+    "mithril-infinite": "^0.2.14",
     "verge": "^1.9.1"
   },
   "devDependencies": {

@@ -16,21 +16,20 @@ let vm = {
 };
 
 // fade in first time only
-const fadeInImage = (el, imgUrl) => {
+const showImage = (el, imgUrl) => {
     const url = IMG_URL + imgUrl;
-    const showImage = () => {
+    const populate = () => {
         el.style.backgroundImage = 'url(' + url + ')';
-        el.style.opacity = 1;
         vm.seen[url] = 1;
     };
     if (!vm.seen[url]) {
         let img = new Image();
         img.onload = () => {
-            showImage();
+            populate();
         };
         img.src = url;
     } else {
-        showImage();
+        populate();
     }
 };
 
@@ -43,7 +42,7 @@ const item = (data) => {
                         return;
                     }
                     if (infinite.isElementInViewport({el: el})) {
-                        fadeInImage(el, data.src);
+                        showImage(el, data.src);
                         context.inited = true;
                     }
                 }
@@ -56,6 +55,7 @@ let component = {};
 component.view = () => {
     return m.component(infinite, {
         maxPages: 16, // pages of 12 items each
+        preloadPages: 3,
         item: item,
         pageUrl: page => 'app/grid/data/page-' + page + '.json',
         class: 'grid',

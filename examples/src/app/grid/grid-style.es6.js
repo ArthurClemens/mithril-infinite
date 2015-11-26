@@ -61,12 +61,7 @@ const styles = [
                                 width: '100%',
                                 'background-size': 'contain',
                                 'background-repeat': 'no-repeat',
-                                'background-position-x': '50%',
-                                'transition-property': 'opacity',
-                                '-webkit-transition-property': 'opacity',
-                                'opacity': 0,
-                                'transition-duration': '500ms',
-                                '-webkit-transition-duration': '500ms'
+                                'background-position-x': '50%'
                             }
                         }
                     }
