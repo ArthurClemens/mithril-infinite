@@ -18,6 +18,7 @@
 * Items are handled per "page", which is a normal way of handling batches of search results from the server.
 * Pages can contain an arbitrary and unequal amount of items.
 * When there is room on the page to show more data: automatic detection of "loadable space" (so no loading area detection div is needed).
+* Optionally use previous/next paging buttons
 
 Not included:
 
@@ -87,7 +88,7 @@ m.component(infinite, {
 });
 ~~~
 
-#### Intercepting page count
+### Intercepting page count
 
 Assume the server delivers the total page count with json (and received with the function passed in `pageData`):
 
@@ -116,7 +117,7 @@ const pageCount = m.prop();
 const pageData = (pageNum) => {
     return getData(pageNum).then((response) => {
         pageCount(response.pageCount);
-        m.redraw(); // because we are using "background: true" with m.request
+        setTimeout(m.redraw, 0); // because we are using "background: true" with m.request
         return [response.results];
     });
 };
@@ -137,30 +138,50 @@ return m('.results', m.component(infinite, {
 }));
 ~~~
 
-### Configuration parameters
+### Pagination
+
+See the "paging" example.
+
+
+## Configuration options
+
+### Appearance options
+
+| **Parameter** |  **Mandatory** | **Type** | **Default** | **Description** |
+| ------------- | -------------- | -------- | ----------- | --------------- |
+| **scrollView** | optional | Selector String | | Pass an element's selector to assign another element as scrollView |
+| **class** | optional | String |  | Extra CSS class appended to 'scroll-view' |
+| **contentTag** | optional | String | 'div' | HTML tag for the content element |
+| **pageTag** | optional | String | 'div' | HTML tag for the page element; note that pages have class `page` plus either `odd` or `even` |
+| **maxPages** | optional | Number | `Number.MAX_VALUE` | Maximum number of pages to draw |
+| **preloadPages** | optional | Number | 1 | Number of pages to preload when the app starts; if room is available, this number will increase automatically |
+| **axis** | optional | String | 'y' | The scroll axis, either 'y' or 'x' |
+| **autoSize** | optional | Boolean | | Set to `true` to not set the width or height in CSS |
+| **before** | optional | Mithril template or component | | Content shown before the pages; has class `before` |
+| **after** | optional | Mithril template or component | | Content shown after the pages; has class `after`; will be shown only when the last page is in view (when `maxPages` is defined) |
+| **contentSize** | optional | Number (pixels) |  | Use when you know the number of items to display and the height of the content, and when  predictable scrollbar behaviour is desired (without jumps when content is loaded); pass a pixel value to set the size (height or width) of the scroll content, thereby overriding the dynamically calculated height; use together with `pageSize`  |
+
+### Callback functions
 
 | **Parameter** |  **Mandatory** | **Type** | **Default** | **Description** |
 | ------------- | -------------- | -------- | ----------- | --------------- |
 | **pageUrl** | either `pageData` or `pageUrl` | Function :: Number => String | | Function that accepts a page number and returns a URL String |
 | **pageData** | either `pageData` or `pageUrl` | Function :: Number => Promise | | Function that fetches data; accepts a page number and returns a promise |
 | **item** | required | Function :: (Array, Object) => Mithril Template | | Function that creates an item from data |
-| **scrollView** | optional | Selector String | | Pass an element's selector to assign another element as scrollView |
-| **class** | optional | String |  | Extra CSS class appended to 'scroll-view' |
-| **contentTag** | optional | String | 'div' | HTML tag for the content element |
-| **pageTag** | optional | String | 'div' | HTML tag for the page element; note that pages have class `page` plus either `odd` or `even` |
-| **maxPages** | optional | Number | `Number.MAX_VALUE` | Maximum number of pages to draw |
-| **processPageData** | optional | Function :: (Array, Object options) => Array | | Function that maps over the page data and returns an item for each |
-| **preloadPages** | optional | Number | 1 | Number of pages to preload when the app starts; if room is available, this number will increase automatically |
-| **pageChange** | optional | Function :: (Number) | | Notifies the current page on change |
-| **axis** | optional | String | 'y' | The scroll axis, either 'y' or 'x' |
-| **before** | optional | Mithril template or component | | Content shown before the pages; has class `before` |
-| **after** | optional | Mithril template or component | | Content shown after the pages; has class `after`; will be shown only when the last page is in view (when `maxPages` is defined) |
-| **contentSize** | optional | Number (pixels) |  | Use when you know the number of items to display and the height of the content, and when  predictable scrollbar behaviour is desired (without jumps when content is loaded); pass a pixel value to set the size (height or width) of the scroll content, thereby overriding the dynamically calculated height; use together with `pageSize`  |
 | **pageSize** | optional | Function: Array => Number | Pass a pixel value to set the size (height or width) of each page; the function accepts the page content and returns the size |
+| **pageChange** | optional | Function :: (Number) | | Notifies the current page on change |
+| **processPageData** | optional | Function :: (Array, Object options) => Array | | Function that maps over the page data and returns an item for each |
+
+### Paging options
+
+| **Parameter** |  **Mandatory** | **Type** | **Default** | **Description** |
+| ------------- | -------------- | -------- | ----------- | --------------- |
+| **currentPage**  | optional | Number | | Sets the current page |
+| **from** | optional | Number | | Not needed when only one page is shown (use `currentPage`); use page data from this number and higher |
+| **to** | optional | Number | | Not needed when only one page is shown (use `currentPage`); Use page data to this number and lower |
 
 
-
-### Using images
+## Using images
 
 Images should be loaded only when they appear on the screen. To check if the image is in the viewport, you can use the function `infinite.isElementInViewport(el)`. For example:
 
@@ -194,7 +215,7 @@ el.style.backgroundImage = 'url(' + url + ')'
 ~~~
 
 
-### Using table data
+## Using table data
 
 Using `<table>` tags causes reflow problems. Use divs instead, with CSS styling for table features. For example:
 
@@ -230,13 +251,13 @@ Using `<table>` tags causes reflow problems. Use divs instead, with CSS styling 
 
 
 
-### Styling
+## Styling
 
 Note: The parent of 'scroll-view' must have a height.
 
 Mithril Infinite comes with a JavaScript based styling that uses [j2c](https://github.com/pygy/j2c), but there is no hard dependency - you can provide your own styles in any other way, for instance with the CSS file `mithril-infinite.css` (generated by npm script `standalone-css`).
 
-#### Including the style in a project
+### Including the style in a project
 
 Make sure that 'mithril-infinite-style' can be found.
 
@@ -257,7 +278,7 @@ For SystemJS in `map`:
 ~~~
 
 
-#### j2c styling
+### j2c styling
 
 The j2c way goes like this. In your application file:
 
@@ -273,7 +294,7 @@ styler.add('mithril-infinite', style);
 ~~~
 
 
-### Data structure
+## Data structure
 
 Data is handled per "results" page. Each page is a JSON data object that contains a list of item data.
 

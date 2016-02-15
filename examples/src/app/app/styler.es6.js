@@ -1,36 +1,38 @@
 import j2c from 'j2c';
 
-const removeStyle = (id) => {
-	if (id) {
-		const old = document.getElementById(id);
-		if (old) {
-			old.parentNode.removeChild(old);
-		}
-	}
+const remove = (id) => {
+    if (id) {
+        const old = document.getElementById(id);
+        if (old) {
+            old.parentNode.removeChild(old);
+        }
+    }
 };
 
 /*
-styles: list of lists
+* id: identifier, used as HTMLElement id for the attached <style></style> element
+* styles: list of lists style Objects
 */
-const addStyle = (id, ...styles) => {
-	removeStyle(id);
-	const styleEl = document.createElement('style');
-	if (id) {
-		styleEl.setAttribute('id', id);
-	}
-	styles.forEach((styleList) => {
-		// each style returns a list
-		styleList.forEach((style) => {
-			const sheet = j2c.sheet(style);
-			styleEl.appendChild(document.createTextNode(sheet));
-		});
-	});
-	document.head.appendChild(styleEl);
+const add = (id, ...styles) => {
+    remove(id);
+    const styleEl = document.createElement('style');
+    if (id) {
+        styleEl.setAttribute('id', id);
+    }
+    styles.forEach((styleList) => {
+        // each style returns a list
+        if (Object.keys(styleList).length) {
+            styleList.forEach((style) => {
+                const scoped = {'@global': style};
+                const sheet = j2c.sheet(scoped);
+                styleEl.appendChild(document.createTextNode(sheet));
+            });
+        }
+    });
+    document.head.appendChild(styleEl);
 };
 
-const styler = {
-	add: addStyle,
-	remove: removeStyle
+export default {
+    add,
+    remove
 };
-
-export default styler;

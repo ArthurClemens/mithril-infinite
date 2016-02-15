@@ -12,7 +12,7 @@ function bundle(entries, outfile) {
             './node_modules/mithril-infinite/lib/' // include mithril-infinite-style.js
         ]
     })
-    .transform(babelify)
+    .transform(babelify, {presets: ['es2015']})
     .transform({
         global: true
     }, 'uglifyify')

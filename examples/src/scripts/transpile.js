@@ -15,7 +15,7 @@ watch ({
     },
     transform: function(inPath, outPath) {
         return [
-            'babel', inPath, '>', outPath,
+            'babel', '--presets es2015', inPath, '>', outPath,
             '&&',
             'uglifyjs', '--screw-ie8 -c -m sort -r \'require,exports\' -o', outPath, outPath
         ].join(' ');

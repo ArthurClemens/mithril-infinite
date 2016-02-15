@@ -1,1 +1,1 @@
-"use strict";Object.defineProperty(exports,"__esModule",{value:!0});var styles=[{".scroll-view.table.fixed":{" .scroll-content":{" .page":{" .list-item":{"max-height":"36px"}}," .github":{height:"133px"}}}}];exports.default=styles,module.exports=exports.default;
+"use strict";Object.defineProperty(exports,"__esModule",{value:!0});var styles=[{".scroll-view.table.fixed":{" .scroll-content":{" .page":{" .list-item":{"max-height":"36px"}}," .github":{height:"133px"}}}}];exports.default=styles;

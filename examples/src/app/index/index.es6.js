@@ -8,6 +8,7 @@ import table from 'app/table/table';
 import short from 'app/short/short';
 import horizontal from 'app/horizontal/horizontal';
 import fixed from 'app/fixed/fixed';
+import paging from 'app/paging/paging';
 
 import styler from 'app/app/styler';
 import style from 'mithril-infinite-style';
@@ -48,6 +49,11 @@ const menuData = [
         href: '/fixed',
         title: 'Fixed height',
         subtitle: 'Preset the scroll height, don\'t update scroll height'
+    },
+    {
+        href: '/paging',
+        title: 'Paging',
+        subtitle: 'Prev/Next buttons instead of infinite scroll'
     }
 ];
 
@@ -79,5 +85,6 @@ m.route(document.body, '/', {
     '/table': table,
     '/short': short,
     '/horizontal': horizontal,
-    '/fixed': fixed
+    '/fixed': fixed,
+    '/paging': paging
 });
