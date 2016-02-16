@@ -6,7 +6,8 @@
   "scripts": {
     "transpile": "node scripts/transpile.js once lib node_modules",
     "watch": "node scripts/transpile.js watch lib node_modules",
-    "standalone-css": "node scripts/create-standalone-css.js > lib/mithril-infinite.css"
+    "standalone-css": "node scripts/create-standalone-css.js > lib/mithril-infinite.css",
+    "github": "node scripts/github.js"
   },
   "dependencies": {},
   "devDependencies": {
@@ -15,6 +16,7 @@
     "babelify": "^7.2.0",
     "j2c": "^0.11.0",
     "mithril": "^0.2.0",
+    "shelljs": "^0.6.0",
     "transpile-watch": "0.0.3",
     "uglify-js": "^2.4.24",
     "uglifyjs": "^2.4.10"

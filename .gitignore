@@ -5,4 +5,4 @@ tmp-npm
 
 examples/build/app/index/index-bundle.js
 
-examples/src/npm-debug.log
+npm-debug.log
