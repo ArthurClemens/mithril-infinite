@@ -6,20 +6,22 @@
   "scripts": {
     "transpile": "node scripts/transpile.js once app node_modules",
     "watch": "node scripts/transpile.js watch app node_modules",
-    "build": "npm run transpile && node scripts/build.js ."
+    "build": "npm run transpile && node scripts/build.js .",
+    "dev-build": "node scripts/build-preflight.js && npm install && node scripts/build.js && node scripts/build-postflight.js"
   },
   "dependencies": {
     "j2c": "^0.11.0",
     "mithril": "^0.2.0",
-    "mithril-infinite": "^0.2.14",
+    "mithril-infinite": "^0.3.1",
     "verge": "^1.9.1"
   },
   "devDependencies": {
     "babel-cli": "^6.5.1",
     "babel-preset-es2015": "^6.3.13",
     "babelify": "^7.2.0",
-    "j2c": "^0.11.0",
     "browserify": "^11.2.0",
+    "j2c": "^0.11.0",
+    "shelljs": "^0.6.0",
     "systemjs": "^0.19.0",
     "transpile-watch": "0.0.3",
     "uglifyify": "^3.0.1"
