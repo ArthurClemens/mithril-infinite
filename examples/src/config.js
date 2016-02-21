@@ -11,7 +11,6 @@ System.config({
     map: {
         'j2c': 'node_modules/j2c/dist/j2c.global.min',
         'mithril-infinite': 'node_modules/mithril-infinite/lib/mithril-infinite',
-        'mithril-infinite-style': 'node_modules/mithril-infinite/lib/mithril-infinite-style',
         'mithril': 'node_modules/mithril/mithril.min',
         'verge': 'node_modules/verge/verge.min'
     }

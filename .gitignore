@@ -3,6 +3,4 @@ node_modules
 tmp
 tmp-npm
 
-examples/build/app/index/index-bundle.js
-
 npm-debug.log

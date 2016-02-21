@@ -1,15 +1,15 @@
 const styles = [{
-    '.scroll-view.table': {
+    '.mithril-infinite__scroll-view.table': {
         'min-width': '320px',
         margin: '0 auto',
         background: '#eee',
 
-        ' .scroll-content': {
-            ' .page': {
+        ' .mithril-infinite__scroll-content': {
+            ' .mithril-infinite__page': {
                 display: 'table',
                 width: '100%'
             },
-            ' .page.odd': {
+            ' .mithril-infinite__page--odd': {
                 'background-color': '#eceff1',
 
                 ' .list-item': {
@@ -23,7 +23,7 @@ const styles = [{
                     }
                 }
             },
-            ' .page.even': {
+            ' .mithril-infinite__page--even': {
                 'background-color': '#263238',
 
                 ' .list-item': {

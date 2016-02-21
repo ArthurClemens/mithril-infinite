@@ -20,6 +20,7 @@ const showImage = (el, imgUrl) => {
     const url = IMG_URL + imgUrl;
     const populate = () => {
         el.style.backgroundImage = 'url(' + url + ')';
+        el.style.opacity = 1;
         vm.seen[url] = 1;
     };
     if (!vm.seen[url]) {

@@ -11,9 +11,6 @@ import fixed from 'app/fixed/fixed';
 import paging from 'app/paging/paging';
 
 import styler from 'app/app/styler';
-import style from 'mithril-infinite-style';
-styler.add('mithril-infinite', style);
-
 import commonStyle from 'app/app/common-style';
 import indexStyle from './index-style';
 styler.add('common', commonStyle);

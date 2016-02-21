@@ -8,8 +8,7 @@ function bundle(entries, outfile) {
         extensions: ['.es6.js'],
         paths: [
             '.',
-            './node_modules',
-            './node_modules/mithril-infinite/lib/' // include mithril-infinite-style.js
+            './node_modules'
         ]
     })
     .transform(babelify, {presets: ['es2015']})

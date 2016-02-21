@@ -12,20 +12,20 @@ const styles = [
             margin: '0 auto',
             height: '100%',
 
-            ' .scroll-view.scroll-view-y': {
+            ' .mithril-infinite__scroll-view.mithril-infinite__scroll-view--y': {
                 height: pageHeight + 'px',
             },
-            ' .scroll-content': {
+            ' .mithril-infinite__scroll-content': {
                 margin: '0 auto',
                 width: pageWidth + 'px',
                 padding: gridSpacing + 'px 0',
 
-                ' .content': {
+                ' .mithril-infinite__content': {
                     margin: '0 auto',
                     'font-size': 0,
                     'line-height': 0,
 
-                    ' .page': {
+                    ' .mithril-infinite__page': {
                         margin: '0 ' + (-gridSpacing / 2) + 'px'
                     },
                     ' .grid-item': {

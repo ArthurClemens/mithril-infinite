@@ -7,13 +7,12 @@
     "transpile": "node scripts/transpile.js once app node_modules",
     "watch": "node scripts/transpile.js watch app node_modules",
     "build": "npm run transpile && node scripts/build.js .",
-    "dev-build": "node scripts/build-preflight.js && npm install && node scripts/build.js && node scripts/build-postflight.js"
+    "dev-build": "node scripts/dev-build-prepare.js preflight && npm install && node scripts/build.js && node scripts/dev-build-prepare.js postflight",
+    "test-build": "node scripts/test-build-prepare.js preflight && npm run build && node scripts/test-build-prepare.js postflight"
   },
   "dependencies": {
-    "j2c": "^0.11.0",
     "mithril": "^0.2.0",
-    "mithril-infinite": "^0.3.1",
-    "verge": "^1.9.1"
+    "mithril-infinite": "^0.4.0"
   },
   "devDependencies": {
     "babel-cli": "^6.5.1",

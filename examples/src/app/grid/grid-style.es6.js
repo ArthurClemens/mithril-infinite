@@ -7,9 +7,9 @@ const imageHolderPaddingPx = imageHolderPadding + 'px';
 const makeMediaStyle = function(which, cols) {
     return {
         ['@media (' + which + '-width: ' + ((cols + 1) * itemWidth + cols * gridSpacing) + 'px)']: {
-            '.scroll-view.grid': {
-                ' .scroll-content': {
-                    ' .content': {
+            '.mithril-infinite__scroll-view.grid': {
+                ' .mithril-infinite__scroll-content': {
+                    ' .mithril-infinite__content': {
                         'width': cols * itemWidth + (cols - 1) * gridSpacing + 'px'
                     }
                 }
@@ -24,18 +24,18 @@ const styles = [
     makeMediaStyle('max', 3),
     makeMediaStyle('max', 2),
     makeMediaStyle('max', 1), {
-        '.scroll-view.grid': {
+        '.mithril-infinite__scroll-view.grid': {
             margin: '0 auto',
 
-            ' .scroll-content': {
+            ' .mithril-infinite__scroll-content': {
                 padding: 2 * gridSpacing + 'px 0',
 
-                ' .content': {
+                ' .mithril-infinite__content': {
                     margin: '0 auto',
                     'font-size': 0,
                     'line-height': 0,
 
-                    ' .page': {
+                    ' .mithril-infinite__page': {
                         margin: '0 ' + (-gridSpacing / 2) + 'px'
                     },
                     ' .grid-item': {
@@ -61,7 +61,9 @@ const styles = [
                                 width: '100%',
                                 'background-size': 'contain',
                                 'background-repeat': 'no-repeat',
-                                'background-position-x': '50%'
+                                'background-position-x': '50%',
+                                opacity: 0,
+                                transition: 'opacity .7s'
                             }
                         }
                     }

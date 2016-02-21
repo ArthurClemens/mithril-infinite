@@ -1,10 +1,10 @@
 const styles = [{
-    '.scroll-view.short': {
+    '.mithril-infinite__scroll-view.short': {
         'min-width': '320px',
         margin: '0 auto',
         background: '#eee',
 
-        ' .scroll-content': {
+        ' .mithril-infinite__scroll-content': {
             ' .list-item': {
                 height: '8px',
 

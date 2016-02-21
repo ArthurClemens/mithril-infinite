@@ -6,27 +6,27 @@ const image_padding = 10;
 const image_padding_px = image_padding + 'px';
 
 const styles = [{
-    '.scroll-view.horizontal': {
+    '.mithril-infinite__scroll-view.horizontal': {
         margin: 0,
         height: item_size + 20 + 'px', // add space for scrollbar
         background: '#fff',
 
-        ' .scroll-content': {
+        ' .mithril-infinite__scroll-content': {
             padding: 0,
             margin: 0,
             'font-size': 0,
 
-            ' .content, .padding-before, .padding-after': {
+            ' .mithril-infinite__content, .mithril-infinite__padding-before, .mithril-infinite__padding-after': {
                 display: 'inline-block'
             },
-            ' .content': {
+            ' .mithril-infinite__content': {
                 margin: 0,
                 'font-size': 0,
 
-                ' .page': {
+                ' .mithril-infinite__page': {
                     display: 'inline-block',
                     height: item_size_px
-                },
+                },                
 
                 ' .grid-item': {
                     display: 'inline-block',

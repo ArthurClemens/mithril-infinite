@@ -68,7 +68,7 @@ component.view = (ctrl) => {
                 pageData: ctrl.pageData, // fetches data
                 pageChange: ctrl.pageNum,
                 currentPage: pageNum,
-                // autoSize: true // disabled because we are already setting the height in CSS
+                autoSize: false // disabled because we are already setting the height in CSS
             }),
             m('.pager', [
                 m('a', {
