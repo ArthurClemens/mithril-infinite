@@ -311,15 +311,21 @@ Traditional approaches use a div at the bottom of the content; when it is scroll
 
 ### Horizontal
 
-This is a bit more tricky because the horizonal width needs to be set ('auto' or '100%'' doesn't work).
+This is a bit more tricky because the horizontal width needs to be set ('auto' or '100%'' doesn't work).
 In the demo we use `pageSize` that returns the item width * item count, making sure we have a default width in case the count is 0 (which happens when no data has been received yet).
 
-With CSS, the blocks 'content', 'padding-before' and 'padding-after' need to be set to `inline-block`.
+With CSS, the blocks 'mithril-infinite__content', 'mithril-infinite__padding-before' and 'mithril-infinite__padding-after' need to be set to `inline-block`.
 
 
 ### Fixed
 
-Sometimes it is useful to present the user predictable scrollbar behaviour: scrolling the scroll knob all the way down leads to the last content page. This is only possible when you know the size of the content (calculated by the number of pages times the height of each page). This example demonstrates the use of the param `contentSize` together with `pageSize`.
+Sometimes it is useful to present the user predictable scrollbar behavior: scrolling the scroll knob all the way down leads to the last content page. This is only possible when you know the size of the content (calculated by the number of pages times the height of each page). This example demonstrates the use of the param `contentSize` together with `pageSize`.
+
+
+### Paging
+
+Demonstrates how to set up pagination with Next/Prev buttons.
+
 
 
 
@@ -348,7 +354,7 @@ The examples are currently set up in 2 ways (to keep things relatively flexible)
 For compiling/transpiling, you need to install the following:
 
 ~~~bash
-npm install babel -g
+npm install babel-cli -g
 ~~~
 
 ### Scripts
@@ -382,7 +388,7 @@ Watches changes to es6 files
 
 ## Size
 
-Minified and gzipped: 2265 bytes (core) plus 281 bytes (style): ~ 2.5 Kb
+Minified and gzipped: ~ 2.8 Kb
 
 
 ## Dependencies
