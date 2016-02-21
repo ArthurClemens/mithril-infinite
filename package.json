@@ -1,17 +1,21 @@
 {
   "name": "mithril-infinite",
-  "version": "0.3.1",
+  "version": "0.4.0",
   "description": "Infinite Scroll for Mithril",
   "main": "lib/mithril-infinite.js",
   "scripts": {
     "transpile": "node scripts/transpile.js once lib node_modules",
     "watch": "node scripts/transpile.js watch lib node_modules",
-    "standalone-css": "node scripts/create-standalone-css.js > lib/mithril-infinite.css",
     "github": "node scripts/github.js"
   },
-  "dependencies": {},
+  "dependencies": {
+    "j2c": "^0.11.0",
+    "mithril": "^0.2.0",
+    "verge": "^1.9.1"
+  },
   "devDependencies": {
     "babel-cli": "^6.5.1",
+    "babel-plugin-add-module-exports": "^0.1.2",
     "babel-preset-es2015": "^6.3.13",
     "babelify": "^7.2.0",
     "j2c": "^0.11.0",
