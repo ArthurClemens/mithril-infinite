@@ -1,6 +1,9 @@
 import vars from './variables';
 
 const styles = [{
+    ' *': {
+        'box-sizing': 'border-box'
+    },
     ' html, body': {
         'min-height': '100%',
         height: '100%'

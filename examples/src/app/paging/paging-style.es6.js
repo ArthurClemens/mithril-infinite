@@ -1,7 +1,6 @@
 const gridSpacing = 8;
 const pageWidth = 320;
 const itemSize = (320 - 2 * gridSpacing) / 3;
-const pageHeight = 4 * itemSize + 3 * gridSpacing + 2 * gridSpacing;
 const imageHolderPadding = 10;
 const imageHolderPaddingPx = imageHolderPadding + 'px';
 
@@ -10,15 +9,15 @@ const styles = [
         '.paging': {
             width: pageWidth + 'px',
             margin: '0 auto',
-            height: '100%',
 
             ' .mithril-infinite__scroll-view.mithril-infinite__scroll-view--y': {
-                height: pageHeight + 'px',
+                height: 'auto'
             },
             ' .mithril-infinite__scroll-content': {
                 margin: '0 auto',
                 width: pageWidth + 'px',
-                padding: gridSpacing + 'px 0',
+                padding: gridSpacing + 'px 0 0',
+               
 
                 ' .mithril-infinite__content': {
                     margin: '0 auto',
