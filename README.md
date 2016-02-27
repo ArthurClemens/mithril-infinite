@@ -204,7 +204,9 @@ Options for `infinite.isElementInViewport`:
 | ------------- | -------------- | -------- | ----------- | --------------- |
 | **el** | required | HTML Element | | The element to check |
 | **axis** | optional | String | 'y' | The scroll axis, either 'y' or 'x' |
-| **leeway** | optional | Number | 100 | The extended area; by default the image is already fetched when it is 100px outside of the viewport |
+| **leeway** | optional | Number | 300 | The extended area; by default the image is already fetched when it is 100px outside of the viewport |
+
+Note that for scrolling backwards, leeway must be passed with a negative value.
 
 
 Images should not be shown with the `<img/>` tag: while this works fine on desktop browsers, this causes redrawing glitches on iOS Safari. The solution is to use `background-image`. For example:
