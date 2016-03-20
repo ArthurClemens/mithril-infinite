@@ -159,17 +159,19 @@ See the "paging" example.
 | **before** | optional | Mithril template or component | | Content shown before the pages; has class `mithril-infinite__before` |
 | **after** | optional | Mithril template or component | | Content shown after the pages; has class `mithril-infinite__after`; will be shown only when the last page is in view (when `maxPages` is defined) |
 | **contentSize** | optional | Number (pixels) |  | Use when you know the number of items to display and the height of the content, and when  predictable scrollbar behaviour is desired (without jumps when content is loaded); pass a pixel value to set the size (height or width) of the scroll content, thereby overriding the dynamically calculated height; use together with `pageSize`  |
+| **setDimensions** | optional | Function ({scrolled: Number, size: Number}) | | Sets the initial size and scroll position of `scrollView`; this function is called once |
 
 ### Callback functions
 
 | **Parameter** |  **Mandatory** | **Type** | **Default** | **Description** |
 | ------------- | -------------- | -------- | ----------- | --------------- |
-| **pageUrl** | either `pageData` or `pageUrl` | Function :: Number => String | | Function that accepts a page number and returns a URL String |
-| **pageData** | either `pageData` or `pageUrl` | Function :: Number => Promise | | Function that fetches data; accepts a page number and returns a promise |
-| **item** | required | Function :: (Array, Object) => Mithril Template | | Function that creates an item from data |
-| **pageSize** | optional | Function: Array => Number | Pass a pixel value to set the size (height or width) of each page; the function accepts the page content and returns the size |
-| **pageChange** | optional | Function :: (Number) | | Notifies the current page on change |
-| **processPageData** | optional | Function :: (Array, Object options) => Array | | Function that maps over the page data and returns an item for each |
+| **pageUrl** | either `pageData` or `pageUrl` | Function (page: Number) => String | | Function that accepts a page number and returns a URL String |
+| **pageData** | either `pageData` or `pageUrl` | Function (page: Number) => Promise | | Function that fetches data; accepts a page number and returns a promise |
+| **item** | required | Function (data: Array, options: Object) => Mithril Template | | Function that creates an item from data |
+| **pageSize** | optional | Function (content: Array) => Number | Pass a pixel value to set the size (height or width) of each page; the function accepts the page content and returns the size |
+| **pageChange** | optional | Function (page: Number) | | Notifies the current page on change |
+| **processPageData** | optional | Function (data: Array, options: Object) => Array | | Function that maps over the page data and returns an item for each |
+| **getDimensions** | optional | Function () => {scrolled: Number, size: Number} | | Returns an object with state dimensions of `scrollView`: `scrolled` (either scrollTop or scrollLeft) and `size` (either height or width); this function is called on each view update | 
 
 ### Paging options
 
