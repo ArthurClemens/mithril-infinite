@@ -8,9 +8,7 @@ import styler from 'app/app/styler';
 import pagingStyle from 'app/paging/paging-style';
 styler.add('paging', pagingStyle);
 
-
 const IMG_URL = 'http://arthurclemens.github.io/assets/mithril-infinite-scroll/thumbs/';
-
 
 const item = (data) => {
     return m('a.grid-item',

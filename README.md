@@ -86,6 +86,10 @@ m.component(infinite, {
 });
 ~~~
 
+You can use `fetch` instead of `m.request`.
+
+
+
 ### Intercepting page count
 
 Assume the server delivers the total page count with json (and received with the function passed in `pageData`):

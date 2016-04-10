@@ -11,7 +11,7 @@ const styles = [
             margin: '0 auto',
 
             ' .mithril-infinite__scroll-view.mithril-infinite__scroll-view--y': {
-                height: 'auto'
+                height: (itemSize * 4) + (gridSpacing * 3) + (2 * gridSpacing) + 'px'
             },
             ' .mithril-infinite__scroll-content': {
                 margin: '0 auto',
