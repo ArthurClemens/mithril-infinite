@@ -8,10 +8,14 @@ function bundle(entries, outfile) {
         extensions: ['.es6.js'],
         paths: [
             '.',
-            './node_modules'
-        ]
+            'node_modules'
+        ],
+        debug: true
     })
-    .transform(babelify, {presets: ['es2015']})
+    .transform(babelify, {
+        presets: ['es2015'],
+        sourceMaps: true
+    })
     .transform({
         global: true
     }, 'uglifyify')

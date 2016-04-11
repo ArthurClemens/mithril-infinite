@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "j2c": "^0.11.0",
-    "mithril": "^0.2.0",
+    "mithril": "^0.2.3",
     "verge": "^1.9.1"
   },
   "devDependencies": {
