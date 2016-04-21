@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "mithril": "^0.2.4",
-    "mithril-infinite": "^0.5.4"
+    "mithril-infinite": "^0.5.5"
   },
   "devDependencies": {
     "babel-cli": "^6.7.7",
