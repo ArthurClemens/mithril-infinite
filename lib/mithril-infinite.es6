@@ -351,7 +351,7 @@ infinite.view = (ctrl, opts) => {
             m(contentTag, {
                 class: CSS_CLASSES.content
             }, [
-                (opts.before && ctrl.contentSize)
+                opts.before
                     ? m('div', {
                         class: CSS_CLASSES.before,
                         style: {
@@ -400,6 +400,7 @@ infinite.view = (ctrl, opts) => {
                         })
                     ]
                 ),
+                // only show 'after' when content is available
                 (opts.after && ctrl.contentSize)
                     ? m('div', {
                         class: CSS_CLASSES.after,
