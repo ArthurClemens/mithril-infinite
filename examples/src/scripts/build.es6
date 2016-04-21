@@ -1,11 +1,11 @@
-var fs = require('fs');
-var browserify = require('browserify');
-var babelify = require('babelify');
+const fs = require('fs');
+const browserify = require('browserify');
+const babelify = require('babelify');
 
-function bundle(entries, outfile) {
+const bundle = (entries, outfile) => {
     browserify({
         entries: entries,
-        extensions: ['.es6.js'],
+        extensions: ['.es6'],
         paths: [
             '.',
             'node_modules'

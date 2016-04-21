@@ -4,11 +4,10 @@
   "description": "",
   "main": "",
   "scripts": {
-    "transpile": "node scripts/transpile.js once app node_modules",
-    "watch": "node scripts/transpile.js watch app node_modules",
-    "build": "npm run transpile && node scripts/build.js .",
-    "dev-build": "node scripts/dev-build-prepare.js preflight && npm install && node scripts/build.js && node scripts/dev-build-prepare.js postflight",
-    "test-build": "node scripts/test-build-prepare.js preflight && npm run build && node scripts/test-build-prepare.js postflight"
+    "transpile": "node scripts/transpile.es6 once app node_modules",
+    "watch": "node scripts/transpile.es6 watch app node_modules",
+    "build": "npm run transpile && node scripts/build.es6 .",
+    "dev-build": "node scripts/dev-build-prepare.es6 preflight && npm install && node scripts/build.es6 && node scripts/dev-build-prepare.es6 postflight"
   },
   "dependencies": {
     "mithril": "^0.2.3",
