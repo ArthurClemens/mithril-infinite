@@ -354,11 +354,6 @@ infinite.view = (ctrl, opts) => {
                 opts.before
                     ? m('div', {
                         class: CSS_CLASSES.before,
-                        style: {
-                            // visually hide this element until the last page is into view
-                            // to prevent flashes of after content when scrolling fast
-                            visibility: isFirstPageVisible ? 'visible' : 'hidden'
-                        },
                         config: el => {
                             // always update the natural size
                             const size = getElementSize(el, opts.axis);
