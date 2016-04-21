@@ -27,5 +27,5 @@ const bundle = (entries, outfile) => {
 }
 
 bundle([
-    'app/index/index.es6.js'
+    'app/index/index.es6'
 ], '../build/app/index/index-bundle.js');
