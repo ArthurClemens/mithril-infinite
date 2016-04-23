@@ -47,10 +47,10 @@ const getElementSize = (el, axis) => {
     const styles = window.getComputedStyle(el);
     if (axis === 'x') {
         const margin = parseFloat(styles.marginLeft) + parseFloat(styles.marginRight);
-        return el.scrollWidth + margin;
+        return Math.round(el.scrollWidth + margin);
     } else {
         const margin = parseFloat(styles.marginTop) + parseFloat(styles.marginBottom);
-        return el.scrollHeight + margin;
+        return Math.round(el.scrollHeight + margin);
     }
 };
 
@@ -258,6 +258,7 @@ infinite.view = (ctrl, opts) => {
     const contentTag = opts.contentTag || 'div';
     const classList = [CSS_CLASSES.scrollView, (opts.axis === 'x' ? CSS_CLASSES.scrollViewX : CSS_CLASSES.scrollViewY), opts.class].join(' ');
     ctrl.contentSize = calculateSize(1, maxPage, state);
+    const isFirstPageVisible = isPageInViewport(minPage, opts.axis, state, ctrl.scrollView);
     const isLastPageVisible = maxPage
         ? isPageInViewport(maxPage, opts.axis, state, ctrl.scrollView)
         : true;

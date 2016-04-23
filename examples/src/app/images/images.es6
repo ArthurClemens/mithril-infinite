@@ -34,7 +34,7 @@ let item = (data, opts) => {
 
     return m('a.list-item', {
         style: {
-            height: Math.floor(parseInt(data.height, 10) * heightFraction) + 'px'
+            height: (parseFloat(data.height) * heightFraction) + 'px'
         },
         onclick: () => {
             vm.toggle(id);
@@ -43,8 +43,8 @@ let item = (data, opts) => {
         m('span.pageNum', opts.page),
         m('.image', {
             style: {
-                height: Math.floor(parseInt(data.height, 10) * heightFraction) + 'px',
-                width: Math.floor(parseInt(data.width, 10) * heightFraction) + 'px'
+                height: (parseFloat(data.height) * heightFraction) + 'px',
+                width: (parseFloat(data.width) * heightFraction) + 'px'
             },
             config: (el, inited, context) => {
                 if (context.inited && !isDirty) {
