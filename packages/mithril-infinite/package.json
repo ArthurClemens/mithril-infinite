@@ -1,0 +1,31 @@
+{
+  "name": "mithril-infinite",
+  "main": "dist/mithril-infinite.js",
+  "module": "dist/mithril-infinite.mjs",
+  "jsnext:main": "dist/mithril-infinite.mjs",
+  "version": "0.6.0",
+  "description": "Infinite Scroll for Mithril",
+  "scripts": {
+    "build": "DEPS=false ../../node_modules/rollup/bin/rollup -c ../../scripts/rollup.umd.js && ../../node_modules/rollup/bin/rollup -c ../../scripts/rollup.es.js"
+  },
+  "dependencies": {
+    "j2c": "^1.0.0-4",
+    "mithril": "0.2.5",
+    "verge": "1.9.1"
+  },
+  "keywords": [
+    "scroll",
+    "infinite",
+    "mithril",
+    "occlusion culling"
+  ],
+  "files": [
+    "lib"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ArthurClemens/mithril-infinite.git"
+  },
+  "author": "Arthur Clemens <arthurclemens@gmail.com> (http://visiblearea.com)",
+  "license": "MIT"
+}
