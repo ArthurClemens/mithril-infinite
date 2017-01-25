@@ -1,8 +1,8 @@
-[Main README](https://github.com/ArthurClemens/mithril-infinite)
-
 
 # Infinite Scroll for Mithril - Examples
 
+
+* [Infinite Scroll documentation](https://github.com/ArthurClemens/mithril-infinite/tree/master/packages/mithril-infinite)
 
 
 ## Online examples
