@@ -4,7 +4,6 @@
   "description": "",
   "main": "dist/js/examples.js",
   "module": "dist/js/examples.mjs",
-  "jsnext:main": "dist/js/examples.mjs",
   "scripts": {
     "build": "DEPS=true ../../node_modules/rollup/bin/rollup -c ../../scripts/rollup.umd.js && ../../node_modules/rollup/bin/rollup -c ../../scripts/rollup.es.js",
     "watch": "DEPS=true PORT=8080 WATCH_DIR=./dist/ ../../node_modules/rollup/bin/rollup -c ../../scripts/rollup.watch.js --watch"

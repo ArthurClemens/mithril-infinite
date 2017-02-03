@@ -1,5 +1,5 @@
 import m from "mithril";
-import { default as infinite } from "mithril-infinite";
+import infinite from "mithril-infinite";
 
 import { addStyle } from "../app/styler";
 import styles from "./styles";

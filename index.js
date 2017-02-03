@@ -1,1 +1,1 @@
-export { infinite } from './src/index';
+export { infinite } from "./src/index";

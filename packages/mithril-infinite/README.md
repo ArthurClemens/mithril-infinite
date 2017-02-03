@@ -1,5 +1,7 @@
 # Infinite Scroll for Mithril on mobile and desktop
 
+Compatible with Mithril 0.2.5.
+
 ## Examples
 
 * [Infinite Scroll Examples](http://arthurclemens.github.io/mithril-infinite/index.html)
@@ -34,7 +36,7 @@ Use as npm module:
 npm install mithril-infinite
 ~~~
 
-or download/clone from Github.
+or download/clone from Github, `packages/mithril-infinite`.
 
 For working with the examples, see the [Examples README](https://github.com/ArthurClemens/mithril-infinite/packages/examples).
 
