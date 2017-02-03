@@ -61,7 +61,7 @@ We have limited the number of pages to 16, pass a function to generate a JSON da
 const handlePageItem = (data, opts) => 
   m(".item", [
     m("h2", data.title),
-    m("div", opts.page)
+    m("div", opts.pageNum)
   ])
 };
 ~~~

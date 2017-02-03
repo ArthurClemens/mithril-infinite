@@ -25,7 +25,7 @@ let vm = {
 };
 
 let item = (data, opts) => {
-  const id = opts.page + data.src;
+  const id = opts.pageNum + data.src;
   const isExpanded = vm.isExpanded(id);
   const isDirty = vm.isDirty(id);
   const heightFraction = isExpanded ? 0.5 : 0.25;
@@ -38,7 +38,7 @@ let item = (data, opts) => {
       vm.toggle(id);
     }
   }, [
-    m("span.pageNum", opts.page),
+    m("span.pageNum", opts.pageNum),
     m(".image", {
       style: {
         height: (parseFloat(data.height) * heightFraction) + "px",
@@ -66,7 +66,7 @@ export default {
     m(infinite, {
       maxPages: 20,
       item: item,
-      pageUrl: page => "data/images/page-" + page + ".json",
+      pageUrl: pageNum => "data/images/page-" + pageNum + ".json",
       preloadPages: 3,
       class: "images",
       before: m("a", {

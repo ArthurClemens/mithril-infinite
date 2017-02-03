@@ -8,7 +8,7 @@ addStyle("table", styles);
 
 const item = (data, opts) => {
   return m(".list-item", [
-    m("div", opts.page),
+    m("div", opts.pageNum),
     m("div", data || m.trust("&nbsp;"))
   ]);
 };

@@ -13,7 +13,7 @@ const AFTER_CONTENT_HEIGHT = 133;
 
 let item = (data, opts) => {
   return m(".list-item", [
-    m("div", opts.page),
+    m("div", opts.pageNum),
     m("div", data || m.trust("&nbsp;"))
   ]);
 };
