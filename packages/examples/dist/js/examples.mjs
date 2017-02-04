@@ -41,20 +41,25 @@ var removeStyle = function removeStyle(id) {
   }
 };
 
-var vars = {
+var styleVariables = {
   size: 320,
   size_px: "320px",
   text_color: "#263238"
 };
 
-var side_padding = 16;
+var appVariables = {
+  imageUrl: "http://arthurclemens.github.io/assets/mithril-infinite-scroll/thumbs/"
+};
+
+var SIDE_PADDING = 16;
+var VERSION = "1.0.0";
 
 var styles = [{
-  ".github": {
-    width: vars.size - 2 * side_padding + "px",
+  ".footer": {
+    width: styleVariables.size - 2 * SIDE_PADDING + "px",
     margin: "32px auto 0 auto",
     "text-align": "left",
-    padding: "24px " + side_padding + "px",
+    padding: "24px " + SIDE_PADDING + "px",
     "font-size": "14px",
     "line-height": 1.3,
     color: "#90A4AE",
@@ -63,23 +68,22 @@ var styles = [{
     " hr": {
       height: "1px",
       border: "none",
-      margin: "1em -" + side_padding + "px",
+      margin: "1em -" + SIDE_PADDING + "px",
       "background-color": "#CFD8DC",
       opacity: ".85"
     }
   }
 }];
 
-addStyle("github", styles);
+addStyle("footer", styles);
 
-var github = function github() {
+var footer = (function () {
   var opts = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-
-  return m(".github", [!opts.home ? m("a", {
+  return m(".footer", [!opts.home ? m("a", {
     href: "/",
-    config: m.route
-  }, "All examples") : null, m("hr"), m.trust("mithril-infinite, Infinite Scroll for Mithril on mobile and desktop. Project page on <a href=\"https://github.com/ArthurClemens/mithril-infinite\">Github</a>.")]);
-};
+    oncreate: m.route.link
+  }, "All examples") : null, m("hr"), m.trust("mithril-infinite, Infinite Scroll for Mithril on mobile and desktop. This site runs on version " + VERSION + ". Project page on <a href=\"https://github.com/ArthurClemens/mithril-infinite\">Github</a>.")]);
+});
 
 var image_position = "56px";
 var toggle_size = "40px";
@@ -163,7 +167,9 @@ var styles$1 = [{
 
 addStyle("images", styles$1);
 
-var IMG_URL = "http://arthurclemens.github.io/assets/mithril-infinite-scroll/thumbs/";
+var pageUrl = function pageUrl(pageNum) {
+  return "data/images/page-" + pageNum + ".json";
+};
 
 var vm = {
   expanded: {},
@@ -187,65 +193,61 @@ var vm = {
   }
 };
 
+var maybeUpdate = function maybeUpdate(dom, id, src) {
+  if (!vm.isDirty(id)) {
+    return;
+  }
+  if (infinite.isElementInViewport({ el: dom })) {
+    var url = appVariables.imageUrl + src;
+    dom.style.backgroundImage = dom.style.backgroundImage = "url(" + url + ")";
+    vm.clearDirty(id);
+  }
+};
+
 var item = function item(data, opts) {
-  var id = opts.page + data.src;
+  var id = opts.pageNum + data.width + data.src;
   var isExpanded = vm.isExpanded(id);
-  var isDirty = vm.isDirty(id);
   var heightFraction = isExpanded ? 0.5 : 0.25;
+  var width = parseFloat(data.width) * heightFraction;
+  var height = parseFloat(data.height) * heightFraction;
 
   return m("a.list-item", {
-    style: {
-      height: parseFloat(data.height) * heightFraction + "px"
-    },
+    style: { height: height + "px" },
     onclick: function onclick() {
-      vm.toggle(id);
+      return vm.toggle(id);
     }
-  }, [m("span.pageNum", opts.page), m(".image", {
-    style: {
-      height: parseFloat(data.height) * heightFraction + "px",
-      width: parseFloat(data.width) * heightFraction + "px"
+  }, [m("span.pageNum", opts.pageNum), m(".image", {
+    style: { height: height + "px", width: width + "px" },
+    oncreate: function oncreate(_ref) {
+      var dom = _ref.dom;
+      return vm.dirty[id] = true, maybeUpdate(dom, id, data.src);
     },
-    config: function config(el, inited, context) {
-      if (context.inited && !isDirty) {
-        return;
-      }
-      if (infinite.isElementInViewport({
-        el: el
-      })) {
-        var url = IMG_URL + data.src;
-        el.style.backgroundImage = el.style.backgroundImage = "url(" + url + ")";
-        context.inited = true;
-        vm.clearDirty(id);
-      }
+    onupdate: function onupdate(_ref2) {
+      var dom = _ref2.dom;
+      return maybeUpdate(dom, id, data.src);
     }
   }),
   // minus or plus sign
   m(".toggle", isExpanded ? m.trust("&#150;") : m.trust("&#43;"))]);
 };
 
-var component = {};
-component.view = function () {
-  return m(infinite, {
-    maxPages: 20,
-    item: item,
-    pageUrl: function pageUrl(page) {
-      return "data/images/page-" + page + ".json";
-    },
-    preloadPages: 3,
-    class: "images",
-    before: m("a", {
-      class: ["list-item", vm.isExpanded("before") ? "open" : "closed"].join(" "),
-      onclick: function onclick() {
-        vm.toggle("before");
-      }
-    }, [m("div", m.trust("A list of pugs. Courtesy the <a href=\"http: //airbnb.io/infinity/demo-off.html\">AirBnb Infinity demo</a>.")), m(".toggle", vm.isExpanded("before") ? m.trust("&#150;") : m.trust("&#43;"))]),
-    after: github(),
-    pageChange: function pageChange(page) {
-      if (console) {
-        console.log("page", page); // eslint-disable-line no-console
-      }
-    }
-  });
+var images = {
+  view: function view() {
+    return m(infinite, {
+      maxPages: 20,
+      item: item,
+      pageUrl: pageUrl,
+      preloadPages: 3,
+      class: "images",
+      before: m("a", {
+        class: ["list-item", vm.isExpanded("before") ? "open" : "closed"].join(" "),
+        onclick: function onclick() {
+          return vm.toggle("before");
+        }
+      }, [m("div", m.trust("A list of pugs. Courtesy the <a href=\"http: //airbnb.io/infinity/demo-off.html\">AirBnb Infinity demo</a>.")), m(".toggle", vm.isExpanded("before") ? m.trust("&#150;") : m.trust("&#43;"))]),
+      after: footer()
+    });
+  }
 };
 
 var defineProperty = function (obj, key, value) {
@@ -334,64 +336,63 @@ var styles$2 = [makeMediaStyle("min", 4), makeMediaStyle("max", 4), makeMediaSty
 
 addStyle("grid", styles$2);
 
-var IMG_URL$1 = "http://arthurclemens.github.io/assets/mithril-infinite-scroll/thumbs/";
+var PAGE_ITEMS = 12;
+var IMAGE_SIZE = 190;
 
-var vm$1 = {
-  seen: {}
-};
-
-// fade in first time only
-var showImage = function showImage(el, imgUrl) {
-  var url = IMG_URL$1 + imgUrl;
+var loadImage = function loadImage(el, imgUrl) {
+  var url = imgUrl.replace(/\/150\//, "/" + IMAGE_SIZE + "/");
   var populate = function populate() {
     el.style.backgroundImage = "url(" + url + ")";
     el.style.opacity = 1;
-    vm$1.seen[url] = 1;
   };
-  if (!vm$1.seen[url]) {
-    var img = new Image();
-    img.onload = function () {
-      populate();
-    };
-    img.src = url;
-  } else {
-    populate();
+  var img = new Image();
+  img.onload = populate;
+  img.src = imgUrl;
+};
+
+var maybeLoadImage = function maybeLoadImage(vnode, data) {
+  if (vnode.state.inited) {
+    return;
+  }
+  if (infinite.isElementInViewport({ el: vnode.dom })) {
+    loadImage(vnode.dom, data.thumbnailUrl);
+    vnode.state.inited = true;
   }
 };
 
 var item$1 = function item(data) {
   return m("a.grid-item", m(".image-holder", m(".image", {
-    config: function config(el, inited, context) {
-      if (context.inited) {
-        return;
-      }
-      if (infinite.isElementInViewport({
-        el: el
-      })) {
-        showImage(el, data.src);
-        context.inited = true;
-      }
+    oncreate: function oncreate(vnode) {
+      return maybeLoadImage(vnode, data);
+    },
+    onupdate: function onupdate(vnode) {
+      return maybeLoadImage(vnode, data);
     }
   })));
 };
 
-var component$1 = {};
-component$1.view = function () {
-  return m(infinite, {
-    maxPages: 16, // pages of 12 items each
-    preloadPages: 3,
-    item: item$1,
-    pageUrl: function pageUrl(page) {
-      return "data/grid/page-" + page + ".json";
-    },
-    class: "grid",
-    pageChange: function pageChange(page) {
-      if (console) {
-        console.log("page", page); // eslint-disable-line no-console
-      }
-    },
-    after: github()
+var dataUrl = function dataUrl(pageNum) {
+  return "http://jsonplaceholder.typicode.com/photos?_start=" + (pageNum - 1) * PAGE_ITEMS + "&_end=" + pageNum * PAGE_ITEMS;
+};
+
+var pageData = function pageData(pageNum) {
+  return m.request({
+    method: "GET",
+    dataType: "jsonp",
+    url: dataUrl(pageNum)
   });
+};
+
+var grid = {
+  view: function view() {
+    return m(infinite, {
+      preloadPages: 3,
+      item: item$1,
+      pageData: pageData,
+      class: "grid",
+      after: footer()
+    });
+  }
 };
 
 var styles$3 = [{
@@ -427,6 +428,7 @@ var styles$3 = [{
         display: "table-row",
 
         " > div": {
+          borderBottom: "1px solid rgba(0, 0, 0, .07)",
           display: "table-cell",
           verticalAlign: "top",
           padding: "8px 16px",
@@ -447,25 +449,21 @@ var styles$3 = [{
 addStyle("table", styles$3);
 
 var item$2 = function item(data, opts) {
-  return m(".list-item", [m("div", opts.page), m("div", data || m.trust("&nbsp;"))]);
+  return m(".list-item", [m("div", opts.pageNum), m("div", data || m.trust("&nbsp;"))]);
 };
 
-var component$2 = {};
-component$2.view = function () {
-  return m(infinite, {
-    maxPages: 10,
-    item: item$2,
-    pageUrl: function pageUrl(page) {
-      return "data/table/page-" + page + ".json";
-    },
-    class: "table",
-    pageChange: function pageChange(page) {
-      if (console) {
-        console.log("page", page); // eslint-disable-line no-console
-      }
-    },
-    after: github()
-  });
+var table = {
+  view: function view() {
+    return m(infinite, {
+      maxPages: 10,
+      item: item$2,
+      pageUrl: function pageUrl(page) {
+        return "data/table/page-" + page + ".json";
+      },
+      class: "table",
+      after: footer()
+    });
+  }
 };
 
 var styles$4 = [{
@@ -492,32 +490,33 @@ var styles$4 = [{
 
 addStyle("short", styles$4);
 
-var short = {};
-short.item = function (data) {
+var item$3 = function item(data) {
   var color = data[1] || "transparent";
   var title = data[1] ? "" : m(".title", data[0]);
   return m(".list-item", {
     class: title ? "has-title" : "",
-    style: {
-      "background-color": color
-    }
+    style: { "background-color": color }
   }, title);
 };
-short.view = function () {
-  return m(infinite, {
-    item: short.item,
-    maxPages: 21,
-    preloadSlots: 1,
-    pageUrl: function pageUrl(page) {
-      return "data/short/page-" + page + ".json";
-    },
-    class: "short",
-    pageChange: function pageChange(page) {
-      if (console) {
-        console.log("page", page); // eslint-disable-line no-console
-      }
-    }
-  });
+
+var short = {
+  view: function view() {
+    return m(infinite, {
+      item: item$3,
+      maxPages: 21,
+      preloadSlots: 10,
+      pageUrl: function pageUrl(page) {
+        return "data/short/page-" + page + ".json";
+      },
+      class: "short",
+      pageChange: function pageChange(page) {
+        if (console) {
+          console.log("page", page); // eslint-disable-line no-console
+        }
+      },
+      after: footer()
+    });
+  }
 };
 
 var grid_spacing = 8;
@@ -585,65 +584,58 @@ var styles$5 = [{
 
 addStyle("horizontal", styles$5);
 
-var IMG_URL$2 = "http://arthurclemens.github.io/assets/mithril-infinite-scroll/thumbs/";
-var vm$2 = {
-  seen: {}
-};
-
-// fade in first time only
-var fadeInImage = function fadeInImage(el, imgUrl) {
-  var url = IMG_URL$2 + imgUrl;
-  var showImage = function showImage() {
+var loadImage$1 = function loadImage(el, imgUrl) {
+  var url = appVariables.imageUrl + imgUrl;
+  var populate = function populate() {
     el.style.backgroundImage = "url(" + url + ")";
     el.style.opacity = 1;
-    vm$2.seen[url] = 1;
   };
-  if (!vm$2.seen[url]) {
-    var img = new Image();
-    img.onload = function () {
-      showImage();
-    };
-    img.src = url;
-  } else {
-    showImage();
+  var img = new Image();
+  img.onload = populate;
+  img.src = url;
+};
+
+var maybeLoadImage$1 = function maybeLoadImage(vnode, data) {
+  if (vnode.state.inited) {
+    return;
+  }
+  if (infinite.isElementInViewport({ el: vnode.dom })) {
+    loadImage$1(vnode.dom, data.src);
+    vnode.state.inited = true;
   }
 };
 
-var item$3 = function item(data) {
+var item$4 = function item(data) {
   return m("a.grid-item", m(".image-holder", m(".image", {
-    config: function config(el, inited, context) {
-      if (context.inited) {
-        return;
-      }
-      if (infinite.isElementInViewport({
-        el: el
-      })) {
-        fadeInImage(el, data.src);
-        context.inited = true;
-      }
+    oncreate: function oncreate(vnode) {
+      return maybeLoadImage$1(vnode, data);
+    },
+    onupdate: function onupdate(vnode) {
+      return maybeLoadImage$1(vnode, data);
     }
   })));
 };
 
-var component$3 = {};
-component$3.view = function () {
-  return [m(infinite, {
-    maxPages: 16,
-    item: item$3,
-    pageUrl: function pageUrl(page) {
-      return "data/horizontal/page-" + page + ".json";
-    },
-    class: "horizontal",
-    axis: "x",
-    pageSize: function pageSize(content) {
-      return (content.length || 12) * (210 + 2 * 4);
-    }, // values from CSS including margins
-    pageChange: function pageChange(page) {
-      if (console) {
-        console.log("page", page); // eslint-disable-line no-console
+var horizontal = {
+  view: function view() {
+    return [m(infinite, {
+      maxPages: 16,
+      item: item$4,
+      pageUrl: function pageUrl(pageNum) {
+        return "data/horizontal/page-" + pageNum + ".json";
+      },
+      class: "horizontal",
+      axis: "x",
+      pageSize: function pageSize(content) {
+        return (content.length || 12) * (210 + 2 * 4);
+      }, // values from CSS including margins
+      pageChange: function pageChange(pageNum) {
+        if (console) {
+          console.log("page", pageNum); // eslint-disable-line no-console
+        }
       }
-    }
-  }), github()];
+    }), footer()];
+  }
 };
 
 var styles$6 = [{
@@ -651,45 +643,71 @@ var styles$6 = [{
     " .mithril-infinite__scroll-content": {
       " .mithril-infinite__page": {
         " .list-item": {
-          maxHeight: "36px"
+          maxHeight: "36px",
+          overflowY: "hidden"
         }
       },
-      " .github": {
+      " .footer": {
         height: "133px"
       }
     }
   }
 }];
 
+/*
+This example shows how to get the total page count from a request, and use that to calculate the total content height.
+*/
 addStyle("fixed", styles$6);
 
-var item$4 = function item(data, opts) {
-  return m(".list-item", [m("div", opts.page), m("div", data || m.trust("&nbsp;"))]);
-};
-
-var PAGE_COUNT = 20;
-var PAGE_ITEMS = 20;
+var PAGE_ITEMS$1 = 10;
 var ITEM_HEIGHT = 36 + 1; // include border
 var AFTER_CONTENT_HEIGHT = 133;
 
-var component$4 = {};
-component$4.view = function () {
-  var scrollHeight = PAGE_COUNT * PAGE_ITEMS * ITEM_HEIGHT + AFTER_CONTENT_HEIGHT;
-  return m(infinite, {
-    maxPages: PAGE_COUNT,
-    item: item$4,
-    pageUrl: function pageUrl(page) {
-      return "data/fixed/page-" + page + ".json";
-    },
-    class: "table fixed",
-    // set the size of each page
-    pageSize: function pageSize() {
-      return PAGE_ITEMS * ITEM_HEIGHT;
-    },
-    // set the total height
-    contentSize: scrollHeight,
-    after: github()
-  });
+var dataUrl$1 = function dataUrl(pageNum) {
+  return "http://jsonplaceholder.typicode.com/posts?_start=" + (pageNum - 1) * PAGE_ITEMS$1 + "&_end=" + pageNum * PAGE_ITEMS$1;
+};
+
+var item$5 = function item(data) {
+  return m(".list-item", [m("div", data.id), m("div", data.title)]);
+};
+
+var fixed = {
+  oninit: function oninit(vnode) {
+    var state = vnode.state;
+    state.pageCount = 1;
+
+    state.pageData = function (pageNum) {
+      return m.request({
+        method: "GET",
+        dataType: "jsonp",
+        url: dataUrl$1(pageNum),
+        extract: function extract(xhr) {
+          return (
+            // Read the total count from the header
+            state.pageCount = Math.ceil(parseInt(xhr.getResponseHeader("X-Total-Count"), 10) / PAGE_ITEMS$1), JSON.parse(xhr.responseText)
+          );
+        }
+      });
+    };
+  },
+  view: function view(_ref) {
+    var state = _ref.state;
+
+    return m(infinite, {
+      pageData: state.pageData,
+      maxPages: state.pageCount,
+      preloadPages: 3,
+      item: item$5,
+      class: "table fixed",
+      // set the size of each page
+      pageSize: function pageSize() {
+        return PAGE_ITEMS$1 * ITEM_HEIGHT;
+      },
+      // set the total height
+      contentSize: state.pageCount * PAGE_ITEMS$1 * ITEM_HEIGHT + AFTER_CONTENT_HEIGHT,
+      after: footer()
+    });
+  }
 };
 
 var gridSpacing$1 = 8;
@@ -705,6 +723,9 @@ var styles$7 = [{
 
     " .mithril-infinite__scroll-view.mithril-infinite__scroll-view--y": {
       height: itemSize * 4 + gridSpacing$1 * 3 + 2 * gridSpacing$1 + "px"
+    },
+    " .mithril-infinite__page--placeholder": {
+      height: "0 !important"
     },
     " .mithril-infinite__scroll-content": {
       margin: "0 auto",
@@ -784,67 +805,66 @@ var styles$7 = [{
 
 addStyle("paging", styles$7);
 
-var IMG_URL$3 = "http://arthurclemens.github.io/assets/mithril-infinite-scroll/thumbs/";
-
-var item$5 = function item(data) {
+var item$6 = function item(data) {
   return m("a.grid-item", m(".image-holder", m(".image", {
-    config: function config(el, inited, context) {
-      if (context.inited) {
-        return;
-      }
-      el.style.backgroundImage = "url(" + IMG_URL$3 + data.src + ")";
+    oncreate: function oncreate(_ref) {
+      var dom = _ref.dom;
+
+      dom.style.backgroundImage = "url(" + appVariables.imageUrl + data.src + ")";
     }
   })));
 };
 
-var component$5 = {};
-component$5.controller = function () {
-  var getData = function getData(page) {
-    return m.request({
-      method: "GET",
-      url: "data/grid/page-" + page + ".json"
-    });
-  };
-  var pageCount = m.prop();
-  var page = m.route.param("page") ? parseInt(m.route.param("page"), 10) : 1;
-  var pageNum = m.prop(page);
-  var pageData = function pageData(pageNum) {
-    return getData(pageNum).then(function (response) {
-      pageCount(response.length);
-      return response;
-    });
-  };
-
-  return {
-    pageData: pageData,
-    pageCount: pageCount,
-    pageNum: pageNum,
-    hasPrev: function hasPrev() {
-      return pageNum() > 1;
-    },
-    hasNext: function hasNext() {
-      return pageNum() !== pageCount();
-    }
-  };
+var getData = function getData(pageNum) {
+  return m.request({
+    method: "GET",
+    url: "data/paging/page-" + pageNum + ".json"
+  });
 };
-component$5.view = function (ctrl) {
-  var pageNum = m.route.param("page") ? parseInt(m.route.param("page"), 10) : ctrl.pageNum();
 
-  return m("div", [m(".paging", [m(".count", "Page " + pageNum), m(infinite, {
-    item: item$5, // draws one item
-    pageData: ctrl.pageData, // fetches data
-    pageChange: ctrl.pageNum,
-    currentPage: pageNum,
-    autoSize: false // disabled because we are already setting the height in CSS
-  }), m(".pager", [m("a", {
-    class: !ctrl.hasPrev() ? "disabled" : "",
-    href: "/paging?page=" + (pageNum - 1),
-    config: m.route
-  }, "Prev"), m("a", {
-    class: !ctrl.hasNext() ? "disabled" : "",
-    href: "/paging?page=" + (pageNum + 1),
-    config: m.route
-  }, "Next")])]), github()]);
+var paging = {
+  oninit: function oninit(vnode) {
+    var pageCount = 0;
+    var pageNum = m.route.param("p") ? parseInt(m.route.param("p"), 10) : 1;
+
+    var getPageData = function getPageData(pageNum) {
+      return getData(pageNum).then(function (response) {
+        return pageCount = response.length, response;
+      });
+    };
+
+    vnode.state = {
+      getPageData: getPageData,
+      pageNum: pageNum,
+      hasPrev: function hasPrev(num) {
+        return num > 1;
+      },
+      hasNext: function hasNext(num) {
+        return num < pageCount;
+      }
+    };
+  },
+  view: function view(vnode) {
+    var state = vnode.state;
+    var pageNum = m.route.param("p") ? parseInt(m.route.param("p"), 10) : state.pageNum;
+    return m("div", [m(".paging", [m(".count", "Page " + pageNum), m(infinite, {
+      item: item$6,
+      pageData: state.getPageData,
+      pageChange: function pageChange(num) {
+        return state.pageNum = num;
+      },
+      currentPage: pageNum,
+      autoSize: false // disabled because we are already setting the height in CSS
+    }), m(".pager", [m("a", {
+      class: !state.hasPrev(pageNum) ? "disabled" : "",
+      href: "/paging/" + (pageNum - 1),
+      oncreate: m.route.link
+    }, "Prev"), m("a", {
+      class: !state.hasNext(pageNum) ? "disabled" : "",
+      href: "/paging/" + (pageNum + 1),
+      oncreate: m.route.link
+    }, "Next")])]), footer()]);
+  }
 };
 
 var styles$8 = [{
@@ -859,7 +879,7 @@ var styles$8 = [{
     margin: 0,
     padding: 0,
     fontFamily: "arial, sans-serif",
-    minWidth: vars.size_px
+    minWidth: styleVariables.size_px
   },
   " h1": {
     display: "block",
@@ -868,7 +888,7 @@ var styles$8 = [{
     textAlign: "center",
     fontSize: "28px",
     fontWeight: "normal",
-    color: vars.text_color
+    color: styleVariables.text_color
   },
   " a": {
     "&:link, &:visited": {
@@ -882,18 +902,18 @@ var textColorLight = "#90A4AE";
 var indexBlockBackgroundColor = "#CFD8DC";
 var indexBlockTextColor = "rgba(0,0,0,.85)";
 var indexBlockTextColorLight = "rgba(0,0,0,.4)";
-var menuWidthPx = vars.size_px;
+var menuWidthPx = styleVariables.size_px;
 
 var indexStyle = [{
   ".index": {
     " h1": {
       display: "block",
       margin: "40px auto 0 auto",
-      width: vars.size + "px",
+      width: styleVariables.size + "px",
       textAlign: "center",
       fontSize: "28px",
       fontWeight: "normal",
-      color: vars.text_color
+      color: styleVariables.text_color
     },
     " .menu": {
       width: menuWidthPx,
@@ -944,6 +964,10 @@ var menuData = [{
   title: "Images",
   subtitle: "200 images of various heights"
 }, {
+  href: "/horizontal",
+  title: "Horizontal",
+  subtitle: "Horizontal scroller"
+}, {
   href: "/grid",
   title: "Image grid",
   subtitle: "Responsive grid with 1, 2, 3 and 4 columns"
@@ -956,44 +980,41 @@ var menuData = [{
   title: "Short content",
   subtitle: "Automatically finds loadable space"
 }, {
-  href: "/horizontal",
-  title: "Horizontal",
-  subtitle: "Horizontal scroller"
-}, {
   href: "/fixed",
   title: "Fixed height",
   subtitle: "Preset the scroll height, don\"t update scroll height"
 }, {
   href: "/paging",
   title: "Paging",
-  subtitle: "Prev/Next buttons instead of infinite scroll"
+  subtitle: "Previous / Next buttons instead of infinite scroll"
 }];
 
 var menu = m("ul.menu", [m("li.header", "Examples"), menuData.map(function (menuItem) {
   return m("li", m("a", {
     href: menuItem.href,
-    config: m.route
+    oncreate: m.route.link
   }, [m("span.title", menuItem.title), m("span.subtitle", menuItem.subtitle)]));
 })]);
 
-var app = {};
-app.view = function () {
-  return m(".index", [m("h1", "Infinite Scroll for Mithril"), menu, github({
-    home: true
-  })]);
+var app = {
+  view: function view() {
+    return m(".index", [m("h1", "Infinite Scroll for Mithril"), menu, footer({
+      home: true
+    })]);
+  }
 };
 
-m.route.mode = "hash";
 var mountNode = document.querySelector("#app");
 m.route(mountNode, "/", {
   "/": app,
-  "/images": component,
-  "/grid": component$1,
-  "/table": component$2,
+  "/images": images,
+  "/grid": grid,
+  "/table": table,
   "/short": short,
-  "/horizontal": component$3,
-  "/fixed": component$4,
-  "/paging": component$5
+  "/horizontal": horizontal,
+  "/fixed": fixed,
+  "/paging": paging,
+  "/paging/:p": paging
 });
 
 // Debounce window resize
