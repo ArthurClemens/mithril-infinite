@@ -1,11 +1,10 @@
 # Infinite Scroll for Mithril on mobile and desktop
 
-Compatible with Mithril 0.2.5.
+Compatible with Mithril 0.2.
 
 ## Examples
 
-* [Infinite Scroll Examples](http://arthurclemens.github.io/mithril-infinite/index.html)
-* [Example with header panel (Polythene)](http://arthurclemens.github.io/Polythene-examples/index.html#/header-panel/infinite)
+[Infinite Scroll Examples](http://arthurclemens.github.io/mithril-infinite/index.html)
 
 
 ## Features
@@ -33,7 +32,7 @@ Not included:
 Use as npm module:
 
 ~~~bash
-npm install mithril-infinite
+npm install --save mithril-infinite
 ~~~
 
 or download/clone from Github, `packages/mithril-infinite`.
@@ -242,22 +241,6 @@ Using `<table>` tags causes reflow problems. Use divs instead, with CSS styling 
 }
 ~~~
 
-### Generated HTML
-
-~~~html
-<div class="mithril-infinite__scroll-view mithril-infinite__scroll-view--y">
-    <div class="mithril-infinite__scroll-content">
-        <div style="height: 0px;"></div> <!-- padding before -->
-        <div class="mithril-infinite__content">
-            <div data-page="000001" class="mithril-infinite__page mithril-infinite__page--odd" style="height: auto;">
-                <!-- list items -->
-            </div>
-        </div>
-        <div style="height: 0px;"></div> <!-- padding after -->
-    </div>
-</div>
-~~~
-
 
 
 ## Styling
@@ -293,12 +276,39 @@ Or:
 
 
 
-## Future improvements
+## Viewing the examples
 
-* Store current "page" in url so the location can be bookmarked.
-* Smarter handling of "no data found" (works fine if maxPages is set, otherwise gives 404 in console).
-* Optimize page load order, for example de-prioritize loading of the previous page.
-* `after` content does not work well with "loadable space" (example "short content").
+* `git clone https://github.com/ArthurClemens/mithril-infinite.git`
+* `cd mithril-infinite`
+* `npm install -g lerna`
+* `npm install`
+* `lerna init`
+* `lerna bootstrap`
+* `cd packages/examples`
+* `npm run watch`
+* Open browser at [localhost:8080](http://localhost:8080/)
+
+
+
+## CSS classes
+
+| **Element**           | **Key**       |  **Class** |
+| --------------------- | ------------- | --------------- |
+| Scroll view           | scrollView    | `mithril-infinite__scroll-view` |
+| Scroll content        | scrollContent | `mithril-infinite__scroll-content` |
+| Content container     | content       | `mithril-infinite__content` |
+| Pages container       | pages         | `mithril-infinite__pages` |
+| Page                  | page          | `mithril-infinite__page` |
+| Content before        | before        | `mithril-infinite__before` |
+| Content after         | after         | `mithril-infinite__after` |
+
+| **State**             | **Key**     |  **Class** |
+| --------------------- | ----------- | --------------- |
+| Scroll view, x axis   | scrollViewX | `mithril-infinite__scroll-view--x` |
+| Scroll view, y axis   | scrollViewY | `mithril-infinite__scroll-view--y` |
+| Even numbered page    | pageEven    | `mithril-infinite__page--even` |
+| Odd numbered page     | pageOdd     | `mithril-infinite__page--odd` |
+| Page, now placeholder | placeholder | `mithril-infinite__page--placeholder` |
 
 
 
@@ -310,14 +320,17 @@ Minified and gzipped: ~ 5.5 Kb
 
 ## Dependencies
 
-Included in mithril-infinite.js:
-
 * [Verge](https://www.npmjs.com/package/verge) - for measuring the viewport
 * [j2c](https://github.com/pygy/j2c) - for creating js stylesheets
-
-External dependency
-
 * [Mithril](https://www.npmjs.com/package/mithril)
+
+
+
+## Future improvements
+
+* Smarter handling of "no data found" (works fine if maxPages is set, otherwise gives 404 in console).
+* Optimize page load order, for example de-prioritize loading of the previous page.
+
 
 
 ## Licence
