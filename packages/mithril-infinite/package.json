@@ -2,7 +2,7 @@
   "name": "mithril-infinite",
   "main": "dist/mithril-infinite.js",
   "module": "dist/mithril-infinite.mjs",
-  "version": "0.6.0",
+  "version": "0.6.1",
   "description": "Infinite Scroll for Mithril",
   "scripts": {
     "build": "DEPS=false ../../node_modules/rollup/bin/rollup -c ../../scripts/rollup.umd.js && ../../node_modules/rollup/bin/rollup -c ../../scripts/rollup.es.js"
@@ -19,7 +19,8 @@
     "occlusion culling"
   ],
   "files": [
-    "lib"
+    "dist",
+    "README.md"
   ],
   "repository": {
     "type": "git",
