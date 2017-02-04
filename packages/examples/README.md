@@ -8,7 +8,7 @@
 
 ## Online examples
 
-[View Infinite Scroll examples](http://arthurclemens.github.io/mithril-infinite/index.html)
+[View Infinite Scroll examples](http://arthurclemens.github.io/mithril-infinite/)
 
 
 

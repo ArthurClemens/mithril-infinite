@@ -79,7 +79,6 @@ const app = {
   }
 };
 
-m.route.prefix("#");
 const mountNode = document.querySelector("#app");
 m.route(mountNode, "/", {
   "/": app,
