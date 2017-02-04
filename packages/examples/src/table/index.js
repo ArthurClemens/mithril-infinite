@@ -1,5 +1,5 @@
 import m from "mithril";
-import { github } from "../app/github";
+import footer from "../app/footer";
 import infinite from "mithril-infinite";
 
 import { addStyle } from "../app/styler";
@@ -20,12 +20,7 @@ export default {
       item,
       pageUrl: page => "data/table/page-" + page + ".json",
       class: "table",
-      pageChange: page => {
-        if (console) {
-          console.log("page", page); // eslint-disable-line no-console
-        }
-      },
-      after: github()
+      after: footer()
     })
 };
 

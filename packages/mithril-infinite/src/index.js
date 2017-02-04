@@ -13,6 +13,9 @@ const numToId = pageNum =>
 
 const calculateCurrentPageNum = (scrollAmount, state) => {
   const pageNumKeys = state.sortedKeys;
+  if (pageNumKeys.length === 0) {
+    return 1;
+  }
   let acc = state.beforeSize || 0;
   let currentPageNum = 1;
   for (let i = 0; i < pageNumKeys.length; i = i + 1) {
@@ -45,83 +48,62 @@ const isPageInViewport = (page, axis, state, scrollView) => {
     return false;
   }
   const id = numToId(page);
-  const el = scrollView.querySelector("[data-page=\"" + id + "\"]");
+  const el = scrollView.querySelector(`[data-page="${id}"]`);
   return isElementInViewport({ el, axis });
 };
 
-const updatePageSize = ctrl => (pageId, size) => (
-  ctrl.state.pageSizes[pageId] = size,
-  ctrl.state.sortedKeys = Object.keys(ctrl.state.pageSizes).sort()
+const updatePageSize = state => (pageId, size) => (
+  state.pageSizes[pageId] = size,
+  state.sortedKeys = Object.keys(state.pageSizes).sort()
 );
 
-export const infinite = {};
-
-infinite.controller = (opts) => {
-  // Memoize some properties that do not change
-  const whichScroll = opts.axis === "x" ? "scrollLeft" : "scrollTop";
-  const maxPages = opts.maxPages !== undefined ? opts.maxPages : Number.MAX_VALUE;
-  const autoSize = (opts.autoSize !== undefined && opts.autoSize === false) ? false : true;
-  const scrollThrottle = opts.throttle !== undefined ? opts.throttle * 1000 : SCROLL_WATCH_TIMER;
-  const contentTag = opts.contentTag || "div";
-
-  return {
-    state: {
-      pageSizes: {},
-      sortedKeys: [],
-      beforeSize: null,
-      afterSize: null
-    },
-    scrollView: null,
-    isScrolling: false,
-    scrollWatchScrollingStateId: null,
-    scrollWatchUpdateStateId: null,
-    preloadSlots: opts.preloadPages || 1,
-    boundingClientRect: {},
-    currentPageNum: 0,
-    scrollAmount: 0,
-
-    // Memoized
-    whichScroll,
-    maxPages,
-    autoSize,
-    scrollThrottle,
-    contentTag
+const handleScroll = (state, view, action) => {
+  const scroll = () => {
+    state.isScrolling = true;
+    // reset isScrolling state only when scrolling is done
+    clearTimeout(state.scrollWatchScrollingStateId);
+    state.scrollWatchScrollingStateId = setTimeout(() => {
+      state.isScrolling = false;
+      // update pages
+      m.redraw();
+    }, state.scrollThrottle);
+    // throttle updates while scrolling
+    if (!state.scrollWatchUpdateStateId) {
+      state.scrollWatchUpdateStateId = setTimeout(() => {
+        // update pages
+        m.redraw();
+        state.scrollWatchUpdateStateId = null;
+      }, state.scrollThrottle);
+    }
   };
+  if (action === "add") {
+    view.addEventListener("scroll", scroll);
+  } else {
+    view.removeEventListener("scroll", scroll);
+  }
 };
 
-infinite.view = (ctrl, opts) => {
-  const state = ctrl.state;
-  ctrl.scrollAmount = ctrl.scrollView ? ctrl.scrollView[ctrl.whichScroll] : 0;
-  
-  const currentPageNum = opts.currentPage
-    ? parseInt(opts.currentPage, 10)
-    : calculateCurrentPageNum(ctrl.scrollAmount, state);
-
-  if (currentPageNum !== ctrl.currentPageNum && opts.pageChange) {
-    opts.pageChange(currentPageNum);
+const updatePart = (dom, whichSize, state, axis) => {
+  const size = getElementSize(dom, axis);
+  if (size) {
+    state[whichSize] = size;
   }
-  ctrl.currentPageNum = currentPageNum;
+};
 
-  if (ctrl.scrollView && opts.getDimensions) {
-    opts.getDimensions({
-      scrolled: ctrl.scrollAmount,
-      size: ctrl.contentSize
-    });
-  }
-
-  const minPageNum = opts.from
-    ? parseInt(opts.from, 10)
-    : opts.currentPage
-      ? opts.currentPage
+const getPageList = (currentPageNum, fromPage, toPage, currentPage, preloadSlots, maxPages) => {
+  const minPageNum = fromPage
+    ? parseInt(fromPage, 10)
+    : currentPage
+      ? currentPage
       : 1;
-  const maxPageNum = opts.to
-    ? parseInt(opts.to, 10)
-    : opts.currentPage
-      ? opts.currentPage
-      : ctrl.maxPages;
+  const maxPageNum = toPage
+    ? parseInt(toPage, 10)
+    : currentPage
+      ? currentPage
+      : maxPages;
   const pages = [];
   const prePages = [];
-  for (let i = -ctrl.preloadSlots; i <= ctrl.preloadSlots; i = i + 1) {
+  for (let i = -preloadSlots; i <= preloadSlots; i = i + 1) {
     const pageNum = currentPageNum + i;
     if (pageNum >= minPageNum && pageNum <= maxPageNum) {
       pages.push(pageNum);
@@ -130,167 +112,209 @@ infinite.view = (ctrl, opts) => {
   for (let pageNum = 1; pageNum < pages[0]; pageNum = pageNum + 1) {
     prePages.push(pageNum);
   }
+  return {pages, prePages, maxPageNum};
+};
 
+const oninit = vnode => {
+  const attrs = vnode.attrs;
+  // Memoize some properties that do not change
+  const axis = attrs.axis || "y";
+  const whichScroll = axis === "x" ? "scrollLeft" : "scrollTop";
+  const autoSize = (attrs.autoSize !== undefined && attrs.autoSize === false) ? false : true;
+  const pageSize = attrs.pageSize;
+  const scrollThrottle = attrs.throttle !== undefined ? attrs.throttle * 1000 : SCROLL_WATCH_TIMER;
+  const contentTag = attrs.contentTag || "div";
   const classList = [
     classes.scrollView,
-    opts.axis === "x"
+    axis === "x"
       ? classes.scrollViewX
       : classes.scrollViewY,
-    opts.class
+    attrs.class
   ].join(" ");
-  ctrl.contentSize = calculateContentSize(1, maxPageNum, state);
+
+  vnode.state = Object.assign(
+    {},
+    {
+      pageSizes: {},
+      sortedKeys: [],
+      beforeSize: null,
+      afterSize: null,
+      scrollView: null,
+      isScrolling: false,
+      scrollWatchScrollingStateId: null,
+      scrollWatchUpdateStateId: null,
+      preloadSlots: attrs.preloadPages || 1,
+      boundingClientRect: {},
+      currentPageNum: 0,
+      scrollAmount: 0,
+
+      // Memoized
+      classList,
+      axis,
+      whichScroll,
+      autoSize,
+      pageSize,
+      scrollThrottle,
+      contentTag
+    }
+  );
+};
+
+const view = ({state, attrs}) => {
+  state.scrollAmount = state.scrollView ? state.scrollView[state.whichScroll] : 0;
+  const axis = state.axis;
+  const maxPages = attrs.maxPages !== undefined ? attrs.maxPages : Number.MAX_VALUE;
+
+  const currentPageNum = attrs.currentPage
+    ? parseInt(attrs.currentPage, 10)
+    : calculateCurrentPageNum(state.scrollAmount, state);
+
+  if (attrs.pageChange && currentPageNum !== state.currentPageNum) {
+    attrs.pageChange(currentPageNum);
+  }
+  state.currentPageNum = currentPageNum;
+
+  if (state.scrollView && attrs.getDimensions) {
+    attrs.getDimensions({
+      scrolled: state.scrollAmount,
+      size: state.contentSize
+    });
+  }
+
+  const {pages, prePages, maxPageNum} = getPageList(currentPageNum, attrs.from, attrs.to, attrs.currentPage, state.preloadSlots, maxPages);
+
+  state.contentSize = calculateContentSize(1, maxPageNum, state);
   const isLastPageVisible = maxPageNum
-    ? isPageInViewport(maxPageNum, opts.axis, state, ctrl.scrollView)
+    ? isPageInViewport(maxPageNum, axis, state, state.scrollView)
     : true;
 
-  if (ctrl.scrollView) {
+  if (state.scrollView) {
     // in case the screen size was changed, reset preloadSlots
-    const boundingClientRect = ctrl.scrollView.getBoundingClientRect();
-    ctrl.boundingClientRect = ctrl.boundingClientRect || boundingClientRect;
-    if (boundingClientRect.width !== ctrl.boundingClientRect.width
-      || boundingClientRect.height !== ctrl.boundingClientRect.height
+    const boundingClientRect = state.scrollView.getBoundingClientRect();
+    state.boundingClientRect = state.boundingClientRect || boundingClientRect;
+    if (boundingClientRect.width !== state.boundingClientRect.width
+      || boundingClientRect.height !== state.boundingClientRect.height
     ) {
-      ctrl.preloadSlots = opts.preloadPages || 1;
+      state.preloadSlots = attrs.preloadPages || 1;
     }
-    ctrl.boundingClientRect = boundingClientRect;
+    state.boundingClientRect = boundingClientRect;
     // calculate if we have room to load more
-    const maxSlots = opts.maxPreloadPages || Number.MAX_VALUE;
+    const maxSlots = attrs.maxPreloadPages || Number.MAX_VALUE;
 
-    if (ctrl.contentSize
-      && (ctrl.preloadSlots < pages.length)
-      && (ctrl.preloadSlots <= maxSlots)
-      && (ctrl.contentSize < boundingClientRect.height)
+    if (state.contentSize
+      && (state.preloadSlots < pages.length)
+      && (state.preloadSlots <= maxSlots)
+      && (state.contentSize < boundingClientRect.height)
     ) {
-      ctrl.preloadSlots++;
+      state.preloadSlots++;
       setTimeout(m.redraw, 0);
     }
   }
 
-  return m("div", {
-    config: (el, inited, context) => {
-      if (inited) {
-        return;
-      }
-      if (opts.scrollView) {
-        ctrl.scrollView = document.querySelector(opts.scrollView);
-      } else {
-        ctrl.scrollView = el;
-      }
-      ctrl.scrollView.className += " " + classList;
+  return m("div",
+    {
+      oncreate: ({ dom }) => {
+        state.scrollView = attrs.scrollView
+          ? document.querySelector(attrs.scrollView)
+          : dom;
+        state.scrollView.className += " " + state.classList;
 
-      if (opts.setDimensions) {
-        const dimensions = opts.setDimensions();
-        const whichSize = opts.axis === "x"
-          ? "width"
-          : "height";
-        if (dimensions.size > 0) {
-          el.style[whichSize] = dimensions.size + "px";
-        }
-        ctrl.scrollView[ctrl.whichScroll] = dimensions.scrolled;
-      }
-
-      const handleScroll = () => {
-        ctrl.isScrolling = true;
-
-        // reset isScrolling state only when scrolling is done
-        clearTimeout(ctrl.scrollWatchScrollingStateId);
-        ctrl.scrollWatchScrollingStateId = setTimeout(() => {
-          ctrl.isScrolling = false;
-          // update pages
-          m.redraw();
-        }, ctrl.scrollThrottle);
-
-        // throttle updates while scrolling
-        if (!ctrl.scrollWatchUpdateStateId) {
-          ctrl.scrollWatchUpdateStateId = setTimeout(() => {
-            // update pages
-            m.redraw();
-            ctrl.scrollWatchUpdateStateId = null;
-          }, ctrl.scrollThrottle);
-        }
-      };
-      ctrl.scrollView.addEventListener("scroll", handleScroll);
-      context.onunload = () => {
-        ctrl.scrollView.removeEventListener("scroll", handleScroll);
-      };
-    }
-  }, m("div", {
-    class: classes.scrollContent,
-    style: !ctrl.autoSize
-      ? {}
-      : Object.assign(
-        {},
-        opts.axis === "x"
-          ? { width: ctrl.contentSize + "px" }
-          : { height: ctrl.contentSize + "px" },
-        opts.contentSize
-          ? opts.axis === "x"
-            ? { "min-width": opts.contentSize + "px" }
-            : { "min-height": opts.contentSize + "px" }
-          : {}
-    )
-  }, [
-    m(ctrl.contentTag, { class: classes.content }, [
-      opts.before
-        ? m("div", {
-          class: classes.before,
-          config: el => {
-            // always update the natural size
-            const size = getElementSize(el, opts.axis);
-            if (size) {
-              state.beforeSize = size;
-            }
+        if (attrs.setDimensions) {
+          const dimensions = attrs.setDimensions();
+          if (dimensions.size > 0) {
+            const whichSize = axis === "x"
+              ? "width"
+              : "height";
+            dom.style[whichSize] = dimensions.size + "px";
           }
-        }, opts.before)
-        : null,
-      m("div", { class: classes.pages }, [
-        prePages.map(pageNum => 
-          m(placeholder, Object.assign(
+          state.scrollView[state.whichScroll] = dimensions.scrolled;
+        }
+        handleScroll(state, state.scrollView, "add");
+      },
+      onremove: () => handleScroll(state, state.scrollView, "remove")
+    },
+    m("div",
+      {
+        class: classes.scrollContent,
+        style: !state.autoSize
+          ? null
+          : Object.assign(
             {},
-            opts,
-            {
-              pageNum,
-              pageId: numToId(pageNum),
-              pageSizes: state.pageSizes
-            }
-          ))
-        ),
-        pages.map(pageNum =>
-          m(page, Object.assign(
-            {},
-            opts,
-            {
-              pageNum,
-              pageId: numToId(pageNum),
-              isScrolling: ctrl.isScrolling,
-              pageSizes: state.pageSizes,
-              updatePageSize: updatePageSize(ctrl),
-              autoSize: ctrl.autoSize
-            }
-          ))
+            axis === "x"
+              ? { width: state.contentSize + "px" }
+              : { height: state.contentSize + "px" },
+            attrs.contentSize
+              ? axis === "x"
+                ? { "min-width": attrs.contentSize + "px" }
+                : { "min-height": attrs.contentSize + "px" }
+              : {}
         )
-      ]),
-      // only show "after" when content is available
-      opts.after && ctrl.contentSize
-        ? m("div", {
-          class: classes.after,
-          style: {
-            // visually hide this element until the last page is into view
-            // to prevent flashes of after content when scrolling fast
-            visibility: isLastPageVisible ? "visible" : "hidden"
-          },
-          config: el => {
-            // always update the natural size
-            const size = getElementSize(el, opts.axis);
-            if (size) {
-              state.afterSize = size;
-            }
-          }
-        }, opts.after)
-        : null
-    ])
-  ]));
+      },
+      [
+        m(state.contentTag, { class: classes.content }, [
+          attrs.before
+            ? m("div", {
+              class: classes.before,
+              oncreate: ({ dom }) => updatePart(dom, "before", state, axis),
+              onupdate: ({ dom }) => updatePart(dom, "before", state, axis)
+            }, attrs.before)
+            : null,
+          m("div", { class: classes.pages }, [
+            prePages.map(pageNum => 
+              m(placeholder, Object.assign(
+                {},
+                {
+                  axis,
+                  key: numToId(pageNum),
+                  pageId: numToId(pageNum),
+                  pageNum,
+                  pageSizes: state.pageSizes
+                }
+              ))
+            ),
+            pages.map(pageNum =>
+              m(page, Object.assign(
+                {},
+                {
+                  autoSize: state.autoSize,
+                  axis,
+                  isScrolling: state.isScrolling,
+                  item: attrs.item,
+                  key: numToId(pageNum),
+                  pageData: attrs.pageData,
+                  pageId: numToId(pageNum),
+                  pageNum,
+                  pageSize: state.pageSize,
+                  pageSizes: state.pageSizes,
+                  pageTag: attrs.pageTag,
+                  pageUrl: attrs.pageUrl,
+                  updatePageSize: updatePageSize(state)
+                }
+              ))
+            )
+          ]),
+          // only show "after" when content is available
+          attrs.after && state.contentSize
+            ? m("div", {
+              class: classes.after,
+              style: {
+                // visually hide this element until the last page is into view
+                // to prevent flashes of after content when scrolling fast
+                visibility: isLastPageVisible ? "visible" : "hidden"
+              },
+              oncreate: ({ dom }) => updatePart(dom, "after", state, axis),
+              onupdate: ({ dom }) => updatePart(dom, "after", state, axis),
+            }, attrs.after)
+            : null
+        ])
+      ]
+    )
+  );
 };
 
-infinite.isElementInViewport = isElementInViewport;
+export const infinite = {
+  oninit,
+  view,
+  isElementInViewport
+};
 

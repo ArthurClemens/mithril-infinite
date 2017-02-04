@@ -1,5 +1,5 @@
 import m from "mithril";
-import { github } from "../app/github";
+import footer from "../app/footer";
 import images from "../images";
 import grid from "../grid";
 import table from "../table";
@@ -16,42 +16,50 @@ addStyle("index", indexStyle);
 
 const RESIZE_TIMER = 500;
 
-const menuData = [{
-  href: "/images",
-  title: "Images",
-  subtitle: "200 images of various heights"
-}, {
-  href: "/grid",
-  title: "Image grid",
-  subtitle: "Responsive grid with 1, 2, 3 and 4 columns"
-}, {
-  href: "/table",
-  title: "Data table",
-  subtitle: "Table rows of various heights"
-}, {
-  href: "/short",
-  title: "Short content",
-  subtitle: "Automatically finds loadable space"
-}, {
-  href: "/horizontal",
-  title: "Horizontal",
-  subtitle: "Horizontal scroller"
-}, {
-  href: "/fixed",
-  title: "Fixed height",
-  subtitle: "Preset the scroll height, don\"t update scroll height"
-}, {
-  href: "/paging",
-  title: "Paging",
-  subtitle: "Prev/Next buttons instead of infinite scroll"
-}];
+const menuData = [
+  {
+    href: "/images",
+    title: "Images",
+    subtitle: "200 images of various heights"
+  },
+  {
+    href: "/horizontal",
+    title: "Horizontal",
+    subtitle: "Horizontal scroller"
+  },
+  {
+    href: "/grid",
+    title: "Image grid",
+    subtitle: "Responsive grid with 1, 2, 3 and 4 columns"
+  },
+  {
+    href: "/table",
+    title: "Data table",
+    subtitle: "Table rows of various heights"
+  },
+  {
+    href: "/short",
+    title: "Short content",
+    subtitle: "Automatically finds loadable space"
+  },
+  {
+    href: "/fixed",
+    title: "Fixed height",
+    subtitle: "Preset the scroll height, don\"t update scroll height"
+  },
+  {
+    href: "/paging",
+    title: "Paging",
+    subtitle: "Previous / Next buttons instead of infinite scroll"
+  }
+];
 
 const menu = m("ul.menu", [
   m("li.header", "Examples"),
   menuData.map(menuItem => {
     return m("li", m("a", {
       href: menuItem.href,
-      config: m.route
+      oncreate: m.route.link
     }, [
       m("span.title", menuItem.title),
       m("span.subtitle", menuItem.subtitle)
@@ -59,18 +67,19 @@ const menu = m("ul.menu", [
   })
 ]);
 
-let app = {};
-app.view = () => {
-  return m(".index", [
-    m("h1", "Infinite Scroll for Mithril"),
-    menu,
-    github({
-      home: true
-    })
-  ]);
+const app = {
+  view: () => {
+    return m(".index", [
+      m("h1", "Infinite Scroll for Mithril"),
+      menu,
+      footer({
+        home: true
+      })
+    ]);
+  }
 };
 
-m.route.mode = "hash";
+m.route.prefix("#");
 const mountNode = document.querySelector("#app");
 m.route(mountNode, "/", {
   "/": app,
@@ -80,7 +89,8 @@ m.route(mountNode, "/", {
   "/short": short,
   "/horizontal": horizontal,
   "/fixed": fixed,
-  "/paging": paging
+  "/paging": paging,
+  "/paging/:p": paging
 });
 
 // Debounce window resize

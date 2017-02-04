@@ -1,21 +1,21 @@
-import vars from "../app/variables";
+import { styleVariables } from "../app/variables";
 
 const textColorLight = "#90A4AE";
 const indexBlockBackgroundColor = "#CFD8DC";
 const indexBlockTextColor = "rgba(0,0,0,.85)";
 const indexBlockTextColorLight = "rgba(0,0,0,.4)";
-const menuWidthPx = vars.size_px;
+const menuWidthPx = styleVariables.size_px;
 
 export default [{
   ".index": {
     " h1": {
       display: "block",
       margin: "40px auto 0 auto",
-      width: vars.size + "px",
+      width: styleVariables.size + "px",
       textAlign: "center",
       fontSize: "28px",
       fontWeight: "normal",
-      color: vars.text_color
+      color: styleVariables.text_color
     },
     " .menu": {
       width: menuWidthPx,

@@ -12,6 +12,9 @@ export default [{
     " .mithril-infinite__scroll-view.mithril-infinite__scroll-view--y": {
       height: (itemSize * 4) + (gridSpacing * 3) + (2 * gridSpacing) + "px"
     },
+    " .mithril-infinite__page--placeholder": {
+      height: "0 !important"
+    },
     " .mithril-infinite__scroll-content": {
       margin: "0 auto",
       width: pageWidth + "px",

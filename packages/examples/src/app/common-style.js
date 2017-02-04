@@ -1,4 +1,4 @@
-import vars from "./variables";
+import { styleVariables } from "./variables";
 
 const styles = [{
   " *": {
@@ -12,7 +12,7 @@ const styles = [{
     margin: 0,
     padding: 0,
     fontFamily: "arial, sans-serif",
-    minWidth: vars.size_px
+    minWidth: styleVariables.size_px
   },
   " h1": {
     display: "block",
@@ -21,7 +21,7 @@ const styles = [{
     textAlign: "center",
     fontSize: "28px",
     fontWeight: "normal",
-    color: vars.text_color
+    color: styleVariables.text_color
   },
   " a": {
     "&:link, &:visited": {

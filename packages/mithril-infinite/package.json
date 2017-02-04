@@ -2,14 +2,14 @@
   "name": "mithril-infinite",
   "main": "dist/mithril-infinite.js",
   "module": "dist/mithril-infinite.mjs",
-  "version": "0.6.2",
+  "version": "1.0.0",
   "description": "Infinite Scroll for Mithril",
   "scripts": {
     "build": "DEPS=false ../../node_modules/rollup/bin/rollup -c ../../scripts/rollup.umd.js && ../../node_modules/rollup/bin/rollup -c ../../scripts/rollup.es.js"
   },
   "dependencies": {
-    "j2c": "^1.0.0-4",
-    "mithril": "0.2.5",
+    "j2c": "1.0.0-4",
+    "mithril": "1.0.0",
     "verge": "1.9.1"
   },
   "keywords": [

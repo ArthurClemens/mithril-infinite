@@ -1,10 +1,10 @@
 # Infinite Scroll for Mithril on mobile and desktop
 
-Compatible with Mithril 0.2.
+Compatible with Mithril 1.0.
 
 ## Examples
 
-[Infinite Scroll Examples](http://arthurclemens.github.io/mithril-infinite/index.html)
+[Examples](https://github.com/ArthurClemens/mithril-infinite/tree/master/packages/examples)
 
 
 ## Features
@@ -21,7 +21,7 @@ Compatible with Mithril 0.2.
 * When there is room on the page to show more data: automatic detection of "loadable space" (so no loading area detection div is needed).
 * Optionally use previous/next paging buttons
 
-Not included:
+Not included (by design):
 
 * Special support for older mobile browsers: no touch layer, requestAnimationFrame, absolute positioning or speed/deceleration calculations.
 * For smooth programmatic scrolling (to a scroll position) a number of scroll libraries exist, for instance [ftcroller](https://github.com/ftlabs/ftscroller).
@@ -35,226 +35,53 @@ Use as npm module:
 npm install --save mithril-infinite
 ~~~
 
-or download/clone from Github, `packages/mithril-infinite`.
+or download/clone from Github.
 
-For working with the examples, see the [Examples README](https://github.com/ArthurClemens/mithril-infinite/packages/examples).
+For working with the examples, see [Viewing the examples](#viewing-the-examples) below.
 
 
 ## Usage
 
-Then:
+A example using data files:
 
 ~~~javascript
 import infinite from "mithril-infinite";
 
 m(infinite, {
   maxPages: 16,
-  pageUrl: function(page) {return "app/data/page-" + page + ".json";},
-  item: handlePageItem
+  pageUrl: pageNum => "data/page-" + pageNum + ".json",
+  item
 });
 ~~~
 
-We have limited the number of pages to 16, pass a function to generate a JSON data URL, and pass a function that creates an item (Mithril template/component):
+With these options we are:
+
+* limiting the number of pages to 16
+* passing a function to generate a JSON data URL
+* passing a function that should return a Mithril element
+
+A simple item function:
 
 ~~~javascript
-const handlePageItem = (data, opts) => 
+const item = (data, opts, index) => 
   m(".item", [
     m("h2", data.title),
-    m("div", opts.pageNum)
-  ])
-};
+    m("div", data.body)
+  ]);
 ~~~
 
-### Custom requests
+The `item` function passes 3 parameters:
 
-By default, the resulting URL from `pageUrl` is passed to a `m.request` function. This works for simple cases where data is fetched from the same server. If you need to access another server, this will likely fail. Instead create your own request and pass this with parameter `pageData`:
-
-~~~javascript
-const getPageData = page =>
-  m.request({
-    method: "GET",
-    url: "http://mysite.com/data?pageSize=12&page=" + page,
-    initialValue: [],
-    background: true,
-    dataType: "jsonp"
-  })
-};
-
-m(infinite, {
-  maxPages: 16,
-  pageData: getPageData,
-  item: handlePageItem
-});
-~~~
-
-You can use `fetch` instead of `m.request`.
+1. `data` contains the loaded data from `pageUrl`.
+2. `opts` contains: `isScrolling: Bool`, `pageId: String`, `pageNum: Number`, `pageSize: Number`
+3. `index`: the item index
 
 
-
-### Intercepting page count
-
-Assume the server delivers the total page count with json (and received with the function passed in `pageData`):
-
-~~~javascript
-"pageCount": 9,
-"results": ["one", "two", "three", ...]
-~~~
-
-`results` is the data for the requested page.
-
-The page count information can be used to set the component"s `maxPages` parameter. We only need to grab the page count value before passing on the results.
-
-For instance in the controller:
-
-~~~javascript
-const getData = page =>
-  m.request({
-    method: "GET",
-    url: "http://mysite.com/data?pageSize=12&page=" + page,
-    initialValue: [],
-    background: true,
-    dataType: "jsonp"
-  });
-};
-const pageCount = m.prop();
-const pageData = pageNum =>
-  getData(pageNum).then(response => {
-    pageCount(response.pageCount);
-    setTimeout(m.redraw, 0); // because we are using "background: true" with m.request
-    return [response.results];
-  })
-};
-
-return {
-  pageData,
-  pageCount
-};
-~~~
-
-And in the view:
-
-~~~javascript
-return m(".results", m(infinite, {
-  maxPages: ctrl.pageCount(),
-  item: item,
-  pageData: ctrl.pageData
-}));
-~~~
-
-### Pagination
-
-See the "paging" example.
-
-
-## Configuration options
-
-### Appearance options
-
-| **Parameter** |  **Mandatory** | **Type** | **Default** | **Description** |
-| ------------- | -------------- | -------- | ----------- | --------------- |
-| **scrollView** | optional | Selector String | | Pass an element"s selector to assign another element as scrollView |
-| **class** | optional | String |  | Extra CSS class appended to "mithril-infinite__scroll-view" |
-| **contentTag** | optional | String | "div" | HTML tag for the content element |
-| **pageTag** | optional | String | "div" | HTML tag for the page element; note that pages have class `mithril-infinite__page` plus either `mithril-infinite__page--odd` or `mithril-infinite__page--even` |
-| **maxPages** | optional | Number | `Number.MAX_VALUE` | Maximum number of pages to draw |
-| **preloadPages** | optional | Number | 1 | Number of pages to preload when the app starts; if room is available, this number will increase automatically |
-| **axis** | optional | String | "y" | The scroll axis, either "y" or "x" |
-| **autoSize** | optional | Boolean | true | Set to `false` to not set the width or height in CSS |
-| **throttle** | optional | Number | .2 | The number of seconds between scroll updates |
-| **before** | optional | Mithril template or component | | Content shown before the pages; has class `mithril-infinite__before` |
-| **after** | optional | Mithril template or component | | Content shown after the pages; has class `mithril-infinite__after`; will be shown only when content exists and the last page is in view (when `maxPages` is defined) |
-| **contentSize** | optional | Number (pixels) |  | Use when you know the number of items to display and the height of the content, and when  predictable scrollbar behaviour is desired (without jumps when content is loaded); pass a pixel value to set the size (height or width) of the scroll content, thereby overriding the dynamically calculated height; use together with `pageSize`  |
-| **setDimensions** | optional | Function ({scrolled: Number, size: Number}) | | Sets the initial size and scroll position of `scrollView`; this function is called once |
-
-### Callback functions
-
-| **Parameter** |  **Mandatory** | **Type** | **Default** | **Description** |
-| ------------- | -------------- | -------- | ----------- | --------------- |
-| **pageUrl** | either `pageData` or `pageUrl` | Function (page: Number) => String | | Function that accepts a page number and returns a URL String |
-| **pageData** | either `pageData` or `pageUrl` | Function (page: Number) => Promise | | Function that fetches data; accepts a page number and returns a promise |
-| **item** | required | Function (data: Array, options: Object) => Mithril Template | | Function that creates an item from data |
-| **pageSize** | optional | Function (content: Array) => Number | Pass a pixel value to set the size (height or width) of each page; the function accepts the page content and returns the size |
-| **pageChange** | optional | Function (page: Number) | | Notifies the current page on change |
-| **processPageData** | optional | Function (data: Array, options: Object) => Array | | Function that maps over the page data and returns an item for each |
-| **getDimensions** | optional | Function () => {scrolled: Number, size: Number} | | Returns an object with state dimensions of `scrollView`: `scrolled` (either scrollTop or scrollLeft) and `size` (either height or width); this function is called on each view update | 
-
-### Paging options
-
-| **Parameter** |  **Mandatory** | **Type** | **Default** | **Description** |
-| ------------- | -------------- | -------- | ----------- | --------------- |
-| **currentPage**  | optional | Number | | Sets the current page |
-| **from** | optional | Number | | Not needed when only one page is shown (use `currentPage`); use page data from this number and higher |
-| **to** | optional | Number | | Not needed when only one page is shown (use `currentPage`); Use page data to this number and lower |
-
-
-## Using images
-
-Images should be loaded only when they appear on the screen. To check if the image is in the viewport, you can use the function `infinite.isElementInViewport(el)`. For example:
-
-~~~javascript
-m(".image", {
-  config: function(el, inited, context) {
-    if (context.inited) {
-      return;
-    }
-    if (infinite.isElementInViewport({el:el})) {
-      // use data.src
-      context.inited = true;
-    }
-  }
-})
-~~~
-
-Options for `infinite.isElementInViewport`:
-
-| **Parameter** |  **Mandatory** | **Type** | **Default** | **Description** |
-| ------------- | -------------- | -------- | ----------- | --------------- |
-| **el** | required | HTML Element | | The element to check |
-| **axis** | optional | String | "y" | The scroll axis, either "y" or "x" |
-| **leeway** | optional | Number | 300 | The extended area; by default the image is already fetched when it is 100px outside of the viewport |
-
-Note that for scrolling backwards, leeway must be passed with a negative value.
-
-
-Images should not be shown with the `<img/>` tag: while this works fine on desktop browsers, this causes redrawing glitches on iOS Safari. The solution is to use `background-image`. For example:
-
-~~~javascript
-el.style.backgroundImage = "url(" + url + ")"
-~~~
-
-
-## Using table data
-
-Using `<table>` tags causes reflow problems. Use divs instead, with CSS styling for table features. For example:
-
-~~~css
-.page {
-  display: table;
-  width: 100%;
-}
-.list-item {
-  width: 100%;
-  display: table-row;
-}
-.list-item > div {
-  display: table-cell;
-}
-~~~
-
-
-
-## Styling
-
-Note: The parent of "scroll-view" must have a height.
-
-The including of styles is done with the help of [j2c](https://github.com/pygy/j2c). This library is also included in the examples.
-
-
-## Data structure
+### Data file structure
 
 Data is handled per "results" page. Each page is a JSON data object that contains a list of item data.
 
-Examples:
+For example:
 
 ~~~json
 [
@@ -276,17 +103,202 @@ Or:
 
 
 
-## Viewing the examples
+### Server requests
+ 
+In most real world situations an API server will provide the data. Instead of passing file URLs with `pageUrl`, we create a custom request function passed to `pageData`:
 
-* `git clone https://github.com/ArthurClemens/mithril-infinite.git`
-* `cd mithril-infinite`
-* `npm install -g lerna`
-* `npm install`
-* `lerna init`
-* `lerna bootstrap`
-* `cd packages/examples`
-* `npm run watch`
-* Open browser at [localhost:8080](http://localhost:8080/)
+~~~javascript
+import infinite from "mithril-infinite";
+
+m(infinite, {
+  pageData,
+  item
+});
+
+const pageData = pageNum => 
+  m.request({
+    method: "GET",
+    dataType: "jsonp",
+    url: dataUrl(pageNum)
+  });
+~~~
+
+In example "Grid" we use `jsonplaceholder.typicode.com` to fetch our images:
+
+~~~javascript
+const dataUrl = pageNum =>
+  `http://jsonplaceholder.typicode.com/photos?_start=${(pageNum - 1) * PAGE_ITEMS}&_end=${pageNum * PAGE_ITEMS}`;
+~~~
+
+And we show the images in a more elaborate `item` function:
+
+~~~javascript
+const item = (data, opts) =>
+  m("a.grid-item",
+    m(".image-holder",
+      m(".image", {
+        oncreate: vnode => maybeShowImage(vnode, data, opts.isScrolling),
+        onupdate: vnode => maybeShowImage(vnode, data, opts.isScrolling)
+      })
+    )
+  );
+
+// Don't load the image if the page is scrolling
+const maybeShowImage = (vnode, data, isScrolling) => {
+  if (isScrolling || vnode.state.inited) {
+    return;
+  }
+  // Only load the image when visible in the viewport
+  if (infinite.isElementInViewport({ el: vnode.dom })) {
+    showImage(vnode.dom, data.thumbnailUrl);
+    vnode.state.inited = true;
+  }
+el.style.backgroundImage = `url(${url})`;
+~~~
+
+* Images are only loaded when they are visible in the viewport, using `infinite.isElementInViewport`
+* We don't load images when we are scrolling. This makes a big difference in performance, but it will not always result in a good user experience - the page will seem "dead" when during the scrolling. So use with consideration.
+
+
+
+### Getting the total page count
+
+How the total page count is delivered will differ per server. `jsonplaceholder.typicode.com` passes the info in the request header.
+
+Example "Fixed" shows how to get the total page count from the request, and use that to calculate the total content height.
+
+We place the `pageData` function in the `oninit` function so that we have easy access to the `state.pageCount` variable:
+
+~~~javascript
+const state = vnode.state;
+state.pageCount = 1;
+
+state.pageData = pageNum => 
+  m.request({
+    method: "GET",
+    dataType: "jsonp",
+    url: dataUrl(pageNum),
+    extract: xhr => (
+      // Read the total count from the header
+      state.pageCount = Math.ceil(parseInt(xhr.getResponseHeader("X-Total-Count"), 10) / PAGE_ITEMS),
+      JSON.parse(xhr.responseText)
+    )
+  });
+~~~
+
+Then pass `state.pageData` to `infinite`:
+
+~~~javascript
+m(infinite, {
+  pageData: state.pageData,
+  maxPages: state.pageCount,
+  ...
+});
+~~~
+
+
+### Using images
+
+Images should be loaded only when they appear on the screen. To check if the image is in the viewport, you can use the function `infinite.isElementInViewport({ el })`. For example:
+
+~~~javascript
+if (infinite.isElementInViewport({ el: vnode.dom })) {
+  loadImage(vnode.dom, data.thumbnailUrl);
+}
+~~~
+
+Images should not be shown with the `<img/>` tag: while this works fine on desktop browsers, this causes redrawing glitches on iOS Safari. The solution is to use `background-image`. For example:
+
+~~~javascript
+el.style.backgroundImage = `url(${url})`;
+~~~
+
+
+
+### Using table data
+
+Using `<table>` tags causes reflow problems. Use divs instead, with CSS styling for table features. For example:
+
+~~~css
+.page {
+  display: table;
+  width: 100%;
+}
+.list-item {
+  width: 100%;
+  display: table-row;
+}
+.list-item > div {
+  display: table-cell;
+}
+~~~
+
+
+
+### Pagination
+
+See the "Paging" example.
+
+
+
+## Configuration options
+
+### Appearance options
+
+| **Parameter** |  **Mandatory** | **Type** | **Default** | **Description** |
+| ------------- | -------------- | -------- | ----------- | --------------- |
+| **scrollView** | optional | Selector String | | Pass an element"s selector to assign another element as scrollView |
+| **class** | optional | String |  | Extra CSS class appended to `mithril-infinite__scroll-view` |
+| **contentTag** | optional | String | "div" | HTML tag for the content element |
+| **pageTag** | optional | String | "div" | HTML tag for the page element; note that pages have class `mithril-infinite__page` plus either `mithril-infinite__page--odd` or `mithril-infinite__page--even` |
+| **maxPages** | optional | Number | `Number.MAX_VALUE` | Maximum number of pages to draw |
+| **preloadPages** | optional | Number | 1 | Number of pages to preload when the app starts; if room is available, this number will increase automatically |
+| **axis** | optional | String | "y" | The scroll axis, either "y" or "x" |
+| **autoSize** | optional | Boolean | true | Set to `false` to not set the width or height in CSS |
+| **throttle** | optional | Number | .2 | The number of seconds between scroll updates |
+| **before** | optional | Mithril template or component | | Content shown before the pages; has class `mithril-infinite__before` |
+| **after** | optional | Mithril template or component | | Content shown after the pages; has class `mithril-infinite__after`; will be shown only when content exists and the last page is in view (when `maxPages` is defined) |
+| **contentSize** | optional | Number (pixels) |  | Use when you know the number of items to display and the height of the content, and when  predictable scrollbar behaviour is desired (without jumps when content is loaded); pass a pixel value to set the size (height or width) of the scroll content, thereby overriding the dynamically calculated height; use together with `pageSize`  |
+| **setDimensions** | optional | Function ({scrolled: Number, size: Number}) | | Sets the initial size and scroll position of `scrollView`; this function is called once |
+
+### Callback functions
+
+| **Parameter** |  **Mandatory** | **Type** | **Default** | **Description** |
+| ------------- | -------------- | -------- | ----------- | --------------- |
+| **pageUrl** | either `pageData` or `pageUrl` | Function `(page: Number) => String` | | Function that accepts a page number and returns a URL String |
+| **pageData** | either `pageData` or `pageUrl` | Function `(page: Number) => Promise` | | Function that fetches data; accepts a page number and returns a promise |
+| **item** | required | Function `(data: Array, options: Object, index: Number) => Mithril Template` | | Function that creates a Mithril element from received data |
+| **pageSize** | optional | Function `(content: Array) => Number` | Pass a pixel value to set the size (height or width) of each page; the function accepts the page content and returns the size |
+| **pageChange** | optional | Function `(page: Number)` | | Get notified when a new page is shown |
+| **processPageData** | optional | Function `(data: Array, options: Object) => Array` | | Function that maps over the page data and returns an item for each |
+| **getDimensions** | optional | Function `() => {scrolled: Number, size: Number}` | | Returns an object with state dimensions of `scrollView`: `scrolled` (either scrollTop or scrollLeft) and `size` (either height or width); this function is called on each view update | 
+
+### Paging options
+
+| **Parameter** |  **Mandatory** | **Type** | **Default** | **Description** |
+| ------------- | -------------- | -------- | ----------- | --------------- |
+| **currentPage**  | optional | Number | | Sets the current page |
+| **from** | optional | Number | | Not needed when only one page is shown (use `currentPage`); use page data from this number and higher |
+| **to** | optional | Number | | Not needed when only one page is shown (use `currentPage`); Use page data to this number and lower |
+
+### Options for infinite.isElementInViewport
+
+All options are passed in an options object: `infinite.isElementInViewport({ el, leeway })`
+
+| **Parameter** |  **Mandatory** | **Type** | **Default** | **Description** |
+| ------------- | -------------- | -------- | ----------- | --------------- |
+| **el** | required | HTML Element | | The element to check |
+| **axis** | optional | String | "y" | The scroll axis, either "y" or "x" |
+| **leeway** | optional | Number | 300 | The extended area; by default the image is already fetched when it is 100px outside of the viewport; both bottom and top leeway are calculated |
+
+
+
+## Styling
+
+Note: The parent of "scroll-view" must have a height.
+
+Styles are added using [j2c](https://github.com/pygy/j2c). This library is also used in the examples.
+
 
 
 
@@ -314,15 +326,15 @@ Or:
 
 ## Size
 
-Minified and gzipped: ~ 5.5 Kb
+Minified and gzipped: ~ 6.3 Kb
 
 
 
 ## Dependencies
 
-* [Verge](https://www.npmjs.com/package/verge) - for measuring the viewport
+* [Mithril 1.0](https://www.npmjs.com/package/mithril)
 * [j2c](https://github.com/pygy/j2c) - for creating js stylesheets
-* [Mithril](https://www.npmjs.com/package/mithril)
+* [Verge](https://www.npmjs.com/package/verge) - for measuring the viewport
 
 
 

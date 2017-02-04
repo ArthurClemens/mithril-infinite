@@ -1,9 +1,15 @@
 # Infinite Scroll for Mithril on mobile and desktop
 
-Compatible with Mithril 0.2.
+Compatible with Mithril 1.0.
 
 * [Documentation](https://github.com/ArthurClemens/mithril-infinite/tree/master/packages/mithril-infinite)
 * [Examples](https://github.com/ArthurClemens/mithril-infinite/tree/master/packages/examples)
+
+
+## Older release
+
+* [Infinite Scroll for Mithril 0.2](https://github.com/ArthurClemens/mithril-infinite/releases/tag/v0.6.2)
+
 
 ## Licence
 

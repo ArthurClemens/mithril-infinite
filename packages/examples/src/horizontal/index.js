@@ -1,40 +1,39 @@
 import m from "mithril";
-import { github } from "../app/github";
+import footer from "../app/footer";
 import infinite from "mithril-infinite";
+import { appVariables } from "../app/variables";
 
 import { addStyle } from "../app/styler";
 import styles from "./styles";
 addStyle("horizontal", styles);
 
-const IMG_URL = "http://arthurclemens.github.io/assets/mithril-infinite-scroll/thumbs/";
-
-// fade in first time only
-const fadeInImage = (el, imgUrl) => {
-  const url = IMG_URL + imgUrl;
-  const showImage = () => {
-    el.style.backgroundImage = "url(" + url + ")";
+const loadImage = (el, imgUrl) => {
+  const url = appVariables.imageUrl + imgUrl;
+  const populate = () => {
+    el.style.backgroundImage = `url(${url})`;
     el.style.opacity = 1;
   };
   let img = new Image();
-  img.onload = () => {
-    showImage();
-  };
+  img.onload = populate;
   img.src = url;
+};
+
+const maybeLoadImage = (vnode, data) => {
+  if (vnode.state.inited) {
+    return;
+  }
+  if (infinite.isElementInViewport({ el: vnode.dom })) {
+    loadImage(vnode.dom, data.src);
+    vnode.state.inited = true;
+  }
 };
 
 const item = data =>
   m("a.grid-item",
     m(".image-holder",
       m(".image", {
-        config: (el, inited, context) => {
-          if (context.inited) {
-            return;
-          }
-          if (infinite.isElementInViewport({ el })) {
-            fadeInImage(el, data.src);
-            context.inited = true;
-          }
-        }
+        oncreate: vnode => maybeLoadImage(vnode, data),
+        onupdate: vnode => maybeLoadImage(vnode, data)
       })
     )
   );
@@ -44,18 +43,18 @@ export default {
     [
       m(infinite, {
         maxPages: 16,
-        item: item,
-        pageUrl: page => "data/horizontal/page-" + page + ".json",
+        item,
+        pageUrl: pageNum => "data/horizontal/page-" + pageNum + ".json",
         class: "horizontal",
         axis: "x",
-        pageSize: (content) => (content.length || 12) * (210 + 2 * 4), // values from CSS including margins
-        pageChange: page => {
+        pageSize: content => (content.length || 12) * (210 + 2 * 4), // values from CSS including margins
+        pageChange: pageNum => {
           if (console) {
-            console.log("page", page); // eslint-disable-line no-console
+            console.log("page", pageNum); // eslint-disable-line no-console
           }
         }
       }),
-      github()
+      footer()
     ]
 };
 

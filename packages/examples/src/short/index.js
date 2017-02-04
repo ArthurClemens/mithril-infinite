@@ -1,5 +1,6 @@
 import m from "mithril";
 import infinite from "mithril-infinite";
+import footer from "../app/footer";
 
 import { addStyle } from "../app/styler";
 import styles from "./styles";
@@ -10,9 +11,7 @@ const item = data => {
   const title = data[1] ? "" : m(".title", data[0]);
   return m(".list-item", {
     class: title ? "has-title" : "",
-    style: {
-      "background-color": color
-    }
+    style: { "background-color": color }
   }, title);
 };
 
@@ -28,6 +27,7 @@ export default {
         if (console) {
           console.log("page", page); // eslint-disable-line no-console
         }
-      }
+      },
+      after: footer()
     })
 };

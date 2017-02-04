@@ -4,8 +4,8 @@ function Vnode(tag, key, attrs0, children, text, dom) {
 	return {tag: tag, key: key, attrs: attrs0, children: children, text: text, dom: dom, domSize: undefined, state: {}, events: undefined, instance: undefined, skip: false}
 }
 Vnode.normalize = function(node) {
-	if (node instanceof Array) return Vnode("[", undefined, undefined, Vnode.normalizeChildren(node), undefined, undefined)
-	if (node != null && typeof node !== "object") return Vnode("#", undefined, undefined, node, undefined, undefined)
+	if (Array.isArray(node)) return Vnode("[", undefined, undefined, Vnode.normalizeChildren(node), undefined, undefined)
+	if (node != null && typeof node !== "object") return Vnode("#", undefined, undefined, node === false ? "" : node, undefined, undefined)
 	return node
 }
 Vnode.normalizeChildren = function normalizeChildren(children) {
@@ -17,7 +17,7 @@ Vnode.normalizeChildren = function normalizeChildren(children) {
 var selectorParser = /(?:(^|#|\.)([^#\.\[\]]+))|(\[(.+?)(?:\s*=\s*("|'|)((?:\\["'\]]|.)*?)\5)?\])/g
 var selectorCache = {}
 function hyperscript(selector) {
-	if (selector == null || typeof selector !== "string" && selector.view == null) {
+	if (selector == null || typeof selector !== "string" && typeof selector.view !== "function") {
 		throw Error("The selector must be either a string or a component.");
 	}
 	if (typeof selector === "string" && selectorCache[selector] === undefined) {
@@ -52,19 +52,19 @@ function hyperscript(selector) {
 					break
 				}
 			}
-			if (children instanceof Array && children.length == 1 && children[0] != null && children[0].tag === "#") text = children[0].children
+			if (Array.isArray(children) && children.length == 1 && children[0] != null && children[0].tag === "#") text = children[0].children
 			else childList = children
 			return Vnode(tag || "div", attrs.key, hasAttrs ? attrs : undefined, childList, text, undefined)
 		}
 	}
 	var attrs, children, childrenIndex
-	if (arguments[1] == null || typeof arguments[1] === "object" && arguments[1].tag === undefined && !(arguments[1] instanceof Array)) {
+	if (arguments[1] == null || typeof arguments[1] === "object" && arguments[1].tag === undefined && !Array.isArray(arguments[1])) {
 		attrs = arguments[1]
 		childrenIndex = 2
 	}
 	else childrenIndex = 1
 	if (arguments.length === childrenIndex + 1) {
-		children = arguments[childrenIndex] instanceof Array ? arguments[childrenIndex] : [arguments[childrenIndex]]
+		children = Array.isArray(arguments[childrenIndex]) ? arguments[childrenIndex] : [arguments[childrenIndex]]
 	}
 	else {
 		children = []
@@ -190,7 +190,7 @@ var buildQueryString = function(object) {
 	}
 	return args.join("&")
 	function destructure(key0, value) {
-		if (value instanceof Array) {
+		if (Array.isArray(value)) {
 			for (var i = 0; i < value.length; i++) {
 				destructure(key0 + "[" + i + "]", value[i])
 			}
@@ -232,7 +232,6 @@ var _8 = function($window, Promise) {
 		}
 		return args
 	}
-	
 	function request(args, extra) {
 		var finalize = finalizer()
 		args = normalize(args, extra)
@@ -255,9 +254,14 @@ var _8 = function($window, Promise) {
 				xhr.setRequestHeader("Accept", "application/json, text/*")
 			}
 			if (args.withCredentials) xhr.withCredentials = args.withCredentials
+			for (var key in args.headers) if ({}.hasOwnProperty.call(args.headers, key)) {
+				xhr.setRequestHeader(key, args.headers[key])
+			}
 			if (typeof args.config === "function") xhr = args.config(xhr, args) || xhr
 			xhr.onreadystatechange = function() {
-				if (xhr.readyState === 4) {
+				// Don't throw errors on xhr.abort(). XMLHttpRequests ends up in a state of
+				// xhr.status == 0 and xhr.readyState == 4 if aborted after open, but before completion.
+				if (xhr.status && xhr.readyState === 4) {
 					try {
 						var response = (args.extract !== extract) ? args.extract(xhr, args) : args.deserialize(args.extract(xhr, args))
 						if ((xhr.status >= 200 && xhr.status < 300) || xhr.status === 304) {
@@ -282,7 +286,6 @@ var _8 = function($window, Promise) {
 	function jsonp(args, extra) {
 		var finalize = finalizer()
 		args = normalize(args, extra)
-		
 		var promise0 = new Promise(function(resolve, reject) {
 			var callbackName = args.callbackName || "_mithril_" + Math.round(Math.random() * 1e16) + "_" + callbackCount++
 			var script = $window.document.createElement("script")
@@ -311,7 +314,6 @@ var _8 = function($window, Promise) {
 			var key = tokens[i].slice(1)
 			if (data[key] != null) {
 				url = url.replace(tokens[i], data[key])
-				delete data[key]
 			}
 		}
 		return url
@@ -331,7 +333,7 @@ var _8 = function($window, Promise) {
 	function extract(xhr) {return xhr.responseText}
 	function cast(type0, data) {
 		if (typeof type0 === "function") {
-			if (data instanceof Array) {
+			if (Array.isArray(data)) {
 				for (var i = 0; i < data.length; i++) {
 					data[i] = new type0(data[i])
 				}
@@ -429,11 +431,7 @@ var coreRenderer = function($window) {
 		return element
 	}
 	function createComponent(vnode, hooks, ns) {
-		// For object literals since `Vnode()` always sets the `state` field.
-		if (!vnode.state) vnode.state = {}
-		var constructor = function() {}
-		constructor.prototype = vnode.tag
-		vnode.state = new constructor
+		vnode.state = Object.create(vnode.tag)
 		var view = vnode.tag.view
 		if (view.reentrantLock != null) return $emptyFragment
 		view.reentrantLock = true
@@ -745,7 +743,7 @@ var coreRenderer = function($window) {
 		if (vnode.instance != null) onremove(vnode.instance)
 		else {
 			var children = vnode.children
-			if (children instanceof Array) {
+			if (Array.isArray(children)) {
 				for (var i = 0; i < children.length; i++) {
 					var child = children[i]
 					if (child != null) onremove(child)
@@ -887,7 +885,7 @@ var coreRenderer = function($window) {
 		var active = $doc.activeElement
 		// First time0 rendering into a node clears it out
 		if (dom.vnodes == null) dom.textContent = ""
-		if (!(vnodes instanceof Array)) vnodes = [vnodes]
+		if (!Array.isArray(vnodes)) vnodes = [vnodes]
 		updateNodes(dom, dom.vnodes, Vnode.normalizeChildren(vnodes), hooks, null, undefined)
 		dom.vnodes = vnodes
 		for (var i = 0; i < hooks.length; i++) hooks[i]()
@@ -1136,12 +1134,16 @@ var _20 = function($window, redrawService0) {
 			route.set(href, undefined, undefined)
 		}
 	}
+	route.param = function(key3) {
+		if(typeof attrs3 !== "undefined" && typeof key3 !== "undefined") return attrs3[key3]
+		return attrs3
+	}
 	return route
 }
 m.route = _20(window, redrawService)
 m.withAttr = function(attrName, callback1, context) {
 	return function(e) {
-		return callback1.call(context || this, attrName in e.currentTarget ? e.currentTarget[attrName] : e.currentTarget.getAttribute(attrName))
+		callback1.call(context || this, attrName in e.currentTarget ? e.currentTarget[attrName] : e.currentTarget.getAttribute(attrName))
 	}
 }
 var _28 = coreRenderer(window)
@@ -1151,7 +1153,7 @@ m.request = requestService.request
 m.jsonp = requestService.jsonp
 m.parseQueryString = parseQueryString
 m.buildQueryString = buildQueryString
-m.version = "1.0.0-rc.6"
+m.version = "1.0.0"
 m.vnode = Vnode
 if (typeof module !== "undefined") module["exports"] = m
 else window.m = m

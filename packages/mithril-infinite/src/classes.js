@@ -9,6 +9,7 @@ export const classes = {
   page:          "mithril-infinite__page",
   pageEven:      "mithril-infinite__page--even",
   pageOdd:       "mithril-infinite__page--odd",
+  placeholder:   "mithril-infinite__page--placeholder",
   before:        "mithril-infinite__before",
   after:         "mithril-infinite__after"
 };

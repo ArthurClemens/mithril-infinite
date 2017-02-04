@@ -3,6 +3,7 @@ import babel from "rollup-plugin-babel";
 import eslint from "rollup-plugin-eslint";
 import resolve from "rollup-plugin-node-resolve";
 import commonjs from "rollup-plugin-commonjs";
+import pathmodify from "rollup-plugin-pathmodify";
 
 export const pkg = JSON.parse(fs.readFileSync("./package.json"));
 const external = Object.keys(pkg.dependencies || {});
@@ -30,6 +31,15 @@ export const createConfig = ({ includeDepencies }) => ({
       jsnext: true,
       main: true,
       skip: includeDepencies ? [] : external
+    }),
+
+    pathmodify({
+      aliases: [
+        {
+          id: "mithril/stream",
+          resolveTo: "node_modules/mithril/stream.js"
+        }
+      ]
     }),
 
     // Convert CommonJS modules to ES6, so they can be included in a Rollup bundle

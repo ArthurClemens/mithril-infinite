@@ -1,57 +1,62 @@
 import m from "mithril";
-import { github } from "../app/github";
+import footer from "../app/footer";
 import infinite from "mithril-infinite";
 
 import { addStyle } from "../app/styler";
 import styles from "./styles";
 addStyle("grid", styles);
 
-const IMG_URL = "http://arthurclemens.github.io/assets/mithril-infinite-scroll/thumbs/";
+const PAGE_ITEMS = 12;
+const IMAGE_SIZE = 190;
 
-const showImage = (el, imgUrl) => {
-  const url = IMG_URL + imgUrl;
+const loadImage = (el, imgUrl) => {
+  const url = imgUrl.replace(/\/150\//, `/${IMAGE_SIZE}/`);
   const populate = () => {
-    el.style.backgroundImage = "url(" + url + ")";
+    el.style.backgroundImage = `url(${url})`;
     el.style.opacity = 1;
   };
   let img = new Image();
-  img.onload = () => {
-    populate();
-  };
-  img.src = url;
+  img.onload = populate;
+  img.src = imgUrl;
 };
 
-const item = (data) => {
-  return m("a.grid-item",
+const maybeLoadImage = (vnode, data) => {
+  if (vnode.state.inited) {
+    return;
+  }
+  if (infinite.isElementInViewport({ el: vnode.dom })) {
+    loadImage(vnode.dom, data.thumbnailUrl);
+    vnode.state.inited = true;
+  }
+};
+
+const item = data =>
+  m("a.grid-item",
     m(".image-holder",
       m(".image", {
-        config: (el, inited, context) => {
-          if (context.inited) {
-            return;
-          }
-          if (infinite.isElementInViewport({ el })) {
-            showImage(el, data.src);
-            context.inited = true;
-          }
-        }
+        oncreate: vnode => maybeLoadImage(vnode, data),
+        onupdate: vnode => maybeLoadImage(vnode, data)
       })
     )
   );
-};
+
+const dataUrl = pageNum =>
+  `http://jsonplaceholder.typicode.com/photos?_start=${(pageNum - 1) * PAGE_ITEMS}&_end=${pageNum * PAGE_ITEMS}`;
+
+const pageData = pageNum => 
+  m.request({
+    method: "GET",
+    dataType: "jsonp",
+    url: dataUrl(pageNum)
+  });
 
 export default {
   view: () => 
     m(infinite, {
-      maxPages: 16, // pages of 12 items each
       preloadPages: 3,
-      item: item,
-      pageUrl: page => "data/grid/page-" + page + ".json",
+      item,
+      pageData,
       class: "grid",
-      pageChange: page => {
-        if (console) {
-          console.log("page", page); // eslint-disable-line no-console
-        }
-      },
-      after: github()
+      after: footer()
     })
 };
