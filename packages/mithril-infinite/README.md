@@ -37,7 +37,7 @@ npm install --save mithril-infinite
 
 or download/clone from Github.
 
-For working with the examples, see [Viewing the examples](#viewing-the-examples) below.
+For working with the examples, see the [examples documentation](https://github.com/ArthurClemens/mithril-infinite/tree/master/packages/examples).
 
 
 ## Usage
