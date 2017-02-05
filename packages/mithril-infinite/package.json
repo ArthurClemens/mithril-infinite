@@ -8,9 +8,9 @@
     "build": "DEPS=false ../../node_modules/rollup/bin/rollup -c ../../scripts/rollup.umd.js && ../../node_modules/rollup/bin/rollup -c ../../scripts/rollup.es.js"
   },
   "dependencies": {
-    "j2c": "1.0.0-4",
-    "mithril": "1.0.0",
-    "verge": "1.9.1"
+    "j2c": "^1.0.0-4",
+    "mithril": "^1.0.0",
+    "verge": "^1.9.1"
   },
   "keywords": [
     "scroll",
