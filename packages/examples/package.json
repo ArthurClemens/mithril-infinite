@@ -5,8 +5,8 @@
   "main": "dist/js/examples.js",
   "module": "dist/js/examples.mjs",
   "scripts": {
-    "build": "DEPS=true ../../node_modules/rollup/bin/rollup -c ../../scripts/rollup.umd.js && ../../node_modules/rollup/bin/rollup -c ../../scripts/rollup.es.js",
-    "watch": "DEPS=true PORT=8080 WATCH_DIR=./dist/ ../../node_modules/rollup/bin/rollup -c ../../scripts/rollup.watch.js --watch"
+    "build": "DEPS=1 ../../node_modules/rollup/bin/rollup -c ../../scripts/rollup.umd.js && ../../node_modules/rollup/bin/rollup -c ../../scripts/rollup.es.js",
+    "watch": "DEPS=1 PORT=8080 WATCH_DIR=./dist/ ../../node_modules/rollup/bin/rollup -c ../../scripts/rollup.watch.js --watch"
   },
   "dependencies": {
     "j2c": "^1.0.0-4",

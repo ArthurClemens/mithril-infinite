@@ -326,7 +326,7 @@ Styles are added using [j2c](https://github.com/pygy/j2c). This library is also 
 
 ## Size
 
-Minified and gzipped: ~ 6.3 Kb
+Minified and gzipped: ~ 3.7 Kb
 
 
 

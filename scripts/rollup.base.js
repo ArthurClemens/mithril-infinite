@@ -22,7 +22,7 @@ external.forEach(ext => {
 export const createConfig = ({ includeDepencies }) => ({
   entry: "index.js",
   external: includeDepencies ? ["mithril"] : external,
-  moduleName: "mithril-infinite",
+  moduleName: pkg.name,
   globals,
   plugins: [
 
