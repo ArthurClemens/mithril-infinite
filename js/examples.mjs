@@ -58,10 +58,10 @@ var styles = [{
   ".footer": {
     width: styleVariables.size - 2 * SIDE_PADDING + "px",
     margin: "32px auto 0 auto",
-    "text-align": "left",
+    textAlign: "left",
     padding: "24px " + SIDE_PADDING + "px",
-    "font-size": "14px",
-    "line-height": 1.3,
+    fontSize: "14px",
+    lineHeight: 1.3,
     color: "#90A4AE",
     opacity: ".85",
 
@@ -69,7 +69,7 @@ var styles = [{
       height: "1px",
       border: "none",
       margin: "1em -" + SIDE_PADDING + "px",
-      "background-color": "#CFD8DC",
+      backgroundColor: "#CFD8DC",
       opacity: ".85"
     }
   }
