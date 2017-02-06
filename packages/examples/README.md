@@ -17,7 +17,7 @@
 
 * `git clone https://github.com/ArthurClemens/mithril-infinite.git`
 * `cd mithril-infinite`
-* `npm install -g lerna`
+* Install Lerna globally: `npm install -g lerna`
 * `npm install`
 * `lerna init`
 * `lerna bootstrap`

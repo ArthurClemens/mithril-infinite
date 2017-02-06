@@ -28,6 +28,7 @@
     "rollup-plugin-pathmodify": "^1.0.1",
     "rollup-plugin-serve": "^0.1.0",
     "rollup-plugin-uglify": "^1.0.1",
-    "rollup-watch": "^3.2.2"
+    "rollup-watch": "^3.2.2",
+    "shelljs": "^0.7.6"
   }
 }

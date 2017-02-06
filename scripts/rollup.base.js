@@ -21,7 +21,7 @@ external.forEach(ext => {
 
 export const createConfig = ({ includeDepencies }) => ({
   entry: "index.js",
-  external: includeDepencies ? ["mithril"] : external,
+  external: includeDepencies ? [] : external,
   moduleName: pkg.name,
   globals,
   plugins: [
