@@ -6,14 +6,13 @@ import uglify from "rollup-plugin-uglify";
 
 const env = process.env; // eslint-disable-line no-undef
 const includeDepencies = !!parseInt(env.DEPS, 10) || false; // Use `false` if you are creating a library, or if you are including external script in html
-const moduleName = env.MODULE_NAME || "mithril-infinite";
+const dest = env.DEST || pkg.main;
 
 const baseConfig = createConfig({ includeDepencies });
 const targetConfig = Object.assign({}, baseConfig, {
-  dest: pkg.main,
+  dest,
   format: "umd",
-  sourceMap: true,
-  moduleName
+  sourceMap: true
 });
 
 targetConfig.plugins.push(uglify());
