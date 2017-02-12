@@ -4,7 +4,7 @@ Compatible with Mithril 0.2.
 
 ## Examples
 
-[Infinite Scroll Examples](http://arthurclemens.github.io/mithril-infinite/index.html)
+[Infinite Scroll Examples (branch 1.0)](http://arthurclemens.github.io/mithril-infinite/index.html)
 
 
 ## Features
@@ -27,17 +27,19 @@ Not included:
 * For smooth programmatic scrolling (to a scroll position) a number of scroll libraries exist, for instance [ftcroller](https://github.com/ftlabs/ftscroller).
 
 
+
 ## Installation
 
 Use as npm module:
 
 ~~~bash
-npm install --save mithril-infinite
+npm install --save mithril-infinite@0.6.2
 ~~~
 
-or download/clone from Github, `packages/mithril-infinite`.
+or download/clone branch `mithril-0.2` from Github, `packages/mithril-infinite`.
 
-For working with the examples, see the [Examples README](https://github.com/ArthurClemens/mithril-infinite/packages/examples).
+For working with the examples, see the [Examples README](https://github.com/ArthurClemens/mithril-infinite/tree/mithril-0.2/packages/examples).
+
 
 
 ## Usage

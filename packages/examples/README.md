@@ -1,4 +1,4 @@
-[Infinite Scroll documentation](https://github.com/ArthurClemens/mithril-infinite/tree/master/packages/mithril-infinite)
+[Infinite Scroll documentation](https://github.com/ArthurClemens/mithril-infinite/tree/mithril-0.2/packages/mithril-infinite)
 
 
 # Infinite Scroll examples
