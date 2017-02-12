@@ -6,9 +6,11 @@ Compatible with Mithril 1.0.
 * [Examples](https://github.com/ArthurClemens/mithril-infinite/tree/master/packages/examples)
 
 
+
 ## Older release
 
-* [Infinite Scroll for Mithril 0.2](https://github.com/ArthurClemens/mithril-infinite/releases/tag/v0.6.2)
+[Infinite Scroll for Mithril 0.2](https://github.com/ArthurClemens/mithril-infinite/tree/mithril-0.2)
+
 
 
 ## Licence
