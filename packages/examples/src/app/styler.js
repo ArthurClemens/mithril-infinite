@@ -2,6 +2,15 @@ import { prefixPlugin } from "j2c-plugin-prefix-browser";
 import J2c from "j2c";
 const j2c = new J2c(prefixPlugin);
 
+const removeStyle = id => {
+  if (id) {
+    const old = document.getElementById(id);
+    if (old) {
+      old.parentNode.removeChild(old);
+    }
+  }
+};
+
 /*
  * @param id: identifier, used as HTMLElement id for the attached <style></style> element
  * @param styles: list of lists style Objects
@@ -23,13 +32,4 @@ export const addStyle = (id, ...styles) => {
     }
   });
   document.head.appendChild(styleEl);
-};
-
-const removeStyle = id => {
-  if (id) {
-    const old = document.getElementById(id);
-    if (old) {
-      old.parentNode.removeChild(old);
-    }
-  }
 };
