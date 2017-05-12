@@ -5,7 +5,8 @@ import { page } from "./page";
 import { placeholder } from "./placeholder";
 import "./css";
 
-const SCROLL_WATCH_TIMER = 200;
+const SCROLLING_UPDATE_DELAY = 200;
+const WATCH_IS_SCROLLING_DELAY = 60;
 const SEL_PADDING = "000000";
 
 const numToId = pageNum =>
@@ -57,32 +58,6 @@ const updatePageSize = state => (pageId, size) => (
   state.sortedKeys = Object.keys(state.pageSizes).sort()
 );
 
-const handleScroll = (state, view, action) => {
-  const scroll = () => {
-    state.isScrolling = true;
-    // reset isScrolling state only when scrolling is done
-    clearTimeout(state.scrollWatchScrollingStateId);
-    state.scrollWatchScrollingStateId = setTimeout(() => {
-      state.isScrolling = false;
-      // update pages
-      m.redraw();
-    }, state.scrollThrottle);
-    // throttle updates while scrolling
-    if (!state.scrollWatchUpdateStateId) {
-      state.scrollWatchUpdateStateId = setTimeout(() => {
-        // update pages
-        m.redraw();
-        state.scrollWatchUpdateStateId = null;
-      }, state.scrollThrottle);
-    }
-  };
-  if (action === "add") {
-    view.addEventListener("scroll", scroll);
-  } else {
-    view.removeEventListener("scroll", scroll);
-  }
-};
-
 const updatePart = (dom, whichSize, state, axis) => {
   const size = getElementSize(dom, axis);
   if (size) {
@@ -122,7 +97,7 @@ const oninit = vnode => {
   const whichScroll = axis === "x" ? "scrollLeft" : "scrollTop";
   const autoSize = (attrs.autoSize !== undefined && attrs.autoSize === false) ? false : true;
   const pageSize = attrs.pageSize;
-  const scrollThrottle = attrs.throttle !== undefined ? attrs.throttle * 1000 : SCROLL_WATCH_TIMER;
+  const scrollThrottle = attrs.throttle !== undefined ? attrs.throttle * 1000 : SCROLLING_UPDATE_DELAY;
   const contentTag = attrs.contentTag || "div";
   const classList = [
     classes.scrollView,
@@ -132,42 +107,57 @@ const oninit = vnode => {
     attrs.class
   ].join(" ");
 
-  vnode.state = Object.assign(
-    {},
-    {
-      pageSizes: {},
-      sortedKeys: [],
-      beforeSize: null,
-      afterSize: null,
-      scrollView: null,
-      isScrolling: false,
-      scrollWatchScrollingStateId: null,
-      scrollWatchUpdateStateId: null,
-      preloadSlots: attrs.preloadPages || 1,
-      boundingClientRect: {},
-      currentPageNum: 0,
-      scrollAmount: 0,
-
-      // Memoized
-      classList,
-      axis,
-      whichScroll,
-      autoSize,
-      pageSize,
-      scrollThrottle,
-      contentTag
+  const scroll = () => {
+    const state = vnode.state;
+    state.isScrolling = true;
+    // throttle updates while scrolling
+    if (!state.scrollWatchUpdateStateId) {
+      state.scrollWatchUpdateStateId = setTimeout(() => {
+        // update pages
+        m.redraw();
+        state.scrollWatchUpdateStateId = null;
+        state.isScrolling = false;
+        setTimeout(() => {
+          if (state.isScrolling === false) {
+            m.redraw();
+          }
+        }, WATCH_IS_SCROLLING_DELAY);
+      }, state.scrollThrottle);
     }
-  );
+  };
+
+  vnode.state = {
+    afterSize: null,
+    beforeSize: null,
+    boundingClientRect: {},
+    currentPageNum: 0,
+    isScrolling: false,
+    pageSizes: {},
+    preloadSlots: attrs.preloadPages || 1,
+    scrollView: null,
+    scrollWatchUpdateStateId: null,
+    sortedKeys: [],
+
+    // Memoized
+    autoSize,
+    axis,
+    classList,
+    contentTag,
+    pageSize,
+    scroll,
+    scrollThrottle,
+    whichScroll,
+  };
 };
 
-const view = ({state, attrs}) => {
-  state.scrollAmount = state.scrollView ? state.scrollView[state.whichScroll] : 0;
+const view = ({ state, attrs }) => {
+  const scrollAmount = state.scrollView ? state.scrollView[state.whichScroll] : 0;
   const axis = state.axis;
   const maxPages = attrs.maxPages !== undefined ? attrs.maxPages : Number.MAX_VALUE;
-
+  
   const currentPageNum = attrs.currentPage
     ? parseInt(attrs.currentPage, 10)
-    : calculateCurrentPageNum(state.scrollAmount, state);
+    : calculateCurrentPageNum(scrollAmount, state);
 
   if (attrs.pageChange && currentPageNum !== state.currentPageNum) {
     attrs.pageChange(currentPageNum);
@@ -176,13 +166,12 @@ const view = ({state, attrs}) => {
 
   if (state.scrollView && attrs.getDimensions) {
     attrs.getDimensions({
-      scrolled: state.scrollAmount,
+      scrolled: scrollAmount,
       size: state.contentSize
     });
   }
 
-  const {pages, prePages, maxPageNum} = getPageList(currentPageNum, attrs.from, attrs.to, attrs.currentPage, state.preloadSlots, maxPages);
-
+  const { pages, prePages, maxPageNum } = getPageList(currentPageNum, attrs.from, attrs.to, attrs.currentPage, state.preloadSlots, maxPages);
   state.contentSize = calculateContentSize(1, maxPageNum, state);
   const isLastPageVisible = maxPageNum
     ? isPageInViewport(maxPageNum, axis, state, state.scrollView)
@@ -198,9 +187,9 @@ const view = ({state, attrs}) => {
       state.preloadSlots = attrs.preloadPages || 1;
     }
     state.boundingClientRect = boundingClientRect;
-    // calculate if we have room to load more
-    const maxSlots = attrs.maxPreloadPages || Number.MAX_VALUE;
 
+    // calculate if we have room on the screen to show more slots
+    const maxSlots = attrs.maxPreloadPages || Number.MAX_VALUE;
     if (state.contentSize
       && (state.preloadSlots < pages.length)
       && (state.preloadSlots <= maxSlots)
@@ -229,9 +218,9 @@ const view = ({state, attrs}) => {
           }
           state.scrollView[state.whichScroll] = dimensions.scrolled;
         }
-        handleScroll(state, state.scrollView, "add");
+        state.scrollView.addEventListener("scroll", state.scroll);
       },
-      onremove: () => handleScroll(state, state.scrollView, "remove")
+      onremove: () => state.scrollView.removeEventListener("scroll", state.scroll)
     },
     m("div",
       {
@@ -261,36 +250,30 @@ const view = ({state, attrs}) => {
             : null,
           m("div", { class: classes.pages }, [
             prePages.map(pageNum => 
-              m(placeholder, Object.assign(
-                {},
-                {
-                  axis,
-                  key: numToId(pageNum),
-                  pageId: numToId(pageNum),
-                  pageNum,
-                  pageSizes: state.pageSizes
-                }
-              ))
+              m(placeholder, {
+                axis,
+                key: numToId(pageNum),
+                pageId: numToId(pageNum),
+                pageNum,
+                pageSizes: state.pageSizes
+              })
             ),
             pages.map(pageNum =>
-              m(page, Object.assign(
-                {},
-                {
-                  autoSize: state.autoSize,
-                  axis,
-                  isScrolling: state.isScrolling,
-                  item: attrs.item,
-                  key: numToId(pageNum),
-                  pageData: attrs.pageData,
-                  pageId: numToId(pageNum),
-                  pageNum,
-                  pageSize: state.pageSize,
-                  pageSizes: state.pageSizes,
-                  pageTag: attrs.pageTag,
-                  pageUrl: attrs.pageUrl,
-                  updatePageSize: updatePageSize(state)
-                }
-              ))
+              m(page, {
+                autoSize: state.autoSize,
+                axis,
+                isScrolling: state.isScrolling,
+                item: attrs.item,
+                key: numToId(pageNum),
+                pageData: attrs.pageData,
+                pageId: numToId(pageNum),
+                pageNum,
+                pageSize: state.pageSize,
+                pageSizes: state.pageSizes,
+                pageTag: attrs.pageTag,
+                pageUrl: attrs.pageUrl,
+                updatePageSize: updatePageSize(state)
+              })
             )
           ]),
           // only show "after" when content is available
