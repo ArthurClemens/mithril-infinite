@@ -61,9 +61,7 @@ export default [
                 width: "100%",
                 backgroundSize: "contain",
                 backgroundRepeat: "no-repeat",
-                backgroundPositionX: "50%",
-                opacity: 0,
-                transition: "opacity .7s"
+                backgroundPositionX: "50%"
               }
             }
           }

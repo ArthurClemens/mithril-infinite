@@ -18,11 +18,11 @@
 * `git clone https://github.com/ArthurClemens/mithril-infinite.git`
 * `cd mithril-infinite`
 * Install Lerna globally: `npm install -g lerna`
-* `npm install`
+* `yarn`
 * `lerna init`
 * `lerna bootstrap`
 * `cd packages/examples`
-* `npm run watch`
+* `yarn run dev`
 * Open browser at [localhost:8080](http://localhost:8080/)
 
 

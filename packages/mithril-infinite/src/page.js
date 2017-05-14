@@ -1,5 +1,6 @@
 import m from "mithril";
 import prop from "mithril/stream";
+import ResizeObserver from "resize-observer-polyfill";
 import { getElementSize, makeClassName } from "./util";
 
 const getPageData = url =>
@@ -13,12 +14,13 @@ const oninit = ({ state, attrs }) => {
   let content = prop([]);
   if (attrs.pageData) {
     const result = attrs.pageData(pageNum);
-    if (result.then) {
-      // A Promise
-      result.then(content);
-    } else {
-      content = result;
-    }
+    Promise.resolve(result).then(content);
+    // if (result.then) {
+    //   // A Promise
+    //   result.then(content);
+    // } else {
+    //   content = result;
+    // }
   } else if (attrs.pageUrl) {
     const url = attrs.pageUrl(pageNum);
     getPageData(url).then(content);
@@ -53,16 +55,12 @@ const view = ({state, attrs}) => {
     : !attrs.autoSize || (attrs.isScrolling && storedPageSize)
       ? storedPageSize + "px"
       : "auto";
+
   const update = dom => {
     if (pageSize) return;
     const size = getElementSize(dom, attrs.axis);
     if (size) {
       attrs.updatePageSize(pageId, size);
-    }
-    if (!storedPageSize) {
-      // this is the very first measurement
-      // make sure we use the first page size by calling the view again
-      setTimeout(m.redraw, 0);
     }
   };
 
@@ -74,7 +72,21 @@ const view = ({state, attrs}) => {
         ? { width: cssSize }
         : { height: cssSize }
       : null,
-    oncreate: ({ dom }) => update(dom),
+    oncreate: ({ dom }) => {
+      const ro = new ResizeObserver(entries => {
+        for (const entry of entries) {
+          const { width, height } = entry.contentRect;
+          if (
+            (attrs.axis === "x" && width !== storedPageSize)
+            || (attrs.axis === "y" && height !== storedPageSize)
+          ) {
+            update(dom);
+          }
+        }
+      });
+      ro.observe(dom);
+      // update(dom);
+    },
     onupdate: ({ dom }) => update(dom)
   }, state.processPageData(state.content(), {
     isScrolling: attrs.isScrolling,

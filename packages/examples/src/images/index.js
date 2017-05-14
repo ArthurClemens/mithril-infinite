@@ -41,9 +41,8 @@ const item = (data, opts) => {
   const id = opts.pageNum + data.width + data.src;
   const isExpanded = vm.isExpanded(id);
   const heightFraction = isExpanded ? 0.5 : 0.25;
-  const width = parseFloat(data.width) * heightFraction;
-  const height = parseFloat(data.height) * heightFraction;
-
+  const width = parseInt(data.width * heightFraction, 10);
+  const height = parseInt(data.height * heightFraction, 10);
   return m("a.list-item",
     {
       style: { height: height + "px" },

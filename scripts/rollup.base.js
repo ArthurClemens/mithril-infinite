@@ -33,8 +33,7 @@ export const createConfig = ({ includeDepencies }) => ({
     // Resolve libs in node_modules
     resolve({
       jsnext: true,
-      main: true,
-      skip: includeDepencies ? [] : external
+      main: true
     }),
 
     pathmodify({

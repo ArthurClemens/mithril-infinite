@@ -1,5 +1,6 @@
 import m from 'mithril';
 import verge from 'verge';
+import ResizeObserver from 'resize-observer-polyfill';
 import J2c from 'j2c';
 
 var classes = {
@@ -51,147 +52,190 @@ function createCommonjsModule(fn, module) {
 
 var stream$1 = createCommonjsModule(function (module) {
 	"use strict";
+	(function () {
 
-	var guid = 0,
-	    HALT = {};
-	function createStream() {
-		function stream() {
+		var guid = 0,
+		    HALT = {};
+		function createStream() {
+			function stream() {
+				if (arguments.length > 0 && arguments[0] !== HALT) updateStream(stream, arguments[0]);
+				return stream._state.value;
+			}
+			initStream(stream);
+
 			if (arguments.length > 0 && arguments[0] !== HALT) updateStream(stream, arguments[0]);
-			return stream._state.value;
+
+			return stream;
 		}
-		initStream(stream);
+		function initStream(stream) {
+			stream.constructor = createStream;
+			stream._state = { id: guid++, value: undefined, state: 0, derive: undefined, recover: undefined, deps: {}, parents: [], endStream: undefined, unregister: undefined };
+			stream.map = stream["fantasy-land/map"] = map, stream["fantasy-land/ap"] = ap, stream["fantasy-land/of"] = createStream;
+			stream.valueOf = valueOf, stream.toJSON = toJSON, stream.toString = valueOf;
 
-		if (arguments.length > 0 && arguments[0] !== HALT) updateStream(stream, arguments[0]);
-
-		return stream;
-	}
-	function initStream(stream) {
-		stream.constructor = createStream;
-		stream._state = { id: guid++, value: undefined, state: 0, derive: undefined, recover: undefined, deps: {}, parents: [], endStream: undefined };
-		stream.map = stream["fantasy-land/map"] = map, stream["fantasy-land/ap"] = ap, stream["fantasy-land/of"] = createStream;
-		stream.valueOf = valueOf, stream.toJSON = toJSON, stream.toString = valueOf;
-
-		Object.defineProperties(stream, {
-			end: { get: function get() {
-					if (!stream._state.endStream) {
-						var endStream = createStream();
-						endStream.map(function (value) {
-							if (value === true) unregisterStream(stream), unregisterStream(endStream);
-							return value;
-						});
-						stream._state.endStream = endStream;
-					}
-					return stream._state.endStream;
-				} }
-		});
-	}
-	function updateStream(stream, value) {
-		updateState(stream, value);
-		for (var id in stream._state.deps) {
-			updateDependency(stream._state.deps[id], false);
-		}finalize(stream);
-	}
-	function updateState(stream, value) {
-		stream._state.value = value;
-		stream._state.changed = true;
-		if (stream._state.state !== 2) stream._state.state = 1;
-	}
-	function updateDependency(stream, mustSync) {
-		var state = stream._state,
-		    parents = state.parents;
-		if (parents.length > 0 && parents.every(active) && (mustSync || parents.some(changed))) {
-			var value = stream._state.derive();
-			if (value === HALT) return false;
-			updateState(stream, value);
-		}
-	}
-	function finalize(stream) {
-		stream._state.changed = false;
-		for (var id in stream._state.deps) {
-			stream._state.deps[id]._state.changed = false;
-		}
-	}
-
-	function combine(fn, streams) {
-		if (!streams.every(valid)) throw new Error("Ensure that each item passed to m.prop.combine/m.prop.merge is a stream");
-		return initDependency(createStream(), streams, function () {
-			return fn.apply(this, streams.concat([streams.filter(changed)]));
-		});
-	}
-
-	function initDependency(dep, streams, derive) {
-		var state = dep._state;
-		state.derive = derive;
-		state.parents = streams.filter(notEnded);
-
-		registerDependency(dep, state.parents);
-		updateDependency(dep, true);
-
-		return dep;
-	}
-	function registerDependency(stream, parents) {
-		for (var i = 0; i < parents.length; i++) {
-			parents[i]._state.deps[stream._state.id] = stream;
-			registerDependency(stream, parents[i]._state.parents);
-		}
-	}
-	function unregisterStream(stream) {
-		for (var i = 0; i < stream._state.parents.length; i++) {
-			var parent = stream._state.parents[i];
-			delete parent._state.deps[stream._state.id];
-		}
-		for (var id in stream._state.deps) {
-			var dependent = stream._state.deps[id];
-			var index = dependent._state.parents.indexOf(stream);
-			if (index > -1) dependent._state.parents.splice(index, 1);
-		}
-		stream._state.state = 2; //ended
-		stream._state.deps = {};
-	}
-
-	function map(fn) {
-		return combine(function (stream) {
-			return fn(stream());
-		}, [this]);
-	}
-	function ap(stream) {
-		return combine(function (s1, s2) {
-			return s1()(s2());
-		}, [stream, this]);
-	}
-	function valueOf() {
-		return this._state.value;
-	}
-	function toJSON() {
-		return this._state.value != null && typeof this._state.value.toJSON === "function" ? this._state.value.toJSON() : this._state.value;
-	}
-
-	function valid(stream) {
-		return stream._state;
-	}
-	function active(stream) {
-		return stream._state.state === 1;
-	}
-	function changed(stream) {
-		return stream._state.changed;
-	}
-	function notEnded(stream) {
-		return stream._state.state !== 2;
-	}
-
-	function merge(streams) {
-		return combine(function () {
-			return streams.map(function (s) {
-				return s();
+			Object.defineProperties(stream, {
+				end: { get: function get() {
+						if (!stream._state.endStream) {
+							var endStream = createStream();
+							endStream.map(function (value) {
+								if (value === true) {
+									unregisterStream(stream);
+									endStream._state.unregister = function () {
+										unregisterStream(endStream);
+									};
+								}
+								return value;
+							});
+							stream._state.endStream = endStream;
+						}
+						return stream._state.endStream;
+					} }
 			});
-		}, streams);
-	}
-	createStream["fantasy-land/of"] = createStream;
-	createStream.merge = merge;
-	createStream.combine = combine;
-	createStream.HALT = HALT;
+		}
+		function updateStream(stream, value) {
+			updateState(stream, value);
+			for (var id in stream._state.deps) {
+				updateDependency(stream._state.deps[id], false);
+			}if (stream._state.unregister != null) stream._state.unregister();
+			finalize(stream);
+		}
+		function updateState(stream, value) {
+			stream._state.value = value;
+			stream._state.changed = true;
+			if (stream._state.state !== 2) stream._state.state = 1;
+		}
+		function updateDependency(stream, mustSync) {
+			var state = stream._state,
+			    parents = state.parents;
+			if (parents.length > 0 && parents.every(active) && (mustSync || parents.some(changed))) {
+				var value = stream._state.derive();
+				if (value === HALT) return false;
+				updateState(stream, value);
+			}
+		}
+		function finalize(stream) {
+			stream._state.changed = false;
+			for (var id in stream._state.deps) {
+				stream._state.deps[id]._state.changed = false;
+			}
+		}
 
-	module["exports"] = createStream;
+		function combine(fn, streams) {
+			if (!streams.every(valid)) throw new Error("Ensure that each item passed to stream.combine/stream.merge is a stream");
+			return initDependency(createStream(), streams, function () {
+				return fn.apply(this, streams.concat([streams.filter(changed)]));
+			});
+		}
+
+		function initDependency(dep, streams, derive) {
+			var state = dep._state;
+			state.derive = derive;
+			state.parents = streams.filter(notEnded);
+
+			registerDependency(dep, state.parents);
+			updateDependency(dep, true);
+
+			return dep;
+		}
+		function registerDependency(stream, parents) {
+			for (var i = 0; i < parents.length; i++) {
+				parents[i]._state.deps[stream._state.id] = stream;
+				registerDependency(stream, parents[i]._state.parents);
+			}
+		}
+		function unregisterStream(stream) {
+			for (var i = 0; i < stream._state.parents.length; i++) {
+				var parent = stream._state.parents[i];
+				delete parent._state.deps[stream._state.id];
+			}
+			for (var id in stream._state.deps) {
+				var dependent = stream._state.deps[id];
+				var index = dependent._state.parents.indexOf(stream);
+				if (index > -1) dependent._state.parents.splice(index, 1);
+			}
+			stream._state.state = 2; //ended
+			stream._state.deps = {};
+		}
+
+		function map(fn) {
+			return combine(function (stream) {
+				return fn(stream());
+			}, [this]);
+		}
+		function ap(stream) {
+			return combine(function (s1, s2) {
+				return s1()(s2());
+			}, [stream, this]);
+		}
+		function valueOf() {
+			return this._state.value;
+		}
+		function toJSON() {
+			return this._state.value != null && typeof this._state.value.toJSON === "function" ? this._state.value.toJSON() : this._state.value;
+		}
+
+		function valid(stream) {
+			return stream._state;
+		}
+		function active(stream) {
+			return stream._state.state === 1;
+		}
+		function changed(stream) {
+			return stream._state.changed;
+		}
+		function notEnded(stream) {
+			return stream._state.state !== 2;
+		}
+
+		function merge(streams) {
+			return combine(function () {
+				return streams.map(function (s) {
+					return s();
+				});
+			}, streams);
+		}
+
+		function scan(reducer, seed, stream) {
+			var newStream = combine(function (s) {
+				return seed = reducer(seed, s._state.value);
+			}, [stream]);
+
+			if (newStream._state.state === 0) newStream(seed);
+
+			return newStream;
+		}
+
+		function scanMerge(tuples, seed) {
+			var streams = tuples.map(function (tuple) {
+				var stream = tuple[0];
+				if (stream._state.state === 0) stream(undefined);
+				return stream;
+			});
+
+			var newStream = combine(function () {
+				var changed = arguments[arguments.length - 1];
+
+				streams.forEach(function (stream, idx) {
+					if (changed.indexOf(stream) > -1) {
+						seed = tuples[idx][1](seed, stream._state.value);
+					}
+				});
+
+				return seed;
+			}, streams);
+
+			return newStream;
+		}
+
+		createStream["fantasy-land/of"] = createStream;
+		createStream.merge = merge;
+		createStream.combine = combine;
+		createStream.scan = scan;
+		createStream.scanMerge = scanMerge;
+		createStream.HALT = HALT;
+
+		module["exports"] = createStream;
+	})();
 });
 
 var stream = stream$1;
@@ -211,12 +255,13 @@ var oninit$1 = function oninit(_ref) {
   var content = stream([]);
   if (attrs.pageData) {
     var result = attrs.pageData(pageNum);
-    if (result.then) {
-      // A Promise
-      result.then(content);
-    } else {
-      content = result;
-    }
+    Promise.resolve(result).then(content);
+    // if (result.then) {
+    //   // A Promise
+    //   result.then(content);
+    // } else {
+    //   content = result;
+    // }
   } else if (attrs.pageUrl) {
     var url = attrs.pageUrl(pageNum);
     getPageData(url).then(content);
@@ -250,16 +295,12 @@ var view$1 = function view(_ref2) {
   }
 
   var cssSize = pageSize ? pageSize + "px" : !attrs.autoSize || attrs.isScrolling && storedPageSize ? storedPageSize + "px" : "auto";
+
   var update = function update(dom) {
     if (pageSize) return;
     var size = getElementSize(dom, attrs.axis);
     if (size) {
       attrs.updatePageSize(pageId, size);
-    }
-    if (!storedPageSize) {
-      // this is the very first measurement
-      // make sure we use the first page size by calling the view again
-      setTimeout(m.redraw, 0);
     }
   };
 
@@ -269,7 +310,40 @@ var view$1 = function view(_ref2) {
     style: storedPageSize ? attrs.axis === "x" ? { width: cssSize } : { height: cssSize } : null,
     oncreate: function oncreate(_ref3) {
       var dom = _ref3.dom;
-      return update(dom);
+
+      var ro = new ResizeObserver(function (entries) {
+        var _iteratorNormalCompletion = true;
+        var _didIteratorError = false;
+        var _iteratorError = undefined;
+
+        try {
+          for (var _iterator = entries[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+            var entry = _step.value;
+            var _entry$contentRect = entry.contentRect,
+                width = _entry$contentRect.width,
+                height = _entry$contentRect.height;
+
+            if (attrs.axis === "x" && width !== storedPageSize || attrs.axis === "y" && height !== storedPageSize) {
+              update(dom);
+            }
+          }
+        } catch (err) {
+          _didIteratorError = true;
+          _iteratorError = err;
+        } finally {
+          try {
+            if (!_iteratorNormalCompletion && _iterator.return) {
+              _iterator.return();
+            }
+          } finally {
+            if (_didIteratorError) {
+              throw _iteratorError;
+            }
+          }
+        }
+      });
+      ro.observe(dom);
+      // update(dom);
     },
     onupdate: function onupdate(_ref4) {
       var dom = _ref4.dom;
@@ -399,7 +473,8 @@ var styles = [defineProperty({}, "." + classes.scrollView, (_ref3 = {
 
 addStyle("mithril-infinite", styles);
 
-var SCROLL_WATCH_TIMER = 200;
+var SCROLLING_UPDATE_DELAY = 200;
+var WATCH_IS_SCROLLING_DELAY = 60;
 var SEL_PADDING = "000000";
 
 var numToId = function numToId(pageNum) {
@@ -449,40 +524,30 @@ var isPageInViewport = function isPageInViewport(page$$1, axis, state, scrollVie
 
 var updatePageSize = function updatePageSize(state) {
   return function (pageId, size) {
-    return state.pageSizes[pageId] = size, state.sortedKeys = Object.keys(state.pageSizes).sort();
+    return state.pageSizes[pageId] = parseInt(size, 10), state.sortedKeys = Object.keys(state.pageSizes).sort(), calculatePreloadSlots(state);
   };
-};
-
-var handleScroll = function handleScroll(state, view, action) {
-  var scroll = function scroll() {
-    state.isScrolling = true;
-    // reset isScrolling state only when scrolling is done
-    clearTimeout(state.scrollWatchScrollingStateId);
-    state.scrollWatchScrollingStateId = setTimeout(function () {
-      state.isScrolling = false;
-      // update pages
-      m.redraw();
-    }, state.scrollThrottle);
-    // throttle updates while scrolling
-    if (!state.scrollWatchUpdateStateId) {
-      state.scrollWatchUpdateStateId = setTimeout(function () {
-        // update pages
-        m.redraw();
-        state.scrollWatchUpdateStateId = null;
-      }, state.scrollThrottle);
-    }
-  };
-  if (action === "add") {
-    view.addEventListener("scroll", scroll);
-  } else {
-    view.removeEventListener("scroll", scroll);
-  }
 };
 
 var updatePart = function updatePart(dom, whichSize, state, axis) {
   var size = getElementSize(dom, axis);
   if (size) {
     state[whichSize] = size;
+  }
+};
+
+var calculatePreloadSlots = function calculatePreloadSlots(state) {
+  if (!state.scrollView) return;
+  var boundingClientRect = state.scrollView.getBoundingClientRect();
+  state.boundingClientRect = state.boundingClientRect || boundingClientRect;
+  if (boundingClientRect.width !== state.boundingClientRect.width || boundingClientRect.height !== state.boundingClientRect.height) {
+    state.preloadSlots = state.attrsPreloadSlots || 1;
+  }
+  state.boundingClientRect = boundingClientRect;
+
+  // calculate if we have room on the screen to show more slots
+  if (state.contentSize && state.preloadSlots < state.pageCount && state.preloadSlots <= state.attrsMaxPreloadSlots && state.contentSize < boundingClientRect.height) {
+    state.preloadSlots++;
+    setTimeout(m.redraw, 0);
   }
 };
 
@@ -510,44 +575,64 @@ var oninit = function oninit(vnode) {
   var whichScroll = axis === "x" ? "scrollLeft" : "scrollTop";
   var autoSize = attrs.autoSize !== undefined && attrs.autoSize === false ? false : true;
   var pageSize = attrs.pageSize;
-  var scrollThrottle = attrs.throttle !== undefined ? attrs.throttle * 1000 : SCROLL_WATCH_TIMER;
+  var scrollThrottle = attrs.throttle !== undefined ? attrs.throttle * 1000 : SCROLLING_UPDATE_DELAY;
   var contentTag = attrs.contentTag || "div";
   var classList = [classes.scrollView, axis === "x" ? classes.scrollViewX : classes.scrollViewY, attrs.class].join(" ");
 
-  vnode.state = _extends({}, {
-    pageSizes: {},
-    sortedKeys: [],
-    beforeSize: null,
+  var scroll = function scroll() {
+    var state = vnode.state;
+    state.isScrolling = true;
+    // throttle updates while scrolling
+    if (!state.scrollWatchUpdateStateId) {
+      state.scrollWatchUpdateStateId = setTimeout(function () {
+        // update pages
+        m.redraw();
+        state.scrollWatchUpdateStateId = null;
+        state.isScrolling = false;
+        setTimeout(function () {
+          if (state.isScrolling === false) {
+            m.redraw();
+          }
+        }, WATCH_IS_SCROLLING_DELAY);
+      }, state.scrollThrottle);
+    }
+  };
+
+  vnode.state = {
     afterSize: null,
-    scrollView: null,
-    isScrolling: false,
-    scrollWatchScrollingStateId: null,
-    scrollWatchUpdateStateId: null,
-    preloadSlots: attrs.preloadPages || 1,
+    beforeSize: null,
     boundingClientRect: {},
     currentPageNum: 0,
-    scrollAmount: 0,
+    isScrolling: false,
+    pageSizes: {},
+    preloadSlots: attrs.preloadPages || 1,
+    scrollView: null,
+    scrollWatchUpdateStateId: null,
+    sortedKeys: [],
 
     // Memoized
-    classList: classList,
-    axis: axis,
-    whichScroll: whichScroll,
+    attrsMaxPreloadSlots: attrs.maxPreloadPages || Number.MAX_VALUE,
+    attrsPreloadSlots: attrs.preloadPages || 1,
     autoSize: autoSize,
+    axis: axis,
+    classList: classList,
+    contentTag: contentTag,
     pageSize: pageSize,
+    scroll: scroll,
     scrollThrottle: scrollThrottle,
-    contentTag: contentTag
-  });
+    whichScroll: whichScroll
+  };
 };
 
 var view = function view(_ref) {
   var state = _ref.state,
       attrs = _ref.attrs;
 
-  state.scrollAmount = state.scrollView ? state.scrollView[state.whichScroll] : 0;
+  var scrollAmount = state.scrollView ? state.scrollView[state.whichScroll] : 0;
   var axis = state.axis;
   var maxPages = attrs.maxPages !== undefined ? attrs.maxPages : Number.MAX_VALUE;
 
-  var currentPageNum = attrs.currentPage ? parseInt(attrs.currentPage, 10) : calculateCurrentPageNum(state.scrollAmount, state);
+  var currentPageNum = attrs.currentPage ? parseInt(attrs.currentPage, 10) : calculateCurrentPageNum(scrollAmount, state);
 
   if (attrs.pageChange && currentPageNum !== state.currentPageNum) {
     attrs.pageChange(currentPageNum);
@@ -556,7 +641,7 @@ var view = function view(_ref) {
 
   if (state.scrollView && attrs.getDimensions) {
     attrs.getDimensions({
-      scrolled: state.scrollAmount,
+      scrolled: scrollAmount,
       size: state.contentSize
     });
   }
@@ -567,24 +652,9 @@ var view = function view(_ref) {
       maxPageNum = _getPageList.maxPageNum;
 
   state.contentSize = calculateContentSize(1, maxPageNum, state);
+  state.pageCount = pages.length;
+
   var isLastPageVisible = maxPageNum ? isPageInViewport(maxPageNum, axis, state, state.scrollView) : true;
-
-  if (state.scrollView) {
-    // in case the screen size was changed, reset preloadSlots
-    var boundingClientRect = state.scrollView.getBoundingClientRect();
-    state.boundingClientRect = state.boundingClientRect || boundingClientRect;
-    if (boundingClientRect.width !== state.boundingClientRect.width || boundingClientRect.height !== state.boundingClientRect.height) {
-      state.preloadSlots = attrs.preloadPages || 1;
-    }
-    state.boundingClientRect = boundingClientRect;
-    // calculate if we have room to load more
-    var maxSlots = attrs.maxPreloadPages || Number.MAX_VALUE;
-
-    if (state.contentSize && state.preloadSlots < pages.length && state.preloadSlots <= maxSlots && state.contentSize < boundingClientRect.height) {
-      state.preloadSlots++;
-      setTimeout(m.redraw, 0);
-    }
-  }
 
   return m("div", {
     oncreate: function oncreate(_ref2) {
@@ -601,10 +671,10 @@ var view = function view(_ref) {
         }
         state.scrollView[state.whichScroll] = dimensions.scrolled;
       }
-      handleScroll(state, state.scrollView, "add");
+      state.scrollView.addEventListener("scroll", state.scroll);
     },
     onremove: function onremove() {
-      return handleScroll(state, state.scrollView, "remove");
+      return state.scrollView.removeEventListener("scroll", state.scroll);
     }
   }, m("div", {
     class: classes.scrollContent,
@@ -620,15 +690,15 @@ var view = function view(_ref) {
       return updatePart(dom, "before", state, axis);
     }
   }, attrs.before) : null, m("div", { class: classes.pages }, [prePages.map(function (pageNum) {
-    return m(placeholder, _extends({}, {
+    return m(placeholder, {
       axis: axis,
       key: numToId(pageNum),
       pageId: numToId(pageNum),
       pageNum: pageNum,
       pageSizes: state.pageSizes
-    }));
+    });
   }), pages.map(function (pageNum) {
-    return m(page, _extends({}, {
+    return m(page, {
       autoSize: state.autoSize,
       axis: axis,
       isScrolling: state.isScrolling,
@@ -642,7 +712,7 @@ var view = function view(_ref) {
       pageTag: attrs.pageTag,
       pageUrl: attrs.pageUrl,
       updatePageSize: updatePageSize(state)
-    }));
+    });
   })]),
   // only show "after" when content is available
   attrs.after && state.contentSize ? m("div", {

@@ -1,21 +1,28 @@
 {
   "name": "examples",
-  "version": "0.0.2",
+  "version": "1.1.0",
   "description": "",
   "main": "dist/js/examples.js",
   "module": "dist/js/examples.mjs",
   "scripts": {
-    "build": "PACKAGE=mithril-infinite node ../../scripts/copy-package.js && DEPS=1 ../../node_modules/rollup/bin/rollup -c ../../scripts/rollup.umd.js && ../../node_modules/rollup/bin/rollup -c ../../scripts/rollup.es.js",
-    "watch": "PACKAGE=mithril-infinite node ../../scripts/copy-package.js && DEPS=1 PORT=8080 WATCH_DIR=./dist/ ../../node_modules/rollup/bin/rollup -c ../../scripts/rollup.watch.js --watch",
-    "restore": "PACKAGE=mithril-infinite node ../../scripts/copy-package-cleanup.js"
+    "dev": "npm-run-all --parallel dev:watch dev:serve",
+    "dev:serve": "webpack-dev-server --config scripts/webpack.config.dev.js",
+    "dev:watch": "webpack --watch --config scripts/webpack.config.dev.js",
+    "build": "webpack -p --config scripts/webpack.config.js"
   },
   "dependencies": {
     "j2c": "^1.0.0-4",
     "j2c-plugin-prefix-browser": "^1.0.6",
-    "mithril": "^1.0.0",
-    "mithril-infinite": "^1.0.1"
+    "mithril": "^1.1.1",
+    "mithril-infinite": "1.1.0"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "babel-core": "^6.24.1",
+    "babel-loader": "^7.0.0",
+    "npm-run-all": "^4.0.2",
+    "webpack": "^2.5.0",
+    "webpack-dev-server": "^2.4.1"
+  },
   "repository": {},
   "author": "",
   "license": ""

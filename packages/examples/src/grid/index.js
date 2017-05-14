@@ -13,7 +13,6 @@ const loadImage = (el, imgUrl) => {
   const url = imgUrl.replace(/\/150\//, `/${IMAGE_SIZE}/`);
   const populate = () => {
     el.style.backgroundImage = `url(${url})`;
-    el.style.opacity = 1;
   };
   let img = new Image();
   img.onload = populate;

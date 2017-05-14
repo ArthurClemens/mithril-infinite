@@ -42,6 +42,9 @@ For working with the examples, see the [examples documentation](https://github.c
 
 ## Usage
 
+**Note:** The parent of "scroll-view" must have a height. Also make sure that `html` has a height of `100%`.
+
+
 A example using data files:
 
 ~~~javascript
@@ -81,7 +84,7 @@ The `item` function passes 3 parameters:
 
 Data is handled per "results" page. Each page is a JSON data object that contains a list of item data.
 
-For example:
+You are free to use any data format. Some examples: 
 
 ~~~json
 [
@@ -105,7 +108,7 @@ Or:
 
 ### Server requests
  
-In most real world situations an API server will provide the data. Instead of passing file URLs with `pageUrl`, we create a custom request function passed to `pageData`:
+In most real world situations an API server will provide the data. So while passing file URLs with `pageUrl` is a handy shortcut, we preferably use data reqeusts. For that we create a custom request function passed to `pageData`:
 
 ~~~javascript
 import infinite from "mithril-infinite";
@@ -123,7 +126,7 @@ const pageData = pageNum =>
   });
 ~~~
 
-In example "Grid" we use `jsonplaceholder.typicode.com` to fetch our images:
+Demo tip: in the example "Grid" we use `jsonplaceholder.typicode.com` to fetch our images:
 
 ~~~javascript
 const dataUrl = pageNum =>
@@ -295,10 +298,9 @@ All options are passed in an options object: `infinite.isElementInViewport({ el,
 
 ## Styling
 
-Note: The parent of "scroll-view" must have a height.
+Note: The parent of "scroll-view" must have a height. Also make sure that `html` has a height of `100%`.
 
 Styles are added using [j2c](https://github.com/pygy/j2c). This library is also used in the examples.
-
 
 
 
@@ -332,8 +334,9 @@ Minified and gzipped: ~ 3.7 Kb
 
 ## Dependencies
 
-* [Mithril 1.0](https://www.npmjs.com/package/mithril)
 * [j2c](https://github.com/pygy/j2c) - for creating js stylesheets
+* [Mithril 1.0](https://www.npmjs.com/package/mithril)
+* [resize-observer-polyfill](https://github.com/que-etc/resize-observer-polyfill)
 * [Verge](https://www.npmjs.com/package/verge) - for measuring the viewport
 
 

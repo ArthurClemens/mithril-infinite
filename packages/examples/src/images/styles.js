@@ -15,23 +15,20 @@ export default [{
         }
       },
       " .mithril-infinite__page": {
-        minHeight: "400px" // prevent "after" content to show up on every scroll
-      },
-      " .mithril-infinite__page + .mithril-infinite__page": {
-        borderTop: "1px solid #ddd"
+        minHeight: "400px", // prevent "after" content to show up on every scroll
       },
       " .mithril-infinite__page--odd": {
         backgroundColor: "#f0f0f0",
 
-        " .list-item + .list-item": {
-          borderTop: "1px solid #ddd"
+        " .list-item": {
+          borderBottom: "1px solid #ddd"
         }
       },
       " .mithril-infinite__page--even": {
         "background-color": "#e0e0e0",
 
-        " .list-item + .list-item": {
-          borderTop: "1px solid #ccc"
+        " .list-item": {
+          borderBottom: "1px solid #ccc"
         }
       },
       " .list-item": {

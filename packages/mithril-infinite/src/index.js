@@ -54,14 +54,37 @@ const isPageInViewport = (page, axis, state, scrollView) => {
 };
 
 const updatePageSize = state => (pageId, size) => (
-  state.pageSizes[pageId] = size,
-  state.sortedKeys = Object.keys(state.pageSizes).sort()
+  state.pageSizes[pageId] = parseInt(size, 10),
+  state.sortedKeys = Object.keys(state.pageSizes).sort(),
+  calculatePreloadSlots(state)
 );
 
 const updatePart = (dom, whichSize, state, axis) => {
   const size = getElementSize(dom, axis);
   if (size) {
     state[whichSize] = size;
+  }
+};
+
+const calculatePreloadSlots = state => {
+  if (!state.scrollView) return;
+  const boundingClientRect = state.scrollView.getBoundingClientRect();
+  state.boundingClientRect = state.boundingClientRect || boundingClientRect;
+  if (boundingClientRect.width !== state.boundingClientRect.width
+    || boundingClientRect.height !== state.boundingClientRect.height
+  ) {
+    state.preloadSlots = state.attrsPreloadSlots || 1;
+  }
+  state.boundingClientRect = boundingClientRect;
+
+  // calculate if we have room on the screen to show more slots
+  if (state.contentSize
+    && (state.preloadSlots < state.pageCount)
+    && (state.preloadSlots <= state.attrsMaxPreloadSlots)
+    && (state.contentSize < boundingClientRect.height)
+  ) {
+    state.preloadSlots++;
+    setTimeout(m.redraw, 0);
   }
 };
 
@@ -139,6 +162,8 @@ const oninit = vnode => {
     sortedKeys: [],
 
     // Memoized
+    attrsMaxPreloadSlots: attrs.maxPreloadPages || Number.MAX_VALUE,
+    attrsPreloadSlots: attrs.preloadPages || 1,
     autoSize,
     axis,
     classList,
@@ -173,32 +198,11 @@ const view = ({ state, attrs }) => {
 
   const { pages, prePages, maxPageNum } = getPageList(currentPageNum, attrs.from, attrs.to, attrs.currentPage, state.preloadSlots, maxPages);
   state.contentSize = calculateContentSize(1, maxPageNum, state);
+  state.pageCount = pages.length;
+
   const isLastPageVisible = maxPageNum
     ? isPageInViewport(maxPageNum, axis, state, state.scrollView)
     : true;
-
-  if (state.scrollView) {
-    // in case the screen size was changed, reset preloadSlots
-    const boundingClientRect = state.scrollView.getBoundingClientRect();
-    state.boundingClientRect = state.boundingClientRect || boundingClientRect;
-    if (boundingClientRect.width !== state.boundingClientRect.width
-      || boundingClientRect.height !== state.boundingClientRect.height
-    ) {
-      state.preloadSlots = attrs.preloadPages || 1;
-    }
-    state.boundingClientRect = boundingClientRect;
-
-    // calculate if we have room on the screen to show more slots
-    const maxSlots = attrs.maxPreloadPages || Number.MAX_VALUE;
-    if (state.contentSize
-      && (state.preloadSlots < pages.length)
-      && (state.preloadSlots <= maxSlots)
-      && (state.contentSize < boundingClientRect.height)
-    ) {
-      state.preloadSlots++;
-      setTimeout(m.redraw, 0);
-    }
-  }
 
   return m("div",
     {
