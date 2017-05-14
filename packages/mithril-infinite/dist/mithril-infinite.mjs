@@ -361,34 +361,7 @@ var page = {
   view: view$1
 };
 
-var defineProperty = function (obj, key, value) {
-  if (key in obj) {
-    Object.defineProperty(obj, key, {
-      value: value,
-      enumerable: true,
-      configurable: true,
-      writable: true
-    });
-  } else {
-    obj[key] = value;
-  }
-
-  return obj;
-};
-
-var _extends = Object.assign || function (target) {
-  for (var i = 1; i < arguments.length; i++) {
-    var source = arguments[i];
-
-    for (var key in source) {
-      if (Object.prototype.hasOwnProperty.call(source, key)) {
-        target[key] = source[key];
-      }
-    }
-  }
-
-  return target;
-};
+var _extends$1 = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 var placeholder = {
   oninit: function oninit(vnode) {
@@ -406,7 +379,7 @@ var placeholder = {
     return m("div", {
       "data-page": pageId,
       class: [classes.placeholder, state.className].join(" "),
-      style: _extends({}, attrs.axis === "x" ? { width: storedPageSize + "px" } : { height: storedPageSize + "px" })
+      style: _extends$1({}, attrs.axis === "x" ? { width: storedPageSize + "px" } : { height: storedPageSize + "px" })
     });
   }
 };
@@ -451,18 +424,20 @@ var removeStyle = function removeStyle(id) {
 
 var _ref3;
 
-var styles = [defineProperty({}, "." + classes.scrollView, (_ref3 = {
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+var styles = [_defineProperty({}, "." + classes.scrollView, (_ref3 = {
   "-webkit-overflow-scrolling": "touch",
   height: "100%"
 
-}, defineProperty(_ref3, "&." + classes.scrollViewY, defineProperty({
+}, _defineProperty(_ref3, "&." + classes.scrollViewY, _defineProperty({
   overflowX: "hidden",
   overflowY: "auto",
   height: "100%"
 
 }, " ." + classes.scrollContent, {
   height: "100%"
-})), defineProperty(_ref3, "&." + classes.scrollViewX, defineProperty({
+})), _defineProperty(_ref3, "&." + classes.scrollViewX, _defineProperty({
   overflowX: "auto",
   overflowY: "hidden",
   width: "100%"
@@ -472,6 +447,8 @@ var styles = [defineProperty({}, "." + classes.scrollView, (_ref3 = {
 })), _ref3))];
 
 addStyle("mithril-infinite", styles);
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 var SCROLLING_UPDATE_DELAY = 200;
 var WATCH_IS_SCROLLING_DELAY = 60;
