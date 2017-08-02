@@ -68,6 +68,7 @@ page.controller = function () {
       // A Promise
       result.then(function (r) {
         content(r);
+        m.redraw();
       });
     } else {
       content = result;
