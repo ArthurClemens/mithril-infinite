@@ -44,34 +44,7 @@ var makeClassName = function makeClassName(pageNum) {
   return [classes.page, pageNum % 2 === 0 ? classes.pageEven : classes.pageOdd].join(" ");
 };
 
-var defineProperty = function (obj, key, value) {
-  if (key in obj) {
-    Object.defineProperty(obj, key, {
-      value: value,
-      enumerable: true,
-      configurable: true,
-      writable: true
-    });
-  } else {
-    obj[key] = value;
-  }
-
-  return obj;
-};
-
-var _extends = Object.assign || function (target) {
-  for (var i = 1; i < arguments.length; i++) {
-    var source = arguments[i];
-
-    for (var key in source) {
-      if (Object.prototype.hasOwnProperty.call(source, key)) {
-        target[key] = source[key];
-      }
-    }
-  }
-
-  return target;
-};
+var _extends$1 = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 var getPageData = function getPageData(url) {
   return m.request({
@@ -136,7 +109,7 @@ page.view = function (ctrl) {
   return m(ctrl.pageTag, {
     "data-page": pageId,
     class: ctrl.className,
-    style: storedPageSize ? _extends({}, opts.axis === "x" ? { width: cssSize } : { height: cssSize }) : {},
+    style: storedPageSize ? _extends$1({}, opts.axis === "x" ? { width: cssSize } : { height: cssSize }) : {},
     config: pageSize ? null : function (el) {
       // always update the natural size
       var size = getElementSize(el, opts.axis);
@@ -151,6 +124,8 @@ page.view = function (ctrl) {
     }
   }, processPageData(ctrl.content(), opts));
 };
+
+var _extends$2 = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 var placeholder = {};
 
@@ -171,7 +146,7 @@ placeholder.view = function (ctrl) {
   return m("div", {
     "data-page": pageId,
     class: ctrl.className,
-    style: _extends({}, opts.axis === "x" ? { width: storedPageSize + "px" } : { height: storedPageSize + "px" })
+    style: _extends$2({}, opts.axis === "x" ? { width: storedPageSize + "px" } : { height: storedPageSize + "px" })
   });
 };
 
@@ -215,18 +190,20 @@ var removeStyle = function removeStyle(id) {
 
 var _ref3;
 
-var styles = [defineProperty({}, "." + classes.scrollView, (_ref3 = {
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+var styles = [_defineProperty({}, "." + classes.scrollView, (_ref3 = {
   "-webkit-overflow-scrolling": "touch",
   height: "100%"
 
-}, defineProperty(_ref3, "&." + classes.scrollViewY, defineProperty({
+}, _defineProperty(_ref3, "&." + classes.scrollViewY, _defineProperty({
   overflowX: "hidden",
   overflowY: "auto",
   height: "100%"
 
 }, " ." + classes.scrollContent, {
   height: "100%"
-})), defineProperty(_ref3, "&." + classes.scrollViewX, defineProperty({
+})), _defineProperty(_ref3, "&." + classes.scrollViewX, _defineProperty({
   overflowX: "auto",
   overflowY: "hidden",
   width: "100%"
@@ -236,6 +213,8 @@ var styles = [defineProperty({}, "." + classes.scrollView, (_ref3 = {
 })), _ref3))];
 
 addStyle("mithril-infinite", styles);
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 var SCROLL_WATCH_TIMER = 200;
 var SEL_PADDING = "000000";

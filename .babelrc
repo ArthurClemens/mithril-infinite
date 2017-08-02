@@ -3,9 +3,8 @@
     ["es2015", { "modules": false }]
   ],
   "plugins": [
-    "external-helpers",
-    "transform-object-assign",
-    "transform-object-rest-spread"
+    "transform-object-rest-spread",
+    "transform-object-assign"
   ],
   "env": {
     "test": {

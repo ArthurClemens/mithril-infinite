@@ -5,16 +5,23 @@
   "main": "dist/js/examples.js",
   "module": "dist/js/examples.mjs",
   "scripts": {
-    "build": "DEPS=true ../../node_modules/rollup/bin/rollup -c ../../scripts/rollup.umd.js && ../../node_modules/rollup/bin/rollup -c ../../scripts/rollup.es.js",
-    "watch": "DEPS=true PORT=8080 WATCH_DIR=./dist/ ../../node_modules/rollup/bin/rollup -c ../../scripts/rollup.watch.js --watch"
+    "dev": "npm-run-all --parallel dev:watch dev:serve",
+    "dev:serve": "webpack-dev-server --config scripts/webpack.config.dev.js",
+    "dev:watch": "webpack --watch --config scripts/webpack.config.dev.js",
+    "build": "webpack -p --config scripts/webpack.config.js"
   },
   "dependencies": {
     "j2c": "^1.0.0-4",
     "j2c-plugin-prefix-browser": "^1.0.6",
     "mithril": "0.2.5",
-    "mithril-infinite": "^0.6.0"
+    "mithril-infinite": "^0.6.2"
   },
   "devDependencies": {
+    "babel-core": "^6.24.1",
+    "babel-loader": "^7.0.0",
+    "npm-run-all": "^4.0.2",
+    "webpack": "^2.5.0",
+    "webpack-dev-server": "^2.4.1"
   },
   "repository": {},
   "author": "",

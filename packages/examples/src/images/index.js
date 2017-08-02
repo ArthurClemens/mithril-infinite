@@ -8,6 +8,12 @@ addStyle("images", styles);
 
 const IMG_URL = "http://arthurclemens.github.io/assets/mithril-infinite-scroll/thumbs/";
 
+const getData = page =>
+  m.request({
+    method: "GET",
+    url: "data/images/page-" + page + ".json"
+  });
+
 let vm = {
   expanded: {},
   dirty: {},
@@ -62,11 +68,21 @@ let item = (data, opts) => {
 };
 
 export default {
-  view: () =>
+  controller: () => {
+    const pageData = p => 
+      getData(p).then((response) => (
+        response
+      ));
+    return {
+      pageData
+    };
+  },
+  view: (ctrl) =>
     m(infinite, {
       maxPages: 20,
       item: item,
-      pageUrl: pageNum => "data/images/page-" + pageNum + ".json",
+      // pageUrl: pageNum => "data/images/page-" + pageNum + ".json", // this is an alternative, simpler way
+      pageData: ctrl.pageData, // fetches data
       preloadPages: 3,
       class: "images",
       before: m("a", {
