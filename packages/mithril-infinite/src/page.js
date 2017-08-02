@@ -21,6 +21,7 @@ page.controller = (opts = {}) => {
       // A Promise
       result.then((r) => {
         content(r);
+        m.redraw();
       });
     } else {
       content = result;
