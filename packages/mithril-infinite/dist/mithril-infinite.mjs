@@ -51,8 +51,10 @@ function createCommonjsModule(fn, module) {
 }
 
 var stream$1 = createCommonjsModule(function (module) {
-	"use strict";
+	/* eslint-disable */
 	(function () {
+		"use strict";
+		/* eslint-enable */
 
 		var guid = 0,
 		    HALT = {};

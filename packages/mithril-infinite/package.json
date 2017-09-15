@@ -9,9 +9,9 @@
   },
   "dependencies": {
     "j2c": "^1.0.0-4",
-    "mithril": "^1.1.1",
+    "mithril": "^1.1.3",
     "resize-observer-polyfill": "^1.4.2",
-    "verge": "^1.9.1"
+    "verge": "^1.10.2"
   },
   "keywords": [
     "scroll",
