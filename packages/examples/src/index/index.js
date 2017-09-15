@@ -1,5 +1,6 @@
 import m from "mithril";
 import footer from "../app/footer";
+
 import images from "../images";
 import grid from "../grid";
 import table from "../table";

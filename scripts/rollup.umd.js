@@ -18,4 +18,3 @@ const targetConfig = Object.assign({}, baseConfig, {
 targetConfig.plugins.push(uglify());
 
 export default targetConfig;
-

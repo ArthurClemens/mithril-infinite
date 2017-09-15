@@ -2,6 +2,7 @@
   "name": "examples",
   "version": "1.1.0",
   "description": "",
+  "private": true,
   "main": "dist/js/examples.js",
   "module": "dist/js/examples.mjs",
   "scripts": {

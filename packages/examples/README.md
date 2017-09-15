@@ -19,7 +19,6 @@
 * `cd mithril-infinite`
 * Install Lerna globally: `npm install -g lerna`
 * `yarn`
-* `lerna init`
 * `lerna bootstrap`
 * `cd packages/examples`
 * `yarn run dev`
