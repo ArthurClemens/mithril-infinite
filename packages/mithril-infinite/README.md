@@ -42,8 +42,17 @@ For working with the examples, see the [examples documentation](https://github.c
 
 ## Usage
 
-**Note:** The parent of "scroll-view" must have a height. Also make sure that `html` has a height of `100%`.
+**Note:** The parent of "scroll-view" must have a height. Also make sure that `html` has a height (typically set to `100%`).
 
+### Handling data
+
+Data can be provided:
+
+* With `pageUrl` for referencing URLs
+* With `pageData` for server requests
+
+
+#### Using `pageUrl` for referencing URLs
 
 A example using data files:
 
@@ -80,7 +89,7 @@ The `item` function passes 3 parameters:
 3. `index`: the item index
 
 
-### Data file structure
+#### Data file structure
 
 Data is handled per "results" page. Each page is a JSON data object that contains a list of item data.
 
@@ -105,18 +114,15 @@ Or:
 ~~~
 
 
-
-### Server requests
+#### Using `pageData` for server requests
  
-In most real world situations an API server will provide the data. So while passing file URLs with `pageUrl` is a handy shortcut, we preferably use data reqeusts. For that we create a custom request function passed to `pageData`:
+In most real world situations an API server will provide the data. So while passing file URLs with `pageUrl` is a handy shortcut, we preferably use data requests.
+
+
+##### With m.request
 
 ~~~javascript
 import infinite from "mithril-infinite";
-
-m(infinite, {
-  pageData,
-  item
-});
 
 const pageData = pageNum => 
   m.request({
@@ -124,16 +130,89 @@ const pageData = pageNum =>
     dataType: "jsonp",
     url: dataUrl(pageNum)
   });
+
+m(infinite, {
+  pageData,
+  item
+});
 ~~~
 
 Demo tip: in the example "Grid" we use `jsonplaceholder.typicode.com` to fetch our images:
 
 ~~~javascript
+const PAGE_ITEMS = 10;
+
 const dataUrl = pageNum =>
   `http://jsonplaceholder.typicode.com/photos?_start=${(pageNum - 1) * PAGE_ITEMS}&_end=${pageNum * PAGE_ITEMS}`;
 ~~~
 
-And we show the images in a more elaborate `item` function:
+
+##### With `async`
+
+~~~javascript
+import infinite from "mithril-infinite";
+
+const asyncPageData = async function(pageNum) {
+  return await fetchPageData(pageNum);
+};
+
+const fetchPageData = pageNum => 
+  fetch(dataUrl(pageNum))
+    .then(function(response) {
+      return response.json();
+    }).then(function(json) {
+      return json;
+    }).catch(function() {
+      //console.log('parsing failed', ex)
+    });
+
+m(infinite, {
+  pageData: asyncPageData,
+  item
+});
+~~~
+
+##### Returning data directly
+
+~~~javascript
+import infinite from "mithril-infinite";
+
+const returnData = () =>
+  [{ /* some data */ }
+
+m(infinite, {
+  pageData: returnData,
+  item
+});
+~~~
+
+##### Returning data as a Promise
+
+~~~javascript
+import infinite from "mithril-infinite";
+
+const returnDelayedData = () =>
+  new Promise(resolve =>
+    setTimeout(() =>
+      resolve(data)
+    , 1000)
+  );
+
+m(infinite, {
+  pageData: returnDelayedData,
+  item
+});
+~~~
+
+
+### Advanced item function example
+
+To enhance the current loading behavior, we:
+
+* Load images when they are visible in the viewport
+* Stop loading images when the page is scrolling. This makes a big difference in performance, but it will not always result in a good user experience - the page will seem "dead" when during the scrolling. So use with consideration.
+
+The `item` function can now look like this:
 
 ~~~javascript
 const item = (data, opts) =>
@@ -158,10 +237,6 @@ const maybeShowImage = (vnode, data, isScrolling) => {
   }
 el.style.backgroundImage = `url(${url})`;
 ~~~
-
-* Images are only loaded when they are visible in the viewport, using `infinite.isElementInViewport`
-* We don't load images when we are scrolling. This makes a big difference in performance, but it will not always result in a good user experience - the page will seem "dead" when during the scrolling. So use with consideration.
-
 
 
 ### Getting the total page count
@@ -202,7 +277,7 @@ m(infinite, {
 
 ### Using images
 
-Images should be loaded only when they appear on the screen. To check if the image is in the viewport, you can use the function `infinite.isElementInViewport({ el })`. For example:
+For a better loading experience (and data usage), images should be loaded only when they appear on the screen. To check if the image is in the viewport, you can use the function `infinite.isElementInViewport({ el })`. For example:
 
 ~~~javascript
 if (infinite.isElementInViewport({ el: vnode.dom })) {
@@ -298,7 +373,7 @@ All options are passed in an options object: `infinite.isElementInViewport({ el,
 
 ## Styling
 
-Note: The parent of "scroll-view" must have a height. Also make sure that `html` has a height of `100%`.
+Note: The parent of "scroll-view" must have a height. Also make sure that `html` has a height (typically set to `100%`).
 
 Styles are added using [j2c](https://github.com/pygy/j2c). This library is also used in the examples.
 

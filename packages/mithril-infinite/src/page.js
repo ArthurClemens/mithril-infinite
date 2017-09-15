@@ -1,5 +1,5 @@
 import m from "mithril";
-import prop from "mithril/stream";
+import stream from "mithril/stream";
 import ResizeObserver from "resize-observer-polyfill";
 import { getElementSize, makeClassName } from "./util";
 
@@ -11,16 +11,11 @@ const getPageData = url =>
 
 const oninit = ({ state, attrs }) => {
   const pageNum = attrs.pageNum;
-  let content = prop([]);
+  let content = stream([]);
+
   if (attrs.pageData) {
     const result = attrs.pageData(pageNum);
-    Promise.resolve(result).then(content);
-    // if (result.then) {
-    //   // A Promise
-    //   result.then(content);
-    // } else {
-    //   content = result;
-    // }
+    Promise.resolve(result).then(content).then(m.redraw);
   } else if (attrs.pageUrl) {
     const url = attrs.pageUrl(pageNum);
     getPageData(url).then(content);

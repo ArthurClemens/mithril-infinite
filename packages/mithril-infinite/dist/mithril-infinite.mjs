@@ -50,7 +50,7 @@ function createCommonjsModule(fn, module) {
 	return module = { exports: {} }, fn(module, module.exports), module.exports;
 }
 
-var stream$1 = createCommonjsModule(function (module) {
+var stream$2 = createCommonjsModule(function (module) {
 	/* eslint-disable */
 	(function () {
 		"use strict";
@@ -240,7 +240,7 @@ var stream$1 = createCommonjsModule(function (module) {
 	})();
 });
 
-var stream = stream$1;
+var stream = stream$2;
 
 var getPageData = function getPageData(url) {
   return m.request({
@@ -255,15 +255,10 @@ var oninit$1 = function oninit(_ref) {
 
   var pageNum = attrs.pageNum;
   var content = stream([]);
+
   if (attrs.pageData) {
     var result = attrs.pageData(pageNum);
-    Promise.resolve(result).then(content);
-    // if (result.then) {
-    //   // A Promise
-    //   result.then(content);
-    // } else {
-    //   content = result;
-    // }
+    Promise.resolve(result).then(content).then(m.redraw);
   } else if (attrs.pageUrl) {
     var url = attrs.pageUrl(pageNum);
     getPageData(url).then(content);
