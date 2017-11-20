@@ -153,18 +153,13 @@ const dataUrl = pageNum =>
 import infinite from "mithril-infinite";
 
 const asyncPageData = async function(pageNum) {
-  return await fetchPageData(pageNum);
+  try {
+    const response = await fetch(dataUrl(pageNum));
+    return response.json();
+  } catch (ex) {
+    //console.log('parsing failed', ex);
+  }
 };
-
-const fetchPageData = pageNum => 
-  fetch(dataUrl(pageNum))
-    .then(function(response) {
-      return response.json();
-    }).then(function(json) {
-      return json;
-    }).catch(function() {
-      //console.log('parsing failed', ex)
-    });
 
 m(infinite, {
   pageData: asyncPageData,
@@ -178,7 +173,7 @@ m(infinite, {
 import infinite from "mithril-infinite";
 
 const returnData = () =>
-  [{ /* some data */ }
+  [{ /* some data */ }];
 
 m(infinite, {
   pageData: returnData,
