@@ -932,14 +932,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__app_footer__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__images__ = __webpack_require__(9);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__grid__ = __webpack_require__(14);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__table__ = __webpack_require__(16);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__short__ = __webpack_require__(18);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__horizontal__ = __webpack_require__(20);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__fixed__ = __webpack_require__(22);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__paging__ = __webpack_require__(24);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__table__ = __webpack_require__(17);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__short__ = __webpack_require__(19);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__horizontal__ = __webpack_require__(21);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__fixed__ = __webpack_require__(23);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__paging__ = __webpack_require__(25);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__app_styler__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__app_common_style__ = __webpack_require__(26);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__styles__ = __webpack_require__(27);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__app_common_style__ = __webpack_require__(27);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__styles__ = __webpack_require__(28);
 
 
 
@@ -4366,10 +4366,10 @@ var toggle_size = "40px";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_mithril___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_mithril__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__app_footer__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_mithril_infinite__ = __webpack_require__(3);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_whatwg_fetch__ = __webpack_require__(28);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_whatwg_fetch__ = __webpack_require__(15);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_whatwg_fetch___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_whatwg_fetch__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__app_styler__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__styles__ = __webpack_require__(15);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__styles__ = __webpack_require__(16);
 
 
 
@@ -4552,770 +4552,6 @@ var data = [{
 
 /***/ }),
 /* 15 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-var gridSpacing = 8;
-var itemWidth = 210;
-var itemWidthPx = itemWidth + "px";
-var imageHolderPadding = 10;
-var imageHolderPaddingPx = imageHolderPadding + "px";
-
-var makeMediaStyle = function makeMediaStyle(which, cols) {
-  return _defineProperty({}, "@media (" + which + "-width: " + ((cols + 1) * itemWidth + cols * gridSpacing) + "px)", {
-    ".mithril-infinite__scroll-view.grid": {
-      " .mithril-infinite__scroll-content": {
-        " .mithril-infinite__content": {
-          "width": cols * itemWidth + (cols - 1) * gridSpacing + "px"
-        }
-      }
-    }
-  });
-};
-
-/* harmony default export */ __webpack_exports__["a"] = ([makeMediaStyle("min", 4), makeMediaStyle("max", 4), makeMediaStyle("max", 3), makeMediaStyle("max", 2), makeMediaStyle("max", 1), {
-  ".mithril-infinite__scroll-view.grid": {
-    margin: "0 auto",
-
-    " .mithril-infinite__scroll-content": {
-      padding: 2 * gridSpacing + "px 0",
-
-      " .mithril-infinite__content": {
-        margin: "0 auto",
-        fontSize: 0,
-        lineHeight: 0,
-
-        " .mithril-infinite__page": {
-          margin: "0 " + -gridSpacing / 2 + "px"
-        },
-        " .grid-item": {
-          display: "inline-block",
-          height: itemWidthPx,
-          width: itemWidthPx,
-          backgroundColor: "#f0f0f0",
-          margin: [0, gridSpacing / 2, gridSpacing, gridSpacing / 2].map(function (v) {
-            return v + "px";
-          }).join(" "),
-
-          " .image-holder": {
-            height: itemWidth - 2 * imageHolderPadding + "px",
-            width: itemWidth - 2 * imageHolderPadding + "px",
-            overflow: "hidden",
-            position: "relative",
-            margin: imageHolderPaddingPx,
-
-            " .image": {
-              position: "absolute",
-              left: "auto",
-              top: 0,
-              right: "auto",
-              bottom: 0,
-              width: "100%",
-              backgroundSize: "contain",
-              backgroundRepeat: "no-repeat",
-              backgroundPositionX: "50%"
-            }
-          }
-        }
-      }
-    }
-  }
-}]);
-
-/***/ }),
-/* 16 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_mithril__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_mithril___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_mithril__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__app_footer__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_mithril_infinite__ = __webpack_require__(3);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__app_styler__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__styles__ = __webpack_require__(17);
-
-
-
-
-
-
-Object(__WEBPACK_IMPORTED_MODULE_3__app_styler__["a" /* addStyle */])("table", __WEBPACK_IMPORTED_MODULE_4__styles__["a" /* default */]);
-
-var item = function item(data, opts) {
-  return __WEBPACK_IMPORTED_MODULE_0_mithril___default()(".list-item", [__WEBPACK_IMPORTED_MODULE_0_mithril___default()("div", opts.pageNum), __WEBPACK_IMPORTED_MODULE_0_mithril___default()("div", data || __WEBPACK_IMPORTED_MODULE_0_mithril___default.a.trust("&nbsp;"))]);
-};
-
-/* harmony default export */ __webpack_exports__["a"] = ({
-  view: function view() {
-    return __WEBPACK_IMPORTED_MODULE_0_mithril___default()(__WEBPACK_IMPORTED_MODULE_2_mithril_infinite__["a" /* default */], {
-      maxPages: 10,
-      item: item,
-      pageUrl: function pageUrl(page) {
-        return "data/table/page-" + page + ".json";
-      },
-      class: "table",
-      after: Object(__WEBPACK_IMPORTED_MODULE_1__app_footer__["a" /* default */])()
-    });
-  }
-});
-
-/***/ }),
-/* 17 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony default export */ __webpack_exports__["a"] = ([{
-  ".mithril-infinite__scroll-view.table": {
-    minWidth: "320px",
-    margin: "0 auto",
-    background: "#eee",
-
-    " .mithril-infinite__scroll-content": {
-      " .mithril-infinite__page": {
-        display: "table",
-        width: "100%"
-      },
-      " .mithril-infinite__page--odd": {
-        backgroundColor: "#e4e4e4",
-
-        " .list-item": {
-          " > div": {
-            color: "rgba(0,0,0,.87)",
-            borderBottom: "1px solid rgba(0, 0, 0, .07)",
-
-            ":first-child": {
-              color: "rgba(0,0,0,.54)"
-            }
-          }
-        }
-      },
-      " .mithril-infinite__page--even": {
-        "background-color": "#f0f0f0"
-      },
-      " .list-item": {
-        width: "100%",
-        display: "table-row",
-
-        " > div": {
-          borderBottom: "1px solid rgba(0, 0, 0, .07)",
-          display: "table-cell",
-          verticalAlign: "top",
-          padding: "8px 16px",
-          minHeight: "1em",
-          width: "90%",
-
-          ":first-child": {
-            color: "#aaa",
-            width: "10%",
-            textAlign: "right"
-          }
-        }
-      }
-    }
-  }
-}]);
-
-/***/ }),
-/* 18 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_mithril__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_mithril___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_mithril__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_mithril_infinite__ = __webpack_require__(3);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__app_footer__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__app_styler__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__styles__ = __webpack_require__(19);
-
-
-
-
-
-
-Object(__WEBPACK_IMPORTED_MODULE_3__app_styler__["a" /* addStyle */])("short", __WEBPACK_IMPORTED_MODULE_4__styles__["a" /* default */]);
-
-var item = function item(data) {
-  var color = data[1] || "transparent";
-  var title = data[1] ? "" : __WEBPACK_IMPORTED_MODULE_0_mithril___default()(".title", data[0]);
-  return __WEBPACK_IMPORTED_MODULE_0_mithril___default()(".list-item", {
-    class: title ? "has-title" : "",
-    style: { "background-color": color }
-  }, title);
-};
-
-/* harmony default export */ __webpack_exports__["a"] = ({
-  view: function view() {
-    return __WEBPACK_IMPORTED_MODULE_0_mithril___default()(__WEBPACK_IMPORTED_MODULE_1_mithril_infinite__["a" /* default */], {
-      item: item,
-      maxPages: 21,
-      preloadSlots: 10,
-      pageUrl: function pageUrl(page) {
-        return "data/short/page-" + page + ".json";
-      },
-      class: "short",
-      pageChange: function pageChange(page) {
-        if (console) {
-          console.log("page", page); // eslint-disable-line no-console
-        }
-      },
-      after: Object(__WEBPACK_IMPORTED_MODULE_2__app_footer__["a" /* default */])()
-    });
-  }
-});
-
-/***/ }),
-/* 19 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony default export */ __webpack_exports__["a"] = ([{
-  ".mithril-infinite__scroll-view.short": {
-    minWidth: "320px",
-    margin: "0 auto",
-    background: "#eee",
-
-    " .mithril-infinite__scroll-content": {
-      " .list-item": {
-        height: "8px",
-
-        ".has-title": {
-          fontSize: "18px",
-          padding: "0 16px",
-          height: "32px",
-          lineHeight: "32px",
-          color: "#222"
-        }
-      }
-    }
-  }
-}]);
-
-/***/ }),
-/* 20 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_mithril__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_mithril___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_mithril__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__app_footer__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_mithril_infinite__ = __webpack_require__(3);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__app_variables__ = __webpack_require__(4);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__app_styler__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__styles__ = __webpack_require__(21);
-
-
-
-
-
-
-
-Object(__WEBPACK_IMPORTED_MODULE_4__app_styler__["a" /* addStyle */])("horizontal", __WEBPACK_IMPORTED_MODULE_5__styles__["a" /* default */]);
-
-var loadImage = function loadImage(el, imgUrl) {
-  var url = __WEBPACK_IMPORTED_MODULE_3__app_variables__["a" /* appVariables */].imageUrl + imgUrl;
-  var populate = function populate() {
-    el.style.backgroundImage = "url(" + url + ")";
-    el.style.opacity = 1;
-  };
-  var img = new Image();
-  img.onload = populate;
-  img.src = url;
-};
-
-var maybeLoadImage = function maybeLoadImage(vnode, data) {
-  if (vnode.state.inited) {
-    return;
-  }
-  if (__WEBPACK_IMPORTED_MODULE_2_mithril_infinite__["a" /* default */].isElementInViewport({ el: vnode.dom })) {
-    loadImage(vnode.dom, data.src);
-    vnode.state.inited = true;
-  }
-};
-
-var item = function item(data) {
-  return __WEBPACK_IMPORTED_MODULE_0_mithril___default()("a.grid-item", __WEBPACK_IMPORTED_MODULE_0_mithril___default()(".image-holder", __WEBPACK_IMPORTED_MODULE_0_mithril___default()(".image", {
-    oncreate: function oncreate(vnode) {
-      return maybeLoadImage(vnode, data);
-    },
-    onupdate: function onupdate(vnode) {
-      return maybeLoadImage(vnode, data);
-    }
-  })));
-};
-
-/* harmony default export */ __webpack_exports__["a"] = ({
-  view: function view() {
-    return [__WEBPACK_IMPORTED_MODULE_0_mithril___default()(__WEBPACK_IMPORTED_MODULE_2_mithril_infinite__["a" /* default */], {
-      maxPages: 16,
-      item: item,
-      pageUrl: function pageUrl(pageNum) {
-        return "data/horizontal/page-" + pageNum + ".json";
-      },
-      class: "horizontal",
-      axis: "x",
-      pageSize: function pageSize(content) {
-        return (content.length || 12) * (210 + 2 * 4);
-      }, // values from CSS including margins
-      pageChange: function pageChange(pageNum) {
-        if (console) {
-          console.log("page", pageNum); // eslint-disable-line no-console
-        }
-      }
-    }), Object(__WEBPACK_IMPORTED_MODULE_1__app_footer__["a" /* default */])()];
-  }
-});
-
-/***/ }),
-/* 21 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-var grid_spacing = 8;
-var item_size = 210;
-var item_size_px = item_size + "px";
-var image_padding = 10;
-var image_padding_px = image_padding + "px";
-
-/* harmony default export */ __webpack_exports__["a"] = ([{
-  ".mithril-infinite__scroll-view.horizontal": {
-    margin: 0,
-    height: item_size + 20 + "px", // add space for scrollbar
-    background: "#fff",
-
-    " .mithril-infinite__scroll-content": {
-      padding: 0,
-      margin: 0,
-      fontSize: 0,
-
-      " .mithril-infinite__content, .mithril-infinite__padding-before, .mithril-infinite__padding-after": {
-        display: "inline-block"
-      },
-      " .mithril-infinite__content": {
-        margin: 0,
-        fontSize: 0,
-
-        " .mithril-infinite__page": {
-          display: "inline-block",
-          height: item_size_px
-        },
-
-        " .grid-item": {
-          display: "inline-block",
-          height: item_size_px,
-          width: item_size_px,
-          backgroundColor: "#f0f0f0",
-          margin: "0 " + grid_spacing / 2 + "px",
-
-          " .image-holder": {
-            height: item_size - 2 * image_padding + "px",
-            width: item_size - 2 * image_padding + "px",
-            overflow: "hidden",
-            position: "relative",
-            margin: image_padding_px,
-
-            " .image": {
-              position: "absolute",
-              left: "auto",
-              top: 0,
-              right: "auto",
-              bottom: 0,
-              width: "100%",
-              backgroundSize: "contain",
-              backgroundRepeat: "no-repeat",
-              backgroundPositionX: "50%",
-              opacity: 0,
-              transition: "opacity .7s"
-            }
-          }
-        }
-      }
-    }
-  }
-}]);
-
-/***/ }),
-/* 22 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_mithril__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_mithril___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_mithril__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__app_footer__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_mithril_infinite__ = __webpack_require__(3);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__app_styler__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__styles__ = __webpack_require__(23);
-/*
-This example shows how to get the total page count from a request, and use that to calculate the total content height.
-*/
-
-
-
-
-
-
-Object(__WEBPACK_IMPORTED_MODULE_3__app_styler__["a" /* addStyle */])("fixed", __WEBPACK_IMPORTED_MODULE_4__styles__["a" /* default */]);
-
-var PAGE_ITEMS = 10;
-var ITEM_HEIGHT = 36 + 1; // include border
-var AFTER_CONTENT_HEIGHT = 133;
-
-var dataUrl = function dataUrl(pageNum) {
-  return "http://jsonplaceholder.typicode.com/posts?_start=" + (pageNum - 1) * PAGE_ITEMS + "&_end=" + pageNum * PAGE_ITEMS;
-};
-
-var item = function item(data) {
-  return __WEBPACK_IMPORTED_MODULE_0_mithril___default()(".list-item", [__WEBPACK_IMPORTED_MODULE_0_mithril___default()("div", data.id), __WEBPACK_IMPORTED_MODULE_0_mithril___default()("div", data.title)]);
-};
-
-/* harmony default export */ __webpack_exports__["a"] = ({
-  oninit: function oninit(vnode) {
-    var state = vnode.state;
-    state.pageCount = 1;
-
-    state.pageData = function (pageNum) {
-      return __WEBPACK_IMPORTED_MODULE_0_mithril___default.a.request({
-        method: "GET",
-        dataType: "jsonp",
-        url: dataUrl(pageNum),
-        extract: function extract(xhr) {
-          return (
-            // Read the total count from the header
-            state.pageCount = Math.ceil(parseInt(xhr.getResponseHeader("X-Total-Count"), 10) / PAGE_ITEMS), JSON.parse(xhr.responseText)
-          );
-        }
-      });
-    };
-  },
-  view: function view(_ref) {
-    var state = _ref.state;
-
-    return __WEBPACK_IMPORTED_MODULE_0_mithril___default()(__WEBPACK_IMPORTED_MODULE_2_mithril_infinite__["a" /* default */], {
-      pageData: state.pageData,
-      maxPages: state.pageCount,
-      preloadPages: 3,
-      item: item,
-      class: "table fixed",
-      // set the size of each page
-      pageSize: function pageSize() {
-        return PAGE_ITEMS * ITEM_HEIGHT;
-      },
-      // set the total height
-      contentSize: state.pageCount * PAGE_ITEMS * ITEM_HEIGHT + AFTER_CONTENT_HEIGHT,
-      after: Object(__WEBPACK_IMPORTED_MODULE_1__app_footer__["a" /* default */])()
-    });
-  }
-});
-
-/***/ }),
-/* 23 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony default export */ __webpack_exports__["a"] = ([{
-  ".mithril-infinite__scroll-view.table.fixed": {
-    " .mithril-infinite__scroll-content": {
-      " .mithril-infinite__page": {
-        " .list-item": {
-          maxHeight: "36px",
-          overflowY: "hidden"
-        }
-      },
-      " .footer": {
-        height: "133px"
-      }
-    }
-  }
-}]);
-
-/***/ }),
-/* 24 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_mithril__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_mithril___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_mithril__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__app_footer__ = __webpack_require__(2);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_mithril_infinite__ = __webpack_require__(3);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__app_variables__ = __webpack_require__(4);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__app_styler__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__styles__ = __webpack_require__(25);
-
-
-
-
-
-
-
-Object(__WEBPACK_IMPORTED_MODULE_4__app_styler__["a" /* addStyle */])("paging", __WEBPACK_IMPORTED_MODULE_5__styles__["a" /* default */]);
-
-var item = function item(data) {
-  return __WEBPACK_IMPORTED_MODULE_0_mithril___default()("a.grid-item", __WEBPACK_IMPORTED_MODULE_0_mithril___default()(".image-holder", __WEBPACK_IMPORTED_MODULE_0_mithril___default()(".image", {
-    oncreate: function oncreate(_ref) {
-      var dom = _ref.dom;
-
-      dom.style.backgroundImage = "url(" + __WEBPACK_IMPORTED_MODULE_3__app_variables__["a" /* appVariables */].imageUrl + data.src + ")";
-    }
-  })));
-};
-
-var getData = function getData(pageNum) {
-  return __WEBPACK_IMPORTED_MODULE_0_mithril___default.a.request({
-    method: "GET",
-    url: "data/paging/page-" + pageNum + ".json"
-  });
-};
-
-/* harmony default export */ __webpack_exports__["a"] = ({
-  oninit: function oninit(vnode) {
-    var pageCount = 0;
-    var pageNum = __WEBPACK_IMPORTED_MODULE_0_mithril___default.a.route.param("p") ? parseInt(__WEBPACK_IMPORTED_MODULE_0_mithril___default.a.route.param("p"), 10) : 1;
-
-    var getPageData = function getPageData(pageNum) {
-      return getData(pageNum).then(function (response) {
-        return pageCount = response.length, response;
-      });
-    };
-
-    vnode.state = {
-      getPageData: getPageData,
-      pageNum: pageNum,
-      hasPrev: function hasPrev(num) {
-        return num > 1;
-      },
-      hasNext: function hasNext(num) {
-        return num < pageCount;
-      }
-    };
-  },
-  view: function view(vnode) {
-    var state = vnode.state;
-    var pageNum = __WEBPACK_IMPORTED_MODULE_0_mithril___default.a.route.param("p") ? parseInt(__WEBPACK_IMPORTED_MODULE_0_mithril___default.a.route.param("p"), 10) : state.pageNum;
-    return __WEBPACK_IMPORTED_MODULE_0_mithril___default()("div", [__WEBPACK_IMPORTED_MODULE_0_mithril___default()(".paging", [__WEBPACK_IMPORTED_MODULE_0_mithril___default()(".count", "Page " + pageNum), __WEBPACK_IMPORTED_MODULE_0_mithril___default()(__WEBPACK_IMPORTED_MODULE_2_mithril_infinite__["a" /* default */], {
-      item: item,
-      pageData: state.getPageData,
-      pageChange: function pageChange(num) {
-        return state.pageNum = num;
-      },
-      currentPage: pageNum,
-      autoSize: false // disabled because we are already setting the height in CSS
-    }), __WEBPACK_IMPORTED_MODULE_0_mithril___default()(".pager", [__WEBPACK_IMPORTED_MODULE_0_mithril___default()("a", {
-      class: !state.hasPrev(pageNum) ? "disabled" : "",
-      href: "/paging/" + (pageNum - 1),
-      oncreate: __WEBPACK_IMPORTED_MODULE_0_mithril___default.a.route.link
-    }, "Prev"), __WEBPACK_IMPORTED_MODULE_0_mithril___default()("a", {
-      class: !state.hasNext(pageNum) ? "disabled" : "",
-      href: "/paging/" + (pageNum + 1),
-      oncreate: __WEBPACK_IMPORTED_MODULE_0_mithril___default.a.route.link
-    }, "Next")])]), Object(__WEBPACK_IMPORTED_MODULE_1__app_footer__["a" /* default */])()]);
-  }
-});
-
-/***/ }),
-/* 25 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-var gridSpacing = 8;
-var pageWidth = 320;
-var itemSize = (320 - 2 * gridSpacing) / 3;
-var imageHolderPadding = 10;
-var imageHolderPaddingPx = imageHolderPadding + "px";
-
-/* harmony default export */ __webpack_exports__["a"] = ([{
-  ".paging": {
-    width: pageWidth + "px",
-    margin: "0 auto",
-
-    " .mithril-infinite__scroll-view.mithril-infinite__scroll-view--y": {
-      height: itemSize * 4 + gridSpacing * 3 + 2 * gridSpacing + "px"
-    },
-    " .mithril-infinite__page--placeholder": {
-      height: "0 !important"
-    },
-    " .mithril-infinite__scroll-content": {
-      margin: "0 auto",
-      width: pageWidth + "px",
-      padding: gridSpacing + "px 0 0",
-
-      " .mithril-infinite__content": {
-        margin: "0 auto",
-        fontSize: 0,
-        lineHeight: 0,
-
-        " .mithril-infinite__page": {
-          margin: "0 " + -gridSpacing / 2 + "px"
-        },
-        " .grid-item": {
-          display: "inline-block",
-          height: itemSize + "px",
-          width: itemSize + "px",
-          backgroundColor: "#f0f0f0",
-          margin: [0, gridSpacing / 2, gridSpacing, gridSpacing / 2].map(function (v) {
-            return v + "px";
-          }).join(" "),
-
-          " .image-holder": {
-            height: itemSize - 2 * imageHolderPadding + "px",
-            width: itemSize - 2 * imageHolderPadding + "px",
-            overflow: "hidden",
-            position: "relative",
-            margin: imageHolderPaddingPx,
-
-            " .image": {
-              position: "absolute",
-              left: "auto",
-              top: 0,
-              right: "auto",
-              bottom: 0,
-              width: "100%",
-              backgroundSize: "contain",
-              backgroundRepeat: "no-repeat",
-              backgroundPositionX: "50%"
-            }
-          }
-        }
-      }
-    },
-    " .count": {
-      fontSize: "14px",
-      lineHeight: 1,
-      padding: "20px 0 10px 0",
-      borderBottom: "1px solid #ddd"
-    },
-    " .pager": {
-      borderTop: "1px solid #ddd",
-      padding: "8px 0",
-      width: pageWidth + "px",
-
-      " a": {
-        display: "inline-block",
-        background: "#e0e0e0",
-        color: "#333",
-        padding: "10px 15px",
-        textAlign: "center",
-        fontSize: "15px",
-        lineHeight: 1,
-        margin: "0 5px 0 0",
-
-        "&.disabled": {
-          color: "#aaa",
-          background: "#f4f4f4",
-          pointerEvents: "none"
-        }
-      }
-    }
-
-  }
-}]);
-
-/***/ }),
-/* 26 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__variables__ = __webpack_require__(4);
-
-
-var styles = [{
-  " *": {
-    "box-sizing": "border-box"
-  },
-  " html, body, #app": {
-    minHeight: "100%",
-    height: "100%"
-  },
-  " body": {
-    margin: 0,
-    padding: 0,
-    fontFamily: "arial, sans-serif",
-    minWidth: __WEBPACK_IMPORTED_MODULE_0__variables__["b" /* styleVariables */].size_px
-  },
-  " h1": {
-    display: "block",
-    margin: "40px auto 0 auto",
-    width: "320px",
-    textAlign: "center",
-    fontSize: "28px",
-    fontWeight: "normal",
-    color: __WEBPACK_IMPORTED_MODULE_0__variables__["b" /* styleVariables */].text_color
-  },
-  " a": {
-    "&:link, &:visited": {
-      color: "#1E88E5",
-      textDecoration: "none"
-    }
-  }
-}];
-/* harmony default export */ __webpack_exports__["a"] = (styles);
-
-/***/ }),
-/* 27 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__app_variables__ = __webpack_require__(4);
-
-
-var textColorLight = "#90A4AE";
-var indexBlockBackgroundColor = "#CFD8DC";
-var indexBlockTextColor = "rgba(0,0,0,.85)";
-var indexBlockTextColorLight = "rgba(0,0,0,.4)";
-var menuWidthPx = __WEBPACK_IMPORTED_MODULE_0__app_variables__["b" /* styleVariables */].size_px;
-
-/* harmony default export */ __webpack_exports__["a"] = ([{
-  ".index": {
-    " h1": {
-      display: "block",
-      margin: "40px auto 0 auto",
-      width: __WEBPACK_IMPORTED_MODULE_0__app_variables__["b" /* styleVariables */].size + "px",
-      textAlign: "center",
-      fontSize: "28px",
-      fontWeight: "normal",
-      color: __WEBPACK_IMPORTED_MODULE_0__app_variables__["b" /* styleVariables */].text_color
-    },
-    " .menu": {
-      width: menuWidthPx,
-      margin: "20px auto",
-      padding: "0 0 20px 0",
-      listStyle: "none",
-
-      " li": {
-        margin: "0 0 1px 0",
-        padding: 0,
-
-        "&.header": {
-          fontSize: "18px",
-          color: textColorLight
-        },
-        "&.header, a": {
-          padding: "20px"
-        },
-        " a": {
-          display: "block",
-          textDecoration: "none",
-          backgroundColor: indexBlockBackgroundColor,
-
-          " .title": {
-            display: "block",
-            color: indexBlockTextColor,
-            fontSize: "18px",
-            lineHeight: 1.4 * 18 + "px"
-          },
-          " .subtitle": {
-            display: "block",
-            color: indexBlockTextColorLight,
-            fontSize: "14px"
-          }
-        }
-      }
-    }
-  }
-}]);
-
-/***/ }),
-/* 28 */
 /***/ (function(module, exports) {
 
 (function(self) {
@@ -5780,6 +5016,770 @@ var menuWidthPx = __WEBPACK_IMPORTED_MODULE_0__app_variables__["b" /* styleVaria
   self.fetch.polyfill = true
 })(typeof self !== 'undefined' ? self : this);
 
+
+/***/ }),
+/* 16 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+var gridSpacing = 8;
+var itemWidth = 210;
+var itemWidthPx = itemWidth + "px";
+var imageHolderPadding = 10;
+var imageHolderPaddingPx = imageHolderPadding + "px";
+
+var makeMediaStyle = function makeMediaStyle(which, cols) {
+  return _defineProperty({}, "@media (" + which + "-width: " + ((cols + 1) * itemWidth + cols * gridSpacing) + "px)", {
+    ".mithril-infinite__scroll-view.grid": {
+      " .mithril-infinite__scroll-content": {
+        " .mithril-infinite__content": {
+          "width": cols * itemWidth + (cols - 1) * gridSpacing + "px"
+        }
+      }
+    }
+  });
+};
+
+/* harmony default export */ __webpack_exports__["a"] = ([makeMediaStyle("min", 4), makeMediaStyle("max", 4), makeMediaStyle("max", 3), makeMediaStyle("max", 2), makeMediaStyle("max", 1), {
+  ".mithril-infinite__scroll-view.grid": {
+    margin: "0 auto",
+
+    " .mithril-infinite__scroll-content": {
+      padding: 2 * gridSpacing + "px 0",
+
+      " .mithril-infinite__content": {
+        margin: "0 auto",
+        fontSize: 0,
+        lineHeight: 0,
+
+        " .mithril-infinite__page": {
+          margin: "0 " + -gridSpacing / 2 + "px"
+        },
+        " .grid-item": {
+          display: "inline-block",
+          height: itemWidthPx,
+          width: itemWidthPx,
+          backgroundColor: "#f0f0f0",
+          margin: [0, gridSpacing / 2, gridSpacing, gridSpacing / 2].map(function (v) {
+            return v + "px";
+          }).join(" "),
+
+          " .image-holder": {
+            height: itemWidth - 2 * imageHolderPadding + "px",
+            width: itemWidth - 2 * imageHolderPadding + "px",
+            overflow: "hidden",
+            position: "relative",
+            margin: imageHolderPaddingPx,
+
+            " .image": {
+              position: "absolute",
+              left: "auto",
+              top: 0,
+              right: "auto",
+              bottom: 0,
+              width: "100%",
+              backgroundSize: "contain",
+              backgroundRepeat: "no-repeat",
+              backgroundPositionX: "50%"
+            }
+          }
+        }
+      }
+    }
+  }
+}]);
+
+/***/ }),
+/* 17 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_mithril__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_mithril___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_mithril__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__app_footer__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_mithril_infinite__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__app_styler__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__styles__ = __webpack_require__(18);
+
+
+
+
+
+
+Object(__WEBPACK_IMPORTED_MODULE_3__app_styler__["a" /* addStyle */])("table", __WEBPACK_IMPORTED_MODULE_4__styles__["a" /* default */]);
+
+var item = function item(data, opts) {
+  return __WEBPACK_IMPORTED_MODULE_0_mithril___default()(".list-item", [__WEBPACK_IMPORTED_MODULE_0_mithril___default()("div", opts.pageNum), __WEBPACK_IMPORTED_MODULE_0_mithril___default()("div", data || __WEBPACK_IMPORTED_MODULE_0_mithril___default.a.trust("&nbsp;"))]);
+};
+
+/* harmony default export */ __webpack_exports__["a"] = ({
+  view: function view() {
+    return __WEBPACK_IMPORTED_MODULE_0_mithril___default()(__WEBPACK_IMPORTED_MODULE_2_mithril_infinite__["a" /* default */], {
+      maxPages: 10,
+      item: item,
+      pageUrl: function pageUrl(page) {
+        return "data/table/page-" + page + ".json";
+      },
+      class: "table",
+      after: Object(__WEBPACK_IMPORTED_MODULE_1__app_footer__["a" /* default */])()
+    });
+  }
+});
+
+/***/ }),
+/* 18 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony default export */ __webpack_exports__["a"] = ([{
+  ".mithril-infinite__scroll-view.table": {
+    minWidth: "320px",
+    margin: "0 auto",
+    background: "#eee",
+
+    " .mithril-infinite__scroll-content": {
+      " .mithril-infinite__page": {
+        display: "table",
+        width: "100%"
+      },
+      " .mithril-infinite__page--odd": {
+        backgroundColor: "#e4e4e4",
+
+        " .list-item": {
+          " > div": {
+            color: "rgba(0,0,0,.87)",
+            borderBottom: "1px solid rgba(0, 0, 0, .07)",
+
+            ":first-child": {
+              color: "rgba(0,0,0,.54)"
+            }
+          }
+        }
+      },
+      " .mithril-infinite__page--even": {
+        "background-color": "#f0f0f0"
+      },
+      " .list-item": {
+        width: "100%",
+        display: "table-row",
+
+        " > div": {
+          borderBottom: "1px solid rgba(0, 0, 0, .07)",
+          display: "table-cell",
+          verticalAlign: "top",
+          padding: "8px 16px",
+          minHeight: "1em",
+          width: "90%",
+
+          ":first-child": {
+            color: "#aaa",
+            width: "10%",
+            textAlign: "right"
+          }
+        }
+      }
+    }
+  }
+}]);
+
+/***/ }),
+/* 19 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_mithril__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_mithril___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_mithril__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_mithril_infinite__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__app_footer__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__app_styler__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__styles__ = __webpack_require__(20);
+
+
+
+
+
+
+Object(__WEBPACK_IMPORTED_MODULE_3__app_styler__["a" /* addStyle */])("short", __WEBPACK_IMPORTED_MODULE_4__styles__["a" /* default */]);
+
+var item = function item(data) {
+  var color = data[1] || "transparent";
+  var title = data[1] ? "" : __WEBPACK_IMPORTED_MODULE_0_mithril___default()(".title", data[0]);
+  return __WEBPACK_IMPORTED_MODULE_0_mithril___default()(".list-item", {
+    class: title ? "has-title" : "",
+    style: { "background-color": color }
+  }, title);
+};
+
+/* harmony default export */ __webpack_exports__["a"] = ({
+  view: function view() {
+    return __WEBPACK_IMPORTED_MODULE_0_mithril___default()(__WEBPACK_IMPORTED_MODULE_1_mithril_infinite__["a" /* default */], {
+      item: item,
+      maxPages: 21,
+      preloadSlots: 10,
+      pageUrl: function pageUrl(page) {
+        return "data/short/page-" + page + ".json";
+      },
+      class: "short",
+      pageChange: function pageChange(page) {
+        if (console) {
+          console.log("page", page); // eslint-disable-line no-console
+        }
+      },
+      after: Object(__WEBPACK_IMPORTED_MODULE_2__app_footer__["a" /* default */])()
+    });
+  }
+});
+
+/***/ }),
+/* 20 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony default export */ __webpack_exports__["a"] = ([{
+  ".mithril-infinite__scroll-view.short": {
+    minWidth: "320px",
+    margin: "0 auto",
+    background: "#eee",
+
+    " .mithril-infinite__scroll-content": {
+      " .list-item": {
+        height: "8px",
+
+        ".has-title": {
+          fontSize: "18px",
+          padding: "0 16px",
+          height: "32px",
+          lineHeight: "32px",
+          color: "#222"
+        }
+      }
+    }
+  }
+}]);
+
+/***/ }),
+/* 21 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_mithril__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_mithril___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_mithril__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__app_footer__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_mithril_infinite__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__app_variables__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__app_styler__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__styles__ = __webpack_require__(22);
+
+
+
+
+
+
+
+Object(__WEBPACK_IMPORTED_MODULE_4__app_styler__["a" /* addStyle */])("horizontal", __WEBPACK_IMPORTED_MODULE_5__styles__["a" /* default */]);
+
+var loadImage = function loadImage(el, imgUrl) {
+  var url = __WEBPACK_IMPORTED_MODULE_3__app_variables__["a" /* appVariables */].imageUrl + imgUrl;
+  var populate = function populate() {
+    el.style.backgroundImage = "url(" + url + ")";
+    el.style.opacity = 1;
+  };
+  var img = new Image();
+  img.onload = populate;
+  img.src = url;
+};
+
+var maybeLoadImage = function maybeLoadImage(vnode, data) {
+  if (vnode.state.inited) {
+    return;
+  }
+  if (__WEBPACK_IMPORTED_MODULE_2_mithril_infinite__["a" /* default */].isElementInViewport({ el: vnode.dom })) {
+    loadImage(vnode.dom, data.src);
+    vnode.state.inited = true;
+  }
+};
+
+var item = function item(data) {
+  return __WEBPACK_IMPORTED_MODULE_0_mithril___default()("a.grid-item", __WEBPACK_IMPORTED_MODULE_0_mithril___default()(".image-holder", __WEBPACK_IMPORTED_MODULE_0_mithril___default()(".image", {
+    oncreate: function oncreate(vnode) {
+      return maybeLoadImage(vnode, data);
+    },
+    onupdate: function onupdate(vnode) {
+      return maybeLoadImage(vnode, data);
+    }
+  })));
+};
+
+/* harmony default export */ __webpack_exports__["a"] = ({
+  view: function view() {
+    return [__WEBPACK_IMPORTED_MODULE_0_mithril___default()(__WEBPACK_IMPORTED_MODULE_2_mithril_infinite__["a" /* default */], {
+      maxPages: 16,
+      item: item,
+      pageUrl: function pageUrl(pageNum) {
+        return "data/horizontal/page-" + pageNum + ".json";
+      },
+      class: "horizontal",
+      axis: "x",
+      pageSize: function pageSize(content) {
+        return (content.length || 12) * (210 + 2 * 4);
+      }, // values from CSS including margins
+      pageChange: function pageChange(pageNum) {
+        if (console) {
+          console.log("page", pageNum); // eslint-disable-line no-console
+        }
+      }
+    }), Object(__WEBPACK_IMPORTED_MODULE_1__app_footer__["a" /* default */])()];
+  }
+});
+
+/***/ }),
+/* 22 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+var grid_spacing = 8;
+var item_size = 210;
+var item_size_px = item_size + "px";
+var image_padding = 10;
+var image_padding_px = image_padding + "px";
+
+/* harmony default export */ __webpack_exports__["a"] = ([{
+  ".mithril-infinite__scroll-view.horizontal": {
+    margin: 0,
+    height: item_size + 20 + "px", // add space for scrollbar
+    background: "#fff",
+
+    " .mithril-infinite__scroll-content": {
+      padding: 0,
+      margin: 0,
+      fontSize: 0,
+
+      " .mithril-infinite__content, .mithril-infinite__padding-before, .mithril-infinite__padding-after": {
+        display: "inline-block"
+      },
+      " .mithril-infinite__content": {
+        margin: 0,
+        fontSize: 0,
+
+        " .mithril-infinite__page": {
+          display: "inline-block",
+          height: item_size_px
+        },
+
+        " .grid-item": {
+          display: "inline-block",
+          height: item_size_px,
+          width: item_size_px,
+          backgroundColor: "#f0f0f0",
+          margin: "0 " + grid_spacing / 2 + "px",
+
+          " .image-holder": {
+            height: item_size - 2 * image_padding + "px",
+            width: item_size - 2 * image_padding + "px",
+            overflow: "hidden",
+            position: "relative",
+            margin: image_padding_px,
+
+            " .image": {
+              position: "absolute",
+              left: "auto",
+              top: 0,
+              right: "auto",
+              bottom: 0,
+              width: "100%",
+              backgroundSize: "contain",
+              backgroundRepeat: "no-repeat",
+              backgroundPositionX: "50%",
+              opacity: 0,
+              transition: "opacity .7s"
+            }
+          }
+        }
+      }
+    }
+  }
+}]);
+
+/***/ }),
+/* 23 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_mithril__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_mithril___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_mithril__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__app_footer__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_mithril_infinite__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__app_styler__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__styles__ = __webpack_require__(24);
+/*
+This example shows how to get the total page count from a request, and use that to calculate the total content height.
+*/
+
+
+
+
+
+
+Object(__WEBPACK_IMPORTED_MODULE_3__app_styler__["a" /* addStyle */])("fixed", __WEBPACK_IMPORTED_MODULE_4__styles__["a" /* default */]);
+
+var PAGE_ITEMS = 10;
+var ITEM_HEIGHT = 36 + 1; // include border
+var AFTER_CONTENT_HEIGHT = 133;
+
+var dataUrl = function dataUrl(pageNum) {
+  return "http://jsonplaceholder.typicode.com/posts?_start=" + (pageNum - 1) * PAGE_ITEMS + "&_end=" + pageNum * PAGE_ITEMS;
+};
+
+var item = function item(data) {
+  return __WEBPACK_IMPORTED_MODULE_0_mithril___default()(".list-item", [__WEBPACK_IMPORTED_MODULE_0_mithril___default()("div", data.id), __WEBPACK_IMPORTED_MODULE_0_mithril___default()("div", data.title)]);
+};
+
+/* harmony default export */ __webpack_exports__["a"] = ({
+  oninit: function oninit(vnode) {
+    var state = vnode.state;
+    state.pageCount = 1;
+
+    state.pageData = function (pageNum) {
+      return __WEBPACK_IMPORTED_MODULE_0_mithril___default.a.request({
+        method: "GET",
+        dataType: "jsonp",
+        url: dataUrl(pageNum),
+        extract: function extract(xhr) {
+          return (
+            // Read the total count from the header
+            state.pageCount = Math.ceil(parseInt(xhr.getResponseHeader("X-Total-Count"), 10) / PAGE_ITEMS), JSON.parse(xhr.responseText)
+          );
+        }
+      });
+    };
+  },
+  view: function view(_ref) {
+    var state = _ref.state;
+
+    return __WEBPACK_IMPORTED_MODULE_0_mithril___default()(__WEBPACK_IMPORTED_MODULE_2_mithril_infinite__["a" /* default */], {
+      pageData: state.pageData,
+      maxPages: state.pageCount,
+      preloadPages: 3,
+      item: item,
+      class: "table fixed",
+      // set the size of each page
+      pageSize: function pageSize() {
+        return PAGE_ITEMS * ITEM_HEIGHT;
+      },
+      // set the total height
+      contentSize: state.pageCount * PAGE_ITEMS * ITEM_HEIGHT + AFTER_CONTENT_HEIGHT,
+      after: Object(__WEBPACK_IMPORTED_MODULE_1__app_footer__["a" /* default */])()
+    });
+  }
+});
+
+/***/ }),
+/* 24 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony default export */ __webpack_exports__["a"] = ([{
+  ".mithril-infinite__scroll-view.table.fixed": {
+    " .mithril-infinite__scroll-content": {
+      " .mithril-infinite__page": {
+        " .list-item": {
+          maxHeight: "36px",
+          overflowY: "hidden"
+        }
+      },
+      " .footer": {
+        height: "133px"
+      }
+    }
+  }
+}]);
+
+/***/ }),
+/* 25 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_mithril__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_mithril___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_mithril__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__app_footer__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_mithril_infinite__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__app_variables__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__app_styler__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__styles__ = __webpack_require__(26);
+
+
+
+
+
+
+
+Object(__WEBPACK_IMPORTED_MODULE_4__app_styler__["a" /* addStyle */])("paging", __WEBPACK_IMPORTED_MODULE_5__styles__["a" /* default */]);
+
+var item = function item(data) {
+  return __WEBPACK_IMPORTED_MODULE_0_mithril___default()("a.grid-item", __WEBPACK_IMPORTED_MODULE_0_mithril___default()(".image-holder", __WEBPACK_IMPORTED_MODULE_0_mithril___default()(".image", {
+    oncreate: function oncreate(_ref) {
+      var dom = _ref.dom;
+
+      dom.style.backgroundImage = "url(" + __WEBPACK_IMPORTED_MODULE_3__app_variables__["a" /* appVariables */].imageUrl + data.src + ")";
+    }
+  })));
+};
+
+var getData = function getData(pageNum) {
+  return __WEBPACK_IMPORTED_MODULE_0_mithril___default.a.request({
+    method: "GET",
+    url: "data/paging/page-" + pageNum + ".json"
+  });
+};
+
+/* harmony default export */ __webpack_exports__["a"] = ({
+  oninit: function oninit(vnode) {
+    var pageCount = 0;
+    var pageNum = __WEBPACK_IMPORTED_MODULE_0_mithril___default.a.route.param("p") ? parseInt(__WEBPACK_IMPORTED_MODULE_0_mithril___default.a.route.param("p"), 10) : 1;
+
+    var getPageData = function getPageData(pageNum) {
+      return getData(pageNum).then(function (response) {
+        return pageCount = response.length, response;
+      });
+    };
+
+    vnode.state = {
+      getPageData: getPageData,
+      pageNum: pageNum,
+      hasPrev: function hasPrev(num) {
+        return num > 1;
+      },
+      hasNext: function hasNext(num) {
+        return num < pageCount;
+      }
+    };
+  },
+  view: function view(vnode) {
+    var state = vnode.state;
+    var pageNum = __WEBPACK_IMPORTED_MODULE_0_mithril___default.a.route.param("p") ? parseInt(__WEBPACK_IMPORTED_MODULE_0_mithril___default.a.route.param("p"), 10) : state.pageNum;
+    return __WEBPACK_IMPORTED_MODULE_0_mithril___default()("div", [__WEBPACK_IMPORTED_MODULE_0_mithril___default()(".paging", [__WEBPACK_IMPORTED_MODULE_0_mithril___default()(".count", "Page " + pageNum), __WEBPACK_IMPORTED_MODULE_0_mithril___default()(__WEBPACK_IMPORTED_MODULE_2_mithril_infinite__["a" /* default */], {
+      item: item,
+      pageData: state.getPageData,
+      pageChange: function pageChange(num) {
+        return state.pageNum = num;
+      },
+      currentPage: pageNum,
+      autoSize: false // disabled because we are already setting the height in CSS
+    }), __WEBPACK_IMPORTED_MODULE_0_mithril___default()(".pager", [__WEBPACK_IMPORTED_MODULE_0_mithril___default()("a", {
+      class: !state.hasPrev(pageNum) ? "disabled" : "",
+      href: "/paging/" + (pageNum - 1),
+      oncreate: __WEBPACK_IMPORTED_MODULE_0_mithril___default.a.route.link
+    }, "Prev"), __WEBPACK_IMPORTED_MODULE_0_mithril___default()("a", {
+      class: !state.hasNext(pageNum) ? "disabled" : "",
+      href: "/paging/" + (pageNum + 1),
+      oncreate: __WEBPACK_IMPORTED_MODULE_0_mithril___default.a.route.link
+    }, "Next")])]), Object(__WEBPACK_IMPORTED_MODULE_1__app_footer__["a" /* default */])()]);
+  }
+});
+
+/***/ }),
+/* 26 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+var gridSpacing = 8;
+var pageWidth = 320;
+var itemSize = (320 - 2 * gridSpacing) / 3;
+var imageHolderPadding = 10;
+var imageHolderPaddingPx = imageHolderPadding + "px";
+
+/* harmony default export */ __webpack_exports__["a"] = ([{
+  ".paging": {
+    width: pageWidth + "px",
+    margin: "0 auto",
+
+    " .mithril-infinite__scroll-view.mithril-infinite__scroll-view--y": {
+      height: itemSize * 4 + gridSpacing * 3 + 2 * gridSpacing + "px"
+    },
+    " .mithril-infinite__page--placeholder": {
+      height: "0 !important"
+    },
+    " .mithril-infinite__scroll-content": {
+      margin: "0 auto",
+      width: pageWidth + "px",
+      padding: gridSpacing + "px 0 0",
+
+      " .mithril-infinite__content": {
+        margin: "0 auto",
+        fontSize: 0,
+        lineHeight: 0,
+
+        " .mithril-infinite__page": {
+          margin: "0 " + -gridSpacing / 2 + "px"
+        },
+        " .grid-item": {
+          display: "inline-block",
+          height: itemSize + "px",
+          width: itemSize + "px",
+          backgroundColor: "#f0f0f0",
+          margin: [0, gridSpacing / 2, gridSpacing, gridSpacing / 2].map(function (v) {
+            return v + "px";
+          }).join(" "),
+
+          " .image-holder": {
+            height: itemSize - 2 * imageHolderPadding + "px",
+            width: itemSize - 2 * imageHolderPadding + "px",
+            overflow: "hidden",
+            position: "relative",
+            margin: imageHolderPaddingPx,
+
+            " .image": {
+              position: "absolute",
+              left: "auto",
+              top: 0,
+              right: "auto",
+              bottom: 0,
+              width: "100%",
+              backgroundSize: "contain",
+              backgroundRepeat: "no-repeat",
+              backgroundPositionX: "50%"
+            }
+          }
+        }
+      }
+    },
+    " .count": {
+      fontSize: "14px",
+      lineHeight: 1,
+      padding: "20px 0 10px 0",
+      borderBottom: "1px solid #ddd"
+    },
+    " .pager": {
+      borderTop: "1px solid #ddd",
+      padding: "8px 0",
+      width: pageWidth + "px",
+
+      " a": {
+        display: "inline-block",
+        background: "#e0e0e0",
+        color: "#333",
+        padding: "10px 15px",
+        textAlign: "center",
+        fontSize: "15px",
+        lineHeight: 1,
+        margin: "0 5px 0 0",
+
+        "&.disabled": {
+          color: "#aaa",
+          background: "#f4f4f4",
+          pointerEvents: "none"
+        }
+      }
+    }
+
+  }
+}]);
+
+/***/ }),
+/* 27 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__variables__ = __webpack_require__(4);
+
+
+var styles = [{
+  " *": {
+    "box-sizing": "border-box"
+  },
+  " html, body, #app": {
+    minHeight: "100%",
+    height: "100%"
+  },
+  " body": {
+    margin: 0,
+    padding: 0,
+    fontFamily: "arial, sans-serif",
+    minWidth: __WEBPACK_IMPORTED_MODULE_0__variables__["b" /* styleVariables */].size_px
+  },
+  " h1": {
+    display: "block",
+    margin: "40px auto 0 auto",
+    width: "320px",
+    textAlign: "center",
+    fontSize: "28px",
+    fontWeight: "normal",
+    color: __WEBPACK_IMPORTED_MODULE_0__variables__["b" /* styleVariables */].text_color
+  },
+  " a": {
+    "&:link, &:visited": {
+      color: "#1E88E5",
+      textDecoration: "none"
+    }
+  }
+}];
+/* harmony default export */ __webpack_exports__["a"] = (styles);
+
+/***/ }),
+/* 28 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__app_variables__ = __webpack_require__(4);
+
+
+var textColorLight = "#90A4AE";
+var indexBlockBackgroundColor = "#CFD8DC";
+var indexBlockTextColor = "rgba(0,0,0,.85)";
+var indexBlockTextColorLight = "rgba(0,0,0,.4)";
+var menuWidthPx = __WEBPACK_IMPORTED_MODULE_0__app_variables__["b" /* styleVariables */].size_px;
+
+/* harmony default export */ __webpack_exports__["a"] = ([{
+  ".index": {
+    " h1": {
+      display: "block",
+      margin: "40px auto 0 auto",
+      width: __WEBPACK_IMPORTED_MODULE_0__app_variables__["b" /* styleVariables */].size + "px",
+      textAlign: "center",
+      fontSize: "28px",
+      fontWeight: "normal",
+      color: __WEBPACK_IMPORTED_MODULE_0__app_variables__["b" /* styleVariables */].text_color
+    },
+    " .menu": {
+      width: menuWidthPx,
+      margin: "20px auto",
+      padding: "0 0 20px 0",
+      listStyle: "none",
+
+      " li": {
+        margin: "0 0 1px 0",
+        padding: 0,
+
+        "&.header": {
+          fontSize: "18px",
+          color: textColorLight
+        },
+        "&.header, a": {
+          padding: "20px"
+        },
+        " a": {
+          display: "block",
+          textDecoration: "none",
+          backgroundColor: indexBlockBackgroundColor,
+
+          " .title": {
+            display: "block",
+            color: indexBlockTextColor,
+            fontSize: "18px",
+            lineHeight: 1.4 * 18 + "px"
+          },
+          " .subtitle": {
+            display: "block",
+            color: indexBlockTextColorLight,
+            fontSize: "14px"
+          }
+        }
+      }
+    }
+  }
+}]);
 
 /***/ })
 /******/ ]);

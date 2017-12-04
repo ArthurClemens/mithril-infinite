@@ -241,7 +241,7 @@ const view = ({ state, attrs }) => {
                 ? { "min-width": attrs.contentSize + "px" }
                 : { "min-height": attrs.contentSize + "px" }
               : {}
-        )
+          )
       },
       [
         m(state.contentTag, { class: classes.content }, [
