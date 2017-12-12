@@ -12,7 +12,8 @@ const styles = [{
       height: "100%",
 
       [" ." + classes.scrollContent]: {
-        height: "100%"
+        height: "100%",
+        overflowAnchor: "none",
       }
     },
 

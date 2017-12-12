@@ -610,7 +610,8 @@ var styles = [_defineProperty({}, "." + classes.scrollView, (_ref3 = {
   height: "100%"
 
 }, " ." + classes.scrollContent, {
-  height: "100%"
+  height: "100%",
+  overflowAnchor: "none"
 })), _defineProperty(_ref3, "&." + classes.scrollViewX, _defineProperty({
   overflowX: "auto",
   overflowY: "hidden",
