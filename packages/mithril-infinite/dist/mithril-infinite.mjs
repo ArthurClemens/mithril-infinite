@@ -53,9 +53,6 @@ function createCommonjsModule(fn, module) {
 var stream$2 = createCommonjsModule(function (module) {
 	/* eslint-disable */
 	(function () {
-		"use strict";
-		/* eslint-enable */
-
 		var guid = 0,
 		    HALT = {};
 		function createStream() {
@@ -291,7 +288,7 @@ var view$1 = function view(_ref2) {
     attrs.updatePageSize(pageId, pageSize);
   }
 
-  var cssSize = pageSize ? pageSize + "px" : !attrs.autoSize || attrs.isScrolling && storedPageSize ? storedPageSize + "px" : "auto";
+  var cssSize = pageSize ? pageSize + "px" : !attrs.autoSize ? storedPageSize + "px" : "auto";
 
   var update = function update(dom) {
     if (pageSize) return;
@@ -347,7 +344,6 @@ var view$1 = function view(_ref2) {
       return update(dom);
     }
   }, state.processPageData(state.content(), {
-    isScrolling: attrs.isScrolling,
     pageId: attrs.pageId,
     pageNum: attrs.pageNum
   }));
@@ -373,6 +369,7 @@ var placeholder = {
 
     var pageId = attrs.pageId;
     var storedPageSize = attrs.pageSizes[pageId] || 0;
+
     return m("div", {
       "data-page": pageId,
       class: [classes.placeholder, state.className].join(" "),
@@ -447,8 +444,6 @@ addStyle("mithril-infinite", styles);
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-var SCROLLING_UPDATE_DELAY = 200;
-var WATCH_IS_SCROLLING_DELAY = 60;
 var SEL_PADDING = "000000";
 
 var numToId = function numToId(pageNum) {
@@ -549,27 +544,11 @@ var oninit = function oninit(vnode) {
   var whichScroll = axis === "x" ? "scrollLeft" : "scrollTop";
   var autoSize = attrs.autoSize !== undefined && attrs.autoSize === false ? false : true;
   var pageSize = attrs.pageSize;
-  var scrollThrottle = attrs.throttle !== undefined ? attrs.throttle * 1000 : SCROLLING_UPDATE_DELAY;
   var contentTag = attrs.contentTag || "div";
   var classList = [classes.scrollView, axis === "x" ? classes.scrollViewX : classes.scrollViewY, attrs.class].join(" ");
 
   var scroll = function scroll() {
-    var state = vnode.state;
-    state.isScrolling = true;
-    // throttle updates while scrolling
-    if (!state.scrollWatchUpdateStateId) {
-      state.scrollWatchUpdateStateId = setTimeout(function () {
-        // update pages
-        m.redraw();
-        state.scrollWatchUpdateStateId = null;
-        state.isScrolling = false;
-        setTimeout(function () {
-          if (state.isScrolling === false) {
-            m.redraw();
-          }
-        }, WATCH_IS_SCROLLING_DELAY);
-      }, state.scrollThrottle);
-    }
+    return m.redraw();
   };
 
   vnode.state = {
@@ -577,11 +556,9 @@ var oninit = function oninit(vnode) {
     beforeSize: null,
     boundingClientRect: {},
     currentPageNum: 0,
-    isScrolling: false,
     pageSizes: {},
     preloadSlots: attrs.preloadPages || 1,
     scrollView: null,
-    scrollWatchUpdateStateId: null,
     sortedKeys: [],
 
     // Memoized
@@ -593,7 +570,6 @@ var oninit = function oninit(vnode) {
     contentTag: contentTag,
     pageSize: pageSize,
     scroll: scroll,
-    scrollThrottle: scrollThrottle,
     whichScroll: whichScroll
   };
 };
@@ -625,7 +601,8 @@ var view = function view(_ref) {
       prePages = _getPageList.prePages,
       maxPageNum = _getPageList.maxPageNum;
 
-  state.contentSize = calculateContentSize(1, maxPageNum, state);
+  state.contentSize = attrs.contentSize !== undefined ? attrs.contentSize : calculateContentSize(1, maxPageNum, state);
+
   state.pageCount = pages.length;
 
   var isLastPageVisible = maxPageNum ? isPageInViewport(maxPageNum, axis, state, state.scrollView) : true;
@@ -675,7 +652,6 @@ var view = function view(_ref) {
     return m(page, {
       autoSize: state.autoSize,
       axis: axis,
-      isScrolling: state.isScrolling,
       item: attrs.item,
       key: numToId(pageNum),
       pageData: attrs.pageData,

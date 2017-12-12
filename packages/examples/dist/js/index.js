@@ -176,7 +176,7 @@ Object(__WEBPACK_IMPORTED_MODULE_1__app_styler__["a" /* addStyle */])("footer", 
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_verge__ = __webpack_require__(10);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_verge___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_verge__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_resize_observer_polyfill__ = __webpack_require__(11);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_j2c__ = __webpack_require__(12);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_j2c__ = __webpack_require__(13);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_j2c___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_j2c__);
 
 
@@ -233,9 +233,6 @@ function createCommonjsModule(fn, module) {
 var stream$2 = createCommonjsModule(function (module) {
 	/* eslint-disable */
 	(function () {
-		"use strict";
-		/* eslint-enable */
-
 		var guid = 0,
 		    HALT = {};
 		function createStream() {
@@ -471,7 +468,7 @@ var view$1 = function view(_ref2) {
     attrs.updatePageSize(pageId, pageSize);
   }
 
-  var cssSize = pageSize ? pageSize + "px" : !attrs.autoSize || attrs.isScrolling && storedPageSize ? storedPageSize + "px" : "auto";
+  var cssSize = pageSize ? pageSize + "px" : !attrs.autoSize ? storedPageSize + "px" : "auto";
 
   var update = function update(dom) {
     if (pageSize) return;
@@ -527,7 +524,6 @@ var view$1 = function view(_ref2) {
       return update(dom);
     }
   }, state.processPageData(state.content(), {
-    isScrolling: attrs.isScrolling,
     pageId: attrs.pageId,
     pageNum: attrs.pageNum
   }));
@@ -553,6 +549,7 @@ var placeholder = {
 
     var pageId = attrs.pageId;
     var storedPageSize = attrs.pageSizes[pageId] || 0;
+
     return __WEBPACK_IMPORTED_MODULE_0_mithril___default()("div", {
       "data-page": pageId,
       class: [classes.placeholder, state.className].join(" "),
@@ -627,8 +624,6 @@ addStyle("mithril-infinite", styles);
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-var SCROLLING_UPDATE_DELAY = 200;
-var WATCH_IS_SCROLLING_DELAY = 60;
 var SEL_PADDING = "000000";
 
 var numToId = function numToId(pageNum) {
@@ -729,27 +724,11 @@ var oninit = function oninit(vnode) {
   var whichScroll = axis === "x" ? "scrollLeft" : "scrollTop";
   var autoSize = attrs.autoSize !== undefined && attrs.autoSize === false ? false : true;
   var pageSize = attrs.pageSize;
-  var scrollThrottle = attrs.throttle !== undefined ? attrs.throttle * 1000 : SCROLLING_UPDATE_DELAY;
   var contentTag = attrs.contentTag || "div";
   var classList = [classes.scrollView, axis === "x" ? classes.scrollViewX : classes.scrollViewY, attrs.class].join(" ");
 
   var scroll = function scroll() {
-    var state = vnode.state;
-    state.isScrolling = true;
-    // throttle updates while scrolling
-    if (!state.scrollWatchUpdateStateId) {
-      state.scrollWatchUpdateStateId = setTimeout(function () {
-        // update pages
-        __WEBPACK_IMPORTED_MODULE_0_mithril___default.a.redraw();
-        state.scrollWatchUpdateStateId = null;
-        state.isScrolling = false;
-        setTimeout(function () {
-          if (state.isScrolling === false) {
-            __WEBPACK_IMPORTED_MODULE_0_mithril___default.a.redraw();
-          }
-        }, WATCH_IS_SCROLLING_DELAY);
-      }, state.scrollThrottle);
-    }
+    return __WEBPACK_IMPORTED_MODULE_0_mithril___default.a.redraw();
   };
 
   vnode.state = {
@@ -757,11 +736,9 @@ var oninit = function oninit(vnode) {
     beforeSize: null,
     boundingClientRect: {},
     currentPageNum: 0,
-    isScrolling: false,
     pageSizes: {},
     preloadSlots: attrs.preloadPages || 1,
     scrollView: null,
-    scrollWatchUpdateStateId: null,
     sortedKeys: [],
 
     // Memoized
@@ -773,7 +750,6 @@ var oninit = function oninit(vnode) {
     contentTag: contentTag,
     pageSize: pageSize,
     scroll: scroll,
-    scrollThrottle: scrollThrottle,
     whichScroll: whichScroll
   };
 };
@@ -805,7 +781,8 @@ var view = function view(_ref) {
       prePages = _getPageList.prePages,
       maxPageNum = _getPageList.maxPageNum;
 
-  state.contentSize = calculateContentSize(1, maxPageNum, state);
+  state.contentSize = attrs.contentSize !== undefined ? attrs.contentSize : calculateContentSize(1, maxPageNum, state);
+
   state.pageCount = pages.length;
 
   var isLastPageVisible = maxPageNum ? isPageInViewport(maxPageNum, axis, state, state.scrollView) : true;
@@ -855,7 +832,6 @@ var view = function view(_ref) {
     return __WEBPACK_IMPORTED_MODULE_0_mithril___default()(page, {
       autoSize: state.autoSize,
       axis: axis,
-      isScrolling: state.isScrolling,
       item: attrs.item,
       key: numToId(pageNum),
       pageData: attrs.pageData,
@@ -931,15 +907,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_mithril___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_mithril__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__app_footer__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__images__ = __webpack_require__(9);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__grid__ = __webpack_require__(14);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__table__ = __webpack_require__(17);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__short__ = __webpack_require__(19);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__horizontal__ = __webpack_require__(21);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__fixed__ = __webpack_require__(23);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__paging__ = __webpack_require__(25);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__grid__ = __webpack_require__(15);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__table__ = __webpack_require__(18);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__short__ = __webpack_require__(20);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__horizontal__ = __webpack_require__(22);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__fixed__ = __webpack_require__(24);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__paging__ = __webpack_require__(26);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__app_styler__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__app_common_style__ = __webpack_require__(27);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__styles__ = __webpack_require__(28);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__app_common_style__ = __webpack_require__(28);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__styles__ = __webpack_require__(29);
 
 
 
@@ -982,7 +958,7 @@ var menuData = [{
 }, {
   href: "/fixed",
   title: "Fixed height",
-  subtitle: "Preset the scroll height, don\"t update scroll height"
+  subtitle: "Preset the scroll height, don't update scroll height"
 }, {
   href: "/paging",
   title: "Paging",
@@ -2329,7 +2305,7 @@ module.exports = j2c;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_mithril_infinite__ = __webpack_require__(3);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__app_variables__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__app_styler__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__styles__ = __webpack_require__(13);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__styles__ = __webpack_require__(14);
 
 
 
@@ -2593,7 +2569,7 @@ var item = function item(data, opts) {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/**
+/* WEBPACK VAR INJECTION */(function(global) {/**
  * A collection of shims that provide minimal functionality of the ES6 collections.
  *
  * These implementations are not meant to be used outside of the ResizeObserver
@@ -2601,7 +2577,7 @@ var item = function item(data, opts) {
  */
 /* eslint-disable require-jsdoc, valid-jsdoc */
 var MapShim = (function () {
-    if (typeof Map != 'undefined') {
+    if (typeof Map !== 'undefined') {
         return Map;
     }
 
@@ -2633,7 +2609,7 @@ var MapShim = (function () {
             this.__entries__ = [];
         }
 
-        var prototypeAccessors = { size: {} };
+        var prototypeAccessors = { size: { configurable: true } };
 
         /**
          * @returns {boolean}
@@ -2702,9 +2678,10 @@ var MapShim = (function () {
          * @returns {void}
          */
         anonymous.prototype.forEach = function (callback, ctx) {
+            var this$1 = this;
             if ( ctx === void 0 ) ctx = null;
 
-            for (var i = 0, list = this.__entries__; i < list.length; i += 1) {
+            for (var i = 0, list = this$1.__entries__; i < list.length; i += 1) {
                 var entry = list[i];
 
                 callback.call(ctx, entry[1], entry[0]);
@@ -2720,7 +2697,25 @@ var MapShim = (function () {
 /**
  * Detects whether window and document objects are available in current environment.
  */
-var isBrowser = typeof window != 'undefined' && typeof document != 'undefined' && window.document === document;
+var isBrowser = typeof window !== 'undefined' && typeof document !== 'undefined' && window.document === document;
+
+// Returns global object of a current environment.
+var global$1 = (function () {
+    if (typeof global !== 'undefined' && global.Math === Math) {
+        return global;
+    }
+
+    if (typeof self !== 'undefined' && self.Math === Math) {
+        return self;
+    }
+
+    if (typeof window !== 'undefined' && window.Math === Math) {
+        return window;
+    }
+
+    // eslint-disable-next-line no-new-func
+    return Function('return this')();
+})();
 
 /**
  * A shim for the requestAnimationFrame which falls back to the setTimeout if
@@ -2730,7 +2725,10 @@ var isBrowser = typeof window != 'undefined' && typeof document != 'undefined' &
  */
 var requestAnimationFrame$1 = (function () {
     if (typeof requestAnimationFrame === 'function') {
-        return requestAnimationFrame;
+        // It's required to use a bounded function because IE sometimes throws
+        // an "Invalid calling object" error if rAF is invoked without the global
+        // object on the left hand side.
+        return requestAnimationFrame.bind(global$1);
     }
 
     return function (callback) { return setTimeout(function () { return callback(Date.now()); }, 1000 / 60); };
@@ -2820,46 +2818,16 @@ var REFRESH_DELAY = 20;
 // might affect dimensions of observed elements.
 var transitionKeys = ['top', 'right', 'bottom', 'left', 'width', 'height', 'size', 'weight'];
 
-// Detect whether running in IE 11 (facepalm).
-var isIE11 = typeof navigator != 'undefined' && /Trident\/.*rv:11/.test(navigator.userAgent);
-
-// MutationObserver should not be used if running in Internet Explorer 11 as it's
-// implementation is unreliable. Example: https://jsfiddle.net/x2r3jpuz/2/
-//
-// It's a real bummer that there is no other way to check for this issue but to
-// use the UA information.
-var mutationObserverSupported = typeof MutationObserver != 'undefined' && !isIE11;
+// Check if MutationObserver is available.
+var mutationObserverSupported = typeof MutationObserver !== 'undefined';
 
 /**
  * Singleton controller class which handles updates of ResizeObserver instances.
  */
 var ResizeObserverController = function() {
-    /**
-     * Indicates whether DOM listeners have been added.
-     *
-     * @private {boolean}
-     */
     this.connected_ = false;
-
-    /**
-     * Tells that controller has subscribed for Mutation Events.
-     *
-     * @private {boolean}
-     */
     this.mutationEventsAdded_ = false;
-
-    /**
-     * Keeps reference to the instance of MutationObserver.
-     *
-     * @private {MutationObserver}
-     */
     this.mutationsObserver_ = null;
-
-    /**
-     * A list of connected observers.
-     *
-     * @private {Array<ResizeObserverSPI>}
-     */
     this.observers_ = [];
 
     this.onTransitionEnd_ = this.onTransitionEnd_.bind(this);
@@ -2871,6 +2839,26 @@ var ResizeObserverController = function() {
  *
  * @param {ResizeObserverSPI} observer - Observer to be added.
  * @returns {void}
+ */
+
+
+/**
+ * Holds reference to the controller's instance.
+ *
+ * @private {ResizeObserverController}
+ */
+
+
+/**
+ * Keeps reference to the instance of MutationObserver.
+ *
+ * @private {MutationObserver}
+ */
+
+/**
+ * Indicates whether DOM listeners have been added.
+ *
+ * @private {boolean}
  */
 ResizeObserverController.prototype.addObserver = function (observer) {
     if (!~this.observers_.indexOf(observer)) {
@@ -3019,7 +3007,7 @@ ResizeObserverController.prototype.disconnect_ = function () {
  * @returns {void}
  */
 ResizeObserverController.prototype.onTransitionEnd_ = function (ref) {
-        var propertyName = ref.propertyName;
+        var propertyName = ref.propertyName; if ( propertyName === void 0 ) propertyName = '';
 
     // Detect whether transition may affect dimensions of an element.
     var isReflowProperty = transitionKeys.some(function (key) {
@@ -3044,11 +3032,6 @@ ResizeObserverController.getInstance = function () {
     return this.instance_;
 };
 
-/**
- * Holds reference to the controller's instance.
- *
- * @private {ResizeObserverController}
- */
 ResizeObserverController.instance_ = null;
 
 /**
@@ -3073,6 +3056,23 @@ var defineConfigurable = (function (target, props) {
     return target;
 });
 
+/**
+ * Returns the global object associated with provided element.
+ *
+ * @param {Object} target
+ * @returns {Object}
+ */
+var getWindowOf = (function (target) {
+    // Assume that the element is an instance of Node, which means that it
+    // has the "ownerDocument" property from which we can retrieve a
+    // corresponding global object.
+    var ownerGlobal = target && target.ownerDocument && target.ownerDocument.defaultView;
+
+    // Return the local global object if it's not possible extract one from
+    // provided element.
+    return ownerGlobal || global$1;
+});
+
 // Placeholder of an empty content rectangle.
 var emptyRect = createRectInit(0, 0, 0, 0);
 
@@ -3094,7 +3094,8 @@ function toFloat(value) {
  * @returns {number}
  */
 function getBordersSize(styles) {
-    var positions = Array.prototype.slice.call(arguments, 1);
+    var positions = [], len = arguments.length - 1;
+    while ( len-- > 0 ) positions[ len ] = arguments[ len + 1 ];
 
     return positions.reduce(function (size, position) {
         var value = styles['border-' + position + '-width'];
@@ -3161,7 +3162,7 @@ function getHTMLElementContentRect(target) {
         return emptyRect;
     }
 
-    var styles = getComputedStyle(target);
+    var styles = getWindowOf(target).getComputedStyle(target);
     var paddings = getPaddings(styles);
     var horizPad = paddings.left + paddings.right;
     var vertPad = paddings.top + paddings.bottom;
@@ -3229,14 +3230,14 @@ function getHTMLElementContentRect(target) {
 var isSVGGraphicsElement = (function () {
     // Some browsers, namely IE and Edge, don't have the SVGGraphicsElement
     // interface.
-    if (typeof SVGGraphicsElement != 'undefined') {
-        return function (target) { return target instanceof SVGGraphicsElement; };
+    if (typeof SVGGraphicsElement !== 'undefined') {
+        return function (target) { return target instanceof getWindowOf(target).SVGGraphicsElement; };
     }
 
     // If it's so, then check that element is at least an instance of the
     // SVGElement and that it has the "getBBox" method.
     // eslint-disable-next-line no-extra-parens
-    return function (target) { return target instanceof SVGElement && typeof target.getBBox === 'function'; };
+    return function (target) { return target instanceof getWindowOf(target).SVGElement && typeof target.getBBox === 'function'; };
 })();
 
 /**
@@ -3246,7 +3247,7 @@ var isSVGGraphicsElement = (function () {
  * @returns {boolean}
  */
 function isDocumentElement(target) {
-    return target === document.documentElement;
+    return target === getWindowOf(target).document.documentElement;
 }
 
 /**
@@ -3281,7 +3282,7 @@ function createReadOnlyRect(ref) {
     var height = ref.height;
 
     // If DOMRectReadOnly is available use it as a prototype for the rectangle.
-    var Constr = typeof DOMRectReadOnly != 'undefined' ? DOMRectReadOnly : Object;
+    var Constr = typeof DOMRectReadOnly !== 'undefined' ? DOMRectReadOnly : Object;
     var rect = Object.create(Constr.prototype);
 
     // Rectangle's properties are not writable and non-enumerable.
@@ -3315,32 +3316,10 @@ function createRectInit(x, y, width, height) {
  * provided DOM element and for keeping track of it's changes.
  */
 var ResizeObservation = function(target) {
-    /**
-     * Broadcasted width of content rectangle.
-     *
-     * @type {number}
-     */
     this.broadcastWidth = 0;
-
-    /**
-     * Broadcasted height of content rectangle.
-     *
-     * @type {number}
-     */
     this.broadcastHeight = 0;
-
-    /**
-     * Reference to the last observed content rectangle.
-     *
-     * @private {DOMRectInit}
-     */
     this.contentRect_ = createRectInit(0, 0, 0, 0);
 
-    /**
-     * Reference to the observed element.
-     *
-     * @type {Element}
-     */
     this.target = target;
 };
 
@@ -3349,6 +3328,20 @@ var ResizeObservation = function(target) {
  * have changed since the last broadcast.
  *
  * @returns {boolean}
+ */
+
+
+/**
+ * Reference to the last observed content rectangle.
+ *
+ * @private {DOMRectInit}
+ */
+
+
+/**
+ * Broadcasted width of content rectangle.
+ *
+ * @type {number}
  */
 ResizeObservation.prototype.isActive = function () {
     var rect = getContentRect(this.target);
@@ -3386,45 +3379,15 @@ var ResizeObserverEntry = function(target, rectInit) {
 };
 
 var ResizeObserverSPI = function(callback, controller, callbackCtx) {
+    this.activeObservations_ = [];
+    this.observations_ = new MapShim();
+
     if (typeof callback !== 'function') {
         throw new TypeError('The callback provided as parameter 1 is not a function.');
     }
 
-    /**
-     * Collection of resize observations that have detected changes in dimensions
-     * of elements.
-     *
-     * @private {Array<ResizeObservation>}
-     */
-    this.activeObservations_ = [];
-
-    /**
-     * Registry of the ResizeObservation instances.
-     *
-     * @private {Map<Element, ResizeObservation>}
-     */
-    this.observations_ = new MapShim();
-
-    /**
-     * Reference to the callback function.
-     *
-     * @private {ResizeObserverCallback}
-     */
     this.callback_ = callback;
-
-    /**
-     * Reference to the associated ResizeObserverController.
-     *
-     * @private {ResizeObserverController}
-     */
     this.controller_ = controller;
-
-    /**
-     * Public ResizeObserver instance which will be passed to the callback
-     * function and used as a value of it's "this" binding.
-     *
-     * @private {ResizeObserver}
-     */
     this.callbackCtx_ = callbackCtx;
 };
 
@@ -3433,6 +3396,28 @@ var ResizeObserverSPI = function(callback, controller, callbackCtx) {
  *
  * @param {Element} target - Element to be observed.
  * @returns {void}
+ */
+
+
+/**
+ * Registry of the ResizeObservation instances.
+ *
+ * @private {Map<Element, ResizeObservation>}
+ */
+
+
+/**
+ * Public ResizeObserver instance which will be passed to the callback
+ * function and used as a value of it's "this" binding.
+ *
+ * @private {ResizeObserver}
+ */
+
+/**
+ * Collection of resize observations that have detected changes in dimensions
+ * of elements.
+ *
+ * @private {Array<ResizeObservation>}
  */
 ResizeObserverSPI.prototype.observe = function (target) {
     if (!arguments.length) {
@@ -3444,7 +3429,7 @@ ResizeObserverSPI.prototype.observe = function (target) {
         return;
     }
 
-    if (!(target instanceof Element)) {
+    if (!(target instanceof getWindowOf(target).Element)) {
         throw new TypeError('parameter 1 is not of type "Element".');
     }
 
@@ -3479,7 +3464,7 @@ ResizeObserverSPI.prototype.unobserve = function (target) {
         return;
     }
 
-    if (!(target instanceof Element)) {
+    if (!(target instanceof getWindowOf(target).Element)) {
         throw new TypeError('parameter 1 is not of type "Element".');
     }
 
@@ -3570,17 +3555,16 @@ ResizeObserverSPI.prototype.hasActive = function () {
 // Registry of internal observers. If WeakMap is not available use current shim
 // for the Map collection as it has all required methods and because WeakMap
 // can't be fully polyfilled anyway.
-var observers = typeof WeakMap != 'undefined' ? new WeakMap() : new MapShim();
+var observers = typeof WeakMap !== 'undefined' ? new WeakMap() : new MapShim();
 
 /**
  * ResizeObserver API. Encapsulates the ResizeObserver SPI implementation
  * exposing only those methods and properties that are defined in the spec.
  */
-var ResizeObserver$1 = function(callback) {
-    if (!(this instanceof ResizeObserver$1)) {
-        throw new TypeError('Cannot call a class as a function');
+var ResizeObserver = function(callback) {
+    if (!(this instanceof ResizeObserver)) {
+        throw new TypeError('Cannot call a class as a function.');
     }
-
     if (!arguments.length) {
         throw new TypeError('1 argument required, but only 0 present.');
     }
@@ -3593,7 +3577,7 @@ var ResizeObserver$1 = function(callback) {
 
 // Expose public methods of ResizeObserver.
 ['observe', 'unobserve', 'disconnect'].forEach(function (method) {
-    ResizeObserver$1.prototype[method] = function () {
+    ResizeObserver.prototype[method] = function () {
         return (ref = observers.get(this))[method].apply(ref, arguments);
         var ref;
     };
@@ -3601,19 +3585,46 @@ var ResizeObserver$1 = function(callback) {
 
 var index = (function () {
     // Export existing implementation if available.
-    if (typeof ResizeObserver != 'undefined') {
-        // eslint-disable-next-line no-undef
-        return ResizeObserver;
+    if (typeof global$1.ResizeObserver !== 'undefined') {
+        return global$1.ResizeObserver;
     }
 
-    return ResizeObserver$1;
+    return ResizeObserver;
 })();
 
 /* harmony default export */ __webpack_exports__["a"] = (index);
 
+/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(12)))
 
 /***/ }),
 /* 12 */
+/***/ (function(module, exports) {
+
+var g;
+
+// This works in non-strict mode
+g = (function() {
+	return this;
+})();
+
+try {
+	// This works if eval is allowed (see CSP)
+	g = g || Function("return this")() || (1,eval)("this");
+} catch(e) {
+	// This works if the window reference is available
+	if(typeof window === "object")
+		g = window;
+}
+
+// g can still be undefined, but nothing to do about it...
+// We return undefined, instead of nothing here, so it's
+// easier to handle this case. if(!global) { ...}
+
+module.exports = g;
+
+
+/***/ }),
+/* 13 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -4276,7 +4287,7 @@ module.exports = j2c;
 
 
 /***/ }),
-/* 13 */
+/* 14 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -4358,7 +4369,7 @@ var toggle_size = "40px";
 }]);
 
 /***/ }),
-/* 14 */
+/* 15 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -4366,10 +4377,10 @@ var toggle_size = "40px";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_mithril___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_mithril__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__app_footer__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_mithril_infinite__ = __webpack_require__(3);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_whatwg_fetch__ = __webpack_require__(15);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_whatwg_fetch__ = __webpack_require__(16);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_whatwg_fetch___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_whatwg_fetch__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__app_styler__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__styles__ = __webpack_require__(16);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__styles__ = __webpack_require__(17);
 
 
 
@@ -4551,7 +4562,7 @@ var data = [{
 }];
 
 /***/ }),
-/* 15 */
+/* 16 */
 /***/ (function(module, exports) {
 
 (function(self) {
@@ -5018,7 +5029,7 @@ var data = [{
 
 
 /***/ }),
-/* 16 */
+/* 17 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -5092,7 +5103,7 @@ var makeMediaStyle = function makeMediaStyle(which, cols) {
 }]);
 
 /***/ }),
-/* 17 */
+/* 18 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -5101,7 +5112,7 @@ var makeMediaStyle = function makeMediaStyle(which, cols) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__app_footer__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_mithril_infinite__ = __webpack_require__(3);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__app_styler__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__styles__ = __webpack_require__(18);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__styles__ = __webpack_require__(19);
 
 
 
@@ -5129,7 +5140,7 @@ var item = function item(data, opts) {
 });
 
 /***/ }),
-/* 18 */
+/* 19 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -5185,7 +5196,7 @@ var item = function item(data, opts) {
 }]);
 
 /***/ }),
-/* 19 */
+/* 20 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -5194,7 +5205,7 @@ var item = function item(data, opts) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_mithril_infinite__ = __webpack_require__(3);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__app_footer__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__app_styler__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__styles__ = __webpack_require__(20);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__styles__ = __webpack_require__(21);
 
 
 
@@ -5233,7 +5244,7 @@ var item = function item(data) {
 });
 
 /***/ }),
-/* 20 */
+/* 21 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -5260,7 +5271,7 @@ var item = function item(data) {
 }]);
 
 /***/ }),
-/* 21 */
+/* 22 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -5270,7 +5281,7 @@ var item = function item(data) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_mithril_infinite__ = __webpack_require__(3);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__app_variables__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__app_styler__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__styles__ = __webpack_require__(22);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__styles__ = __webpack_require__(23);
 
 
 
@@ -5335,7 +5346,7 @@ var item = function item(data) {
 });
 
 /***/ }),
-/* 22 */
+/* 23 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -5403,7 +5414,7 @@ var image_padding_px = image_padding + "px";
 }]);
 
 /***/ }),
-/* 23 */
+/* 24 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -5412,7 +5423,7 @@ var image_padding_px = image_padding + "px";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__app_footer__ = __webpack_require__(2);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_mithril_infinite__ = __webpack_require__(3);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__app_styler__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__styles__ = __webpack_require__(24);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__styles__ = __webpack_require__(25);
 /*
 This example shows how to get the total page count from a request, and use that to calculate the total content height.
 */
@@ -5476,7 +5487,7 @@ var item = function item(data) {
 });
 
 /***/ }),
-/* 24 */
+/* 25 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -5497,7 +5508,7 @@ var item = function item(data) {
 }]);
 
 /***/ }),
-/* 25 */
+/* 26 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -5507,7 +5518,7 @@ var item = function item(data) {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_mithril_infinite__ = __webpack_require__(3);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__app_variables__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__app_styler__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__styles__ = __webpack_require__(26);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__styles__ = __webpack_require__(27);
 
 
 
@@ -5580,7 +5591,7 @@ var getData = function getData(pageNum) {
 });
 
 /***/ }),
-/* 26 */
+/* 27 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -5678,7 +5689,7 @@ var imageHolderPaddingPx = imageHolderPadding + "px";
 }]);
 
 /***/ }),
-/* 27 */
+/* 28 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -5718,7 +5729,7 @@ var styles = [{
 /* harmony default export */ __webpack_exports__["a"] = (styles);
 
 /***/ }),
-/* 28 */
+/* 29 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";

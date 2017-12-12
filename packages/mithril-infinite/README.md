@@ -320,7 +320,7 @@ See the "Paging" example.
 
 | **Parameter** |  **Mandatory** | **Type** | **Default** | **Description** |
 | ------------- | -------------- | -------- | ----------- | --------------- |
-| **scrollView** | optional | Selector String | | Pass an element"s selector to assign another element as scrollView |
+| **scrollView** | optional | Selector String | | Pass an element's selector to assign another element as scrollView |
 | **class** | optional | String |  | Extra CSS class appended to `mithril-infinite__scroll-view` |
 | **contentTag** | optional | String | "div" | HTML tag for the content element |
 | **pageTag** | optional | String | "div" | HTML tag for the page element; note that pages have class `mithril-infinite__page` plus either `mithril-infinite__page--odd` or `mithril-infinite__page--even` |

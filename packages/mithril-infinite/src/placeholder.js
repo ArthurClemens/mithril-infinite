@@ -6,9 +6,10 @@ export const placeholder = {
   oninit: vnode =>
     // Memoize some properties that do not change
     vnode.state.className = makeClassName(vnode.attrs.pageNum),
-  view: ({state, attrs}) => {
+  view: ({ state, attrs }) => {
     const pageId = attrs.pageId;
     const storedPageSize = attrs.pageSizes[pageId] || 0;
+
     return m("div", {
       "data-page": pageId,
       class: [

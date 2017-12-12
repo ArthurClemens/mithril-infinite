@@ -47,7 +47,7 @@ const view = ({state, attrs}) => {
 
   const cssSize = pageSize
     ? pageSize + "px"
-    : !attrs.autoSize || (attrs.isScrolling && storedPageSize)
+    : !attrs.autoSize
       ? storedPageSize + "px"
       : "auto";
 
@@ -84,7 +84,6 @@ const view = ({state, attrs}) => {
     },
     onupdate: ({ dom }) => update(dom)
   }, state.processPageData(state.content(), {
-    isScrolling: attrs.isScrolling,
     pageId: attrs.pageId,
     pageNum: attrs.pageNum
   }));
