@@ -1,7 +1,5379 @@
-!function(e){function t(i){if(n[i])return n[i].exports;var r=n[i]={i:i,l:!1,exports:{}};return e[i].call(r.exports,r,r.exports,t),r.l=!0,r.exports}var n={};t.m=e,t.c=n,t.d=function(e,n,i){t.o(e,n)||Object.defineProperty(e,n,{configurable:!1,enumerable:!0,get:i})},t.n=function(e){var n=e&&e.__esModule?function(){return e.default}:function(){return e};return t.d(n,"a",n),n},t.o=function(e,t){return Object.prototype.hasOwnProperty.call(e,t)},t.p="",t(t.s=5)}([function(e,t){e.exports=m},function(e,t,n){"use strict";n.d(t,"a",function(){return s});var i=n(7),r=(n.n(i),n(8)),a=n.n(r),o=new a.a(i.prefixPlugin),l=function(e){if(e){var t=document.getElementById(e);t&&t.parentNode.removeChild(t)}},s=function(e){for(var t=arguments.length,n=Array(t>1?t-1:0),i=1;i<t;i++)n[i-1]=arguments[i];l(e);var r=document.createElement("style");e&&r.setAttribute("id",e),n.forEach(function(e){Object.keys(e).length&&e.forEach(function(e){var t={"@global":e},n=o.sheet(t);r.appendChild(document.createTextNode(n))})}),document.head.appendChild(r)}},function(e,t,n){"use strict";var i=n(0),r=n.n(i),a=n(1),o=n(4),l=[{".footer":{width:o.b.size-32+"px",margin:"32px auto 0 auto",textAlign:"left",padding:"24px 16px",fontSize:"14px",lineHeight:1.3,color:"#90A4AE",opacity:".85"," hr":{height:"1px",border:"none",margin:"1em -16px",backgroundColor:"#CFD8DC",opacity:".85"}}}];Object(a.a)("footer",l),t.a=function(){var e=arguments.length>0&&void 0!==arguments[0]?arguments[0]:{};return r()(".footer",[e.home?null:r()("a",{href:"/",oncreate:r.a.route.link},"All examples"),r()("hr"),r.a.trust('mithril-infinite, Infinite Scroll for Mithril on mobile and desktop. This site runs on version 1.0.0. Project page on <a href="https://github.com/ArthurClemens/mithril-infinite">Github</a>.')])}},function(e,t,n){"use strict";function i(e,t,n){return t in e?Object.defineProperty(e,t,{value:n,enumerable:!0,configurable:!0,writable:!0}):e[t]=n,e}var r,a=n(0),o=n.n(a),l=n(10),s=n.n(l),u=n(11),c=n(13),f=n.n(c),p={scrollView:"mithril-infinite__scroll-view",scrollViewX:"mithril-infinite__scroll-view--x",scrollViewY:"mithril-infinite__scroll-view--y",scrollContent:"mithril-infinite__scroll-content",content:"mithril-infinite__content",pages:"mithril-infinite__pages",page:"mithril-infinite__page",pageEven:"mithril-infinite__page--even",pageOdd:"mithril-infinite__page--odd",placeholder:"mithril-infinite__page--placeholder",before:"mithril-infinite__before",after:"mithril-infinite__after"},d=function(e,t){var n=window.getComputedStyle(e);if("x"===t){var i=parseFloat(n.marginLeft)+parseFloat(n.marginRight);return e.scrollWidth+i}var r=parseFloat(n.marginTop)+parseFloat(n.marginBottom);return e.scrollHeight+r},h=function(e){var t=e.el,n=e.axis,i=void 0===n?"y":n,r=e.leeway,a=void 0===r?300:r;return"y"===i?s.a.inY(t,a)||s.a.inY(t,-a):"x"===i?s.a.inX(t,a)||s.a.inX(t,-a):s.a.inViewport(t,a)||s.a.inViewport(t,-a)},g=function(e){return[p.page,e%2==0?p.pageEven:p.pageOdd].join(" ")},m=function(e,t){return t={exports:{}},e(t,t.exports),t.exports}(function(e){!function(){function t(){function e(){return arguments.length>0&&arguments[0]!==S&&i(e,arguments[0]),e._state.value}return n(e),arguments.length>0&&arguments[0]!==S&&i(e,arguments[0]),e}function n(e){e.constructor=t,e._state={id:y++,value:void 0,state:0,derive:void 0,recover:void 0,deps:{},parents:[],endStream:void 0,unregister:void 0},e.map=e["fantasy-land/map"]=f,e["fantasy-land/ap"]=p,e["fantasy-land/of"]=t,e.valueOf=d,e.toJSON=h,e.toString=d,Object.defineProperties(e,{end:{get:function(){if(!e._state.endStream){var n=t();n.map(function(t){return!0===t&&(c(e),n._state.unregister=function(){c(n)}),t}),e._state.endStream=n}return e._state.endStream}}})}function i(e,t){r(e,t);for(var n in e._state.deps)a(e._state.deps[n],!1);null!=e._state.unregister&&e._state.unregister(),o(e)}function r(e,t){e._state.value=t,e._state.changed=!0,2!==e._state.state&&(e._state.state=1)}function a(e,t){var n=e._state,i=n.parents;if(i.length>0&&i.every(m)&&(t||i.some(v))){var a=e._state.derive();if(a===S)return!1;r(e,a)}}function o(e){e._state.changed=!1;for(var t in e._state.deps)e._state.deps[t]._state.changed=!1}function l(e,n){if(!n.every(g))throw new Error("Ensure that each item passed to stream.combine/stream.merge is a stream");return s(t(),n,function(){return e.apply(this,n.concat([n.filter(v)]))})}function s(e,t,n){var i=e._state;return i.derive=n,i.parents=t.filter(b),u(e,i.parents),a(e,!0),e}function u(e,t){for(var n=0;n<t.length;n++)t[n]._state.deps[e._state.id]=e,u(e,t[n]._state.parents)}function c(e){for(var t=0;t<e._state.parents.length;t++){delete e._state.parents[t]._state.deps[e._state.id]}for(var n in e._state.deps){var i=e._state.deps[n],r=i._state.parents.indexOf(e);r>-1&&i._state.parents.splice(r,1)}e._state.state=2,e._state.deps={}}function f(e){return l(function(t){return e(t())},[this])}function p(e){return l(function(e,t){return e()(t())},[e,this])}function d(){return this._state.value}function h(){return null!=this._state.value&&"function"==typeof this._state.value.toJSON?this._state.value.toJSON():this._state.value}function g(e){return e._state}function m(e){return 1===e._state.state}function v(e){return e._state.changed}function b(e){return 2!==e._state.state}function x(e){return l(function(){return e.map(function(e){return e()})},e)}function _(e,t,n){var i=l(function(n){return t=e(t,n._state.value)},[n]);return 0===i._state.state&&i(t),i}function w(e,t){var n=e.map(function(e){var t=e[0];return 0===t._state.state&&t(void 0),t});return l(function(){var i=arguments[arguments.length-1];return n.forEach(function(n,r){i.indexOf(n)>-1&&(t=e[r][1](t,n._state.value))}),t},n)}var y=0,S={};t["fantasy-land/of"]=t,t.merge=x,t.combine=l,t.scan=_,t.scanMerge=w,t.HALT=S,e.exports=t}()}),v=m,b=function(e){return o.a.request({method:"GET",url:e})},x=function(e){var t=e.state,n=e.attrs,i=n.pageNum,r=v([]);if(n.pageData){var a=n.pageData(i);Promise.resolve(a).then(r).then(o.a.redraw)}else if(n.pageUrl){var l=n.pageUrl(i);b(l).then(r)}var s=n.processPageData||function(e,t){return e&&e.length?e.map(function(e,i){return n.item(e,t,i)}):null};t.content=r,t.className=g(i),t.pageTag=n.pageTag||"div",t.processPageData=s},_=function(e){var t=e.state,n=e.attrs,i=n.pageId,r=n.pageSizes[i]||0,a=0;n.pageSize&&(a=n.pageSize(t.content()),n.updatePageSize(i,a));var l=a?a+"px":n.autoSize?"auto":r+"px",s=function(e){if(!a){var t=d(e,n.axis);t&&n.updatePageSize(i,t)}};return o()(t.pageTag,{"data-page":i,class:t.className,style:r?"x"===n.axis?{width:l}:{height:l}:null,oncreate:function(e){var t=e.dom;new u.a(function(e){var i=!0,a=!1,o=void 0;try{for(var l,u=e[Symbol.iterator]();!(i=(l=u.next()).done);i=!0){var c=l.value,f=c.contentRect,p=f.width,d=f.height;("x"===n.axis&&p!==r||"y"===n.axis&&d!==r)&&s(t)}}catch(e){a=!0,o=e}finally{try{!i&&u.return&&u.return()}finally{if(a)throw o}}}).observe(t)},onupdate:function(e){var t=e.dom;return s(t)}},t.processPageData(t.content(),{pageId:n.pageId,pageNum:n.pageNum}))},w={oninit:x,view:_},y=Object.assign||function(e){for(var t=1;t<arguments.length;t++){var n=arguments[t];for(var i in n)Object.prototype.hasOwnProperty.call(n,i)&&(e[i]=n[i])}return e},S={oninit:function(e){return e.state.className=g(e.attrs.pageNum)},view:function(e){var t=e.state,n=e.attrs,i=n.pageId,r=n.pageSizes[i]||0;return o()("div",{"data-page":i,class:[p.placeholder,t.className].join(" "),style:y({},"x"===n.axis?{width:r+"px"}:{height:r+"px"})})}},z=new f.a,k=function(e){if(e){var t=document.getElementById(e);t&&t.parentNode.removeChild(t)}},O=[i({},"."+p.scrollView,(r={"-webkit-overflow-scrolling":"touch",height:"100%"},i(r,"&."+p.scrollViewY,i({overflowX:"hidden",overflowY:"auto",height:"100%"}," ."+p.scrollContent,{height:"100%",overflowAnchor:"none"})),i(r,"&."+p.scrollViewX,i({overflowX:"auto",overflowY:"hidden",width:"100%"}," ."+p.scrollContent,{width:"100%"})),r))];!function(e){for(var t=arguments.length,n=Array(t>1?t-1:0),i=1;i<t;i++)n[i-1]=arguments[i];k(e);var r=document.createElement("style");e&&r.setAttribute("id",e),n.forEach(function(e){Object.keys(e).length&&e.forEach(function(e){var t={"@global":e},n=z.sheet(t);r.appendChild(document.createTextNode(n))})}),document.head.appendChild(r)}("mithril-infinite",O);var P=Object.assign||function(e){for(var t=1;t<arguments.length;t++){var n=arguments[t];for(var i in n)Object.prototype.hasOwnProperty.call(n,i)&&(e[i]=n[i])}return e},A="000000",E=function(e){return A.substring(0,A.length-(""+e).length)+e},j=function(e,t){var n=t.sortedKeys;if(0===n.length)return 1;for(var i=t.beforeSize||0,r=1,a=0;a<n.length;a+=1){var o=n[a];e>i&&(r=parseInt(o,10)),i+=t.pageSizes[o]}return r},M=function(e,t,n){var i=Math.max(0,e-1);if(t<i)return 0;var r=t,a=n.sortedKeys.slice(i,r),o=n.beforeSize||0;return o=a.reduce(function(e,t){return e+=n.pageSizes[t]||0},o),o+=n.afterSize||0},I=function(e,t,n,i){if(!i)return!1;var r=E(e),a=i.querySelector('[data-page="'+r+'"]');return h({el:a,axis:t})},R=function(e){return function(t,n){return e.pageSizes[t]=parseInt(n,10),e.sortedKeys=Object.keys(e.pageSizes).sort(),C(e)}},$=function(e,t,n,i){var r=d(e,i);r&&(n[t]=r)},C=function(e){if(e.scrollView){var t=e.scrollView.getBoundingClientRect();e.boundingClientRect=e.boundingClientRect||t,t.width===e.boundingClientRect.width&&t.height===e.boundingClientRect.height||(e.preloadSlots=e.attrsPreloadSlots||1),e.boundingClientRect=t,e.contentSize&&e.preloadSlots<e.pageCount&&e.preloadSlots<=e.attrsMaxPreloadSlots&&e.contentSize<t.height&&(e.preloadSlots++,setTimeout(o.a.redraw,0))}},N=function(e,t,n,i,r,a){for(var o=t?parseInt(t,10):i||1,l=n?parseInt(n,10):i||a,s=[],u=[],c=-r;c<=r;c+=1){var f=e+c;f>=o&&f<=l&&s.push(f)}for(var p=1;p<s[0];p+=1)u.push(p);return{pages:s,prePages:u,maxPageNum:l}},U=function(e){var t=e.attrs,n=t.axis||"y",i="x"===n?"scrollLeft":"scrollTop",r=void 0===t.autoSize||!1!==t.autoSize,a=t.pageSize,l=t.contentTag||"div",s=[p.scrollView,"x"===n?p.scrollViewX:p.scrollViewY,t.class].join(" "),u=function(){return o.a.redraw()};e.state={afterSize:null,beforeSize:null,boundingClientRect:{},currentPageNum:0,pageSizes:{},preloadSlots:t.preloadPages||1,scrollView:null,sortedKeys:[],attrsMaxPreloadSlots:t.maxPreloadPages||Number.MAX_VALUE,attrsPreloadSlots:t.preloadPages||1,autoSize:r,axis:n,classList:s,contentTag:l,pageSize:a,scroll:u,whichScroll:i}},T=function(e){var t=e.state,n=e.attrs,i=t.scrollView?t.scrollView[t.whichScroll]:0,r=t.axis,a=void 0!==n.maxPages?n.maxPages:Number.MAX_VALUE,l=n.currentPage?parseInt(n.currentPage,10):j(i,t);n.pageChange&&l!==t.currentPageNum&&n.pageChange(l),t.currentPageNum=l,t.scrollView&&n.getDimensions&&n.getDimensions({scrolled:i,size:t.contentSize});var s=N(l,n.from,n.to,n.currentPage,t.preloadSlots,a),u=s.pages,c=s.prePages,f=s.maxPageNum;t.contentSize=void 0!==n.contentSize?n.contentSize:M(1,f,t),t.pageCount=u.length;var d=!f||I(f,r,0,t.scrollView);return o()("div",{oncreate:function(e){var i=e.dom;if(t.scrollView=n.scrollView?document.querySelector(n.scrollView):i,t.scrollView.className+=" "+t.classList,n.setDimensions){var a=n.setDimensions();if(a.size>0){var o="x"===r?"width":"height";i.style[o]=a.size+"px"}t.scrollView[t.whichScroll]=a.scrolled}t.scrollView.addEventListener("scroll",t.scroll)},onremove:function(){return t.scrollView.removeEventListener("scroll",t.scroll)}},o()("div",{class:p.scrollContent,style:t.autoSize?P({},"x"===r?{width:t.contentSize+"px"}:{height:t.contentSize+"px"},n.contentSize?"x"===r?{"min-width":n.contentSize+"px"}:{"min-height":n.contentSize+"px"}:{}):null},[o()(t.contentTag,{class:p.content},[n.before?o()("div",{class:p.before,oncreate:function(e){var n=e.dom;return $(n,"before",t,r)},onupdate:function(e){var n=e.dom;return $(n,"before",t,r)}},n.before):null,o()("div",{class:p.pages},[c.map(function(e){return o()(S,{axis:r,key:E(e),pageId:E(e),pageNum:e,pageSizes:t.pageSizes})}),u.map(function(e){return o()(w,{autoSize:t.autoSize,axis:r,item:n.item,key:E(e),pageData:n.pageData,pageId:E(e),pageNum:e,pageSize:t.pageSize,pageSizes:t.pageSizes,pageTag:n.pageTag,pageUrl:n.pageUrl,updatePageSize:R(t)})})]),n.after&&t.contentSize?o()("div",{class:p.after,style:{visibility:d?"visible":"hidden"},oncreate:function(e){var n=e.dom;return $(n,"after",t,r)},onupdate:function(e){var n=e.dom;return $(n,"after",t,r)}},n.after):null])]))},V={oninit:U,view:T,isElementInViewport:h};t.a=V},function(e,t,n){"use strict";n.d(t,"b",function(){return i}),n.d(t,"a",function(){return r});var i={size:320,size_px:"320px",text_color:"#263238"},r={imageUrl:"http://arthurclemens.github.io/assets/mithril-infinite-scroll/thumbs/"}},function(e,t,n){"use strict";Object.defineProperty(t,"__esModule",{value:!0});n(6)},function(e,t,n){"use strict";var i=n(0),r=n.n(i),a=n(2),o=n(9),l=n(15),s=n(17),u=n(19),c=n(21),f=n(23),p=n(25),d=n(1),h=n(27),g=n(28);Object(d.a)("common",h.a),Object(d.a)("index",g.a);var m=[{href:"/images",title:"Images",subtitle:"200 images of various heights"},{href:"/horizontal",title:"Horizontal",subtitle:"Horizontal scroller"},{href:"/grid",title:"Image grid",subtitle:"Responsive grid with 1, 2, 3 and 4 columns"},{href:"/table",title:"Data table",subtitle:"Table rows of various heights"},{href:"/short",title:"Short content",subtitle:"Automatically finds loadable space"},{href:"/fixed",title:"Fixed height",subtitle:"Preset the scroll height, don't update scroll height"},{href:"/paging",title:"Paging",subtitle:"Previous / Next buttons instead of infinite scroll"}],v=r()("ul.menu",[r()("li.header","Examples"),m.map(function(e){return r()("li",r()("a",{href:e.href,oncreate:r.a.route.link},[r()("span.title",e.title),r()("span.subtitle",e.subtitle)]))})]),b={view:function(){return r()(".index",[r()("h1","Infinite Scroll for Mithril"),v,Object(a.a)({home:!0})])}},x=document.querySelector("#app");r.a.route(x,"/",{"/":b,"/images":o.a,"/grid":l.a,"/table":s.a,"/short":u.a,"/horizontal":c.a,"/fixed":f.a,"/paging":p.a,"/paging/:p":p.a});var _=0;window.onresize=function(){clearTimeout(_),_=setTimeout(r.a.redraw,500)}},function(e,t,n){"use strict";function i(){S=getComputedStyle(document.documentElement,null),z=document.createElement("div").style,k=document.documentElement.appendChild(document.createElement("style")),P=l,O=u,"zIndex"in z&&!("z-index"in z)&&(P=function(e,t){return l(a(e),t)},O=function(e){return u(a(e))})}function r(){"undefined"!=typeof document&&document.documentElement.removeChild(k),S=k=null}function a(e){return e.replace(/-([a-z])/g,function(e,t){return t.toUpperCase()}).replace("-","")}function o(e){return e.replace(/[A-Z]/g,function(e){return"-"+e.toLowerCase()})}function l(e,t){return z[e]="",z[e]=t,!!z[e]}function s(e){return k.textContent="@media ("+e+"){}",!/^@media(?:\s+not)?\s+all/.test(k.sheet.cssRules[0].cssText)}function u(e){return e in z}function c(e){return k.textContent=e+"{}",!!k.sheet.cssRules.length}function f(e){if(""!==e.prefix){var t={keyframes:"name",viewport:null,document:'regexp(".")'};for(var n in t){var i=n+" "+(t[n]||"");!c("@"+i)&&c("@"+e.prefix+i)&&(e.hasAtrules=!0,e.atrules["@"+n]="@"+e.prefix+n)}e.hasDppx=s("resolution:1dppx"),e.hasPixelRatio=s(e.prefix+"device-pixel-ratio:1"),e.hasPixelRatioFraction=s(e.prefix+"device-pixel-ratio:1/1"),(e.hasPixelRatio||e.hasPixelRatioFraction)&&(e.properties.resolution=e.prefix+"device-pixel-ratio",e.properties["min-resolution"]=e.prefix+"min-device-pixel-ratio",e.properties["max-resolution"]=e.prefix+"max-device-pixel-ratio",s("min-"+e.prefix+"device-pixel-ratio:1")&&(e.properties["min-resolution"]="min-"+e.prefix+"device-pixel-ratio",e.properties["max-resolution"]="max-"+e.prefix+"device-pixel-ratio"))}}function p(e){if(""!==e.prefix){var t={"linear-gradient":{property:"background-image",params:"red, teal"},calc:{property:"width",params:"1px + 5%"},element:{property:"background-image",params:"#foo"},"cross-fade":{property:"backgroundImage",params:"url(a.png), url(b.png), 50%"}};t["repeating-linear-gradient"]=t["repeating-radial-gradient"]=t["radial-gradient"]=t["linear-gradient"];for(var n in t){var i=t[n],r=i.property,a=n+"("+i.params+")";!P(r,a)&&P(r,e.prefix+a)&&e.functions.push(n)}}}function d(e){if(""!==e.prefix){for(var t=0;t<E.length;t++){for(var n,i={},r=E[t].props[0],a=0;n=E[t].values[a];a++)!P(r,n)&&P(r,e.prefix+n)&&(e.hasKeywords=!0,i[n]=e.prefix+n);for(a=0;r=E[t].props[a];a++)e.keywords[r]=i}if(e.keywords.display&&e.keywords.display.flexbox&&!P("display","flex")){e.keywords.display.flex=e.keywords.display.flexbox,e.keywords.display["inline-flex"]=e.keywords.display["inline-flexbox"];for(var o in I)e.properties[o]=I[o],e.keywords[o]=R}else if(e.keywords.display&&e.keywords.display.box&&!P("display","flex")){e.keywords.display.flex=e.keywords.display.box,e.keywords.display["inline-flex"]=e.keywords.display["inline-box"],e.flexbox2009=!0;for(o in j)e.properties[o]=e.prefix+j[o],e.keywords[o]=M}!P("color","initial")&&P("color",e.prefix+"initial")&&(e.initial=e.prefix+"initial")}}function h(e){function t(e){if("-"===e.charAt(0)){var t=e.split("-")[1];n[t]=++n[t]||1}}var n={};if(S&&S.length>0)for(var i=0;i<S.length;i++)t(S[i]);else for(var r in S)t(o(r));var l=0;for(var s in n)l<n[s]&&(l=n[s],e.prefix="-"+s+"-");e.Prefix=a(e.prefix)}function g(e){var t,n;if(""!==e.prefix){var i={":any-link":":any-link",":read-only":":read-only",":read-write":":read-write","::selection":"::selection",":fullscreen":":fullscreen",":full-screen":":fullscreen","::backdrop":"::backdrop",":placeholder":"::placeholder","::placeholder":"::placeholder",":input-placeholder":"::placeholder","::input-placeholder":"::placeholder"};for(t in i)n=function(t){return t.replace(/^::?/,function(t){return t+e.prefix})}(t),!c(t)&&c(n)&&(e.hasSelectors=!0,e.selectorList.push(i[t]),e.selectorMap[i[t]]=n)}}function m(){return{atrules:{},hasAtrules:!1,hasDppx:null,hasKeywords:!1,hasPixelRatio:!1,hasPixelRatioFraction:!1,hasSelectors:!1,hasValues:!1,fixAtMediaParams:null,fixAtSupportsParams:null,fixProperty:null,fixSelector:null,fixValue:null,flexbox2009:!1,functions:[],initial:null,keywords:{},placeholder:null,prefix:"",Prefix:"",properties:{},selectorList:[],selectorMap:{},valueProperties:{transition:1,"transition-property":1,"will-change":1}}}function v(e){i(),h(e),g(e),f(e),d(e),p(e),r()}function b(e){for(var t,n=[],i=[],r=0;t=C.exec(e);)switch(t[0]){case"(":r++;break;case")":r--;break;case",":if(r)break;n.push(t.index)}for(t=n.length;t--;)i.unshift(e.slice(n[t]+1)),e=e.slice(0,n[t]);return i.unshift(e),i}function x(e,t,n){return new RegExp(e+"(?:"+t.join("|")+")"+n)}function _(e,t,n){return new RegExp("\"(?:\\\\[\\S\\s]|[^\"])*\"|'(?:\\\\[\\S\\s]|[^'])*'|\\/\\*[\\S\\s]*?\\*\\/|"+e+"((?:"+t.join("|")+"))"+n,"gi")}function w(e){function t(e,t,n){return t+i+n}function n(t,n,i){return"("+(e.properties[n]||e.fixProperty(n))+":"+e.fixValue(i,n)}var i=e.prefix;e.fixProperty=e.fixProperty||function(t){var n;return e.properties[t]=O(t)||!O(n=i+t)?t:n};var r=x("",e.selectorList,"(?:\\b|$|[^-])"),a=_("",e.selectorList,"(?:\\b|$|[^-])"),o=function(t,n){return null!=n?e.selectorMap[n]:t};e.fixSelector=function(e){return r.test(e)?e.replace(a,o):e};var l=e.functions.indexOf("linear-gradient")>-1,s=/\blinear-gradient\(/,u=/(^|\s|,|\()((?:repeating-)?linear-gradient\()\s*(-?\d*\.?\d*)deg/gi,c=function(e,t,n,i){return t+n+(90-i)+"deg"},f=!!e.functions.length,p=x("(?:^|\\s|,|\\()",e.functions,"\\s*\\("),d=_("(^|\\s|,|\\()",e.functions,"(?=\\s*\\()"),h=/^\s*([-\w]+)/gi,g=function(t,n){return e.properties[n]||e.fixProperty(n)};e.fixValue=function(n,i){var r;return null!=e.initial&&"initial"===n?e.initial:e.hasKeywords&&(r=(e.keywords[i]||$)[n])?r:(r=n,e.valueProperties.hasOwnProperty(i)&&(r=-1===n.indexOf(",")?n.replace(h,g):b(n).map(function(e){return e.replace(h,g)}).join(",")),f&&p.test(n)&&(l&&s.test(n)&&(r=r.replace(u,c)),r=r.replace(d,t)),r)};var m=/((?:min-|max-)?resolution)\s*:\s*((?:\d*.)?\d+)dppx/g,v=e.hasPixelRatio?function(t,n,i){return e.properties[n]+":"+i}:e.hasPixelRatioFraction?function(t,n,i){return e.properties[n]+":"+Math.round(10*i)+"/10"}:function(e,t,n){return t+":"+Math.round(96*n)+"dpi"};e.fixAtMediaParams=!1!==e.hasDppx?function(e){return e}:function(e){return-1!==e.indexOf("reso")?e.replace(m,v):e};var w=/\(\s*([-\w]+)\s*:\s*((?:"(?:\\[\S\s]|[^"])*"|'(?:\\[\S\s]|[^'])*'|\/\*[\S\s]*?\*\/|\((?:"(?:\\[\S\s]|[^"])*"|'(?:\\[\S\s]|[^'])*'|\/\*[\S\s]*?\*\/|\((?:"(?:\\[\S\s]|[^"])*"|'(?:\\[\S\s]|[^'])*'|\/\*[\S\s]*?\*\/|\((?:"(?:\\[\S\s]|[^"])*"|'(?:\\[\S\s]|[^'])*'|\/\*[\S\s]*?\*\/|\((?:"(?:\\[\S\s]|[^"])*"|'(?:\\[\S\s]|[^'])*'|\/\*[\S\s]*?\*\/|\([^\)]*\)|[^\)])*\)|[^\)])*\)|[^\)])*\)|[^\)])*\)|[^\)])*)/g;e.fixAtSupportsParams=function(e){return e.replace(w,n)}}function y(e){var t=A,n=[];return e&&(e.setPrefixDb=function(e){return-1===n.indexOf(e)&&(w(e),n.push(e)),t=e,y}),{$filter:function(e){return{atrule:function(n,i,r,a){e.atrule(t.hasAtrules&&t.atrules[n]||n,i,"@media"===n?t.fixAtMediaParams(r):"@supports"===n?t.fixAtSupportsParams(r):r,a)},decl:function n(i,r){if(!i||"string"!=typeof r&&"number"!=typeof r)return e.decl(t.properties[i]||t.fixProperty(i),r);r+="","flex-flow"===i&&t.flexbox2009?r.split(" ").forEach(function(e){e.indexOf("wrap")>-1?n("flex-wrap",e):""!==e&&n("flex-direction",e)}):"flex-direction"===i&&t.flexbox2009?(e.decl(t.properties["box-orient"],r.indexOf("column")>-1?"block-axis":"inline-axis"),e.decl(t.properties["box-direction"],r.indexOf("-reverse")>-1?"reverse":"normal")):e.decl(t.properties[i]||t.fixProperty(i),t.fixValue(r,i))},rule:function(n){e.rule(t.hasSelectors?t.fixSelector(n):n)}}}}}Object.defineProperty(t,"__esModule",{value:!0});var S,z,k,O,P,A,E=[{props:["cursor"],values:["grab","grabbing","zoom-in","zoom-out"]},{props:["display"],values:["box","inline-box","flexbox","inline-flexbox","flex","inline-flex","grid","inline-grid"]},{props:["position"],values:["sticky"]},{props:["width","column-width","height","max-height","max-width","min-height","min-width"],values:["contain-floats","fill-available","fit-content","max-content","min-content"]}],j={"align-items":"box-align",flex:"box-flex","box-direction":"box-direction","box-orient":"box-orient","flex-wrap":"box-lines","justify-content":"box-pack",order:"box-ordinal-group"},M={"flex-end":"end","flex-start":"start",nowrap:"single","space-around":"justify","space-between":"justify",wrap:"multiple","wrap-reverse":"multiple"},I={"align-content":"-ms-flex-line-pack","align-items":"-ms-flex-align","align-self":"-ms-flex-item-align","flex-basis":"-ms-preferred-size","flex-grow":"-ms-flex-positive","flex-shrink":"-ms-flex-negative","justify-content":"-ms-flex-pack",order:"-ms-flex-order"},R={"flex-end":"end","flex-start":"start","space-around":"distribute","space-between":"justify"},$={},C=/[(),]|\/\*[\s\S]*?\*\//g;!function(){A=m(),"function"==typeof getComputedStyle&&v(A),w(A)}(),t.prefixPlugin=y},function(e,t,n){"use strict";function i(e,t){for(var n in t)z.call(t,n)&&(!n.indexOf("$")||n in e||(e[n]=t[n]));return e}function r(e,t){var n,i,r=[];for(i in t)if(z.call(t,i))for(n in e)z.call(e,n)&&r.push(e[n]+t[i]);return r}function a(e){for(var t,n=[],i=[],r=0;t=O.exec(e);)switch(t[0]){case"(":r++;break;case")":r--;break;case",":if(r)break;n.push(t.index)}for(t=n.length;t--;)i.unshift(e.slice(n[t]+1)),e=e.slice(0,n[t]);return i.unshift(e),i}function o(e,t){for(var n,i,a=[],o=[];i=P.exec(e);)"&"==i[0]&&a.push(i.index);for(i=a.length;i--;)o.unshift(e.slice(a[i]+1)),e=e.slice(0,a[i]);for(o.unshift(e),1===o.length&&o.unshift(""),n=[o[0]],i=1;i<o.length;i++)n=r(n,r(t,[o[i]]));return n.join(",")}function l(e){return function t(n){if(x.call(n)===_)for(var i=0;i<n.length;i++)t(n[i]);else e(n)}}function s(e){return"-"+e.toLowerCase()}function u(e,t,n,i,r){var a,o,l;if(null!=i)switch(x.call(i=i.valueOf())){case _:for(a=0;a<i.length;a++)u(e,t,n,i[a],r);break;case w:n=n&&n+"-";for(a in i)if(z.call(i,a))if(o=i[a],/\$/.test(a))for(l in a=a.split("$"))z.call(a,l)&&u(e,t,n+a[l],o,r);else u(e,t,n+a,o,r);break;default:a=n.replace(/_/g,"-").replace(/[A-Z]/g,s),!r||"animation-name"!=a&&"animation"!=a&&"list-style"!=a||(i=i.split(",").map(function(t){return t.replace(/^\s*(?:(var\([^)]+\))|:?global\(\s*([_A-Za-z][-\w]*)\s*\)|()(-?[_A-Za-z][-\w]*))/,e.localizeReplacer)}).join(",")),t.decl(a,i)}}function c(e,t,n,i,r,a,o){for(var s=0;s<e.$atHandlers.length;s++)if(e.$atHandlers[s](e,t,n,i,r,a,o))return;if(!n[3]&&/^global$/.test(n[2]))f(e,t,r,i,0,o);else if(!n[3]&&/^local$/.test(n[2]))f(e,t,r,i,1,o);else if(n[3]&&/^adopt$/.test(n[2])){if(!a||o)return t.err("@adopt global or nested: "+n[0]);if(!/^\.?[_A-Za-z][-\w]*$/.test(n[3]))return t.err("bad adopter "+JSON.stringify(n[3])+" in "+n[0]);s=[],l(function(e,i){null!=e&&/^\.?[_A-Za-z][-\w]*(?:\s+\.?[_A-Za-z][-\w]*)*$/.test(i=e+"")?s.push(i.replace(/\./g,"")):t.err("bad adoptee "+JSON.stringify(e)+" in "+n[0])})(i),s.length&&(e.localize(n[3]=n[3].replace(/\./g,"")),e.names[n[3]]+=" "+s.join(" "))}else!n[3]&&/^(?:namespace|import|charset)$/.test(n[2])?l(function(e){t.atrule(n[1],n[2],e)})(i):!n[3]&&/^(?:font-face|viewport)$/.test(n[2])?l(function(i){t.atrule(n[1],n[2],n[3],1),u(e,t,"",i,a),t._atrule()})(i):n[3]&&/^(?:media|supports|page|keyframes)$/.test(n[2])?(a&&"keyframes"==n[2]&&(n[3]=n[3].replace(/(var\([^)]+\))|:?global\(\s*([_A-Za-z][-\w]*)\s*\)|()(-?[_A-Za-z][-\w]*)/,e.localizeReplacer)),t.atrule(n[1],n[2],n[3],1),"page"==n[2]?u(e,t,"",i,a):f(e,t,"keyframes"==n[2]?"":r,i,a,o+1),t._atrule()):t.err("Unsupported at-rule: "+n[0])}function f(e,t,n,i,r,l){var s,p,d,h;switch(x.call(i)){case w:for(s in i)if(z.call(i,s))if(p=i[s],n.length>0&&/^[-\w$]+$/.test(s))if(d||(d=1,t.rule(n)),/\$/.test(s))for(h in s=s.split("$"))z.call(s,h)&&u(e,t,s[h],p,r);else u(e,t,s,p,r);else/^@/.test(s)?(d=0,c(e,t,/^(.(?:-[\w]+-)?([_A-Za-z][-\w]*))\b\s*(.*?)\s*$/.exec(s)||[s,"@","",""],p,n,r,l)):(d=0,f(e,t,n.length>0&&(/,/.test(n)||/,/.test(s))?(h=a(n),a(r?s.replace(/("(?:\\.|[^"\n])*"|'(?:\\.|[^'\n])*'|\/\*[\s\S]*?\*\/)|:global\(\s*(\.-?[_A-Za-z][-\w]*)\s*\)|(\.)(-?[_A-Za-z][-\w]*)/g,e.localizeReplacer):s).map(function(e){return/&/.test(e)?o(e,h):h.map(function(t){return t+e}).join(",")}).join(",")):/&/.test(s)?o(r?s.replace(/("(?:\\.|[^"\n])*"|'(?:\\.|[^'\n])*'|\/\*[\s\S]*?\*\/)|:global\(\s*(\.-?[_A-Za-z][-\w]*)\s*\)|(\.)(-?[_A-Za-z][-\w]*)/g,e.localizeReplacer):s,[n]):n+(r?s.replace(/("(?:\\.|[^"\n])*"|'(?:\\.|[^'\n])*'|\/\*[\s\S]*?\*\/)|:global\(\s*(\.-?[_A-Za-z][-\w]*)\s*\)|(\.)(-?[_A-Za-z][-\w]*)/g,e.localizeReplacer):s),p,r,l+1));break;case _:for(s=0;s<i.length;s++)f(e,t,n,i[s],r,l);break;case y:n.length||t.err("No selector"),t.rule(n||" "),u(e,t,"",i,r)}}function p(e,t){var n;return t?e:{init:function(){n=0,e.init()},done:function(t){return n&&(e._rule(),n=0),e.done(t)},atrule:function(t,i,r,a){n&&(e._rule(),n=0),e.atrule(t,i,r,a)},_atrule:function(t){n&&(e._rule(),n=0),e._atrule(t)},rule:function(t){t!==n&&(n&&e._rule(),e.rule(t),n=t)}}}function d(e){return":global("+e+")"}function h(e,t,n){return n={},n[e]=t,n}function g(e,t,n){if(arguments.length<3){var i=g.bind.apply(g,[null].concat([].slice.call(arguments,0)));return i.toString=function(){return"@"+e+" "+t},i}return h("@"+e+" "+t,n)}function m(){function e(e){if(!z.length){s.push(function(e,t){return t?{init:o.init,decl:o.decl,done:o.done,err:o.err}:o});for(var t=0;t<2;t++)for(var n=s.length;n--;)z[t]=k(i(s[n](z[t],!!t),z[t]))}return z[e]}function t(e){return _.names[e]||(_.names[e]=e+_.suffix),_.names[e].match(/^\S+/)}function n(e,n,i,r,a){return n||i||r+t(a)}var r,a,o={init:function(){r=[],a=[]},done:function(e){if(0!=a.length)throw new Error("j2c error(s): "+JSON.stringify(a,null,2)+"in context:\n"+r.join(""));return e?r:r.join("")},err:function(e){a.push(e),r.push("/* +++ ERROR +++ "+e+" */\n")},atrule:function(e,t,n,i){r.push(e,n&&" ",n,i?" {":";",_.endline)},_atrule:function(){r.push("}",_.endline)},rule:function(e){r.push(e," {",_.endline)},_rule:function(){r.push("}",_.endline)},decl:function(e,t){r.push(e,e&&":",t,";",_.endline)}},s=[p],m=[],_={at:g,global:d,kv:h,names:{},endline:"\n",suffix:"__j2c-"+Math.floor(4294967296*Math.random()).toString(36)+"-"+Math.floor(4294967296*Math.random()).toString(36)+"-"+Math.floor(4294967296*Math.random()).toString(36)+"-"+Math.floor(4294967296*Math.random()).toString(36),$plugins:[],sheet:function(t){var n=e(0);return n.init(),f(w[0],n,"",t,1,0),n.done()},inline:function(t,n){var i=e(1);return i.init(),u(w[1],i,"",t,!(n&&n.global)),i.done()}},w=[{localizeReplacer:n,localize:t,names:_.names,$atHandlers:m,atrule:c,decl:u,rule:f},{localizeReplacer:n,localize:t,names:_.names,decl:u}],y=l(function(e){~_.$plugins.indexOf(e)||(_.$plugins.push(e),x.call(e)===S&&(e=e(_)),e&&(l(function(e){s.push(e)})(e.$filter||v),l(function(e){m.push(e)})(e.$at||v),i(_.names,e.$names||b),y(e.$plugins||v),o=e.$sink||o,i(_,e)))}),z=[];return y(v.slice.call(arguments)),_}var v=[],b={},x=b.toString,_=x.call(v),w=x.call(b),y=x.call(""),S=x.call(x),z=b.hasOwnProperty,k=Object.freeze||function(e){return e},O=/[(),]|"(?:\\.|[^"\n])*"|'(?:\\.|[^'\n])*'|\/\*[\s\S]*?\*\//g,P=/&|"(?:\\.|[^"\n])*"|'(?:\\.|[^'\n])*'|\/\*[\s\S]*?\*\//g;e.exports=m},function(e,t,n){"use strict";var i=n(0),r=n.n(i),a=n(2),o=n(3),l=n(4),s=n(1),u=n(14);Object(s.a)("images",u.a);var c=function(e){return"data/images/page-"+e+".json"},f={expanded:{},dirty:{},toggle:function(e){f.expanded[e]?delete f.expanded[e]:f.expanded[e]=1,f.dirty[e]=1},isExpanded:function(e){return f.expanded[e]},isDirty:function(e){return f.dirty[e]},clearDirty:function(e){return delete f.dirty[e]}},p=function(e,t,n){if(f.isDirty(t)&&o.a.isElementInViewport({el:e})){var i=l.a.imageUrl+n;e.style.backgroundImage=e.style.backgroundImage="url("+i+")",f.clearDirty(t)}},d=function(e,t){var n=t.pageNum+e.width+e.src,i=f.isExpanded(n),a=i?.5:.25,o=parseInt(e.width*a,10),l=parseInt(e.height*a,10);return r()("a.list-item",{style:{height:l+"px"},onclick:function(){return f.toggle(n)}},[r()("span.pageNum",t.pageNum),r()(".image",{style:{height:l+"px",width:o+"px"},oncreate:function(t){var i=t.dom;return f.dirty[n]=!0,p(i,n,e.src)},onupdate:function(t){var i=t.dom;return p(i,n,e.src)}}),r()(".toggle",i?r.a.trust("&#150;"):r.a.trust("&#43;"))])};t.a={view:function(){return r()(o.a,{maxPages:20,item:d,pageUrl:c,preloadPages:3,class:"images",before:r()("a",{class:["list-item",f.isExpanded("before")?"open":"closed"].join(" "),onclick:function(){return f.toggle("before")}},[r()("div",r.a.trust('A list of pugs. Courtesy the <a href="http: //airbnb.io/infinity/demo-off.html">AirBnb Infinity demo</a>.')),r()(".toggle",f.isExpanded("before")?r.a.trust("&#150;"):r.a.trust("&#43;"))]),after:Object(a.a)()})}}},function(e,t){/*!
+/******/ (function(modules) { // webpackBootstrap
+/******/ 	// The module cache
+/******/ 	var installedModules = {};
+/******/
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+/******/
+/******/ 		// Check if module is in cache
+/******/ 		if(installedModules[moduleId]) {
+/******/ 			return installedModules[moduleId].exports;
+/******/ 		}
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = installedModules[moduleId] = {
+/******/ 			i: moduleId,
+/******/ 			l: false,
+/******/ 			exports: {}
+/******/ 		};
+/******/
+/******/ 		// Execute the module function
+/******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
+/******/
+/******/ 		// Flag the module as loaded
+/******/ 		module.l = true;
+/******/
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+/******/
+/******/
+/******/ 	// expose the modules object (__webpack_modules__)
+/******/ 	__webpack_require__.m = modules;
+/******/
+/******/ 	// expose the module cache
+/******/ 	__webpack_require__.c = installedModules;
+/******/
+/******/ 	// define getter function for harmony exports
+/******/ 	__webpack_require__.d = function(exports, name, getter) {
+/******/ 		if(!__webpack_require__.o(exports, name)) {
+/******/ 			Object.defineProperty(exports, name, {
+/******/ 				configurable: false,
+/******/ 				enumerable: true,
+/******/ 				get: getter
+/******/ 			});
+/******/ 		}
+/******/ 	};
+/******/
+/******/ 	// getDefaultExport function for compatibility with non-harmony modules
+/******/ 	__webpack_require__.n = function(module) {
+/******/ 		var getter = module && module.__esModule ?
+/******/ 			function getDefault() { return module['default']; } :
+/******/ 			function getModuleExports() { return module; };
+/******/ 		__webpack_require__.d(getter, 'a', getter);
+/******/ 		return getter;
+/******/ 	};
+/******/
+/******/ 	// Object.prototype.hasOwnProperty.call
+/******/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
+/******/
+/******/ 	// __webpack_public_path__
+/******/ 	__webpack_require__.p = "";
+/******/
+/******/ 	// Load entry module and return exports
+/******/ 	return __webpack_require__(__webpack_require__.s = 5);
+/******/ })
+/************************************************************************/
+/******/ ([
+/* 0 */
+/***/ (function(module, exports) {
+
+module.exports = m;
+
+/***/ }),
+/* 1 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return addStyle; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_j2c_plugin_prefix_browser__ = __webpack_require__(7);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_j2c_plugin_prefix_browser___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_j2c_plugin_prefix_browser__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_j2c__ = __webpack_require__(8);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_j2c___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_j2c__);
+
+
+var j2c = new __WEBPACK_IMPORTED_MODULE_1_j2c___default.a(__WEBPACK_IMPORTED_MODULE_0_j2c_plugin_prefix_browser__["prefixPlugin"]);
+
+var removeStyle = function removeStyle(id) {
+  if (id) {
+    var old = document.getElementById(id);
+    if (old) {
+      old.parentNode.removeChild(old);
+    }
+  }
+};
+
+/*
+ * @param id: identifier, used as HTMLElement id for the attached <style></style> element
+ * @param styles: list of lists style Objects
+ */
+var addStyle = function addStyle(id) {
+  for (var _len = arguments.length, styles = Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
+    styles[_key - 1] = arguments[_key];
+  }
+
+  removeStyle(id);
+  var styleEl = document.createElement("style");
+  if (id) {
+    styleEl.setAttribute("id", id);
+  }
+  styles.forEach(function (styleList) {
+    // each style returns a list
+    if (Object.keys(styleList).length) {
+      styleList.forEach(function (style) {
+        var scoped = { "@global": style };
+        var sheet = j2c.sheet(scoped);
+        styleEl.appendChild(document.createTextNode(sheet));
+      });
+    }
+  });
+  document.head.appendChild(styleEl);
+};
+
+/***/ }),
+/* 2 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_mithril__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_mithril___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_mithril__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__app_styler__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__app_variables__ = __webpack_require__(4);
+
+
+
+
+var SIDE_PADDING = 16;
+var VERSION = "1.0.0";
+
+var styles = [{
+  ".footer": {
+    width: __WEBPACK_IMPORTED_MODULE_2__app_variables__["b" /* styleVariables */].size - 2 * SIDE_PADDING + "px",
+    margin: "32px auto 0 auto",
+    textAlign: "left",
+    padding: "24px " + SIDE_PADDING + "px",
+    fontSize: "14px",
+    lineHeight: 1.3,
+    color: "#90A4AE",
+    opacity: ".85",
+
+    " hr": {
+      height: "1px",
+      border: "none",
+      margin: "1em -" + SIDE_PADDING + "px",
+      backgroundColor: "#CFD8DC",
+      opacity: ".85"
+    }
+  }
+}];
+
+Object(__WEBPACK_IMPORTED_MODULE_1__app_styler__["a" /* addStyle */])("footer", styles);
+
+/* harmony default export */ __webpack_exports__["a"] = (function () {
+  var opts = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+  return __WEBPACK_IMPORTED_MODULE_0_mithril___default()(".footer", [!opts.home ? __WEBPACK_IMPORTED_MODULE_0_mithril___default()("a", {
+    href: "/",
+    oncreate: __WEBPACK_IMPORTED_MODULE_0_mithril___default.a.route.link
+  }, "All examples") : null, __WEBPACK_IMPORTED_MODULE_0_mithril___default()("hr"), __WEBPACK_IMPORTED_MODULE_0_mithril___default.a.trust("mithril-infinite, Infinite Scroll for Mithril on mobile and desktop. This site runs on version " + VERSION + ". Project page on <a href=\"https://github.com/ArthurClemens/mithril-infinite\">Github</a>.")]);
+});
+
+/***/ }),
+/* 3 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_mithril__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_mithril___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_mithril__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_verge__ = __webpack_require__(10);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_verge___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_verge__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_resize_observer_polyfill__ = __webpack_require__(11);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_j2c__ = __webpack_require__(13);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_j2c___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_j2c__);
+
+
+
+
+
+var classes = {
+  scrollView: "mithril-infinite__scroll-view",
+  scrollViewX: "mithril-infinite__scroll-view--x",
+  scrollViewY: "mithril-infinite__scroll-view--y",
+  scrollContent: "mithril-infinite__scroll-content",
+  content: "mithril-infinite__content",
+  pages: "mithril-infinite__pages",
+  page: "mithril-infinite__page",
+  pageEven: "mithril-infinite__page--even",
+  pageOdd: "mithril-infinite__page--odd",
+  placeholder: "mithril-infinite__page--placeholder",
+  before: "mithril-infinite__before",
+  after: "mithril-infinite__after"
+};
+
+var LEEWAY = 300;
+
+var getElementSize = function getElementSize(el, axis) {
+  var styles = window.getComputedStyle(el);
+  if (axis === "x") {
+    var margin = parseFloat(styles.marginLeft) + parseFloat(styles.marginRight);
+    return el.scrollWidth + margin;
+  } else {
+    var _margin = parseFloat(styles.marginTop) + parseFloat(styles.marginBottom);
+    return el.scrollHeight + _margin;
+  }
+};
+
+// el, axis = "y", expand = LEEWAY
+var isElementInViewport = function isElementInViewport(_ref) {
+  var el = _ref.el,
+      _ref$axis = _ref.axis,
+      axis = _ref$axis === undefined ? "y" : _ref$axis,
+      _ref$leeway = _ref.leeway,
+      leeway = _ref$leeway === undefined ? LEEWAY : _ref$leeway;
+
+  return axis === "y" ? __WEBPACK_IMPORTED_MODULE_1_verge___default.a.inY(el, leeway) || __WEBPACK_IMPORTED_MODULE_1_verge___default.a.inY(el, -leeway) : axis === "x" ? __WEBPACK_IMPORTED_MODULE_1_verge___default.a.inX(el, leeway) || __WEBPACK_IMPORTED_MODULE_1_verge___default.a.inX(el, -leeway) : __WEBPACK_IMPORTED_MODULE_1_verge___default.a.inViewport(el, leeway) || __WEBPACK_IMPORTED_MODULE_1_verge___default.a.inViewport(el, -leeway);
+};
+
+var makeClassName = function makeClassName(pageNum) {
+  return [classes.page, pageNum % 2 === 0 ? classes.pageEven : classes.pageOdd].join(" ");
+};
+
+function createCommonjsModule(fn, module) {
+	return module = { exports: {} }, fn(module, module.exports), module.exports;
+}
+
+var stream$2 = createCommonjsModule(function (module) {
+	/* eslint-disable */
+	(function () {
+		var guid = 0,
+		    HALT = {};
+		function createStream() {
+			function stream() {
+				if (arguments.length > 0 && arguments[0] !== HALT) updateStream(stream, arguments[0]);
+				return stream._state.value;
+			}
+			initStream(stream);
+
+			if (arguments.length > 0 && arguments[0] !== HALT) updateStream(stream, arguments[0]);
+
+			return stream;
+		}
+		function initStream(stream) {
+			stream.constructor = createStream;
+			stream._state = { id: guid++, value: undefined, state: 0, derive: undefined, recover: undefined, deps: {}, parents: [], endStream: undefined, unregister: undefined };
+			stream.map = stream["fantasy-land/map"] = map, stream["fantasy-land/ap"] = ap, stream["fantasy-land/of"] = createStream;
+			stream.valueOf = valueOf, stream.toJSON = toJSON, stream.toString = valueOf;
+
+			Object.defineProperties(stream, {
+				end: { get: function get() {
+						if (!stream._state.endStream) {
+							var endStream = createStream();
+							endStream.map(function (value) {
+								if (value === true) {
+									unregisterStream(stream);
+									endStream._state.unregister = function () {
+										unregisterStream(endStream);
+									};
+								}
+								return value;
+							});
+							stream._state.endStream = endStream;
+						}
+						return stream._state.endStream;
+					} }
+			});
+		}
+		function updateStream(stream, value) {
+			updateState(stream, value);
+			for (var id in stream._state.deps) {
+				updateDependency(stream._state.deps[id], false);
+			}if (stream._state.unregister != null) stream._state.unregister();
+			finalize(stream);
+		}
+		function updateState(stream, value) {
+			stream._state.value = value;
+			stream._state.changed = true;
+			if (stream._state.state !== 2) stream._state.state = 1;
+		}
+		function updateDependency(stream, mustSync) {
+			var state = stream._state,
+			    parents = state.parents;
+			if (parents.length > 0 && parents.every(active) && (mustSync || parents.some(changed))) {
+				var value = stream._state.derive();
+				if (value === HALT) return false;
+				updateState(stream, value);
+			}
+		}
+		function finalize(stream) {
+			stream._state.changed = false;
+			for (var id in stream._state.deps) {
+				stream._state.deps[id]._state.changed = false;
+			}
+		}
+
+		function combine(fn, streams) {
+			if (!streams.every(valid)) throw new Error("Ensure that each item passed to stream.combine/stream.merge is a stream");
+			return initDependency(createStream(), streams, function () {
+				return fn.apply(this, streams.concat([streams.filter(changed)]));
+			});
+		}
+
+		function initDependency(dep, streams, derive) {
+			var state = dep._state;
+			state.derive = derive;
+			state.parents = streams.filter(notEnded);
+
+			registerDependency(dep, state.parents);
+			updateDependency(dep, true);
+
+			return dep;
+		}
+		function registerDependency(stream, parents) {
+			for (var i = 0; i < parents.length; i++) {
+				parents[i]._state.deps[stream._state.id] = stream;
+				registerDependency(stream, parents[i]._state.parents);
+			}
+		}
+		function unregisterStream(stream) {
+			for (var i = 0; i < stream._state.parents.length; i++) {
+				var parent = stream._state.parents[i];
+				delete parent._state.deps[stream._state.id];
+			}
+			for (var id in stream._state.deps) {
+				var dependent = stream._state.deps[id];
+				var index = dependent._state.parents.indexOf(stream);
+				if (index > -1) dependent._state.parents.splice(index, 1);
+			}
+			stream._state.state = 2; //ended
+			stream._state.deps = {};
+		}
+
+		function map(fn) {
+			return combine(function (stream) {
+				return fn(stream());
+			}, [this]);
+		}
+		function ap(stream) {
+			return combine(function (s1, s2) {
+				return s1()(s2());
+			}, [stream, this]);
+		}
+		function valueOf() {
+			return this._state.value;
+		}
+		function toJSON() {
+			return this._state.value != null && typeof this._state.value.toJSON === "function" ? this._state.value.toJSON() : this._state.value;
+		}
+
+		function valid(stream) {
+			return stream._state;
+		}
+		function active(stream) {
+			return stream._state.state === 1;
+		}
+		function changed(stream) {
+			return stream._state.changed;
+		}
+		function notEnded(stream) {
+			return stream._state.state !== 2;
+		}
+
+		function merge(streams) {
+			return combine(function () {
+				return streams.map(function (s) {
+					return s();
+				});
+			}, streams);
+		}
+
+		function scan(reducer, seed, stream) {
+			var newStream = combine(function (s) {
+				return seed = reducer(seed, s._state.value);
+			}, [stream]);
+
+			if (newStream._state.state === 0) newStream(seed);
+
+			return newStream;
+		}
+
+		function scanMerge(tuples, seed) {
+			var streams = tuples.map(function (tuple) {
+				var stream = tuple[0];
+				if (stream._state.state === 0) stream(undefined);
+				return stream;
+			});
+
+			var newStream = combine(function () {
+				var changed = arguments[arguments.length - 1];
+
+				streams.forEach(function (stream, idx) {
+					if (changed.indexOf(stream) > -1) {
+						seed = tuples[idx][1](seed, stream._state.value);
+					}
+				});
+
+				return seed;
+			}, streams);
+
+			return newStream;
+		}
+
+		createStream["fantasy-land/of"] = createStream;
+		createStream.merge = merge;
+		createStream.combine = combine;
+		createStream.scan = scan;
+		createStream.scanMerge = scanMerge;
+		createStream.HALT = HALT;
+
+		module["exports"] = createStream;
+	})();
+});
+
+var stream = stream$2;
+
+var getPageData = function getPageData(url) {
+  return __WEBPACK_IMPORTED_MODULE_0_mithril___default.a.request({
+    method: "GET",
+    url: url
+  });
+};
+
+var oninit$1 = function oninit(_ref) {
+  var state = _ref.state,
+      attrs = _ref.attrs;
+
+  var pageNum = attrs.pageNum;
+  var content = stream([]);
+
+  if (attrs.pageData) {
+    var result = attrs.pageData(pageNum);
+    Promise.resolve(result).then(content).then(__WEBPACK_IMPORTED_MODULE_0_mithril___default.a.redraw);
+  } else if (attrs.pageUrl) {
+    var url = attrs.pageUrl(pageNum);
+    getPageData(url).then(content);
+  }
+
+  var processPageData = attrs.processPageData || function (content, attrs1) {
+    return content && content.length ? content.map(function (data, index) {
+      return attrs.item(data, attrs1, index);
+    }) : null;
+  };
+
+  state.content = content;
+  // Memoize some properties that do not change
+  state.className = makeClassName(pageNum);
+  state.pageTag = attrs.pageTag || "div";
+  state.processPageData = processPageData;
+};
+
+var view$1 = function view(_ref2) {
+  var state = _ref2.state,
+      attrs = _ref2.attrs;
+
+  var pageId = attrs.pageId;
+  var storedPageSize = attrs.pageSizes[pageId] || 0;
+  var pageSize = 0;
+
+  // attrs/pageSize overrides all measurements on elements here
+  if (attrs.pageSize) {
+    pageSize = attrs.pageSize(state.content());
+    attrs.updatePageSize(pageId, pageSize);
+  }
+
+  var cssSize = pageSize ? pageSize + "px" : !attrs.autoSize ? storedPageSize + "px" : "auto";
+
+  var update = function update(dom) {
+    if (pageSize) return;
+    var size = getElementSize(dom, attrs.axis);
+    if (size) {
+      attrs.updatePageSize(pageId, size);
+    }
+  };
+
+  return __WEBPACK_IMPORTED_MODULE_0_mithril___default()(state.pageTag, {
+    "data-page": pageId,
+    class: state.className,
+    style: storedPageSize ? attrs.axis === "x" ? { width: cssSize } : { height: cssSize } : null,
+    oncreate: function oncreate(_ref3) {
+      var dom = _ref3.dom;
+
+      var ro = new __WEBPACK_IMPORTED_MODULE_2_resize_observer_polyfill__["a" /* default */](function (entries) {
+        var _iteratorNormalCompletion = true;
+        var _didIteratorError = false;
+        var _iteratorError = undefined;
+
+        try {
+          for (var _iterator = entries[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+            var entry = _step.value;
+            var _entry$contentRect = entry.contentRect,
+                width = _entry$contentRect.width,
+                height = _entry$contentRect.height;
+
+            if (attrs.axis === "x" && width !== storedPageSize || attrs.axis === "y" && height !== storedPageSize) {
+              update(dom);
+            }
+          }
+        } catch (err) {
+          _didIteratorError = true;
+          _iteratorError = err;
+        } finally {
+          try {
+            if (!_iteratorNormalCompletion && _iterator.return) {
+              _iterator.return();
+            }
+          } finally {
+            if (_didIteratorError) {
+              throw _iteratorError;
+            }
+          }
+        }
+      });
+      ro.observe(dom);
+      // update(dom);
+    },
+    onupdate: function onupdate(_ref4) {
+      var dom = _ref4.dom;
+      return update(dom);
+    }
+  }, state.processPageData(state.content(), {
+    pageId: attrs.pageId,
+    pageNum: attrs.pageNum
+  }));
+};
+
+var page = {
+  oninit: oninit$1,
+  view: view$1
+};
+
+var _extends$1 = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+var placeholder = {
+  oninit: function oninit(vnode) {
+    return (
+      // Memoize some properties that do not change
+      vnode.state.className = makeClassName(vnode.attrs.pageNum)
+    );
+  },
+  view: function view(_ref) {
+    var state = _ref.state,
+        attrs = _ref.attrs;
+
+    var pageId = attrs.pageId;
+    var storedPageSize = attrs.pageSizes[pageId] || 0;
+
+    return __WEBPACK_IMPORTED_MODULE_0_mithril___default()("div", {
+      "data-page": pageId,
+      class: [classes.placeholder, state.className].join(" "),
+      style: _extends$1({}, attrs.axis === "x" ? { width: storedPageSize + "px" } : { height: storedPageSize + "px" })
+    });
+  }
+};
+
+var j2c = new __WEBPACK_IMPORTED_MODULE_3_j2c___default.a();
+
+/*
+ * @param id: identifier, used as HTMLElement id for the attached <style></style> element
+ * @param styles: list of lists style Objects
+ */
+var addStyle = function addStyle(id) {
+  for (var _len = arguments.length, styles = Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
+    styles[_key - 1] = arguments[_key];
+  }
+
+  removeStyle(id);
+  var styleEl = document.createElement("style");
+  if (id) {
+    styleEl.setAttribute("id", id);
+  }
+  styles.forEach(function (styleList) {
+    // each style returns a list
+    if (Object.keys(styleList).length) {
+      styleList.forEach(function (style) {
+        var scoped = { "@global": style };
+        var sheet = j2c.sheet(scoped);
+        styleEl.appendChild(document.createTextNode(sheet));
+      });
+    }
+  });
+  document.head.appendChild(styleEl);
+};
+
+var removeStyle = function removeStyle(id) {
+  if (id) {
+    var old = document.getElementById(id);
+    if (old) {
+      old.parentNode.removeChild(old);
+    }
+  }
+};
+
+var _ref3;
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+var styles = [_defineProperty({}, "." + classes.scrollView, (_ref3 = {
+  "-webkit-overflow-scrolling": "touch",
+  height: "100%"
+
+}, _defineProperty(_ref3, "&." + classes.scrollViewY, _defineProperty({
+  overflowX: "hidden",
+  overflowY: "auto",
+  height: "100%"
+
+}, " ." + classes.scrollContent, {
+  height: "100%",
+  overflowAnchor: "none"
+})), _defineProperty(_ref3, "&." + classes.scrollViewX, _defineProperty({
+  overflowX: "auto",
+  overflowY: "hidden",
+  width: "100%"
+
+}, " ." + classes.scrollContent, {
+  width: "100%"
+})), _ref3))];
+
+addStyle("mithril-infinite", styles);
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+var SEL_PADDING = "000000";
+
+var numToId = function numToId(pageNum) {
+  return SEL_PADDING.substring(0, SEL_PADDING.length - ("" + pageNum).length) + pageNum;
+};
+
+var calculateCurrentPageNum = function calculateCurrentPageNum(scrollAmount, state) {
+  var pageNumKeys = state.sortedKeys;
+  if (pageNumKeys.length === 0) {
+    return 1;
+  }
+  var acc = state.beforeSize || 0;
+  var currentPageNum = 1;
+  for (var i = 0; i < pageNumKeys.length; i = i + 1) {
+    var pageKey = pageNumKeys[i];
+    if (scrollAmount > acc) {
+      currentPageNum = parseInt(pageKey, 10);
+    }
+    acc += state.pageSizes[pageKey];
+  }
+  return currentPageNum;
+};
+
+var calculateContentSize = function calculateContentSize(from, to, state) {
+  var fromIndex = Math.max(0, from - 1);
+  if (to < fromIndex) {
+    return 0;
+  }
+  var toIndex = to;
+  var pageNumKeys = state.sortedKeys.slice(fromIndex, toIndex);
+  var size = state.beforeSize || 0;
+  size = pageNumKeys.reduce(function (total, pageKey) {
+    return total += state.pageSizes[pageKey] || 0;
+  }, size);
+  size += state.afterSize || 0;
+  return size;
+};
+
+var isPageInViewport = function isPageInViewport(page$$1, axis, state, scrollView) {
+  if (!scrollView) {
+    return false;
+  }
+  var id = numToId(page$$1);
+  var el = scrollView.querySelector("[data-page=\"" + id + "\"]");
+  return isElementInViewport({ el: el, axis: axis });
+};
+
+var updatePageSize = function updatePageSize(state) {
+  return function (pageId, size) {
+    return state.pageSizes[pageId] = parseInt(size, 10), state.sortedKeys = Object.keys(state.pageSizes).sort(), calculatePreloadSlots(state);
+  };
+};
+
+var updatePart = function updatePart(dom, whichSize, state, axis) {
+  var size = getElementSize(dom, axis);
+  if (size) {
+    state[whichSize] = size;
+  }
+};
+
+var calculatePreloadSlots = function calculatePreloadSlots(state) {
+  if (!state.scrollView) return;
+  var boundingClientRect = state.scrollView.getBoundingClientRect();
+  state.boundingClientRect = state.boundingClientRect || boundingClientRect;
+  if (boundingClientRect.width !== state.boundingClientRect.width || boundingClientRect.height !== state.boundingClientRect.height) {
+    state.preloadSlots = state.attrsPreloadSlots || 1;
+  }
+  state.boundingClientRect = boundingClientRect;
+
+  // calculate if we have room on the screen to show more slots
+  if (state.contentSize && state.preloadSlots < state.pageCount && state.preloadSlots <= state.attrsMaxPreloadSlots && state.contentSize < boundingClientRect.height) {
+    state.preloadSlots++;
+    setTimeout(__WEBPACK_IMPORTED_MODULE_0_mithril___default.a.redraw, 0);
+  }
+};
+
+var getPageList = function getPageList(currentPageNum, fromPage, toPage, currentPage, preloadSlots, maxPages) {
+  var minPageNum = fromPage ? parseInt(fromPage, 10) : currentPage ? currentPage : 1;
+  var maxPageNum = toPage ? parseInt(toPage, 10) : currentPage ? currentPage : maxPages;
+  var pages = [];
+  var prePages = [];
+  for (var i = -preloadSlots; i <= preloadSlots; i = i + 1) {
+    var pageNum = currentPageNum + i;
+    if (pageNum >= minPageNum && pageNum <= maxPageNum) {
+      pages.push(pageNum);
+    }
+  }
+  for (var _pageNum = 1; _pageNum < pages[0]; _pageNum = _pageNum + 1) {
+    prePages.push(_pageNum);
+  }
+  return { pages: pages, prePages: prePages, maxPageNum: maxPageNum };
+};
+
+var oninit = function oninit(vnode) {
+  var attrs = vnode.attrs;
+  // Memoize some properties that do not change
+  var axis = attrs.axis || "y";
+  var whichScroll = axis === "x" ? "scrollLeft" : "scrollTop";
+  var autoSize = attrs.autoSize !== undefined && attrs.autoSize === false ? false : true;
+  var pageSize = attrs.pageSize;
+  var contentTag = attrs.contentTag || "div";
+  var classList = [classes.scrollView, axis === "x" ? classes.scrollViewX : classes.scrollViewY, attrs.class].join(" ");
+
+  var scroll = function scroll() {
+    return __WEBPACK_IMPORTED_MODULE_0_mithril___default.a.redraw();
+  };
+
+  vnode.state = {
+    afterSize: null,
+    beforeSize: null,
+    boundingClientRect: {},
+    currentPageNum: 0,
+    pageSizes: {},
+    preloadSlots: attrs.preloadPages || 1,
+    scrollView: null,
+    sortedKeys: [],
+
+    // Memoized
+    attrsMaxPreloadSlots: attrs.maxPreloadPages || Number.MAX_VALUE,
+    attrsPreloadSlots: attrs.preloadPages || 1,
+    autoSize: autoSize,
+    axis: axis,
+    classList: classList,
+    contentTag: contentTag,
+    pageSize: pageSize,
+    scroll: scroll,
+    whichScroll: whichScroll
+  };
+};
+
+var view = function view(_ref) {
+  var state = _ref.state,
+      attrs = _ref.attrs;
+
+  var scrollAmount = state.scrollView ? state.scrollView[state.whichScroll] : 0;
+  var axis = state.axis;
+  var maxPages = attrs.maxPages !== undefined ? attrs.maxPages : Number.MAX_VALUE;
+
+  var currentPageNum = attrs.currentPage ? parseInt(attrs.currentPage, 10) : calculateCurrentPageNum(scrollAmount, state);
+
+  if (attrs.pageChange && currentPageNum !== state.currentPageNum) {
+    attrs.pageChange(currentPageNum);
+  }
+  state.currentPageNum = currentPageNum;
+
+  if (state.scrollView && attrs.getDimensions) {
+    attrs.getDimensions({
+      scrolled: scrollAmount,
+      size: state.contentSize
+    });
+  }
+
+  var _getPageList = getPageList(currentPageNum, attrs.from, attrs.to, attrs.currentPage, state.preloadSlots, maxPages),
+      pages = _getPageList.pages,
+      prePages = _getPageList.prePages,
+      maxPageNum = _getPageList.maxPageNum;
+
+  state.contentSize = attrs.contentSize !== undefined ? attrs.contentSize : calculateContentSize(1, maxPageNum, state);
+
+  state.pageCount = pages.length;
+
+  var isLastPageVisible = maxPageNum ? isPageInViewport(maxPageNum, axis, state, state.scrollView) : true;
+
+  return __WEBPACK_IMPORTED_MODULE_0_mithril___default()("div", {
+    oncreate: function oncreate(_ref2) {
+      var dom = _ref2.dom;
+
+      state.scrollView = attrs.scrollView ? document.querySelector(attrs.scrollView) : dom;
+      state.scrollView.className += " " + state.classList;
+
+      if (attrs.setDimensions) {
+        var dimensions = attrs.setDimensions();
+        if (dimensions.size > 0) {
+          var whichSize = axis === "x" ? "width" : "height";
+          dom.style[whichSize] = dimensions.size + "px";
+        }
+        state.scrollView[state.whichScroll] = dimensions.scrolled;
+      }
+      state.scrollView.addEventListener("scroll", state.scroll);
+    },
+    onremove: function onremove() {
+      return state.scrollView.removeEventListener("scroll", state.scroll);
+    }
+  }, __WEBPACK_IMPORTED_MODULE_0_mithril___default()("div", {
+    class: classes.scrollContent,
+    style: !state.autoSize ? null : _extends({}, axis === "x" ? { width: state.contentSize + "px" } : { height: state.contentSize + "px" }, attrs.contentSize ? axis === "x" ? { "min-width": attrs.contentSize + "px" } : { "min-height": attrs.contentSize + "px" } : {})
+  }, [__WEBPACK_IMPORTED_MODULE_0_mithril___default()(state.contentTag, { class: classes.content }, [attrs.before ? __WEBPACK_IMPORTED_MODULE_0_mithril___default()("div", {
+    class: classes.before,
+    oncreate: function oncreate(_ref3) {
+      var dom = _ref3.dom;
+      return updatePart(dom, "before", state, axis);
+    },
+    onupdate: function onupdate(_ref4) {
+      var dom = _ref4.dom;
+      return updatePart(dom, "before", state, axis);
+    }
+  }, attrs.before) : null, __WEBPACK_IMPORTED_MODULE_0_mithril___default()("div", { class: classes.pages }, [prePages.map(function (pageNum) {
+    return __WEBPACK_IMPORTED_MODULE_0_mithril___default()(placeholder, {
+      axis: axis,
+      key: numToId(pageNum),
+      pageId: numToId(pageNum),
+      pageNum: pageNum,
+      pageSizes: state.pageSizes
+    });
+  }), pages.map(function (pageNum) {
+    return __WEBPACK_IMPORTED_MODULE_0_mithril___default()(page, {
+      autoSize: state.autoSize,
+      axis: axis,
+      item: attrs.item,
+      key: numToId(pageNum),
+      pageData: attrs.pageData,
+      pageId: numToId(pageNum),
+      pageNum: pageNum,
+      pageSize: state.pageSize,
+      pageSizes: state.pageSizes,
+      pageTag: attrs.pageTag,
+      pageUrl: attrs.pageUrl,
+      updatePageSize: updatePageSize(state)
+    });
+  })]),
+  // only show "after" when content is available
+  attrs.after && state.contentSize ? __WEBPACK_IMPORTED_MODULE_0_mithril___default()("div", {
+    class: classes.after,
+    style: {
+      // visually hide this element until the last page is into view
+      // to prevent flashes of after content when scrolling fast
+      visibility: isLastPageVisible ? "visible" : "hidden"
+    },
+    oncreate: function oncreate(_ref5) {
+      var dom = _ref5.dom;
+      return updatePart(dom, "after", state, axis);
+    },
+    onupdate: function onupdate(_ref6) {
+      var dom = _ref6.dom;
+      return updatePart(dom, "after", state, axis);
+    }
+  }, attrs.after) : null])]));
+};
+
+var infinite$1 = {
+  oninit: oninit,
+  view: view,
+  isElementInViewport: isElementInViewport
+};
+
+/* harmony default export */ __webpack_exports__["a"] = (infinite$1);
+
+
+/***/ }),
+/* 4 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return styleVariables; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return appVariables; });
+var styleVariables = {
+  size: 320,
+  size_px: "320px",
+  text_color: "#263238"
+};
+
+var appVariables = {
+  imageUrl: "http://arthurclemens.github.io/assets/mithril-infinite-scroll/thumbs/"
+};
+
+/***/ }),
+/* 5 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__src_index__ = __webpack_require__(6);
+
+
+/***/ }),
+/* 6 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_mithril__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_mithril___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_mithril__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__app_footer__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__images__ = __webpack_require__(9);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__grid__ = __webpack_require__(15);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__table__ = __webpack_require__(17);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__short__ = __webpack_require__(19);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__horizontal__ = __webpack_require__(21);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__fixed__ = __webpack_require__(23);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__paging__ = __webpack_require__(25);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__app_styler__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__app_common_style__ = __webpack_require__(27);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__styles__ = __webpack_require__(28);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Object(__WEBPACK_IMPORTED_MODULE_9__app_styler__["a" /* addStyle */])("common", __WEBPACK_IMPORTED_MODULE_10__app_common_style__["a" /* default */]);
+Object(__WEBPACK_IMPORTED_MODULE_9__app_styler__["a" /* addStyle */])("index", __WEBPACK_IMPORTED_MODULE_11__styles__["a" /* default */]);
+
+var RESIZE_TIMER = 500;
+
+var menuData = [{
+  href: "/images",
+  title: "Images",
+  subtitle: "200 images of various heights"
+}, {
+  href: "/horizontal",
+  title: "Horizontal",
+  subtitle: "Horizontal scroller"
+}, {
+  href: "/grid",
+  title: "Image grid",
+  subtitle: "Responsive grid with 1, 2, 3 and 4 columns"
+}, {
+  href: "/table",
+  title: "Data table",
+  subtitle: "Table rows of various heights"
+}, {
+  href: "/short",
+  title: "Short content",
+  subtitle: "Automatically finds loadable space"
+}, {
+  href: "/fixed",
+  title: "Fixed height",
+  subtitle: "Preset the scroll height, don't update scroll height"
+}, {
+  href: "/paging",
+  title: "Paging",
+  subtitle: "Previous / Next buttons instead of infinite scroll"
+}];
+
+var menu = __WEBPACK_IMPORTED_MODULE_0_mithril___default()("ul.menu", [__WEBPACK_IMPORTED_MODULE_0_mithril___default()("li.header", "Examples"), menuData.map(function (menuItem) {
+  return __WEBPACK_IMPORTED_MODULE_0_mithril___default()("li", __WEBPACK_IMPORTED_MODULE_0_mithril___default()("a", {
+    href: menuItem.href,
+    oncreate: __WEBPACK_IMPORTED_MODULE_0_mithril___default.a.route.link
+  }, [__WEBPACK_IMPORTED_MODULE_0_mithril___default()("span.title", menuItem.title), __WEBPACK_IMPORTED_MODULE_0_mithril___default()("span.subtitle", menuItem.subtitle)]));
+})]);
+
+var app = {
+  view: function view() {
+    return __WEBPACK_IMPORTED_MODULE_0_mithril___default()(".index", [__WEBPACK_IMPORTED_MODULE_0_mithril___default()("h1", "Infinite Scroll for Mithril"), menu, Object(__WEBPACK_IMPORTED_MODULE_1__app_footer__["a" /* default */])({
+      home: true
+    })]);
+  }
+};
+
+var mountNode = document.querySelector("#app");
+__WEBPACK_IMPORTED_MODULE_0_mithril___default.a.route(mountNode, "/", {
+  "/": app,
+  "/images": __WEBPACK_IMPORTED_MODULE_2__images__["a" /* default */],
+  "/grid": __WEBPACK_IMPORTED_MODULE_3__grid__["a" /* default */],
+  "/table": __WEBPACK_IMPORTED_MODULE_4__table__["a" /* default */],
+  "/short": __WEBPACK_IMPORTED_MODULE_5__short__["a" /* default */],
+  "/horizontal": __WEBPACK_IMPORTED_MODULE_6__horizontal__["a" /* default */],
+  "/fixed": __WEBPACK_IMPORTED_MODULE_7__fixed__["a" /* default */],
+  "/paging": __WEBPACK_IMPORTED_MODULE_8__paging__["a" /* default */],
+  "/paging/:p": __WEBPACK_IMPORTED_MODULE_8__paging__["a" /* default */]
+});
+
+// Debounce window resize
+var resizeTimer = 0;
+window.onresize = function () {
+  clearTimeout(resizeTimer);
+  resizeTimer = setTimeout(__WEBPACK_IMPORTED_MODULE_0_mithril___default.a.redraw, RESIZE_TIMER);
+};
+
+/***/ }),
+/* 7 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, '__esModule', { value: true });
+
+// Derived from Lea Verou's PrefixFree
+
+var allStyles;
+var styleAttr;
+var styleElement;
+var supportedProperty;
+var supportedDecl;
+
+function init() {
+  allStyles = getComputedStyle(document.documentElement, null);
+  styleAttr = document.createElement('div').style;
+  styleElement = document.documentElement.appendChild(document.createElement('style'));
+  supportedDecl = _supportedDecl;
+  supportedProperty = _supportedProperty;
+  if ('zIndex' in styleAttr && !('z-index' in styleAttr)) {
+    // Some browsers like it dash-cased, some camelCased, most like both.
+    supportedDecl = function(property, value) {return _supportedDecl(camelCase(property), value)};
+    supportedProperty = function(property) {return _supportedProperty(camelCase(property))};
+  }
+}
+function finalize() {
+  if (typeof document !== 'undefined') document.documentElement.removeChild(styleElement);
+  // `styleAttr` is used at run time via `supportedProperty()`
+  // `allStyles` and `styleElement` can be displosed of after initialization.
+  allStyles = styleElement = null;
+}
+// Helpers, in alphabetic order
+
+function camelCase(str) {
+  return str.replace(/-([a-z])/g, function($0, $1) { return $1.toUpperCase() }).replace('-','')
+}
+function deCamelCase(str) {
+  return str.replace(/[A-Z]/g, function($0) { return '-' + $0.toLowerCase() })
+}
+function _supportedDecl(property, value) {
+  styleAttr[property] = '';
+  styleAttr[property] = value;
+  return !!styleAttr[property]
+}
+function supportedMedia(condition) {
+  styleElement.textContent = '@media (' + condition +'){}';
+  // Opera 11 treats unknown conditions as 'all', the rest as 'not all'.
+  // So far tested in modern browsers (01/01/2017), and desktop IE9, FF4,
+  // Opera 11/12, and Safari 6. TY SauceLabs.
+  return !/^@media(?:\s+not)?\s+all/.test(styleElement.sheet.cssRules[0].cssText)
+}
+function _supportedProperty(property) {
+  return property in styleAttr
+}
+function supportedRule(selector) {
+  styleElement.textContent = selector + '{}';
+  return !!styleElement.sheet.cssRules.length
+}
+
+// Derived from Lea Verou's PrefixFree
+
+// TODO: http://caniuse.com/#feat=css-media-resolution
+
+function detectAtrules(fixers) {
+  if (fixers.prefix === '') return
+  var atrules = {
+    'keyframes': 'name',
+    'viewport': null,
+    'document': 'regexp(".")'
+  };
+
+  // build a map of {'@ruleX': '@-prefix-ruleX'}
+  for(var atrule in atrules) {
+    var test = atrule + ' ' + (atrules[atrule] || '');
+    if (!supportedRule('@' + test) && supportedRule('@' + fixers.prefix + test)) {
+
+      fixers.hasAtrules = true;
+      fixers.atrules['@' + atrule] = '@' + fixers.prefix + atrule;
+    }
+  }
+
+  // Standard
+  fixers.hasDppx = supportedMedia('resolution:1dppx');
+  // Webkit
+  fixers.hasPixelRatio = supportedMedia(fixers.prefix + 'device-pixel-ratio:1');
+  // Opera
+  fixers.hasPixelRatioFraction = supportedMedia(fixers.prefix + 'device-pixel-ratio:1/1');
+
+  if (fixers.hasPixelRatio || fixers.hasPixelRatioFraction) {
+    fixers.properties['resolution'] = fixers.prefix + 'device-pixel-ratio';
+    fixers.properties['min-resolution'] = fixers.prefix + 'min-device-pixel-ratio';
+    fixers.properties['max-resolution'] = fixers.prefix + 'max-device-pixel-ratio';
+    if (supportedMedia('min-' + fixers.prefix + 'device-pixel-ratio:1')) {
+      // Mozilla/Firefox tunred a vendor prefix into a vendor infix
+      fixers.properties['min-resolution'] = 'min-' + fixers.prefix + 'device-pixel-ratio';
+      fixers.properties['max-resolution'] = 'max-' + fixers.prefix + 'device-pixel-ratio';
+    }
+  }
+}
+
+// Derived from Lea Verou's PrefixFree
+
+function detectFunctions(fixers) {
+  // Values that might need prefixing
+  if (fixers.prefix === '') return
+  var functions = {
+    'linear-gradient': {
+      property: 'background-image',
+      params: 'red, teal'
+    },
+    'calc': {
+      property: 'width',
+      params: '1px + 5%'
+    },
+    'element': {
+      property: 'background-image',
+      params: '#foo'
+    },
+    'cross-fade': {
+      property: 'backgroundImage',
+      params: 'url(a.png), url(b.png), 50%'
+    }
+  };
+  functions['repeating-linear-gradient'] =
+  functions['repeating-radial-gradient'] =
+  functions['radial-gradient'] =
+  functions['linear-gradient'];
+
+  // build an array of prefixable functions
+  for (var func in functions) {
+    var test = functions[func],
+      property = test.property,
+      value = func + '(' + test.params + ')';
+
+    if (!supportedDecl(property, value) && supportedDecl(property, fixers.prefix + value)) {
+      // It's only supported with a prefix
+      fixers.functions.push(func);
+    }
+  }
+}
+
+// Derived from Lea Verou's PrefixFree and Robin Frischmann's Inline Style Prefixer
+
+// TODO: http://caniuse.com/#feat=css-writing-mode
+
+// db of prop/value pairs whose values may need treatment.
+
+var keywords = [
+
+  // `initial` applies to all properties and is thus handled separately.
+  {
+    props: ['cursor'],
+    values: [ 'grab', 'grabbing', 'zoom-in', 'zoom-out']
+  },
+  {
+    props: ['display'],
+    values:['box', 'inline-box', 'flexbox', 'inline-flexbox', 'flex', 'inline-flex', 'grid', 'inline-grid']
+  },
+  {
+    props: ['position'],
+    values: [ 'sticky' ]
+  },
+  {
+    props: ['width', 'column-width', 'height', 'max-height', 'max-width', 'min-height', 'min-width'],
+    values: ['contain-floats', 'fill-available', 'fit-content', 'max-content', 'min-content']
+  }
+];
+// The flexbox zoo
+//
+// ## Specs:
+// - box     (2009/old):  https://www.w3.org/TR/2009/WD-css3-flexbox-20090723/
+// - flexbox (2012/ie10): https://www.w3.org/TR/2012/WD-css3-flexbox-20120322/
+// - flex    (final):     https://www.w3.org/TR/css-flexbox-1/
+var flex2009Props = {
+  // ?align-content =>
+  // ?align-self =>
+  'align-items': 'box-align',
+  'flex': 'box-flex', // https://css-tricks.com/snippets/css/a-guide-to-flexbox/#comment-371025,
+  // ?flex-basis =>
+  // !!flex-direction => box-direction + box-orient, covered in `plugin.js`
+  'box-direction' : 'box-direction', // we prepopulate the cache for the above case.
+  'box-orient': 'box-orient',
+  // !!flex-flow => flex-direction and/or flex-wrap, covered in `plugin.js`
+  // ?flex-grow =>
+  // ?flex-shrink =>
+  'flex-wrap': 'box-lines',
+  'justify-content': 'box-pack',
+  'order': 'box-ordinal-group' // https://css-tricks.com/snippets/css/a-guide-to-flexbox/#comment-371025
+};
+var flex2009Values = {
+  // flex => box || only for display? handled in the code
+  'flex-end': 'end',
+  'flex-start': 'start',
+  // inline-flex => inline-box || see flex
+  'nowrap': 'single',
+  'space-around': 'justify',
+  'space-between': 'justify',
+  'wrap': 'multiple',
+  'wrap-reverse': 'multiple'
+};
+var flex2012Props = {
+  'align-content': '-ms-flex-line-pack',
+  'align-items': '-ms-flex-align',
+  'align-self': '-ms-flex-item-align',
+  // flex => -ms-flex
+  'flex-basis': '-ms-preferred-size',
+  // flex-direction => -ms-flex-direction
+  // flex-flow => -ms-flex-flow
+  'flex-grow': '-ms-flex-positive',
+  'flex-shrink': '-ms-flex-negative',
+  // flex-wrap => -ms-flex-wrap
+  'justify-content': '-ms-flex-pack',
+  'order': '-ms-flex-order'
+};
+var flex2012Values = {
+  // flex => flexbox || only for display? handled in the code
+  'flex-end': 'end',
+  'flex-start': 'start',
+  // inline-flex => inline-flexbox || see 'flex'
+  // nowrap => nowrap
+  'space-around': 'distribute',
+  'space-between': 'justify'
+  // wrap => wrap
+  // wrap-reverse => wrap-reverse
+};
+
+function detectKeywords(fixers) {
+  if (fixers.prefix === '') return
+
+  // build a map of {propertyI: {keywordJ: previxedKeywordJ, ...}, ...}
+  for (var i = 0; i < keywords.length; i++) {
+    var map = {}, property = keywords[i].props[0];
+    // eslint-disable-next-line
+    for (var j = 0, keyword; keyword = keywords[i].values[j]; j++) {
+
+      if (
+        !supportedDecl(property, keyword) &&
+        supportedDecl(property, fixers.prefix + keyword)
+      ) {
+        fixers.hasKeywords = true;
+        map[keyword] = fixers.prefix + keyword;
+      }
+    }
+    // eslint-disable-next-line
+    for (j = 0; property = keywords[i].props[j]; j++) {
+      fixers.keywords[property] = map;
+    }
+  }
+  if (fixers.keywords.display && fixers.keywords.display.flexbox && !supportedDecl('display', 'flex')) {
+    // old IE
+    fixers.keywords.display.flex = fixers.keywords.display.flexbox;
+    fixers.keywords.display['inline-flex'] = fixers.keywords.display['inline-flexbox'];
+    for (var k in flex2012Props) {
+      fixers.properties[k] = flex2012Props[k];
+      fixers.keywords[k] = flex2012Values;
+    }
+  } else if (fixers.keywords.display && fixers.keywords.display.box && !supportedDecl('display', 'flex')) {
+    // old flexbox spec
+    fixers.keywords.display.flex = fixers.keywords.display.box;
+    fixers.keywords.display['inline-flex'] = fixers.keywords.display['inline-box'];
+    fixers.flexbox2009 = true;
+    for (k in flex2009Props) {
+      fixers.properties[k] = fixers.prefix + flex2009Props[k];
+      fixers.keywords[k] = flex2009Values;
+    }
+  }
+  if (
+    !supportedDecl('color', 'initial') &&
+    supportedDecl('color', fixers.prefix + 'initial')
+  ) {
+    // `initial` does not use the `hasKeywords` branch, no need to set it to true.
+    fixers.initial = fixers.prefix + 'initial';
+  }
+}
+
+// Derived from Lea Verou's PrefixFree
+
+function detectPrefix(fixers) {
+  var prefixCounters = {};
+  // Why are we doing this instead of iterating over properties in a .style object? Because Webkit.
+  // 1. Older Webkit won't iterate over those.
+  // 2. Recent Webkit will, but the 'Webkit'-prefixed properties are not enumerable. The 'webkit'
+  //    (lower case 'w') ones are, but they don't `deCamelCase()` into a prefix that we can detect.
+
+  function iteration(property) {
+    if(property.charAt(0) === '-') {
+      var prefix = property.split('-')[1];
+
+      // Count prefix uses
+      prefixCounters[prefix] = ++prefixCounters[prefix] || 1;
+    }
+  }
+
+  // Some browsers have numerical indices for the properties, some don't
+  if(allStyles && allStyles.length > 0) {
+    for(var i=0; i<allStyles.length; i++) {
+      iteration(allStyles[i]);
+    }
+  } else {
+    for(var property in allStyles) {
+      iteration(deCamelCase(property));
+    }
+  }
+
+  var highest = 0;
+  for(var prefix in prefixCounters) {
+    if(highest < prefixCounters[prefix]) {
+      highest = prefixCounters[prefix];
+      fixers.prefix = '-' + prefix + '-';
+    }
+  }
+  fixers.Prefix = camelCase(fixers.prefix);
+}
+
+// Derived from Lea Verou's PrefixFree
+
+function detectSelectors(fixers) {
+  var selector, prefixed;
+  function prefixSelector(selector) {
+    return selector.replace(/^::?/, function($0) { return $0 + fixers.prefix })
+  }
+
+  if (fixers.prefix === '') return
+  var selectors = {
+    ':any-link': ':any-link',
+    ':read-only': ':read-only',
+    ':read-write': ':read-write',
+    '::selection': '::selection',
+
+    ':fullscreen': ':fullscreen', //TODO sort out what changed between specs
+    ':full-screen': ':fullscreen',
+    '::backdrop': '::backdrop',
+
+    //sigh
+    ':placeholder': '::placeholder',
+    '::placeholder': '::placeholder',
+    ':input-placeholder': '::placeholder',
+    '::input-placeholder': '::placeholder'
+  };
+
+  // builds an array of selectors that need a prefix.
+  for (selector in selectors) {
+    prefixed = prefixSelector(selector);
+    if(!supportedRule(selector) && supportedRule(prefixed)) {
+      fixers.hasSelectors = true;
+      fixers.selectorList.push(selectors[selector]);
+      fixers.selectorMap[selectors[selector]] = prefixed;
+    }
+  }
+}
+
+function blankFixers() {
+  return {
+    atrules: {},
+    hasAtrules: false,
+    hasDppx: null,
+    hasKeywords: false,
+    hasPixelRatio: false,
+    hasPixelRatioFraction: false,
+    hasSelectors: false,
+    hasValues: false,
+    fixAtMediaParams: null,
+    fixAtSupportsParams: null,
+    fixProperty: null,
+    fixSelector: null,
+    fixValue: null,
+    flexbox2009: false,
+    functions: [],
+    initial: null,
+    keywords: {},
+    placeholder: null,
+    prefix: '',
+    Prefix: '',
+    properties: {},
+    selectorList: [],
+    selectorMap: {},
+    valueProperties: {
+      'transition': 1,
+      'transition-property': 1,
+      'will-change': 1
+    }
+  }
+}
+
+
+function browserDetector(fixers) {
+  // add the required data to the fixers object.
+  init();
+  detectPrefix(fixers);
+  detectSelectors(fixers);
+  detectAtrules(fixers);
+  detectKeywords(fixers);
+  detectFunctions(fixers);
+  finalize();
+}
+
+var emptySet = {};
+
+var valueTokenizer = /[(),]|\/\*[\s\S]*?\*\//g;
+
+/**
+ * For properties whose values are also properties, this will split a coma-separated
+ * value list into individual values, ignoring comas in comments and in
+ * functions(parameter, lists).
+ *
+ * @param {string} selector
+ * @return {string[]}
+ */
+
+function splitValue(value) {
+  var indices = [], res = [], inParen = 0, o;
+  /*eslint-disable no-cond-assign*/
+  while (o = valueTokenizer.exec(value)) {
+  /*eslint-enable no-cond-assign*/
+    switch (o[0]) {
+    case '(': inParen++; break
+    case ')': inParen--; break
+    case ',': if (inParen) break; indices.push(o.index);
+    }
+  }
+  for (o = indices.length; o--;){
+    res.unshift(value.slice(indices[o] + 1));
+    value = value.slice(0, indices[o]);
+  }
+  res.unshift(value);
+  return res
+}
+
+function makeDetector (before, targets, after) {
+  return new RegExp(before + '(?:' + targets.join('|') + ')' + after)
+}
+
+function makeLexer (before, targets, after) {
+  return new RegExp(
+        "\"(?:\\\\[\\S\\s]|[^\"])*\"|'(?:\\\\[\\S\\s]|[^'])*'|\\/\\*[\\S\\s]*?\\*\\/|" +
+            before + '((?:' +
+            targets.join('|') +
+            '))' + after,
+        'gi'
+    )
+}
+
+
+function finalizeFixers(fixers) {
+  var prefix = fixers.prefix;
+
+
+  // properties
+  // ----------
+
+  fixers.fixProperty = fixers.fixProperty || function(prop) {
+    var prefixed;
+    return fixers.properties[prop] = (
+      supportedProperty(prop) ||
+      !supportedProperty(prefixed = prefix + prop)
+    ) ? prop : prefixed
+  };
+
+
+  // selectors
+  // ----------
+
+  var selectorDetector = makeDetector('', fixers.selectorList, '(?:\\b|$|[^-])');
+  var selectorMatcher = makeLexer('', fixers.selectorList, '(?:\\b|$|[^-])');
+  var selectorReplacer = function(match, selector) {
+    return selector != null ? fixers.selectorMap[selector] : match
+  };
+  fixers.fixSelector = function(selector) {
+    return selectorDetector.test(selector) ? selector.replace(selectorMatcher, selectorReplacer) : selector
+  };
+
+
+  // values
+  // ------
+
+  // When gradients are supported with a prefix, convert angles to legacy
+  // (from clockwise to trigonometric)
+  var hasGradients = fixers.functions.indexOf('linear-gradient') > -1;
+  var gradientDetector = /\blinear-gradient\(/;
+  var gradientMatcher = /(^|\s|,|\()((?:repeating-)?linear-gradient\()\s*(-?\d*\.?\d*)deg/ig;
+  var gradientReplacer = function (match, delim, gradient, deg) {
+    return delim + gradient + (90-deg) + 'deg'
+  };
+
+  // functions
+  var hasFunctions = !!fixers.functions.length;
+  var functionsDetector = makeDetector('(?:^|\\s|,|\\()', fixers.functions, '\\s*\\(');
+  var functionsMatcher = makeLexer('(^|\\s|,|\\()', fixers.functions, '(?=\\s*\\()');
+  function functionReplacer (match, $1, $2) {
+    return $1 + prefix + $2
+  }
+
+  // properties as values (for transition, ...)
+  // No need to look for strings in these properties. We may insert prefixes in comments. Oh the humanity.
+  var valuePropertiesMatcher = /^\s*([-\w]+)/gi;
+  var valuePropertiesReplacer = function(match, prop){
+    return fixers.properties[prop] || fixers.fixProperty(prop)
+  };
+
+  fixers.fixValue = function (value, property) {
+    var res;
+    if (fixers.initial != null && value === 'initial') return fixers.initial
+
+    if (fixers.hasKeywords && (res = (fixers.keywords[property] || emptySet)[value])) return res
+
+    res = value;
+
+    if (fixers.valueProperties.hasOwnProperty(property)) {
+      res = (value.indexOf(',') === -1) ?
+        value.replace(valuePropertiesMatcher, valuePropertiesReplacer) :
+        splitValue(value).map(function(v) {
+          return v.replace(valuePropertiesMatcher, valuePropertiesReplacer)
+        }).join(',');
+    }
+
+    if (hasFunctions && functionsDetector.test(value)) {
+      if (hasGradients && gradientDetector.test(value)) {
+        res = res.replace(gradientMatcher, gradientReplacer);
+      }
+      res = res.replace(functionsMatcher, functionReplacer);
+    }
+    return res
+  };
+
+
+  // @media (resolution:...) {
+  // -------------------------
+
+  var resolutionMatcher = /((?:min-|max-)?resolution)\s*:\s*((?:\d*.)?\d+)dppx/g;
+  var resolutionReplacer = (
+    fixers.hasPixelRatio ? function(_, prop, param){return fixers.properties[prop] + ':' + param} :
+    fixers.hasPixelRatioFraction ? function(_, prop, param){return fixers.properties[prop] + ':' + Math.round(param*10) + '/10'} :
+    function(_, prop, param){return prop + ':' + Math.round(param * 96) +'dpi'}
+  );
+
+  fixers.fixAtMediaParams = fixers.hasDppx !== false /*it may be null*/ ?
+    function(p) {return p} :
+    function (params) {
+      return (params.indexOf('reso') !== -1) ?
+        params.replace(resolutionMatcher, resolutionReplacer) :
+        params
+    };
+
+
+  // @supports ... {
+  // ---------------
+
+  // regexp built by scripts/regexps.js
+  var atSupportsParamsMatcher = /\(\s*([-\w]+)\s*:\s*((?:"(?:\\[\S\s]|[^"])*"|'(?:\\[\S\s]|[^'])*'|\/\*[\S\s]*?\*\/|\((?:"(?:\\[\S\s]|[^"])*"|'(?:\\[\S\s]|[^'])*'|\/\*[\S\s]*?\*\/|\((?:"(?:\\[\S\s]|[^"])*"|'(?:\\[\S\s]|[^'])*'|\/\*[\S\s]*?\*\/|\((?:"(?:\\[\S\s]|[^"])*"|'(?:\\[\S\s]|[^'])*'|\/\*[\S\s]*?\*\/|\((?:"(?:\\[\S\s]|[^"])*"|'(?:\\[\S\s]|[^'])*'|\/\*[\S\s]*?\*\/|\([^\)]*\)|[^\)])*\)|[^\)])*\)|[^\)])*\)|[^\)])*\)|[^\)])*)/g;
+  function atSupportsParamsReplacer(match, prop, value) {
+    return '(' + (fixers.properties[prop] || fixers.fixProperty(prop)) + ':' + fixers.fixValue(value, prop)
+  }
+  fixers.fixAtSupportsParams = function(params) {
+    return params.replace(atSupportsParamsMatcher, atSupportsParamsReplacer)
+  };
+}
+
+var commonFixers;
+
+function initBrowser() {
+  commonFixers = blankFixers();
+  if (typeof getComputedStyle === 'function') browserDetector(commonFixers);
+  finalizeFixers(commonFixers);
+}
+initBrowser();
+
+function prefixPlugin(j2c) {
+  var fixers = commonFixers;
+  var cache = [];
+
+  if (j2c) j2c.setPrefixDb = function(f) {
+    if (cache.indexOf(f) === -1) {
+      finalizeFixers(f);
+      cache.push(f);
+    }
+    fixers = f;
+    return prefixPlugin
+  };
+  return {
+    $filter: function(next) {
+      return {
+        atrule: function(rule, kind, params, hasBlock) {
+          next.atrule(
+            fixers.hasAtrules && fixers.atrules[rule] || rule,
+            kind,
+            (
+              rule === '@media'    ? fixers.fixAtMediaParams(params) :
+              rule === '@supports' ? fixers.fixAtSupportsParams(params) :
+              params
+            ),
+            hasBlock
+          );
+        },
+        decl: function decl(property, value) {
+          if (!property || !(typeof value === 'string' || typeof value === 'number')){
+            return next.decl(fixers.properties[property] || fixers.fixProperty(property), value)
+          }
+          value = value + '';
+          if (property === 'flex-flow' && fixers.flexbox2009) {
+            value.split(' ').forEach(function(v){
+              // recurse! The lack of `next.` is intentional.
+              if (v.indexOf('wrap') > -1) decl('flex-wrap', v);
+              else if(v !== '') decl('flex-direction', v);
+            });
+          } else if (property === 'flex-direction' && fixers.flexbox2009) {
+            next.decl(fixers.properties['box-orient'], value.indexOf('column') > -1 ? 'block-axis' : 'inline-axis');
+            next.decl(fixers.properties['box-direction'], value.indexOf('-reverse') > -1 ? 'reverse' : 'normal');
+          } else {
+            next.decl(
+              fixers.properties[property] || fixers.fixProperty(property),
+              fixers.fixValue(value, property)
+            );
+          }
+        },
+        rule: function(selector) {
+          next.rule(
+            fixers.hasSelectors ? fixers.fixSelector(selector) : selector
+          );
+        }
+      }
+    }
+  }
+}
+
+exports.prefixPlugin = prefixPlugin;
+
+
+/***/ }),
+/* 8 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var emptyArray = [];
+var emptyObject = {};
+var type = emptyObject.toString;
+var ARRAY =  type.call(emptyArray);
+var OBJECT = type.call(emptyObject);
+var STRING = type.call('');
+var FUNCTION = type.call(type);
+var own =  emptyObject.hasOwnProperty;
+var freeze = Object.freeze || function(o) {return o};
+
+
+function defaults(target, source) {
+  for (var k in source) if (own.call(source, k)) {
+    if (k.indexOf('$') && !(k in target)) target[k] = source[k];
+  }
+  return target
+}
+
+function cartesian(a,b) {
+  var res = [], i, j;
+  for (j in b) if(own.call(b, j))
+    for (i in a) if(own.call(a, i))
+      res.push(a[i] + b[j]);
+  return res
+}
+
+// "Tokenizes" the selectors into parts relevant for the next function.
+// Strings and comments are matched, but ignored afterwards.
+// This is not a full tokenizers. It only recognizes comas, parentheses,
+// strings and comments.
+// regexp generated by scripts/regexps.js then trimmed by hand
+var selectorTokenizer = /[(),]|"(?:\\.|[^"\n])*"|'(?:\\.|[^'\n])*'|\/\*[\s\S]*?\*\//g;
+
+
+/**
+ * This will split a coma-separated selector list into individual selectors,
+ * ignoring comas in strings, comments and in :pseudo-selectors(parameter, lists).
+ *
+ * @param {string} selector
+ * @return {string[]}
+ */
+
+function splitSelector(selector) {
+  var indices = [], res = [], inParen = 0, o;
+  /*eslint-disable no-cond-assign*/
+  while (o = selectorTokenizer.exec(selector)) {
+  /*eslint-enable no-cond-assign*/
+    switch (o[0]) {
+    case '(': inParen++; break
+    case ')': inParen--; break
+    case ',': if (inParen) break; indices.push(o.index);
+    }
+  }
+  for (o = indices.length; o--;){
+    res.unshift(selector.slice(indices[o] + 1));
+    selector = selector.slice(0, indices[o]);
+  }
+  res.unshift(selector);
+  return res
+}
+
+// Like the `selectorTokenizer`, but for the `&` operator
+var ampersandTokenizer = /&|"(?:\\.|[^"\n])*"|'(?:\\.|[^'\n])*'|\/\*[\s\S]*?\*\//g;
+
+function ampersand (selector, parents) {
+  var indices = [], split = [], res, o;
+  /*eslint-disable no-cond-assign*/
+  while (o = ampersandTokenizer.exec(selector)) {
+  /*eslint-enable no-cond-assign*/
+    if (o[0] == '&') indices.push(o.index);
+  }
+  for (o = indices.length; o--;){
+    split.unshift(selector.slice(indices[o] + 1));
+    selector = selector.slice(0, indices[o]);
+  }
+  split.unshift(selector);
+  if (split.length === 1) split.unshift('');
+  res = [split[0]];
+  for (o = 1; o < split.length; o++) {
+    res = cartesian(res, cartesian(parents, [split[o]]));
+  }
+  return res.join(',')
+}
+
+function flatIter (f) {
+  return function iter(arg) {
+    if (type.call(arg) === ARRAY) for (var i= 0 ; i < arg.length; i ++) iter(arg[i]);
+    else f(arg);
+  }
+}
+
+function decamelize(match) {
+  return '-' + match.toLowerCase()
+}
+
+/**
+ * Handles the property:value; pairs.
+ *
+ * @param {object} state - holds the localizer- and walker-related methods
+ *                         and state
+ * @param {object} emit - the contextual emitters to the final buffer
+ * @param {string} prefix - the current property or a prefix in case of nested
+ *                          sub-properties.
+ * @param {array|object|string} o - the declarations.
+ * @param {boolean} local - are we in @local or in @global scope.
+ */
+
+function declarations(state, emit, prefix, o, local) {
+  var k, v, kk;
+  if (o==null) return
+
+  switch ( type.call(o = o.valueOf()) ) {
+  case ARRAY:
+    for (k = 0; k < o.length; k++)
+
+      declarations(state, emit, prefix, o[k], local);
+
+    break
+  case OBJECT:
+    // prefix is falsy iif it is the empty string, which means we're at the root
+    // of the declarations list.
+    prefix = (prefix && prefix + '-');
+    for (k in o) if (own.call(o, k)){
+      v = o[k];
+      if (/\$/.test(k)) {
+        for (kk in (k = k.split('$'))) if (own.call(k, kk)) {
+
+          declarations(state, emit, prefix + k[kk], v, local);
+
+        }
+      } else {
+
+        declarations(state, emit, prefix + k, v, local);
+
+      }
+    }
+    break
+  default:
+    // prefix is falsy when it is "", which means that we're
+    // at the top level.
+    // `o` is then treated as a `property:value` pair, or a
+    // semi-colon-separated list thereof.
+    // Otherwise, `prefix` is the property name, and
+    // `o` is the value.
+
+    // restore the dashes
+    k = prefix.replace(/_/g, '-').replace(/[A-Z]/g, decamelize);
+
+    if (local && (k == 'animation-name' || k == 'animation' || k == 'list-style')) {
+      // no need to tokenize here a plain `.split(',')` has all bases covered.
+      // We may 'localize' a comment, but it's not a big deal.
+      o = o.split(',').map(function (o) {
+
+        return o.replace(/^\s*(?:(var\([^)]+\))|:?global\(\s*([_A-Za-z][-\w]*)\s*\)|()(-?[_A-Za-z][-\w]*))/, state.localizeReplacer)
+
+      }).join(',');
+    }
+
+    emit.decl(k, o);
+
+  }
+}
+
+/**
+ * Handles a single at-rules
+ *
+ * @param {object} state - holds the localizer- and walker-related methods
+ *                         and state
+ * @param {object} emit - the contextual emitters to the final buffer
+ * @param {array} k - The parsed at-rule, including the parameters,
+ *                    if takes both parameters and a block.
+ *                    k == [match, fullAtRule, atRuleType, params?]
+ *                    So in `@-webkit-keyframes foo`, we have
+ *                     - match = "@-webkit-keyframes foo"
+ *                     - fullAtRule = "@-webkit-keyframes"
+ *                     - atRuleType = "keyframes"
+ *                     - params = "foo"
+ * @param {string|string[]|object|object[]} v - Either parameters for
+ *                                              block-less rules or
+ *                                              their block
+ *                                              for the others.
+ * @param {string} prefix - the current selector or the selector prefix
+ *                          in case of nested rules
+ * @param {boolean} local - are we in @local or in @global scope?
+ * @param {string} nestingDepth - are we nested in an at-rule or a selector?
+ */
+
+function atRules(state, emit, k, v, prefix, local, nestingDepth) {
+
+  // First iterate over user-provided at-rules and return if one of them corresponds to the current one
+  for (var i = 0; i < state.$atHandlers.length; i++) {
+
+    if (state.$atHandlers[i](state, emit, k, v, prefix, local, nestingDepth)) return
+
+  }
+
+  // using `/^global$/.test(k[2])` rather that 'global' == k[2] gzips
+  // slightly better thanks to the regexps tests further down.
+  // It is slightly less efficient but this isn't a critical path.
+
+  if (!k[3] && /^global$/.test(k[2])) {
+
+    rules(state, emit, prefix, v, 0, nestingDepth);
+
+
+  } else if (!k[3] && /^local$/.test(k[2])) {
+
+    rules(state, emit, prefix, v, 1, nestingDepth);
+
+
+  } else if (k[3] && /^adopt$/.test(k[2])) {
+
+    if (!local || nestingDepth) return emit.err('@adopt global or nested: ' + k[0])
+
+    if (!/^\.?[_A-Za-z][-\w]*$/.test(k[3])) return emit.err('bad adopter ' + JSON.stringify(k[3]) + ' in ' + k[0])
+
+    i = [];
+    flatIter(function(adoptee, asString) {
+
+      if(adoptee == null || !/^\.?[_A-Za-z][-\w]*(?:\s+\.?[_A-Za-z][-\w]*)*$/.test(asString = adoptee + '')) emit.err('bad adoptee '+ JSON.stringify(adoptee) + ' in ' + k[0]);
+
+      else i.push(asString.replace(/\./g, ''));
+
+    })(v);
+
+    // we may end up with duplicate classes but AFAIK it has no consequences on specificity.
+    if (i.length) {
+      state.localize(k[3] = k[3].replace(/\./g, ''));
+      state.names[k[3]] += (' ' + i.join(' '));
+    }
+
+
+  } else if (!k[3] && /^(?:namespace|import|charset)$/.test(k[2])) {
+    flatIter(function(v) {
+
+      emit.atrule(k[1], k[2], v);
+
+    })(v);
+
+
+  } else if (!k[3] && /^(?:font-face|viewport)$/.test(k[2])) {
+    flatIter(function(v) {
+
+      emit.atrule(k[1], k[2], k[3], 1);
+
+      declarations(state, emit, '', v, local);
+
+      emit._atrule();
+
+    })(v);
+
+  } else if (k[3] && /^(?:media|supports|page|keyframes)$/.test(k[2])) {
+
+    if (local && 'keyframes' == k[2]) {
+      k[3] = k[3].replace(
+        // generated by script/regexps.js
+        /(var\([^)]+\))|:?global\(\s*([_A-Za-z][-\w]*)\s*\)|()(-?[_A-Za-z][-\w]*)/,
+        state.localizeReplacer
+      );
+    }
+
+
+    emit.atrule(k[1], k[2], k[3], 1);
+
+    if ('page' == k[2]) {
+
+      declarations(state, emit, '', v, local);
+
+    } else {
+
+      rules(
+        state, emit,
+        'keyframes' == k[2] ? '' : prefix,
+        v, local, nestingDepth + 1
+      );
+
+    }
+
+    emit._atrule();
+
+  } else {
+
+    emit.err('Unsupported at-rule: ' + k[0]);
+
+  }
+}
+
+/**
+ * Add rulesets and other CSS tree to the sheet.
+ *
+ * @param {object} state - holds the localizer- and walker-related methods
+ *                         and state
+ * @param {object} emit - the contextual emitters to the final buffer
+ * @param {string} prefix - the current selector or a prefix in case of nested rules
+ * @param {array|string|object} tree - a source object or sub-object.
+ * @param {string} nestingDepth - are we nested in an at-rule?
+ * @param {boolean} local - are we in @local or in @global scope?
+ */
+function rules(state, emit, prefix, tree, local, nestingDepth) {
+  var k, v, inDeclaration, kk;
+
+  switch (type.call(tree)) {
+
+  case OBJECT:
+    for (k in tree) if (own.call(tree, k)) {
+      v = tree[k];
+
+      if (prefix.length > 0 && /^[-\w$]+$/.test(k)) {
+        if (!inDeclaration) {
+          inDeclaration = 1;
+
+          emit.rule(prefix);
+
+        }
+        if (/\$/.test(k)) {
+          for (kk in (k = k.split('$'))) if (own.call(k, kk)) {
+
+            declarations(state, emit, k[kk], v, local);
+
+          }
+        } else {
+
+          declarations(state, emit, k, v, local);
+
+        }
+
+      } else if (/^@/.test(k)) {
+        // Handle At-rules
+        inDeclaration = 0;
+
+        atRules(state, emit,
+          /^(.(?:-[\w]+-)?([_A-Za-z][-\w]*))\b\s*(.*?)\s*$/.exec(k) || [k,'@','',''],
+          v, prefix, local, nestingDepth
+        );
+
+      } else {
+        // selector or nested sub-selectors
+        inDeclaration = 0;
+
+        rules(
+          state, emit,
+          // build the selector `prefix` for the next iteration.
+          // ugly and full of redundant bits but so far the fastest/shortest.gz
+          /*0 if*/(prefix.length > 0 && (/,/.test(prefix) || /,/.test(k))) ?
+
+            /*0 then*/ (kk = splitSelector(prefix), splitSelector(
+              local ?
+
+                k.replace(
+                  /("(?:\\.|[^"\n])*"|'(?:\\.|[^'\n])*'|\/\*[\s\S]*?\*\/)|:global\(\s*(\.-?[_A-Za-z][-\w]*)\s*\)|(\.)(-?[_A-Za-z][-\w]*)/g,
+                  state.localizeReplacer
+                ) :
+
+                k
+            ).map(function (k) {
+              return /&/.test(k) ? ampersand(k, kk) : kk.map(function(kk) {
+                return kk + k
+              }).join(',')
+            }).join(',')) :
+
+            /*0 else*/ /*1 if*/ /&/.test(k) ?
+
+              /*1 then*/ ampersand(
+                local ?
+
+                  k.replace(
+                    /("(?:\\.|[^"\n])*"|'(?:\\.|[^'\n])*'|\/\*[\s\S]*?\*\/)|:global\(\s*(\.-?[_A-Za-z][-\w]*)\s*\)|(\.)(-?[_A-Za-z][-\w]*)/g,
+                    state.localizeReplacer
+                  ) :
+
+                  k,
+                [prefix]
+              ) :
+
+              /*1 else*/ prefix + (
+                local ?
+
+                  k.replace(
+                    /("(?:\\.|[^"\n])*"|'(?:\\.|[^'\n])*'|\/\*[\s\S]*?\*\/)|:global\(\s*(\.-?[_A-Za-z][-\w]*)\s*\)|(\.)(-?[_A-Za-z][-\w]*)/g,
+                    state.localizeReplacer
+                  ) :
+
+                  k
+                ),
+           v, local, nestingDepth + 1
+        );
+
+      }
+    }
+
+    break
+
+  case ARRAY:
+    for (k = 0; k < tree.length; k++){
+
+      rules(state, emit, prefix, tree[k], local, nestingDepth);
+
+    }
+    break
+
+  case STRING:
+    // CSS hacks or ouptut of `j2c.inline`.
+    if (!prefix.length) emit.err('No selector');
+    emit.rule(prefix || ' ');
+
+    declarations(state, emit, '', tree, local);
+
+  }
+}
+
+// This is the first entry in the filters array, which is
+// actually the last step of the compiler. It inserts
+// closing braces to close normal (non at-) rules (those
+// that start with a selector). Doing it earlier is
+// impossible without passing state around in unrelated code
+// or ending up with duplicated selectors when the source tree
+// contains arrays.
+// There's no `_rule` handler, because the core compiler never
+// calls it.
+function closeSelectors(next, inline) {
+  var lastSelector;
+  return inline ? next : {
+    init: function(){lastSelector = 0; next.init();},
+    done: function (raw) {
+      if (lastSelector) {next._rule(); lastSelector = 0;}
+      return next.done(raw)
+    },
+    atrule: function (rule, kind, param, takesBlock) {
+      if (lastSelector) {next._rule(); lastSelector = 0;}
+      next.atrule(rule, kind, param, takesBlock);
+    },
+    _atrule: function (rule) {
+      if (lastSelector) {next._rule(); lastSelector = 0;}
+      next._atrule(rule);
+    },
+    rule: function (selector) {
+      if (selector !== lastSelector){
+        if (lastSelector) next._rule();
+        next.rule(selector);
+        lastSelector = selector;
+      }
+    }
+  }
+}
+
+function global(x) {
+  return ':global(' + x + ')'
+}
+
+function kv (k, v, o) {
+  o = {};
+  o[k] = v;
+  return o
+}
+
+function at (rule, params, block) {
+  if (
+    arguments.length < 3
+  ) {
+    // inner curry!
+    var _at = at.bind.apply(at, [null].concat([].slice.call(arguments,0)));
+    // So that it can be used as a key in an ES6 object literal.
+    _at.toString = function(){return '@' + rule + ' ' + params};
+    return _at
+  }
+  else return kv('@' + rule +' ' + params, block)
+}
+
+function j2c() {
+
+  // the buffer that accumulates the output. Initialized in `$sink.i()`
+  var buf, err;
+
+  // the bottom of the 'codegen' stream. Mirrors the `$filter` plugin API.
+  var $sink = {
+    init: function(){buf=[], err=[];},
+    done: function (raw) {
+      if (err.length != 0) throw new Error('j2c error(s): ' + JSON.stringify(err,null,2) + 'in context:\n' + buf.join(''))
+      return raw ? buf : buf.join('')
+    },
+    err: function(msg) {
+      err.push(msg);
+      buf.push('/* +++ ERROR +++ ' + msg + ' */\n');
+    },
+    atrule: function (rule, kind, param, takesBlock) {
+      buf.push(rule, param && ' ', param, takesBlock ? ' {' : ';', _instance.endline);
+    },
+    // close atrule
+    _atrule: function () {buf.push('}', _instance.endline);},
+    rule: function (selector) {buf.push(selector, ' {', _instance.endline);},
+    // close rule
+    _rule: function () {buf.push('}', _instance.endline);},
+    decl: function (prop, value) {buf.push(prop, prop && ':', value, ';', _instance.endline);}
+  };
+
+  // holds the `$filter` and `$at` handlers
+  var $filters = [closeSelectors];
+  var $atHandlers = [];
+
+  // the public API (see the main docs)
+  var _instance = {
+    at: at,
+    global: global,
+    kv: kv,
+    names: {},
+    endline: '\n',
+    suffix: '__j2c-' +
+      // 128 bits of randomness
+      Math.floor(Math.random() * 0x100000000).toString(36) + '-' +
+      Math.floor(Math.random() * 0x100000000).toString(36) + '-' +
+      Math.floor(Math.random() * 0x100000000).toString(36) + '-' +
+      Math.floor(Math.random() * 0x100000000).toString(36),
+    $plugins: [],
+    sheet: function(tree) {
+      var emit = _createOrRetrieveStream(0);
+      emit.init();
+      rules(
+        _walkers[0],
+        emit,
+        '', // prefix
+        tree,
+        1,  // local, by default
+        0   // nesting depth
+      );
+
+      return emit.done()
+    },
+    inline: function (tree, options) {
+      var emit = _createOrRetrieveStream(1);
+      emit.init();
+      declarations(
+        _walkers[1],
+        emit,
+        '', // prefix
+        tree,
+        !(options && options.global)   // local, by default
+      );
+      return emit.done()
+    }
+  };
+
+  // The `state` (for the core functions) / `walker` (for the plugins) tables.
+  var _walkers = [
+    // for j2c.sheet
+    {
+      // helpers for locaizing class and animation names
+      localizeReplacer: _localizeReplacer, // second argument to String.prototype.replace
+      localize: _localize,                 // mangles local names
+      names: _instance.names,              // local => mangled mapping
+      $atHandlers: $atHandlers,            // extra at-rules
+      // The core walker methods, to be provided to plugins
+      atrule: atRules,
+      decl: declarations,
+      rule: rules
+    },
+    // likewise, for j2c.inline (idem with `$a`, `a` and `s` removed)
+    {
+      localizeReplacer: _localizeReplacer,
+      localize: _localize,
+      names: _instance.names,
+      decl: declarations
+    }
+  ];
+
+
+  // inner helpers
+
+  var _use = flatIter(function(plugin) {
+    // `~n` is falsy for `n === -1` and truthy otherwise.
+    // Works well to turn the  result of `a.indexOf(x)`
+    // into a value that reflects the presence of `x` in
+    // `a`.
+    if (~_instance.$plugins.indexOf(plugin)) return
+
+    _instance.$plugins.push(plugin);
+
+    if (type.call(plugin) === FUNCTION) plugin = plugin(_instance);
+
+    if (!plugin) return
+
+    flatIter(function(filter) {
+      $filters.push(filter);
+    })(plugin.$filter || emptyArray);
+
+    flatIter(function(handler) {
+      $atHandlers.push(handler);
+    })(plugin.$at || emptyArray);
+
+    defaults(_instance.names, plugin.$names || emptyObject);
+
+    _use(plugin.$plugins || emptyArray);
+
+    $sink = plugin.$sink || $sink;
+
+    defaults(_instance, plugin);
+  });
+
+
+  var _streams = [];
+  /**
+   * returns the codegen streams, creating them if necessary
+   * @param
+   */
+  function _createOrRetrieveStream(inline) {
+    // build the stream processors if needed
+    if (!_streams.length) {
+      // append the $sink as the ultimate filter
+      $filters.push(function(_, inline) {return inline ? {init:$sink.init, decl:$sink.decl, done:$sink.done, err: $sink.err} : $sink});
+      for(var i = 0; i < 2; i++){ // 0 for j2c.sheet, 1 for j2c.inline
+        for (var j = $filters.length; j--;) {
+          _streams[i] = freeze(
+            defaults(
+              $filters[j](_streams[i], !!i),
+              _streams[i]
+            )
+          );
+        }
+      }
+    }
+    return _streams[inline]
+  }
+
+  /**
+   * Returns a localized version of a given name.
+   * Registers the pair in `instnace.name` if needed.
+   *
+   * @param {string} name - the name to localize
+   * @return {string} - the localized version
+   */
+  function _localize(name) {
+    if (!_instance.names[name]) _instance.names[name] = name + _instance.suffix;
+    return _instance.names[name].match(/^\S+/)
+  }
+
+  /**
+   * Used as second argument for str.replace(localizeRegex, replacer)
+   * `ignore`, `global` and `(dot, name)` are mutually exclusive
+   *
+   * @param {string} match - the whole match (ignored)
+   * @param {string|null} ignore - a comment or a string literal
+   * @param {string|null} global - a global name
+   * @param {string|null} dot - either '.' for a local class name or the empty string otherwise
+   * @param {string|null} name - the name to localize
+   * @return {string}
+   */
+  function _localizeReplacer(match, ignore, global$$1, dot, name) {
+    return ignore || global$$1 || dot + _localize(name)
+  }
+
+  _use(emptyArray.slice.call(arguments));
+  return _instance
+}
+
+module.exports = j2c;
+
+
+/***/ }),
+/* 9 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_mithril__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_mithril___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_mithril__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__app_footer__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_mithril_infinite__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__app_variables__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__app_styler__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__styles__ = __webpack_require__(14);
+
+
+
+
+
+
+
+Object(__WEBPACK_IMPORTED_MODULE_4__app_styler__["a" /* addStyle */])("images", __WEBPACK_IMPORTED_MODULE_5__styles__["a" /* default */]);
+
+var pageUrl = function pageUrl(pageNum) {
+  return "data/images/page-" + pageNum + ".json";
+};
+
+var vm = {
+  expanded: {},
+  dirty: {},
+  toggle: function toggle(id) {
+    if (vm.expanded[id]) {
+      delete vm.expanded[id];
+    } else {
+      vm.expanded[id] = 1;
+    }
+    vm.dirty[id] = 1;
+  },
+  isExpanded: function isExpanded(id) {
+    return vm.expanded[id];
+  },
+  isDirty: function isDirty(id) {
+    return vm.dirty[id];
+  },
+  clearDirty: function clearDirty(id) {
+    return delete vm.dirty[id];
+  }
+};
+
+var maybeUpdate = function maybeUpdate(dom, id, src) {
+  if (!vm.isDirty(id)) {
+    return;
+  }
+  if (__WEBPACK_IMPORTED_MODULE_2_mithril_infinite__["a" /* default */].isElementInViewport({ el: dom })) {
+    var url = __WEBPACK_IMPORTED_MODULE_3__app_variables__["a" /* appVariables */].imageUrl + src;
+    dom.style.backgroundImage = dom.style.backgroundImage = "url(" + url + ")";
+    vm.clearDirty(id);
+  }
+};
+
+var item = function item(data, opts) {
+  var id = opts.pageNum + data.width + data.src;
+  var isExpanded = vm.isExpanded(id);
+  var heightFraction = isExpanded ? 0.5 : 0.25;
+  var width = parseInt(data.width * heightFraction, 10);
+  var height = parseInt(data.height * heightFraction, 10);
+  return __WEBPACK_IMPORTED_MODULE_0_mithril___default()("a.list-item", {
+    style: { height: height + "px" },
+    onclick: function onclick() {
+      return vm.toggle(id);
+    }
+  }, [__WEBPACK_IMPORTED_MODULE_0_mithril___default()("span.pageNum", opts.pageNum), __WEBPACK_IMPORTED_MODULE_0_mithril___default()(".image", {
+    style: { height: height + "px", width: width + "px" },
+    oncreate: function oncreate(_ref) {
+      var dom = _ref.dom;
+      return vm.dirty[id] = true, maybeUpdate(dom, id, data.src);
+    },
+    onupdate: function onupdate(_ref2) {
+      var dom = _ref2.dom;
+      return maybeUpdate(dom, id, data.src);
+    }
+  }),
+  // minus or plus sign
+  __WEBPACK_IMPORTED_MODULE_0_mithril___default()(".toggle", isExpanded ? __WEBPACK_IMPORTED_MODULE_0_mithril___default.a.trust("&#150;") : __WEBPACK_IMPORTED_MODULE_0_mithril___default.a.trust("&#43;"))]);
+};
+
+/* harmony default export */ __webpack_exports__["a"] = ({
+  view: function view() {
+    return __WEBPACK_IMPORTED_MODULE_0_mithril___default()(__WEBPACK_IMPORTED_MODULE_2_mithril_infinite__["a" /* default */], {
+      maxPages: 20,
+      item: item,
+      pageUrl: pageUrl,
+      preloadPages: 3,
+      class: "images",
+      before: __WEBPACK_IMPORTED_MODULE_0_mithril___default()("a", {
+        class: ["list-item", vm.isExpanded("before") ? "open" : "closed"].join(" "),
+        onclick: function onclick() {
+          return vm.toggle("before");
+        }
+      }, [__WEBPACK_IMPORTED_MODULE_0_mithril___default()("div", __WEBPACK_IMPORTED_MODULE_0_mithril___default.a.trust("A list of pugs. Courtesy the <a href=\"http: //airbnb.io/infinity/demo-off.html\">AirBnb Infinity demo</a>.")), __WEBPACK_IMPORTED_MODULE_0_mithril___default()(".toggle", vm.isExpanded("before") ? __WEBPACK_IMPORTED_MODULE_0_mithril___default.a.trust("&#150;") : __WEBPACK_IMPORTED_MODULE_0_mithril___default.a.trust("&#43;"))]),
+      after: Object(__WEBPACK_IMPORTED_MODULE_1__app_footer__["a" /* default */])()
+    });
+  }
+});
+
+/***/ }),
+/* 10 */
+/***/ (function(module, exports) {
+
+/*!
  * verge 1.10.2+201705300050
  * http://npm.im/verge
  * MIT Ryan Van Etten
  */
-!function(t,n,i){void 0!==e&&e.exports?e.exports=i():t.verge=i()}(this,0,function(){function e(){return{width:c(),height:f()}}function t(e,t){var n={};return t=+t||0,n.width=(n.right=e.right+t)-(n.left=e.left-t),n.height=(n.bottom=e.bottom+t)-(n.top=e.top-t),n}function n(e,n){return!(!(e=e&&!e.nodeType?e[0]:e)||1!==e.nodeType)&&t(e.getBoundingClientRect(),n)}function i(t){t=null==t?e():1===t.nodeType?n(t):t;var i=t.height,r=t.width;return i="function"==typeof i?i.call(t):i,(r="function"==typeof r?r.call(t):r)/i}var r={},a="undefined"!=typeof window&&window,o="undefined"!=typeof document&&document,l=o&&o.documentElement,s=a.matchMedia||a.msMatchMedia,u=s?function(e){return!!s.call(a,e).matches}:function(){return!1},c=r.viewportW=function(){var e=l.clientWidth,t=a.innerWidth;return e<t?t:e},f=r.viewportH=function(){var e=l.clientHeight,t=a.innerHeight;return e<t?t:e};return r.mq=u,r.matchMedia=s?function(){return s.apply(a,arguments)}:function(){return{}},r.viewport=e,r.scrollX=function(){return a.pageXOffset||l.scrollLeft},r.scrollY=function(){return a.pageYOffset||l.scrollTop},r.rectangle=n,r.aspect=i,r.inX=function(e,t){var i=n(e,t);return!!i&&i.right>=0&&i.left<=c()},r.inY=function(e,t){var i=n(e,t);return!!i&&i.bottom>=0&&i.top<=f()},r.inViewport=function(e,t){var i=n(e,t);return!!i&&i.bottom>=0&&i.right>=0&&i.top<=f()&&i.left<=c()},r})},function(e,t,n){"use strict";(function(e){function n(e){return parseFloat(e)||0}function i(e){for(var t=[],i=arguments.length-1;i-- >0;)t[i]=arguments[i+1];return t.reduce(function(t,i){return t+n(e["border-"+i+"-width"])},0)}function r(e){for(var t=["top","right","bottom","left"],i={},r=0,a=t;r<a.length;r+=1){var o=a[r],l=e["padding-"+o];i[o]=n(l)}return i}function a(e){var t=e.getBBox();return c(0,0,t.width,t.height)}function o(e){var t=e.clientWidth,a=e.clientHeight;if(!t&&!a)return y;var o=w(e).getComputedStyle(e),s=r(o),u=s.left+s.right,f=s.top+s.bottom,p=n(o.width),d=n(o.height);if("border-box"===o.boxSizing&&(Math.round(p+u)!==t&&(p-=i(o,"left","right")+u),Math.round(d+f)!==a&&(d-=i(o,"top","bottom")+f)),!l(e)){var h=Math.round(p+u)-t,g=Math.round(d+f)-a;1!==Math.abs(h)&&(p-=h),1!==Math.abs(g)&&(d-=g)}return c(s.left,s.top,p,d)}function l(e){return e===w(e).document.documentElement}function s(e){return p?S(e)?a(e):o(e):y}function u(e){var t=e.x,n=e.y,i=e.width,r=e.height,a="undefined"!=typeof DOMRectReadOnly?DOMRectReadOnly:Object,o=Object.create(a.prototype);return _(o,{x:t,y:n,width:i,height:r,top:n,right:t+i,bottom:r+n,left:t}),o}function c(e,t,n,i){return{x:e,y:t,width:n,height:i}}var f=function(){function e(e,t){var n=-1;return e.some(function(e,i){return e[0]===t&&(n=i,!0)}),n}return"undefined"!=typeof Map?Map:function(){function t(){this.__entries__=[]}var n={size:{configurable:!0}};return n.size.get=function(){return this.__entries__.length},t.prototype.get=function(t){var n=e(this.__entries__,t),i=this.__entries__[n];return i&&i[1]},t.prototype.set=function(t,n){var i=e(this.__entries__,t);~i?this.__entries__[i][1]=n:this.__entries__.push([t,n])},t.prototype.delete=function(t){var n=this.__entries__,i=e(n,t);~i&&n.splice(i,1)},t.prototype.has=function(t){return!!~e(this.__entries__,t)},t.prototype.clear=function(){this.__entries__.splice(0)},t.prototype.forEach=function(e,t){var n=this;void 0===t&&(t=null);for(var i=0,r=n.__entries__;i<r.length;i+=1){var a=r[i];e.call(t,a[1],a[0])}},Object.defineProperties(t.prototype,n),t}()}(),p="undefined"!=typeof window&&"undefined"!=typeof document&&window.document===document,d=function(){return void 0!==e&&e.Math===Math?e:"undefined"!=typeof self&&self.Math===Math?self:"undefined"!=typeof window&&window.Math===Math?window:Function("return this")()}(),h=function(){return"function"==typeof requestAnimationFrame?requestAnimationFrame.bind(d):function(e){return setTimeout(function(){return e(Date.now())},1e3/60)}}(),g=2,m=function(e,t){function n(){a&&(a=!1,e()),o&&r()}function i(){h(n)}function r(){var e=Date.now();if(a){if(e-l<g)return;o=!0}else a=!0,o=!1,setTimeout(i,t);l=e}var a=!1,o=!1,l=0;return r},v=["top","right","bottom","left","width","height","size","weight"],b="undefined"!=typeof MutationObserver,x=function(){this.connected_=!1,this.mutationEventsAdded_=!1,this.mutationsObserver_=null,this.observers_=[],this.onTransitionEnd_=this.onTransitionEnd_.bind(this),this.refresh=m(this.refresh.bind(this),20)};x.prototype.addObserver=function(e){~this.observers_.indexOf(e)||this.observers_.push(e),this.connected_||this.connect_()},x.prototype.removeObserver=function(e){var t=this.observers_,n=t.indexOf(e);~n&&t.splice(n,1),!t.length&&this.connected_&&this.disconnect_()},x.prototype.refresh=function(){this.updateObservers_()&&this.refresh()},x.prototype.updateObservers_=function(){var e=this.observers_.filter(function(e){return e.gatherActive(),e.hasActive()});return e.forEach(function(e){return e.broadcastActive()}),e.length>0},x.prototype.connect_=function(){p&&!this.connected_&&(document.addEventListener("transitionend",this.onTransitionEnd_),window.addEventListener("resize",this.refresh),b?(this.mutationsObserver_=new MutationObserver(this.refresh),this.mutationsObserver_.observe(document,{attributes:!0,childList:!0,characterData:!0,subtree:!0})):(document.addEventListener("DOMSubtreeModified",this.refresh),this.mutationEventsAdded_=!0),this.connected_=!0)},x.prototype.disconnect_=function(){p&&this.connected_&&(document.removeEventListener("transitionend",this.onTransitionEnd_),window.removeEventListener("resize",this.refresh),this.mutationsObserver_&&this.mutationsObserver_.disconnect(),this.mutationEventsAdded_&&document.removeEventListener("DOMSubtreeModified",this.refresh),this.mutationsObserver_=null,this.mutationEventsAdded_=!1,this.connected_=!1)},x.prototype.onTransitionEnd_=function(e){var t=e.propertyName;void 0===t&&(t=""),v.some(function(e){return!!~t.indexOf(e)})&&this.refresh()},x.getInstance=function(){return this.instance_||(this.instance_=new x),this.instance_},x.instance_=null;var _=function(e,t){for(var n=0,i=Object.keys(t);n<i.length;n+=1){var r=i[n];Object.defineProperty(e,r,{value:t[r],enumerable:!1,writable:!1,configurable:!0})}return e},w=function(e){return e&&e.ownerDocument&&e.ownerDocument.defaultView||d},y=c(0,0,0,0),S=function(){return"undefined"!=typeof SVGGraphicsElement?function(e){return e instanceof w(e).SVGGraphicsElement}:function(e){return e instanceof w(e).SVGElement&&"function"==typeof e.getBBox}}(),z=function(e){this.broadcastWidth=0,this.broadcastHeight=0,this.contentRect_=c(0,0,0,0),this.target=e};z.prototype.isActive=function(){var e=s(this.target);return this.contentRect_=e,e.width!==this.broadcastWidth||e.height!==this.broadcastHeight},z.prototype.broadcastRect=function(){var e=this.contentRect_;return this.broadcastWidth=e.width,this.broadcastHeight=e.height,e};var k=function(e,t){var n=u(t);_(this,{target:e,contentRect:n})},O=function(e,t,n){if(this.activeObservations_=[],this.observations_=new f,"function"!=typeof e)throw new TypeError("The callback provided as parameter 1 is not a function.");this.callback_=e,this.controller_=t,this.callbackCtx_=n};O.prototype.observe=function(e){if(!arguments.length)throw new TypeError("1 argument required, but only 0 present.");if("undefined"!=typeof Element&&Element instanceof Object){if(!(e instanceof w(e).Element))throw new TypeError('parameter 1 is not of type "Element".');var t=this.observations_;t.has(e)||(t.set(e,new z(e)),this.controller_.addObserver(this),this.controller_.refresh())}},O.prototype.unobserve=function(e){if(!arguments.length)throw new TypeError("1 argument required, but only 0 present.");if("undefined"!=typeof Element&&Element instanceof Object){if(!(e instanceof w(e).Element))throw new TypeError('parameter 1 is not of type "Element".');var t=this.observations_;t.has(e)&&(t.delete(e),t.size||this.controller_.removeObserver(this))}},O.prototype.disconnect=function(){this.clearActive(),this.observations_.clear(),this.controller_.removeObserver(this)},O.prototype.gatherActive=function(){var e=this;this.clearActive(),this.observations_.forEach(function(t){t.isActive()&&e.activeObservations_.push(t)})},O.prototype.broadcastActive=function(){if(this.hasActive()){var e=this.callbackCtx_,t=this.activeObservations_.map(function(e){return new k(e.target,e.broadcastRect())});this.callback_.call(e,t,e),this.clearActive()}},O.prototype.clearActive=function(){this.activeObservations_.splice(0)},O.prototype.hasActive=function(){return this.activeObservations_.length>0};var P="undefined"!=typeof WeakMap?new WeakMap:new f,A=function(e){if(!(this instanceof A))throw new TypeError("Cannot call a class as a function.");if(!arguments.length)throw new TypeError("1 argument required, but only 0 present.");var t=x.getInstance(),n=new O(e,t,this);P.set(this,n)};["observe","unobserve","disconnect"].forEach(function(e){A.prototype[e]=function(){return(t=P.get(this))[e].apply(t,arguments);var t}});var E=function(){return void 0!==d.ResizeObserver?d.ResizeObserver:A}();t.a=E}).call(t,n(12))},function(e,t){var n;n=function(){return this}();try{n=n||Function("return this")()||(0,eval)("this")}catch(e){"object"==typeof window&&(n=window)}e.exports=n},function(e,t,n){"use strict";function i(e,t){for(var n in t)z.call(t,n)&&(!n.indexOf("$")||n in e||(e[n]=t[n]));return e}function r(e,t){var n,i,r=[];for(i in t)if(z.call(t,i))for(n in e)z.call(e,n)&&r.push(e[n]+t[i]);return r}function a(e){for(var t,n=[],i=[],r=0;t=O.exec(e);)switch(t[0]){case"(":r++;break;case")":r--;break;case",":if(r)break;n.push(t.index)}for(t=n.length;t--;)i.unshift(e.slice(n[t]+1)),e=e.slice(0,n[t]);return i.unshift(e),i}function o(e,t){for(var n,i,a=[],o=[];i=P.exec(e);)"&"==i[0]&&a.push(i.index);for(i=a.length;i--;)o.unshift(e.slice(a[i]+1)),e=e.slice(0,a[i]);for(o.unshift(e),1===o.length&&o.unshift(""),n=[o[0]],i=1;i<o.length;i++)n=r(n,r(t,[o[i]]));return n.join(",")}function l(e){return function t(n){if(x.call(n)===_)for(var i=0;i<n.length;i++)t(n[i]);else e(n)}}function s(e){return"-"+e.toLowerCase()}function u(e,t,n,i,r){var a,o,l;if(null!=i)switch(x.call(i=i.valueOf())){case _:for(a=0;a<i.length;a++)u(e,t,n,i[a],r);break;case w:n=n&&n+"-";for(a in i)if(z.call(i,a))if(o=i[a],/\$/.test(a))for(l in a=a.split("$"))z.call(a,l)&&u(e,t,n+a[l],o,r);else u(e,t,n+a,o,r);break;default:a=n.replace(/_/g,"-").replace(/[A-Z]/g,s),!r||"animation-name"!=a&&"animation"!=a&&"list-style"!=a||(i=i.split(",").map(function(t){return t.replace(/^\s*(?:(var\([^)]+\))|:?global\(\s*([_A-Za-z][-\w]*)\s*\)|()(-?[_A-Za-z][-\w]*))/,e.localizeReplacer)}).join(",")),t.decl(a,i)}}function c(e,t,n,i,r,a,o){for(var s=0;s<e.$atHandlers.length;s++)if(e.$atHandlers[s](e,t,n,i,r,a,o))return;if(!n[3]&&/^global$/.test(n[2]))f(e,t,r,i,0,o);else if(!n[3]&&/^local$/.test(n[2]))f(e,t,r,i,1,o);else if(n[3]&&/^adopt$/.test(n[2])){if(!a||o)return t.err("@adopt global or nested: "+n[0]);if(!/^\.?[_A-Za-z][-\w]*$/.test(n[3]))return t.err("bad adopter "+JSON.stringify(n[3])+" in "+n[0]);s=[],l(function(e,i){null!=e&&/^\.?[_A-Za-z][-\w]*(?:\s+\.?[_A-Za-z][-\w]*)*$/.test(i=e+"")?s.push(i.replace(/\./g,"")):t.err("bad adoptee "+JSON.stringify(e)+" in "+n[0])})(i),s.length&&(e.localize(n[3]=n[3].replace(/\./g,"")),e.names[n[3]]+=" "+s.join(" "))}else!n[3]&&/^(?:namespace|import|charset)$/.test(n[2])?l(function(e){t.atrule(n[1],n[2],e)})(i):!n[3]&&/^(?:font-face|viewport)$/.test(n[2])?l(function(i){t.atrule(n[1],n[2],n[3],1),u(e,t,"",i,a),t._atrule()})(i):n[3]&&/^(?:media|supports|page|keyframes)$/.test(n[2])?(a&&"keyframes"==n[2]&&(n[3]=n[3].replace(/(var\([^)]+\))|:?global\(\s*([_A-Za-z][-\w]*)\s*\)|()(-?[_A-Za-z][-\w]*)/,e.localizeReplacer)),t.atrule(n[1],n[2],n[3],1),"page"==n[2]?u(e,t,"",i,a):f(e,t,"keyframes"==n[2]?"":r,i,a,o+1),t._atrule()):t.err("Unsupported at-rule: "+n[0])}function f(e,t,n,i,r,l){var s,p,d,h;switch(x.call(i)){case w:for(s in i)if(z.call(i,s))if(p=i[s],n.length>0&&/^[-\w$]+$/.test(s))if(d||(d=1,t.rule(n)),/\$/.test(s))for(h in s=s.split("$"))z.call(s,h)&&u(e,t,s[h],p,r);else u(e,t,s,p,r);else/^@/.test(s)?(d=0,c(e,t,/^(.(?:-[\w]+-)?([_A-Za-z][-\w]*))\b\s*(.*?)\s*$/.exec(s)||[s,"@","",""],p,n,r,l)):(d=0,f(e,t,n.length>0&&(/,/.test(n)||/,/.test(s))?(h=a(n),a(r?s.replace(/("(?:\\.|[^"\n])*"|'(?:\\.|[^'\n])*'|\/\*[\s\S]*?\*\/)|:global\(\s*(\.-?[_A-Za-z][-\w]*)\s*\)|(\.)(-?[_A-Za-z][-\w]*)/g,e.localizeReplacer):s).map(function(e){return/&/.test(e)?o(e,h):h.map(function(t){return t+e}).join(",")}).join(",")):/&/.test(s)?o(r?s.replace(/("(?:\\.|[^"\n])*"|'(?:\\.|[^'\n])*'|\/\*[\s\S]*?\*\/)|:global\(\s*(\.-?[_A-Za-z][-\w]*)\s*\)|(\.)(-?[_A-Za-z][-\w]*)/g,e.localizeReplacer):s,[n]):n+(r?s.replace(/("(?:\\.|[^"\n])*"|'(?:\\.|[^'\n])*'|\/\*[\s\S]*?\*\/)|:global\(\s*(\.-?[_A-Za-z][-\w]*)\s*\)|(\.)(-?[_A-Za-z][-\w]*)/g,e.localizeReplacer):s),p,r,l+1));break;case _:for(s=0;s<i.length;s++)f(e,t,n,i[s],r,l);break;case y:n.length||t.err("No selector"),t.rule(n||" "),u(e,t,"",i,r)}}function p(e,t){var n;return t?e:{init:function(){n=0,e.init()},done:function(t){return n&&(e._rule(),n=0),e.done(t)},atrule:function(t,i,r,a){n&&(e._rule(),n=0),e.atrule(t,i,r,a)},_atrule:function(t){n&&(e._rule(),n=0),e._atrule(t)},rule:function(t){t!==n&&(n&&e._rule(),e.rule(t),n=t)}}}function d(e){return":global("+e+")"}function h(e,t,n){return n={},n[e]=t,n}function g(e,t,n){if(arguments.length<3){var i=g.bind.apply(g,[null].concat([].slice.call(arguments,0)));return i.toString=function(){return"@"+e+" "+t},i}return h("@"+e+" "+t,n)}function m(){function e(e){if(!z.length){s.push(function(e,t){return t?{init:o.init,decl:o.decl,done:o.done,err:o.err}:o});for(var t=0;t<2;t++)for(var n=s.length;n--;)z[t]=k(i(s[n](z[t],!!t),z[t]))}return z[e]}function t(e){return _.names[e]||(_.names[e]=e+_.suffix),_.names[e].match(/^\S+/)}function n(e,n,i,r,a){return n||i||r+t(a)}var r,a,o={init:function(){r=[],a=[]},done:function(e){if(0!=a.length)throw new Error("j2c error(s): "+JSON.stringify(a,null,2)+"in context:\n"+r.join(""));return e?r:r.join("")},err:function(e){a.push(e),r.push("/* +++ ERROR +++ "+e+" */\n")},atrule:function(e,t,n,i){r.push(e,n&&" ",n,i?" {":";",_.endline)},_atrule:function(){r.push("}",_.endline)},rule:function(e){r.push(e," {",_.endline)},_rule:function(){r.push("}",_.endline)},decl:function(e,t){r.push(e,e&&":",t,";",_.endline)}},s=[p],m=[],_={at:g,global:d,kv:h,names:{},endline:"\n",suffix:"__j2c-"+Math.floor(4294967296*Math.random()).toString(36)+"-"+Math.floor(4294967296*Math.random()).toString(36)+"-"+Math.floor(4294967296*Math.random()).toString(36)+"-"+Math.floor(4294967296*Math.random()).toString(36),$plugins:[],sheet:function(t){var n=e(0);return n.init(),f(w[0],n,"",t,1,0),n.done()},inline:function(t,n){var i=e(1);return i.init(),u(w[1],i,"",t,!(n&&n.global)),i.done()}},w=[{localizeReplacer:n,localize:t,names:_.names,$atHandlers:m,atrule:c,decl:u,rule:f},{localizeReplacer:n,localize:t,names:_.names,decl:u}],y=l(function(e){~_.$plugins.indexOf(e)||(_.$plugins.push(e),x.call(e)===S&&(e=e(_)),e&&(l(function(e){s.push(e)})(e.$filter||v),l(function(e){m.push(e)})(e.$at||v),i(_.names,e.$names||b),y(e.$plugins||v),o=e.$sink||o,i(_,e)))}),z=[];return y(v.slice.call(arguments)),_}var v=[],b={},x=b.toString,_=x.call(v),w=x.call(b),y=x.call(""),S=x.call(x),z=b.hasOwnProperty,k=Object.freeze||function(e){return e},O=/[(),]|"(?:\\.|[^"\n])*"|'(?:\\.|[^'\n])*'|\/\*[\s\S]*?\*\//g,P=/&|"(?:\\.|[^"\n])*"|'(?:\\.|[^'\n])*'|\/\*[\s\S]*?\*\//g;e.exports=m},function(e,t,n){"use strict";t.a=[{".mithril-infinite__scroll-view.images":{margin:"0 auto",background:"#fff"," .mithril-infinite__scroll-content":{" .mithril-infinite__before, .mithril-infinite__after":{" .list-item":{padding:"20px 70px 20px 56px",fontSize:"16px",minHeight:"60px"}}," .mithril-infinite__page":{minHeight:"400px"}," .mithril-infinite__page--odd":{backgroundColor:"#f0f0f0"," .list-item":{borderBottom:"1px solid #ddd"}}," .mithril-infinite__page--even":{"background-color":"#e0e0e0"," .list-item":{borderBottom:"1px solid #ccc"}}," .list-item":{position:"relative",display:"block",cursor:"pointer",".open":{height:"160px"},".closed":{height:"auto"}," .image":{display:"block",height:"100%",position:"absolute",left:"56px",top:0,backgroundSize:"contain",backgroundRepeat:"no-repeat"}," .pageNum, .toggle":{position:"absolute",top:"8px",display:"block",color:"#222",width:"40px",height:"40px",textAlign:"center",lineHeight:"40px"}," .pageNum":{left:"4px",fontSize:"13px",color:"#999"}," .toggle":{right:"10px",backgroundColor:"#fff"}}}}}]},function(e,t,n){"use strict";var i=n(0),r=n.n(i),a=n(2),o=n(3),l=n(1),s=n(16);Object(l.a)("grid",s.a);var u=function(e,t){var n=t.replace(/\/150\//,"/190/"),i=function(){e.style.backgroundImage="url("+n+")"},r=new Image;r.onload=i,r.src=t},c=function(e,t){e.state.inited||o.a.isElementInViewport({el:e.dom})&&(u(e.dom,t.thumbnailUrl),e.state.inited=!0)},f=function(e){return r()("a.grid-item",r()(".image-holder",r()(".image",{oncreate:function(t){return c(t,e)},onupdate:function(t){return c(t,e)}})))},p=function(){return d};t.a={view:function(){return r()(o.a,{preloadPages:3,item:f,pageData:p,class:"grid",after:Object(a.a)()})}};var d=[{albumId:1,id:1,title:"accusamus beatae ad facilis cum similique qui sunt",url:"http://placehold.it/600/92c952",thumbnailUrl:"http://placehold.it/150/92c952"},{albumId:1,id:2,title:"reprehenderit est deserunt velit ipsam",url:"http://placehold.it/600/771796",thumbnailUrl:"http://placehold.it/150/771796"},{albumId:1,id:3,title:"officia porro iure quia iusto qui ipsa ut modi",url:"http://placehold.it/600/24f355",thumbnailUrl:"http://placehold.it/150/24f355"},{albumId:1,id:4,title:"culpa odio esse rerum omnis laboriosam voluptate repudiandae",url:"http://placehold.it/600/d32776",thumbnailUrl:"http://placehold.it/150/d32776"},{albumId:1,id:5,title:"natus nisi omnis corporis facere molestiae rerum in",url:"http://placehold.it/600/f66b97",thumbnailUrl:"http://placehold.it/150/f66b97"},{albumId:1,id:6,title:"accusamus ea aliquid et amet sequi nemo",url:"http://placehold.it/600/56a8c2",thumbnailUrl:"http://placehold.it/150/56a8c2"},{albumId:1,id:7,title:"officia delectus consequatur vero aut veniam explicabo molestias",url:"http://placehold.it/600/b0f7cc",thumbnailUrl:"http://placehold.it/150/b0f7cc"},{albumId:1,id:8,title:"aut porro officiis laborum odit ea laudantium corporis",url:"http://placehold.it/600/54176f",thumbnailUrl:"http://placehold.it/150/54176f"},{albumId:1,id:9,title:"qui eius qui autem sed",url:"http://placehold.it/600/51aa97",thumbnailUrl:"http://placehold.it/150/51aa97"},{albumId:1,id:10,title:"beatae et provident et ut vel",url:"http://placehold.it/600/810b14",thumbnailUrl:"http://placehold.it/150/810b14"},{albumId:1,id:11,title:"nihil at amet non hic quia qui",url:"http://placehold.it/600/1ee8a4",thumbnailUrl:"http://placehold.it/150/1ee8a4"},{albumId:1,id:12,title:"mollitia soluta ut rerum eos aliquam consequatur perspiciatis maiores",url:"http://placehold.it/600/66b7d2",thumbnailUrl:"http://placehold.it/150/66b7d2"}]},function(e,t,n){"use strict";function i(e,t,n){return t in e?Object.defineProperty(e,t,{value:n,enumerable:!0,configurable:!0,writable:!0}):e[t]=n,e}var r=function(e,t){return i({},"@media ("+e+"-width: "+(210*(t+1)+8*t)+"px)",{".mithril-infinite__scroll-view.grid":{" .mithril-infinite__scroll-content":{" .mithril-infinite__content":{width:210*t+8*(t-1)+"px"}}}})};t.a=[r("min",4),r("max",4),r("max",3),r("max",2),r("max",1),{".mithril-infinite__scroll-view.grid":{margin:"0 auto"," .mithril-infinite__scroll-content":{padding:"16px 0"," .mithril-infinite__content":{margin:"0 auto",fontSize:0,lineHeight:0," .mithril-infinite__page":{margin:"0 -4px"}," .grid-item":{display:"inline-block",height:"210px",width:"210px",backgroundColor:"#f0f0f0",margin:[0,4,8,4].map(function(e){return e+"px"}).join(" ")," .image-holder":{height:"190px",width:"190px",overflow:"hidden",position:"relative",margin:"10px"," .image":{position:"absolute",left:"auto",top:0,right:"auto",bottom:0,width:"100%",backgroundSize:"contain",backgroundRepeat:"no-repeat",backgroundPositionX:"50%"}}}}}}}]},function(e,t,n){"use strict";var i=n(0),r=n.n(i),a=n(2),o=n(3),l=n(1),s=n(18);Object(l.a)("table",s.a);var u=function(e,t){return r()(".list-item",[r()("div",t.pageNum),r()("div",e||r.a.trust("&nbsp;"))])};t.a={view:function(){return r()(o.a,{maxPages:10,item:u,pageUrl:function(e){return"data/table/page-"+e+".json"},class:"table",after:Object(a.a)()})}}},function(e,t,n){"use strict";t.a=[{".mithril-infinite__scroll-view.table":{minWidth:"320px",margin:"0 auto",background:"#eee"," .mithril-infinite__scroll-content":{" .mithril-infinite__page":{display:"table",width:"100%"}," .mithril-infinite__page--odd":{backgroundColor:"#e4e4e4"," .list-item":{" > div":{color:"rgba(0,0,0,.87)",borderBottom:"1px solid rgba(0, 0, 0, .07)",":first-child":{color:"rgba(0,0,0,.54)"}}}}," .mithril-infinite__page--even":{"background-color":"#f0f0f0"}," .list-item":{width:"100%",display:"table-row"," > div":{borderBottom:"1px solid rgba(0, 0, 0, .07)",display:"table-cell",verticalAlign:"top",padding:"8px 16px",minHeight:"1em",width:"90%",":first-child":{color:"#aaa",width:"10%",textAlign:"right"}}}}}}]},function(e,t,n){"use strict";var i=n(0),r=n.n(i),a=n(3),o=n(2),l=n(1),s=n(20);Object(l.a)("short",s.a);var u=function(e){var t=e[1]||"transparent",n=e[1]?"":r()(".title",e[0]);return r()(".list-item",{class:n?"has-title":"",style:{"background-color":t}},n)};t.a={view:function(){return r()(a.a,{item:u,maxPages:21,preloadSlots:10,pageUrl:function(e){return"data/short/page-"+e+".json"},class:"short",pageChange:function(e){console&&console.log("page",e)},after:Object(o.a)()})}}},function(e,t,n){"use strict";t.a=[{".mithril-infinite__scroll-view.short":{minWidth:"320px",margin:"0 auto",background:"#eee"," .mithril-infinite__scroll-content":{" .list-item":{height:"8px",".has-title":{fontSize:"18px",padding:"0 16px",height:"32px",lineHeight:"32px",color:"#222"}}}}}]},function(e,t,n){"use strict";var i=n(0),r=n.n(i),a=n(2),o=n(3),l=n(4),s=n(1),u=n(22);Object(s.a)("horizontal",u.a);var c=function(e,t){var n=l.a.imageUrl+t,i=function(){e.style.backgroundImage="url("+n+")",e.style.opacity=1},r=new Image;r.onload=i,r.src=n},f=function(e,t){e.state.inited||o.a.isElementInViewport({el:e.dom})&&(c(e.dom,t.src),e.state.inited=!0)},p=function(e){return r()("a.grid-item",r()(".image-holder",r()(".image",{oncreate:function(t){return f(t,e)},onupdate:function(t){return f(t,e)}})))};t.a={view:function(){return[r()(o.a,{maxPages:16,item:p,pageUrl:function(e){return"data/horizontal/page-"+e+".json"},class:"horizontal",axis:"x",pageSize:function(e){return 218*(e.length||12)},pageChange:function(e){console&&console.log("page",e)}}),Object(a.a)()]}}},function(e,t,n){"use strict";t.a=[{".mithril-infinite__scroll-view.horizontal":{margin:0,height:"230px",background:"#fff"," .mithril-infinite__scroll-content":{padding:0,margin:0,fontSize:0," .mithril-infinite__content, .mithril-infinite__padding-before, .mithril-infinite__padding-after":{display:"inline-block"}," .mithril-infinite__content":{margin:0,fontSize:0," .mithril-infinite__page":{display:"inline-block",height:"210px"}," .grid-item":{display:"inline-block",height:"210px",width:"210px",backgroundColor:"#f0f0f0",margin:"0 4px"," .image-holder":{height:"190px",width:"190px",overflow:"hidden",position:"relative",margin:"10px"," .image":{position:"absolute",left:"auto",top:0,right:"auto",bottom:0,width:"100%",backgroundSize:"contain",backgroundRepeat:"no-repeat",backgroundPositionX:"50%",opacity:0,transition:"opacity .7s"}}}}}}}]},function(e,t,n){"use strict";var i=n(0),r=n.n(i),a=n(2),o=n(3),l=n(1),s=n(24);Object(l.a)("fixed",s.a);var u=function(e,t){return r()(".list-item",[r()("div",t.pageNum),r()("div",e.title)])};t.a={view:function(){return r()(o.a,{pageData:function(){return c},maxPages:10,preloadPages:3,item:u,class:"table fixed",pageSize:function(){return 370},contentSize:3833,after:Object(a.a)()})}};var c=[{albumId:1,id:1,title:"accusamus beatae ad facilis cum similique qui sunt",url:"http://placehold.it/600/92c952",thumbnailUrl:"http://placehold.it/150/92c952"},{albumId:1,id:2,title:"reprehenderit est deserunt velit ipsam",url:"http://placehold.it/600/771796",thumbnailUrl:"http://placehold.it/150/771796"},{albumId:1,id:3,title:"officia porro iure quia iusto qui ipsa ut modi",url:"http://placehold.it/600/24f355",thumbnailUrl:"http://placehold.it/150/24f355"},{albumId:1,id:4,title:"culpa odio esse rerum omnis laboriosam voluptate repudiandae",url:"http://placehold.it/600/d32776",thumbnailUrl:"http://placehold.it/150/d32776"},{albumId:1,id:5,title:"natus nisi omnis corporis facere molestiae rerum in",url:"http://placehold.it/600/f66b97",thumbnailUrl:"http://placehold.it/150/f66b97"},{albumId:1,id:6,title:"accusamus ea aliquid et amet sequi nemo",url:"http://placehold.it/600/56a8c2",thumbnailUrl:"http://placehold.it/150/56a8c2"},{albumId:1,id:7,title:"officia delectus consequatur vero aut veniam explicabo molestias",url:"http://placehold.it/600/b0f7cc",thumbnailUrl:"http://placehold.it/150/b0f7cc"},{albumId:1,id:8,title:"aut porro officiis laborum odit ea laudantium corporis",url:"http://placehold.it/600/54176f",thumbnailUrl:"http://placehold.it/150/54176f"},{albumId:1,id:9,title:"qui eius qui autem sed",url:"http://placehold.it/600/51aa97",thumbnailUrl:"http://placehold.it/150/51aa97"},{albumId:1,id:10,title:"beatae et provident et ut vel",url:"http://placehold.it/600/810b14",thumbnailUrl:"http://placehold.it/150/810b14"},{albumId:1,id:11,title:"nihil at amet non hic quia qui",url:"http://placehold.it/600/1ee8a4",thumbnailUrl:"http://placehold.it/150/1ee8a4"},{albumId:1,id:12,title:"mollitia soluta ut rerum eos aliquam consequatur perspiciatis maiores",url:"http://placehold.it/600/66b7d2",thumbnailUrl:"http://placehold.it/150/66b7d2"}]},function(e,t,n){"use strict";t.a=[{".mithril-infinite__scroll-view.table.fixed":{" .mithril-infinite__scroll-content":{" .mithril-infinite__page":{" .list-item":{maxHeight:"36px",overflowY:"hidden"}}," .footer":{height:"133px"}}}}]},function(e,t,n){"use strict";var i=n(0),r=n.n(i),a=n(2),o=n(3),l=n(4),s=n(1),u=n(26);Object(s.a)("paging",u.a);var c=function(e){return r()("a.grid-item",r()(".image-holder",r()(".image",{oncreate:function(t){t.dom.style.backgroundImage="url("+l.a.imageUrl+e.src+")"}})))},f=function(e){return r.a.request({method:"GET",url:"data/paging/page-"+e+".json"})};t.a={oninit:function(e){var t=0,n=r.a.route.param("p")?parseInt(r.a.route.param("p"),10):1,i=function(e){return f(e).then(function(e){return t=e.length,e})};e.state={getPageData:i,pageNum:n,hasPrev:function(e){return e>1},hasNext:function(e){return e<t}}},view:function(e){var t=e.state,n=r.a.route.param("p")?parseInt(r.a.route.param("p"),10):t.pageNum;return r()("div",[r()(".paging",[r()(".count","Page "+n),r()(o.a,{item:c,pageData:t.getPageData,pageChange:function(e){return t.pageNum=e},currentPage:n,autoSize:!1}),r()(".pager",[r()("a",{class:t.hasPrev(n)?"":"disabled",href:"/paging/"+(n-1),oncreate:r.a.route.link},"Prev"),r()("a",{class:t.hasNext(n)?"":"disabled",href:"/paging/"+(n+1),oncreate:r.a.route.link},"Next")])]),Object(a.a)()])}}},function(e,t,n){"use strict";t.a=[{".paging":{width:"320px",margin:"0 auto"," .mithril-infinite__scroll-view.mithril-infinite__scroll-view--y":{height:304/3*4+24+16+"px"}," .mithril-infinite__page--placeholder":{height:"0 !important"}," .mithril-infinite__scroll-content":{margin:"0 auto",width:"320px",padding:"8px 0 0"," .mithril-infinite__content":{margin:"0 auto",fontSize:0,lineHeight:0," .mithril-infinite__page":{margin:"0 -4px"}," .grid-item":{display:"inline-block",height:304/3+"px",width:304/3+"px",backgroundColor:"#f0f0f0",margin:[0,4,8,4].map(function(e){return e+"px"}).join(" ")," .image-holder":{height:304/3-20+"px",width:304/3-20+"px",overflow:"hidden",position:"relative",margin:"10px"," .image":{position:"absolute",left:"auto",top:0,right:"auto",bottom:0,width:"100%",backgroundSize:"contain",backgroundRepeat:"no-repeat",backgroundPositionX:"50%"}}}}}," .count":{fontSize:"14px",lineHeight:1,padding:"20px 0 10px 0",borderBottom:"1px solid #ddd"}," .pager":{borderTop:"1px solid #ddd",padding:"8px 0",width:"320px"," a":{display:"inline-block",background:"#e0e0e0",color:"#333",padding:"10px 15px",textAlign:"center",fontSize:"15px",lineHeight:1,margin:"0 5px 0 0","&.disabled":{color:"#aaa",background:"#f4f4f4",pointerEvents:"none"}}}}}]},function(e,t,n){"use strict";var i=n(4),r=[{" *":{"box-sizing":"border-box"}," html, body, #app":{minHeight:"100%",height:"100%"}," body":{margin:0,padding:0,fontFamily:"arial, sans-serif",minWidth:i.b.size_px}," h1":{display:"block",margin:"40px auto 0 auto",width:"320px",textAlign:"center",fontSize:"28px",fontWeight:"normal",color:i.b.text_color}," a":{"&:link, &:visited":{color:"#1E88E5",textDecoration:"none"}}}];t.a=r},function(e,t,n){"use strict";var i=n(4),r=i.b.size_px;t.a=[{".index":{" h1":{display:"block",margin:"40px auto 0 auto",width:i.b.size+"px",textAlign:"center",fontSize:"28px",fontWeight:"normal",color:i.b.text_color}," .menu":{width:r,margin:"20px auto",padding:"0 0 20px 0",listStyle:"none"," li":{margin:"0 0 1px 0",padding:0,"&.header":{fontSize:"18px",color:"#90A4AE"},"&.header, a":{padding:"20px"}," a":{display:"block",textDecoration:"none",backgroundColor:"#CFD8DC"," .title":{display:"block",color:"rgba(0,0,0,.85)",fontSize:"18px",lineHeight:"25.2px"}," .subtitle":{display:"block",color:"rgba(0,0,0,.4)",fontSize:"14px"}}}}}}]}]);
+
+!function(root, name, make) {
+  if (typeof module != 'undefined' && module['exports']) module['exports'] = make();
+  else root[name] = make();
+}(this, 'verge', function() {
+
+  var xports = {}
+    , win = typeof window != 'undefined' && window
+    , doc = typeof document != 'undefined' && document
+    , docElem = doc && doc.documentElement
+    , matchMedia = win['matchMedia'] || win['msMatchMedia']
+    , mq = matchMedia ? function(q) {
+        return !!matchMedia.call(win, q).matches;
+      } : function() {
+        return false;
+      }
+    , viewportW = xports['viewportW'] = function() {
+        var a = docElem['clientWidth'], b = win['innerWidth'];
+        return a < b ? b : a;
+      }
+    , viewportH = xports['viewportH'] = function() {
+        var a = docElem['clientHeight'], b = win['innerHeight'];
+        return a < b ? b : a;
+      };
+
+  /**
+   * Test if a media query is active. Like Modernizr.mq
+   * @since 1.6.0
+   * @return {boolean}
+   */
+  xports['mq'] = mq;
+
+  /**
+   * Normalized matchMedia
+   * @since 1.6.0
+   * @return {MediaQueryList|Object}
+   */
+  xports['matchMedia'] = matchMedia ? function() {
+    // matchMedia must be binded to window
+    return matchMedia.apply(win, arguments);
+  } : function() {
+    // Gracefully degrade to plain object
+    return {};
+  };
+
+  /**
+   * @since 1.8.0
+   * @return {{width:number, height:number}}
+   */
+  function viewport() {
+    return {'width':viewportW(), 'height':viewportH()};
+  }
+  xports['viewport'] = viewport;
+
+  /**
+   * Cross-browser window.scrollX
+   * @since 1.0.0
+   * @return {number}
+   */
+  xports['scrollX'] = function() {
+    return win.pageXOffset || docElem.scrollLeft;
+  };
+
+  /**
+   * Cross-browser window.scrollY
+   * @since 1.0.0
+   * @return {number}
+   */
+  xports['scrollY'] = function() {
+    return win.pageYOffset || docElem.scrollTop;
+  };
+
+  /**
+   * @param {{top:number, right:number, bottom:number, left:number}} coords
+   * @param {number=} cushion adjustment
+   * @return {Object}
+   */
+  function calibrate(coords, cushion) {
+    var o = {};
+    cushion = +cushion || 0;
+    o['width'] = (o['right'] = coords['right'] + cushion) - (o['left'] = coords['left'] - cushion);
+    o['height'] = (o['bottom'] = coords['bottom'] + cushion) - (o['top'] = coords['top'] - cushion);
+    return o;
+  }
+
+  /**
+   * Cross-browser element.getBoundingClientRect plus optional cushion.
+   * Coords are relative to the top-left corner of the viewport.
+   * @since 1.0.0
+   * @param {Element|Object} el element or stack (uses first item)
+   * @param {number=} cushion +/- pixel adjustment amount
+   * @return {Object|boolean}
+   */
+  function rectangle(el, cushion) {
+    el = el && !el.nodeType ? el[0] : el;
+    if (!el || 1 !== el.nodeType) return false;
+    return calibrate(el.getBoundingClientRect(), cushion);
+  }
+  xports['rectangle'] = rectangle;
+
+  /**
+   * Get the viewport aspect ratio (or the aspect ratio of an object or element)
+   * @since 1.7.0
+   * @param {(Element|Object)=} o optional object with width/height props or methods
+   * @return {number}
+   * @link http://w3.org/TR/css3-mediaqueries/#orientation
+   */
+  function aspect(o) {
+    o = null == o ? viewport() : 1 === o.nodeType ? rectangle(o) : o;
+    var h = o['height'], w = o['width'];
+    h = typeof h == 'function' ? h.call(o) : h;
+    w = typeof w == 'function' ? w.call(o) : w;
+    return w/h;
+  }
+  xports['aspect'] = aspect;
+
+  /**
+   * Test if an element is in the same x-axis section as the viewport.
+   * @since 1.0.0
+   * @param {Element|Object} el
+   * @param {number=} cushion
+   * @return {boolean}
+   */
+  xports['inX'] = function(el, cushion) {
+    var r = rectangle(el, cushion);
+    return !!r && r.right >= 0 && r.left <= viewportW();
+  };
+
+  /**
+   * Test if an element is in the same y-axis section as the viewport.
+   * @since 1.0.0
+   * @param {Element|Object} el
+   * @param {number=} cushion
+   * @return {boolean}
+   */
+  xports['inY'] = function(el, cushion) {
+    var r = rectangle(el, cushion);
+    return !!r && r.bottom >= 0 && r.top <= viewportH();
+  };
+
+  /**
+   * Test if an element is in the viewport.
+   * @since 1.0.0
+   * @param {Element|Object} el
+   * @param {number=} cushion
+   * @return {boolean}
+   */
+  xports['inViewport'] = function(el, cushion) {
+    // Equiv to `inX(el, cushion) && inY(el, cushion)` but just manually do both
+    // to avoid calling rectangle() twice. It gzips just as small like this.
+    var r = rectangle(el, cushion);
+    return !!r && r.bottom >= 0 && r.right >= 0 && r.top <= viewportH() && r.left <= viewportW();
+  };
+
+  return xports;
+});
+
+
+/***/ }),
+/* 11 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(global) {/**
+ * A collection of shims that provide minimal functionality of the ES6 collections.
+ *
+ * These implementations are not meant to be used outside of the ResizeObserver
+ * modules as they cover only a limited range of use cases.
+ */
+/* eslint-disable require-jsdoc, valid-jsdoc */
+var MapShim = (function () {
+    if (typeof Map !== 'undefined') {
+        return Map;
+    }
+
+    /**
+     * Returns index in provided array that matches the specified key.
+     *
+     * @param {Array<Array>} arr
+     * @param {*} key
+     * @returns {number}
+     */
+    function getIndex(arr, key) {
+        var result = -1;
+
+        arr.some(function (entry, index) {
+            if (entry[0] === key) {
+                result = index;
+
+                return true;
+            }
+
+            return false;
+        });
+
+        return result;
+    }
+
+    return (function () {
+        function anonymous() {
+            this.__entries__ = [];
+        }
+
+        var prototypeAccessors = { size: { configurable: true } };
+
+        /**
+         * @returns {boolean}
+         */
+        prototypeAccessors.size.get = function () {
+            return this.__entries__.length;
+        };
+
+        /**
+         * @param {*} key
+         * @returns {*}
+         */
+        anonymous.prototype.get = function (key) {
+            var index = getIndex(this.__entries__, key);
+            var entry = this.__entries__[index];
+
+            return entry && entry[1];
+        };
+
+        /**
+         * @param {*} key
+         * @param {*} value
+         * @returns {void}
+         */
+        anonymous.prototype.set = function (key, value) {
+            var index = getIndex(this.__entries__, key);
+
+            if (~index) {
+                this.__entries__[index][1] = value;
+            } else {
+                this.__entries__.push([key, value]);
+            }
+        };
+
+        /**
+         * @param {*} key
+         * @returns {void}
+         */
+        anonymous.prototype.delete = function (key) {
+            var entries = this.__entries__;
+            var index = getIndex(entries, key);
+
+            if (~index) {
+                entries.splice(index, 1);
+            }
+        };
+
+        /**
+         * @param {*} key
+         * @returns {void}
+         */
+        anonymous.prototype.has = function (key) {
+            return !!~getIndex(this.__entries__, key);
+        };
+
+        /**
+         * @returns {void}
+         */
+        anonymous.prototype.clear = function () {
+            this.__entries__.splice(0);
+        };
+
+        /**
+         * @param {Function} callback
+         * @param {*} [ctx=null]
+         * @returns {void}
+         */
+        anonymous.prototype.forEach = function (callback, ctx) {
+            var this$1 = this;
+            if ( ctx === void 0 ) ctx = null;
+
+            for (var i = 0, list = this$1.__entries__; i < list.length; i += 1) {
+                var entry = list[i];
+
+                callback.call(ctx, entry[1], entry[0]);
+            }
+        };
+
+        Object.defineProperties( anonymous.prototype, prototypeAccessors );
+
+        return anonymous;
+    }());
+})();
+
+/**
+ * Detects whether window and document objects are available in current environment.
+ */
+var isBrowser = typeof window !== 'undefined' && typeof document !== 'undefined' && window.document === document;
+
+// Returns global object of a current environment.
+var global$1 = (function () {
+    if (typeof global !== 'undefined' && global.Math === Math) {
+        return global;
+    }
+
+    if (typeof self !== 'undefined' && self.Math === Math) {
+        return self;
+    }
+
+    if (typeof window !== 'undefined' && window.Math === Math) {
+        return window;
+    }
+
+    // eslint-disable-next-line no-new-func
+    return Function('return this')();
+})();
+
+/**
+ * A shim for the requestAnimationFrame which falls back to the setTimeout if
+ * first one is not supported.
+ *
+ * @returns {number} Requests' identifier.
+ */
+var requestAnimationFrame$1 = (function () {
+    if (typeof requestAnimationFrame === 'function') {
+        // It's required to use a bounded function because IE sometimes throws
+        // an "Invalid calling object" error if rAF is invoked without the global
+        // object on the left hand side.
+        return requestAnimationFrame.bind(global$1);
+    }
+
+    return function (callback) { return setTimeout(function () { return callback(Date.now()); }, 1000 / 60); };
+})();
+
+// Defines minimum timeout before adding a trailing call.
+var trailingTimeout = 2;
+
+/**
+ * Creates a wrapper function which ensures that provided callback will be
+ * invoked only once during the specified delay period.
+ *
+ * @param {Function} callback - Function to be invoked after the delay period.
+ * @param {number} delay - Delay after which to invoke callback.
+ * @returns {Function}
+ */
+var throttle = function (callback, delay) {
+    var leadingCall = false,
+        trailingCall = false,
+        lastCallTime = 0;
+
+    /**
+     * Invokes the original callback function and schedules new invocation if
+     * the "proxy" was called during current request.
+     *
+     * @returns {void}
+     */
+    function resolvePending() {
+        if (leadingCall) {
+            leadingCall = false;
+
+            callback();
+        }
+
+        if (trailingCall) {
+            proxy();
+        }
+    }
+
+    /**
+     * Callback invoked after the specified delay. It will further postpone
+     * invocation of the original function delegating it to the
+     * requestAnimationFrame.
+     *
+     * @returns {void}
+     */
+    function timeoutCallback() {
+        requestAnimationFrame$1(resolvePending);
+    }
+
+    /**
+     * Schedules invocation of the original function.
+     *
+     * @returns {void}
+     */
+    function proxy() {
+        var timeStamp = Date.now();
+
+        if (leadingCall) {
+            // Reject immediately following calls.
+            if (timeStamp - lastCallTime < trailingTimeout) {
+                return;
+            }
+
+            // Schedule new call to be in invoked when the pending one is resolved.
+            // This is important for "transitions" which never actually start
+            // immediately so there is a chance that we might miss one if change
+            // happens amids the pending invocation.
+            trailingCall = true;
+        } else {
+            leadingCall = true;
+            trailingCall = false;
+
+            setTimeout(timeoutCallback, delay);
+        }
+
+        lastCallTime = timeStamp;
+    }
+
+    return proxy;
+};
+
+// Minimum delay before invoking the update of observers.
+var REFRESH_DELAY = 20;
+
+// A list of substrings of CSS properties used to find transition events that
+// might affect dimensions of observed elements.
+var transitionKeys = ['top', 'right', 'bottom', 'left', 'width', 'height', 'size', 'weight'];
+
+// Check if MutationObserver is available.
+var mutationObserverSupported = typeof MutationObserver !== 'undefined';
+
+/**
+ * Singleton controller class which handles updates of ResizeObserver instances.
+ */
+var ResizeObserverController = function() {
+    this.connected_ = false;
+    this.mutationEventsAdded_ = false;
+    this.mutationsObserver_ = null;
+    this.observers_ = [];
+
+    this.onTransitionEnd_ = this.onTransitionEnd_.bind(this);
+    this.refresh = throttle(this.refresh.bind(this), REFRESH_DELAY);
+};
+
+/**
+ * Adds observer to observers list.
+ *
+ * @param {ResizeObserverSPI} observer - Observer to be added.
+ * @returns {void}
+ */
+
+
+/**
+ * Holds reference to the controller's instance.
+ *
+ * @private {ResizeObserverController}
+ */
+
+
+/**
+ * Keeps reference to the instance of MutationObserver.
+ *
+ * @private {MutationObserver}
+ */
+
+/**
+ * Indicates whether DOM listeners have been added.
+ *
+ * @private {boolean}
+ */
+ResizeObserverController.prototype.addObserver = function (observer) {
+    if (!~this.observers_.indexOf(observer)) {
+        this.observers_.push(observer);
+    }
+
+    // Add listeners if they haven't been added yet.
+    if (!this.connected_) {
+        this.connect_();
+    }
+};
+
+/**
+ * Removes observer from observers list.
+ *
+ * @param {ResizeObserverSPI} observer - Observer to be removed.
+ * @returns {void}
+ */
+ResizeObserverController.prototype.removeObserver = function (observer) {
+    var observers = this.observers_;
+    var index = observers.indexOf(observer);
+
+    // Remove observer if it's present in registry.
+    if (~index) {
+        observers.splice(index, 1);
+    }
+
+    // Remove listeners if controller has no connected observers.
+    if (!observers.length && this.connected_) {
+        this.disconnect_();
+    }
+};
+
+/**
+ * Invokes the update of observers. It will continue running updates insofar
+ * it detects changes.
+ *
+ * @returns {void}
+ */
+ResizeObserverController.prototype.refresh = function () {
+    var changesDetected = this.updateObservers_();
+
+    // Continue running updates if changes have been detected as there might
+    // be future ones caused by CSS transitions.
+    if (changesDetected) {
+        this.refresh();
+    }
+};
+
+/**
+ * Updates every observer from observers list and notifies them of queued
+ * entries.
+ *
+ * @private
+ * @returns {boolean} Returns "true" if any observer has detected changes in
+ *  dimensions of it's elements.
+ */
+ResizeObserverController.prototype.updateObservers_ = function () {
+    // Collect observers that have active observations.
+    var activeObservers = this.observers_.filter(function (observer) {
+        return observer.gatherActive(), observer.hasActive();
+    });
+
+    // Deliver notifications in a separate cycle in order to avoid any
+    // collisions between observers, e.g. when multiple instances of
+    // ResizeObserver are tracking the same element and the callback of one
+    // of them changes content dimensions of the observed target. Sometimes
+    // this may result in notifications being blocked for the rest of observers.
+    activeObservers.forEach(function (observer) { return observer.broadcastActive(); });
+
+    return activeObservers.length > 0;
+};
+
+/**
+ * Initializes DOM listeners.
+ *
+ * @private
+ * @returns {void}
+ */
+ResizeObserverController.prototype.connect_ = function () {
+    // Do nothing if running in a non-browser environment or if listeners
+    // have been already added.
+    if (!isBrowser || this.connected_) {
+        return;
+    }
+
+    // Subscription to the "Transitionend" event is used as a workaround for
+    // delayed transitions. This way it's possible to capture at least the
+    // final state of an element.
+    document.addEventListener('transitionend', this.onTransitionEnd_);
+
+    window.addEventListener('resize', this.refresh);
+
+    if (mutationObserverSupported) {
+        this.mutationsObserver_ = new MutationObserver(this.refresh);
+
+        this.mutationsObserver_.observe(document, {
+            attributes: true,
+            childList: true,
+            characterData: true,
+            subtree: true
+        });
+    } else {
+        document.addEventListener('DOMSubtreeModified', this.refresh);
+
+        this.mutationEventsAdded_ = true;
+    }
+
+    this.connected_ = true;
+};
+
+/**
+ * Removes DOM listeners.
+ *
+ * @private
+ * @returns {void}
+ */
+ResizeObserverController.prototype.disconnect_ = function () {
+    // Do nothing if running in a non-browser environment or if listeners
+    // have been already removed.
+    if (!isBrowser || !this.connected_) {
+        return;
+    }
+
+    document.removeEventListener('transitionend', this.onTransitionEnd_);
+    window.removeEventListener('resize', this.refresh);
+
+    if (this.mutationsObserver_) {
+        this.mutationsObserver_.disconnect();
+    }
+
+    if (this.mutationEventsAdded_) {
+        document.removeEventListener('DOMSubtreeModified', this.refresh);
+    }
+
+    this.mutationsObserver_ = null;
+    this.mutationEventsAdded_ = false;
+    this.connected_ = false;
+};
+
+/**
+ * "Transitionend" event handler.
+ *
+ * @private
+ * @param {TransitionEvent} event
+ * @returns {void}
+ */
+ResizeObserverController.prototype.onTransitionEnd_ = function (ref) {
+        var propertyName = ref.propertyName; if ( propertyName === void 0 ) propertyName = '';
+
+    // Detect whether transition may affect dimensions of an element.
+    var isReflowProperty = transitionKeys.some(function (key) {
+        return !!~propertyName.indexOf(key);
+    });
+
+    if (isReflowProperty) {
+        this.refresh();
+    }
+};
+
+/**
+ * Returns instance of the ResizeObserverController.
+ *
+ * @returns {ResizeObserverController}
+ */
+ResizeObserverController.getInstance = function () {
+    if (!this.instance_) {
+        this.instance_ = new ResizeObserverController();
+    }
+
+    return this.instance_;
+};
+
+ResizeObserverController.instance_ = null;
+
+/**
+ * Defines non-writable/enumerable properties of the provided target object.
+ *
+ * @param {Object} target - Object for which to define properties.
+ * @param {Object} props - Properties to be defined.
+ * @returns {Object} Target object.
+ */
+var defineConfigurable = (function (target, props) {
+    for (var i = 0, list = Object.keys(props); i < list.length; i += 1) {
+        var key = list[i];
+
+        Object.defineProperty(target, key, {
+            value: props[key],
+            enumerable: false,
+            writable: false,
+            configurable: true
+        });
+    }
+
+    return target;
+});
+
+/**
+ * Returns the global object associated with provided element.
+ *
+ * @param {Object} target
+ * @returns {Object}
+ */
+var getWindowOf = (function (target) {
+    // Assume that the element is an instance of Node, which means that it
+    // has the "ownerDocument" property from which we can retrieve a
+    // corresponding global object.
+    var ownerGlobal = target && target.ownerDocument && target.ownerDocument.defaultView;
+
+    // Return the local global object if it's not possible extract one from
+    // provided element.
+    return ownerGlobal || global$1;
+});
+
+// Placeholder of an empty content rectangle.
+var emptyRect = createRectInit(0, 0, 0, 0);
+
+/**
+ * Converts provided string to a number.
+ *
+ * @param {number|string} value
+ * @returns {number}
+ */
+function toFloat(value) {
+    return parseFloat(value) || 0;
+}
+
+/**
+ * Extracts borders size from provided styles.
+ *
+ * @param {CSSStyleDeclaration} styles
+ * @param {...string} positions - Borders positions (top, right, ...)
+ * @returns {number}
+ */
+function getBordersSize(styles) {
+    var positions = [], len = arguments.length - 1;
+    while ( len-- > 0 ) positions[ len ] = arguments[ len + 1 ];
+
+    return positions.reduce(function (size, position) {
+        var value = styles['border-' + position + '-width'];
+
+        return size + toFloat(value);
+    }, 0);
+}
+
+/**
+ * Extracts paddings sizes from provided styles.
+ *
+ * @param {CSSStyleDeclaration} styles
+ * @returns {Object} Paddings box.
+ */
+function getPaddings(styles) {
+    var positions = ['top', 'right', 'bottom', 'left'];
+    var paddings = {};
+
+    for (var i = 0, list = positions; i < list.length; i += 1) {
+        var position = list[i];
+
+        var value = styles['padding-' + position];
+
+        paddings[position] = toFloat(value);
+    }
+
+    return paddings;
+}
+
+/**
+ * Calculates content rectangle of provided SVG element.
+ *
+ * @param {SVGGraphicsElement} target - Element content rectangle of which needs
+ *      to be calculated.
+ * @returns {DOMRectInit}
+ */
+function getSVGContentRect(target) {
+    var bbox = target.getBBox();
+
+    return createRectInit(0, 0, bbox.width, bbox.height);
+}
+
+/**
+ * Calculates content rectangle of provided HTMLElement.
+ *
+ * @param {HTMLElement} target - Element for which to calculate the content rectangle.
+ * @returns {DOMRectInit}
+ */
+function getHTMLElementContentRect(target) {
+    // Client width & height properties can't be
+    // used exclusively as they provide rounded values.
+    var clientWidth = target.clientWidth;
+    var clientHeight = target.clientHeight;
+
+    // By this condition we can catch all non-replaced inline, hidden and
+    // detached elements. Though elements with width & height properties less
+    // than 0.5 will be discarded as well.
+    //
+    // Without it we would need to implement separate methods for each of
+    // those cases and it's not possible to perform a precise and performance
+    // effective test for hidden elements. E.g. even jQuery's ':visible' filter
+    // gives wrong results for elements with width & height less than 0.5.
+    if (!clientWidth && !clientHeight) {
+        return emptyRect;
+    }
+
+    var styles = getWindowOf(target).getComputedStyle(target);
+    var paddings = getPaddings(styles);
+    var horizPad = paddings.left + paddings.right;
+    var vertPad = paddings.top + paddings.bottom;
+
+    // Computed styles of width & height are being used because they are the
+    // only dimensions available to JS that contain non-rounded values. It could
+    // be possible to utilize the getBoundingClientRect if only it's data wasn't
+    // affected by CSS transformations let alone paddings, borders and scroll bars.
+    var width = toFloat(styles.width),
+        height = toFloat(styles.height);
+
+    // Width & height include paddings and borders when the 'border-box' box
+    // model is applied (except for IE).
+    if (styles.boxSizing === 'border-box') {
+        // Following conditions are required to handle Internet Explorer which
+        // doesn't include paddings and borders to computed CSS dimensions.
+        //
+        // We can say that if CSS dimensions + paddings are equal to the "client"
+        // properties then it's either IE, and thus we don't need to subtract
+        // anything, or an element merely doesn't have paddings/borders styles.
+        if (Math.round(width + horizPad) !== clientWidth) {
+            width -= getBordersSize(styles, 'left', 'right') + horizPad;
+        }
+
+        if (Math.round(height + vertPad) !== clientHeight) {
+            height -= getBordersSize(styles, 'top', 'bottom') + vertPad;
+        }
+    }
+
+    // Following steps can't be applied to the document's root element as its
+    // client[Width/Height] properties represent viewport area of the window.
+    // Besides, it's as well not necessary as the <html> itself neither has
+    // rendered scroll bars nor it can be clipped.
+    if (!isDocumentElement(target)) {
+        // In some browsers (only in Firefox, actually) CSS width & height
+        // include scroll bars size which can be removed at this step as scroll
+        // bars are the only difference between rounded dimensions + paddings
+        // and "client" properties, though that is not always true in Chrome.
+        var vertScrollbar = Math.round(width + horizPad) - clientWidth;
+        var horizScrollbar = Math.round(height + vertPad) - clientHeight;
+
+        // Chrome has a rather weird rounding of "client" properties.
+        // E.g. for an element with content width of 314.2px it sometimes gives
+        // the client width of 315px and for the width of 314.7px it may give
+        // 314px. And it doesn't happen all the time. So just ignore this delta
+        // as a non-relevant.
+        if (Math.abs(vertScrollbar) !== 1) {
+            width -= vertScrollbar;
+        }
+
+        if (Math.abs(horizScrollbar) !== 1) {
+            height -= horizScrollbar;
+        }
+    }
+
+    return createRectInit(paddings.left, paddings.top, width, height);
+}
+
+/**
+ * Checks whether provided element is an instance of the SVGGraphicsElement.
+ *
+ * @param {Element} target - Element to be checked.
+ * @returns {boolean}
+ */
+var isSVGGraphicsElement = (function () {
+    // Some browsers, namely IE and Edge, don't have the SVGGraphicsElement
+    // interface.
+    if (typeof SVGGraphicsElement !== 'undefined') {
+        return function (target) { return target instanceof getWindowOf(target).SVGGraphicsElement; };
+    }
+
+    // If it's so, then check that element is at least an instance of the
+    // SVGElement and that it has the "getBBox" method.
+    // eslint-disable-next-line no-extra-parens
+    return function (target) { return target instanceof getWindowOf(target).SVGElement && typeof target.getBBox === 'function'; };
+})();
+
+/**
+ * Checks whether provided element is a document element (<html>).
+ *
+ * @param {Element} target - Element to be checked.
+ * @returns {boolean}
+ */
+function isDocumentElement(target) {
+    return target === getWindowOf(target).document.documentElement;
+}
+
+/**
+ * Calculates an appropriate content rectangle for provided html or svg element.
+ *
+ * @param {Element} target - Element content rectangle of which needs to be calculated.
+ * @returns {DOMRectInit}
+ */
+function getContentRect(target) {
+    if (!isBrowser) {
+        return emptyRect;
+    }
+
+    if (isSVGGraphicsElement(target)) {
+        return getSVGContentRect(target);
+    }
+
+    return getHTMLElementContentRect(target);
+}
+
+/**
+ * Creates rectangle with an interface of the DOMRectReadOnly.
+ * Spec: https://drafts.fxtf.org/geometry/#domrectreadonly
+ *
+ * @param {DOMRectInit} rectInit - Object with rectangle's x/y coordinates and dimensions.
+ * @returns {DOMRectReadOnly}
+ */
+function createReadOnlyRect(ref) {
+    var x = ref.x;
+    var y = ref.y;
+    var width = ref.width;
+    var height = ref.height;
+
+    // If DOMRectReadOnly is available use it as a prototype for the rectangle.
+    var Constr = typeof DOMRectReadOnly !== 'undefined' ? DOMRectReadOnly : Object;
+    var rect = Object.create(Constr.prototype);
+
+    // Rectangle's properties are not writable and non-enumerable.
+    defineConfigurable(rect, {
+        x: x, y: y, width: width, height: height,
+        top: y,
+        right: x + width,
+        bottom: height + y,
+        left: x
+    });
+
+    return rect;
+}
+
+/**
+ * Creates DOMRectInit object based on the provided dimensions and the x/y coordinates.
+ * Spec: https://drafts.fxtf.org/geometry/#dictdef-domrectinit
+ *
+ * @param {number} x - X coordinate.
+ * @param {number} y - Y coordinate.
+ * @param {number} width - Rectangle's width.
+ * @param {number} height - Rectangle's height.
+ * @returns {DOMRectInit}
+ */
+function createRectInit(x, y, width, height) {
+    return { x: x, y: y, width: width, height: height };
+}
+
+/**
+ * Class that is responsible for computations of the content rectangle of
+ * provided DOM element and for keeping track of it's changes.
+ */
+var ResizeObservation = function(target) {
+    this.broadcastWidth = 0;
+    this.broadcastHeight = 0;
+    this.contentRect_ = createRectInit(0, 0, 0, 0);
+
+    this.target = target;
+};
+
+/**
+ * Updates content rectangle and tells whether it's width or height properties
+ * have changed since the last broadcast.
+ *
+ * @returns {boolean}
+ */
+
+
+/**
+ * Reference to the last observed content rectangle.
+ *
+ * @private {DOMRectInit}
+ */
+
+
+/**
+ * Broadcasted width of content rectangle.
+ *
+ * @type {number}
+ */
+ResizeObservation.prototype.isActive = function () {
+    var rect = getContentRect(this.target);
+
+    this.contentRect_ = rect;
+
+    return rect.width !== this.broadcastWidth || rect.height !== this.broadcastHeight;
+};
+
+/**
+ * Updates 'broadcastWidth' and 'broadcastHeight' properties with a data
+ * from the corresponding properties of the last observed content rectangle.
+ *
+ * @returns {DOMRectInit} Last observed content rectangle.
+ */
+ResizeObservation.prototype.broadcastRect = function () {
+    var rect = this.contentRect_;
+
+    this.broadcastWidth = rect.width;
+    this.broadcastHeight = rect.height;
+
+    return rect;
+};
+
+var ResizeObserverEntry = function(target, rectInit) {
+    var contentRect = createReadOnlyRect(rectInit);
+
+    // According to the specification following properties are not writable
+    // and are also not enumerable in the native implementation.
+    //
+    // Property accessors are not being used as they'd require to define a
+    // private WeakMap storage which may cause memory leaks in browsers that
+    // don't support this type of collections.
+    defineConfigurable(this, { target: target, contentRect: contentRect });
+};
+
+var ResizeObserverSPI = function(callback, controller, callbackCtx) {
+    this.activeObservations_ = [];
+    this.observations_ = new MapShim();
+
+    if (typeof callback !== 'function') {
+        throw new TypeError('The callback provided as parameter 1 is not a function.');
+    }
+
+    this.callback_ = callback;
+    this.controller_ = controller;
+    this.callbackCtx_ = callbackCtx;
+};
+
+/**
+ * Starts observing provided element.
+ *
+ * @param {Element} target - Element to be observed.
+ * @returns {void}
+ */
+
+
+/**
+ * Registry of the ResizeObservation instances.
+ *
+ * @private {Map<Element, ResizeObservation>}
+ */
+
+
+/**
+ * Public ResizeObserver instance which will be passed to the callback
+ * function and used as a value of it's "this" binding.
+ *
+ * @private {ResizeObserver}
+ */
+
+/**
+ * Collection of resize observations that have detected changes in dimensions
+ * of elements.
+ *
+ * @private {Array<ResizeObservation>}
+ */
+ResizeObserverSPI.prototype.observe = function (target) {
+    if (!arguments.length) {
+        throw new TypeError('1 argument required, but only 0 present.');
+    }
+
+    // Do nothing if current environment doesn't have the Element interface.
+    if (typeof Element === 'undefined' || !(Element instanceof Object)) {
+        return;
+    }
+
+    if (!(target instanceof getWindowOf(target).Element)) {
+        throw new TypeError('parameter 1 is not of type "Element".');
+    }
+
+    var observations = this.observations_;
+
+    // Do nothing if element is already being observed.
+    if (observations.has(target)) {
+        return;
+    }
+
+    observations.set(target, new ResizeObservation(target));
+
+    this.controller_.addObserver(this);
+
+    // Force the update of observations.
+    this.controller_.refresh();
+};
+
+/**
+ * Stops observing provided element.
+ *
+ * @param {Element} target - Element to stop observing.
+ * @returns {void}
+ */
+ResizeObserverSPI.prototype.unobserve = function (target) {
+    if (!arguments.length) {
+        throw new TypeError('1 argument required, but only 0 present.');
+    }
+
+    // Do nothing if current environment doesn't have the Element interface.
+    if (typeof Element === 'undefined' || !(Element instanceof Object)) {
+        return;
+    }
+
+    if (!(target instanceof getWindowOf(target).Element)) {
+        throw new TypeError('parameter 1 is not of type "Element".');
+    }
+
+    var observations = this.observations_;
+
+    // Do nothing if element is not being observed.
+    if (!observations.has(target)) {
+        return;
+    }
+
+    observations.delete(target);
+
+    if (!observations.size) {
+        this.controller_.removeObserver(this);
+    }
+};
+
+/**
+ * Stops observing all elements.
+ *
+ * @returns {void}
+ */
+ResizeObserverSPI.prototype.disconnect = function () {
+    this.clearActive();
+    this.observations_.clear();
+    this.controller_.removeObserver(this);
+};
+
+/**
+ * Collects observation instances the associated element of which has changed
+ * it's content rectangle.
+ *
+ * @returns {void}
+ */
+ResizeObserverSPI.prototype.gatherActive = function () {
+        var this$1 = this;
+
+    this.clearActive();
+
+    this.observations_.forEach(function (observation) {
+        if (observation.isActive()) {
+            this$1.activeObservations_.push(observation);
+        }
+    });
+};
+
+/**
+ * Invokes initial callback function with a list of ResizeObserverEntry
+ * instances collected from active resize observations.
+ *
+ * @returns {void}
+ */
+ResizeObserverSPI.prototype.broadcastActive = function () {
+    // Do nothing if observer doesn't have active observations.
+    if (!this.hasActive()) {
+        return;
+    }
+
+    var ctx = this.callbackCtx_;
+
+    // Create ResizeObserverEntry instance for every active observation.
+    var entries = this.activeObservations_.map(function (observation) {
+        return new ResizeObserverEntry(observation.target, observation.broadcastRect());
+    });
+
+    this.callback_.call(ctx, entries, ctx);
+    this.clearActive();
+};
+
+/**
+ * Clears the collection of active observations.
+ *
+ * @returns {void}
+ */
+ResizeObserverSPI.prototype.clearActive = function () {
+    this.activeObservations_.splice(0);
+};
+
+/**
+ * Tells whether observer has active observations.
+ *
+ * @returns {boolean}
+ */
+ResizeObserverSPI.prototype.hasActive = function () {
+    return this.activeObservations_.length > 0;
+};
+
+// Registry of internal observers. If WeakMap is not available use current shim
+// for the Map collection as it has all required methods and because WeakMap
+// can't be fully polyfilled anyway.
+var observers = typeof WeakMap !== 'undefined' ? new WeakMap() : new MapShim();
+
+/**
+ * ResizeObserver API. Encapsulates the ResizeObserver SPI implementation
+ * exposing only those methods and properties that are defined in the spec.
+ */
+var ResizeObserver = function(callback) {
+    if (!(this instanceof ResizeObserver)) {
+        throw new TypeError('Cannot call a class as a function.');
+    }
+    if (!arguments.length) {
+        throw new TypeError('1 argument required, but only 0 present.');
+    }
+
+    var controller = ResizeObserverController.getInstance();
+    var observer = new ResizeObserverSPI(callback, controller, this);
+
+    observers.set(this, observer);
+};
+
+// Expose public methods of ResizeObserver.
+['observe', 'unobserve', 'disconnect'].forEach(function (method) {
+    ResizeObserver.prototype[method] = function () {
+        return (ref = observers.get(this))[method].apply(ref, arguments);
+        var ref;
+    };
+});
+
+var index = (function () {
+    // Export existing implementation if available.
+    if (typeof global$1.ResizeObserver !== 'undefined') {
+        return global$1.ResizeObserver;
+    }
+
+    return ResizeObserver;
+})();
+
+/* harmony default export */ __webpack_exports__["a"] = (index);
+
+/* WEBPACK VAR INJECTION */}.call(__webpack_exports__, __webpack_require__(12)))
+
+/***/ }),
+/* 12 */
+/***/ (function(module, exports) {
+
+var g;
+
+// This works in non-strict mode
+g = (function() {
+	return this;
+})();
+
+try {
+	// This works if eval is allowed (see CSP)
+	g = g || Function("return this")() || (1,eval)("this");
+} catch(e) {
+	// This works if the window reference is available
+	if(typeof window === "object")
+		g = window;
+}
+
+// g can still be undefined, but nothing to do about it...
+// We return undefined, instead of nothing here, so it's
+// easier to handle this case. if(!global) { ...}
+
+module.exports = g;
+
+
+/***/ }),
+/* 13 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var emptyArray = [];
+var emptyObject = {};
+var type = emptyObject.toString;
+var ARRAY =  type.call(emptyArray);
+var OBJECT = type.call(emptyObject);
+var STRING = type.call('');
+var FUNCTION = type.call(type);
+var own =  emptyObject.hasOwnProperty;
+var freeze = Object.freeze || function(o) {return o};
+
+
+function defaults(target, source) {
+  for (var k in source) if (own.call(source, k)) {
+    if (k.indexOf('$') && !(k in target)) target[k] = source[k];
+  }
+  return target
+}
+
+function cartesian(a,b) {
+  var res = [], i, j;
+  for (j in b) if(own.call(b, j))
+    for (i in a) if(own.call(a, i))
+      res.push(a[i] + b[j]);
+  return res
+}
+
+// "Tokenizes" the selectors into parts relevant for the next function.
+// Strings and comments are matched, but ignored afterwards.
+// This is not a full tokenizers. It only recognizes comas, parentheses,
+// strings and comments.
+// regexp generated by scripts/regexps.js then trimmed by hand
+var selectorTokenizer = /[(),]|"(?:\\.|[^"\n])*"|'(?:\\.|[^'\n])*'|\/\*[\s\S]*?\*\//g;
+
+
+/**
+ * This will split a coma-separated selector list into individual selectors,
+ * ignoring comas in strings, comments and in :pseudo-selectors(parameter, lists).
+ *
+ * @param {string} selector
+ * @return {string[]}
+ */
+
+function splitSelector(selector) {
+  var indices = [], res = [], inParen = 0, o;
+  /*eslint-disable no-cond-assign*/
+  while (o = selectorTokenizer.exec(selector)) {
+  /*eslint-enable no-cond-assign*/
+    switch (o[0]) {
+    case '(': inParen++; break
+    case ')': inParen--; break
+    case ',': if (inParen) break; indices.push(o.index);
+    }
+  }
+  for (o = indices.length; o--;){
+    res.unshift(selector.slice(indices[o] + 1));
+    selector = selector.slice(0, indices[o]);
+  }
+  res.unshift(selector);
+  return res
+}
+
+// Like the `selectorTokenizer`, but for the `&` operator
+var ampersandTokenizer = /&|"(?:\\.|[^"\n])*"|'(?:\\.|[^'\n])*'|\/\*[\s\S]*?\*\//g;
+
+function ampersand (selector, parents) {
+  var indices = [], split = [], res, o;
+  /*eslint-disable no-cond-assign*/
+  while (o = ampersandTokenizer.exec(selector)) {
+  /*eslint-enable no-cond-assign*/
+    if (o[0] == '&') indices.push(o.index);
+  }
+  for (o = indices.length; o--;){
+    split.unshift(selector.slice(indices[o] + 1));
+    selector = selector.slice(0, indices[o]);
+  }
+  split.unshift(selector);
+  if (split.length === 1) split.unshift('');
+  res = [split[0]];
+  for (o = 1; o < split.length; o++) {
+    res = cartesian(res, cartesian(parents, [split[o]]));
+  }
+  return res.join(',')
+}
+
+function flatIter (f) {
+  return function iter(arg) {
+    if (type.call(arg) === ARRAY) for (var i= 0 ; i < arg.length; i ++) iter(arg[i]);
+    else f(arg);
+  }
+}
+
+function decamelize(match) {
+  return '-' + match.toLowerCase()
+}
+
+/**
+ * Handles the property:value; pairs.
+ *
+ * @param {object} state - holds the localizer- and walker-related methods
+ *                         and state
+ * @param {object} emit - the contextual emitters to the final buffer
+ * @param {string} prefix - the current property or a prefix in case of nested
+ *                          sub-properties.
+ * @param {array|object|string} o - the declarations.
+ * @param {boolean} local - are we in @local or in @global scope.
+ */
+
+function declarations(state, emit, prefix, o, local) {
+  var k, v, kk;
+  if (o==null) return
+
+  switch ( type.call(o = o.valueOf()) ) {
+  case ARRAY:
+    for (k = 0; k < o.length; k++)
+
+      declarations(state, emit, prefix, o[k], local);
+
+    break
+  case OBJECT:
+    // prefix is falsy iif it is the empty string, which means we're at the root
+    // of the declarations list.
+    prefix = (prefix && prefix + '-');
+    for (k in o) if (own.call(o, k)){
+      v = o[k];
+      if (/\$/.test(k)) {
+        for (kk in (k = k.split('$'))) if (own.call(k, kk)) {
+
+          declarations(state, emit, prefix + k[kk], v, local);
+
+        }
+      } else {
+
+        declarations(state, emit, prefix + k, v, local);
+
+      }
+    }
+    break
+  default:
+    // prefix is falsy when it is "", which means that we're
+    // at the top level.
+    // `o` is then treated as a `property:value` pair, or a
+    // semi-colon-separated list thereof.
+    // Otherwise, `prefix` is the property name, and
+    // `o` is the value.
+
+    // restore the dashes
+    k = prefix.replace(/_/g, '-').replace(/[A-Z]/g, decamelize);
+
+    if (local && (k == 'animation-name' || k == 'animation' || k == 'list-style')) {
+      // no need to tokenize here a plain `.split(',')` has all bases covered.
+      // We may 'localize' a comment, but it's not a big deal.
+      o = o.split(',').map(function (o) {
+
+        return o.replace(/^\s*(?:(var\([^)]+\))|:?global\(\s*([_A-Za-z][-\w]*)\s*\)|()(-?[_A-Za-z][-\w]*))/, state.localizeReplacer)
+
+      }).join(',');
+    }
+
+    emit.decl(k, o);
+
+  }
+}
+
+/**
+ * Handles a single at-rules
+ *
+ * @param {object} state - holds the localizer- and walker-related methods
+ *                         and state
+ * @param {object} emit - the contextual emitters to the final buffer
+ * @param {array} k - The parsed at-rule, including the parameters,
+ *                    if takes both parameters and a block.
+ *                    k == [match, fullAtRule, atRuleType, params?]
+ *                    So in `@-webkit-keyframes foo`, we have
+ *                     - match = "@-webkit-keyframes foo"
+ *                     - fullAtRule = "@-webkit-keyframes"
+ *                     - atRuleType = "keyframes"
+ *                     - params = "foo"
+ * @param {string|string[]|object|object[]} v - Either parameters for
+ *                                              block-less rules or
+ *                                              their block
+ *                                              for the others.
+ * @param {string} prefix - the current selector or the selector prefix
+ *                          in case of nested rules
+ * @param {boolean} local - are we in @local or in @global scope?
+ * @param {string} nestingDepth - are we nested in an at-rule or a selector?
+ */
+
+function atRules(state, emit, k, v, prefix, local, nestingDepth) {
+
+  // First iterate over user-provided at-rules and return if one of them corresponds to the current one
+  for (var i = 0; i < state.$atHandlers.length; i++) {
+
+    if (state.$atHandlers[i](state, emit, k, v, prefix, local, nestingDepth)) return
+
+  }
+
+  // using `/^global$/.test(k[2])` rather that 'global' == k[2] gzips
+  // slightly better thanks to the regexps tests further down.
+  // It is slightly less efficient but this isn't a critical path.
+
+  if (!k[3] && /^global$/.test(k[2])) {
+
+    rules(state, emit, prefix, v, 0, nestingDepth);
+
+
+  } else if (!k[3] && /^local$/.test(k[2])) {
+
+    rules(state, emit, prefix, v, 1, nestingDepth);
+
+
+  } else if (k[3] && /^adopt$/.test(k[2])) {
+
+    if (!local || nestingDepth) return emit.err('@adopt global or nested: ' + k[0])
+
+    if (!/^\.?[_A-Za-z][-\w]*$/.test(k[3])) return emit.err('bad adopter ' + JSON.stringify(k[3]) + ' in ' + k[0])
+
+    i = [];
+    flatIter(function(adoptee, asString) {
+
+      if(adoptee == null || !/^\.?[_A-Za-z][-\w]*(?:\s+\.?[_A-Za-z][-\w]*)*$/.test(asString = adoptee + '')) emit.err('bad adoptee '+ JSON.stringify(adoptee) + ' in ' + k[0]);
+
+      else i.push(asString.replace(/\./g, ''));
+
+    })(v);
+
+    // we may end up with duplicate classes but AFAIK it has no consequences on specificity.
+    if (i.length) {
+      state.localize(k[3] = k[3].replace(/\./g, ''));
+      state.names[k[3]] += (' ' + i.join(' '));
+    }
+
+
+  } else if (!k[3] && /^(?:namespace|import|charset)$/.test(k[2])) {
+    flatIter(function(v) {
+
+      emit.atrule(k[1], k[2], v);
+
+    })(v);
+
+
+  } else if (!k[3] && /^(?:font-face|viewport)$/.test(k[2])) {
+    flatIter(function(v) {
+
+      emit.atrule(k[1], k[2], k[3], 1);
+
+      declarations(state, emit, '', v, local);
+
+      emit._atrule();
+
+    })(v);
+
+  } else if (k[3] && /^(?:media|supports|page|keyframes)$/.test(k[2])) {
+
+    if (local && 'keyframes' == k[2]) {
+      k[3] = k[3].replace(
+        // generated by script/regexps.js
+        /(var\([^)]+\))|:?global\(\s*([_A-Za-z][-\w]*)\s*\)|()(-?[_A-Za-z][-\w]*)/,
+        state.localizeReplacer
+      );
+    }
+
+
+    emit.atrule(k[1], k[2], k[3], 1);
+
+    if ('page' == k[2]) {
+
+      declarations(state, emit, '', v, local);
+
+    } else {
+
+      rules(
+        state, emit,
+        'keyframes' == k[2] ? '' : prefix,
+        v, local, nestingDepth + 1
+      );
+
+    }
+
+    emit._atrule();
+
+  } else {
+
+    emit.err('Unsupported at-rule: ' + k[0]);
+
+  }
+}
+
+/**
+ * Add rulesets and other CSS tree to the sheet.
+ *
+ * @param {object} state - holds the localizer- and walker-related methods
+ *                         and state
+ * @param {object} emit - the contextual emitters to the final buffer
+ * @param {string} prefix - the current selector or a prefix in case of nested rules
+ * @param {array|string|object} tree - a source object or sub-object.
+ * @param {string} nestingDepth - are we nested in an at-rule?
+ * @param {boolean} local - are we in @local or in @global scope?
+ */
+function rules(state, emit, prefix, tree, local, nestingDepth) {
+  var k, v, inDeclaration, kk;
+
+  switch (type.call(tree)) {
+
+  case OBJECT:
+    for (k in tree) if (own.call(tree, k)) {
+      v = tree[k];
+
+      if (prefix.length > 0 && /^[-\w$]+$/.test(k)) {
+        if (!inDeclaration) {
+          inDeclaration = 1;
+
+          emit.rule(prefix);
+
+        }
+        if (/\$/.test(k)) {
+          for (kk in (k = k.split('$'))) if (own.call(k, kk)) {
+
+            declarations(state, emit, k[kk], v, local);
+
+          }
+        } else {
+
+          declarations(state, emit, k, v, local);
+
+        }
+
+      } else if (/^@/.test(k)) {
+        // Handle At-rules
+        inDeclaration = 0;
+
+        atRules(state, emit,
+          /^(.(?:-[\w]+-)?([_A-Za-z][-\w]*))\b\s*(.*?)\s*$/.exec(k) || [k,'@','',''],
+          v, prefix, local, nestingDepth
+        );
+
+      } else {
+        // selector or nested sub-selectors
+        inDeclaration = 0;
+
+        rules(
+          state, emit,
+          // build the selector `prefix` for the next iteration.
+          // ugly and full of redundant bits but so far the fastest/shortest.gz
+          /*0 if*/(prefix.length > 0 && (/,/.test(prefix) || /,/.test(k))) ?
+
+            /*0 then*/ (kk = splitSelector(prefix), splitSelector(
+              local ?
+
+                k.replace(
+                  /("(?:\\.|[^"\n])*"|'(?:\\.|[^'\n])*'|\/\*[\s\S]*?\*\/)|:global\(\s*(\.-?[_A-Za-z][-\w]*)\s*\)|(\.)(-?[_A-Za-z][-\w]*)/g,
+                  state.localizeReplacer
+                ) :
+
+                k
+            ).map(function (k) {
+              return /&/.test(k) ? ampersand(k, kk) : kk.map(function(kk) {
+                return kk + k
+              }).join(',')
+            }).join(',')) :
+
+            /*0 else*/ /*1 if*/ /&/.test(k) ?
+
+              /*1 then*/ ampersand(
+                local ?
+
+                  k.replace(
+                    /("(?:\\.|[^"\n])*"|'(?:\\.|[^'\n])*'|\/\*[\s\S]*?\*\/)|:global\(\s*(\.-?[_A-Za-z][-\w]*)\s*\)|(\.)(-?[_A-Za-z][-\w]*)/g,
+                    state.localizeReplacer
+                  ) :
+
+                  k,
+                [prefix]
+              ) :
+
+              /*1 else*/ prefix + (
+                local ?
+
+                  k.replace(
+                    /("(?:\\.|[^"\n])*"|'(?:\\.|[^'\n])*'|\/\*[\s\S]*?\*\/)|:global\(\s*(\.-?[_A-Za-z][-\w]*)\s*\)|(\.)(-?[_A-Za-z][-\w]*)/g,
+                    state.localizeReplacer
+                  ) :
+
+                  k
+                ),
+           v, local, nestingDepth + 1
+        );
+
+      }
+    }
+
+    break
+
+  case ARRAY:
+    for (k = 0; k < tree.length; k++){
+
+      rules(state, emit, prefix, tree[k], local, nestingDepth);
+
+    }
+    break
+
+  case STRING:
+    // CSS hacks or ouptut of `j2c.inline`.
+    if (!prefix.length) emit.err('No selector');
+    emit.rule(prefix || ' ');
+
+    declarations(state, emit, '', tree, local);
+
+  }
+}
+
+// This is the first entry in the filters array, which is
+// actually the last step of the compiler. It inserts
+// closing braces to close normal (non at-) rules (those
+// that start with a selector). Doing it earlier is
+// impossible without passing state around in unrelated code
+// or ending up with duplicated selectors when the source tree
+// contains arrays.
+// There's no `_rule` handler, because the core compiler never
+// calls it.
+function closeSelectors(next, inline) {
+  var lastSelector;
+  return inline ? next : {
+    init: function(){lastSelector = 0; next.init();},
+    done: function (raw) {
+      if (lastSelector) {next._rule(); lastSelector = 0;}
+      return next.done(raw)
+    },
+    atrule: function (rule, kind, param, takesBlock) {
+      if (lastSelector) {next._rule(); lastSelector = 0;}
+      next.atrule(rule, kind, param, takesBlock);
+    },
+    _atrule: function (rule) {
+      if (lastSelector) {next._rule(); lastSelector = 0;}
+      next._atrule(rule);
+    },
+    rule: function (selector) {
+      if (selector !== lastSelector){
+        if (lastSelector) next._rule();
+        next.rule(selector);
+        lastSelector = selector;
+      }
+    }
+  }
+}
+
+function global(x) {
+  return ':global(' + x + ')'
+}
+
+function kv (k, v, o) {
+  o = {};
+  o[k] = v;
+  return o
+}
+
+function at (rule, params, block) {
+  if (
+    arguments.length < 3
+  ) {
+    // inner curry!
+    var _at = at.bind.apply(at, [null].concat([].slice.call(arguments,0)));
+    // So that it can be used as a key in an ES6 object literal.
+    _at.toString = function(){return '@' + rule + ' ' + params};
+    return _at
+  }
+  else return kv('@' + rule +' ' + params, block)
+}
+
+function j2c() {
+
+  // the buffer that accumulates the output. Initialized in `$sink.i()`
+  var buf, err;
+
+  // the bottom of the 'codegen' stream. Mirrors the `$filter` plugin API.
+  var $sink = {
+    init: function(){buf=[], err=[];},
+    done: function (raw) {
+      if (err.length != 0) throw new Error('j2c error(s): ' + JSON.stringify(err,null,2) + 'in context:\n' + buf.join(''))
+      return raw ? buf : buf.join('')
+    },
+    err: function(msg) {
+      err.push(msg);
+      buf.push('/* +++ ERROR +++ ' + msg + ' */\n');
+    },
+    atrule: function (rule, kind, param, takesBlock) {
+      buf.push(rule, param && ' ', param, takesBlock ? ' {' : ';', _instance.endline);
+    },
+    // close atrule
+    _atrule: function () {buf.push('}', _instance.endline);},
+    rule: function (selector) {buf.push(selector, ' {', _instance.endline);},
+    // close rule
+    _rule: function () {buf.push('}', _instance.endline);},
+    decl: function (prop, value) {buf.push(prop, prop && ':', value, ';', _instance.endline);}
+  };
+
+  // holds the `$filter` and `$at` handlers
+  var $filters = [closeSelectors];
+  var $atHandlers = [];
+
+  // the public API (see the main docs)
+  var _instance = {
+    at: at,
+    global: global,
+    kv: kv,
+    names: {},
+    endline: '\n',
+    suffix: '__j2c-' +
+      // 128 bits of randomness
+      Math.floor(Math.random() * 0x100000000).toString(36) + '-' +
+      Math.floor(Math.random() * 0x100000000).toString(36) + '-' +
+      Math.floor(Math.random() * 0x100000000).toString(36) + '-' +
+      Math.floor(Math.random() * 0x100000000).toString(36),
+    $plugins: [],
+    sheet: function(tree) {
+      var emit = _createOrRetrieveStream(0);
+      emit.init();
+      rules(
+        _walkers[0],
+        emit,
+        '', // prefix
+        tree,
+        1,  // local, by default
+        0   // nesting depth
+      );
+
+      return emit.done()
+    },
+    inline: function (tree, options) {
+      var emit = _createOrRetrieveStream(1);
+      emit.init();
+      declarations(
+        _walkers[1],
+        emit,
+        '', // prefix
+        tree,
+        !(options && options.global)   // local, by default
+      );
+      return emit.done()
+    }
+  };
+
+  // The `state` (for the core functions) / `walker` (for the plugins) tables.
+  var _walkers = [
+    // for j2c.sheet
+    {
+      // helpers for locaizing class and animation names
+      localizeReplacer: _localizeReplacer, // second argument to String.prototype.replace
+      localize: _localize,                 // mangles local names
+      names: _instance.names,              // local => mangled mapping
+      $atHandlers: $atHandlers,            // extra at-rules
+      // The core walker methods, to be provided to plugins
+      atrule: atRules,
+      decl: declarations,
+      rule: rules
+    },
+    // likewise, for j2c.inline (idem with `$a`, `a` and `s` removed)
+    {
+      localizeReplacer: _localizeReplacer,
+      localize: _localize,
+      names: _instance.names,
+      decl: declarations
+    }
+  ];
+
+
+  // inner helpers
+
+  var _use = flatIter(function(plugin) {
+    // `~n` is falsy for `n === -1` and truthy otherwise.
+    // Works well to turn the  result of `a.indexOf(x)`
+    // into a value that reflects the presence of `x` in
+    // `a`.
+    if (~_instance.$plugins.indexOf(plugin)) return
+
+    _instance.$plugins.push(plugin);
+
+    if (type.call(plugin) === FUNCTION) plugin = plugin(_instance);
+
+    if (!plugin) return
+
+    flatIter(function(filter) {
+      $filters.push(filter);
+    })(plugin.$filter || emptyArray);
+
+    flatIter(function(handler) {
+      $atHandlers.push(handler);
+    })(plugin.$at || emptyArray);
+
+    defaults(_instance.names, plugin.$names || emptyObject);
+
+    _use(plugin.$plugins || emptyArray);
+
+    $sink = plugin.$sink || $sink;
+
+    defaults(_instance, plugin);
+  });
+
+
+  var _streams = [];
+  /**
+   * returns the codegen streams, creating them if necessary
+   * @param
+   */
+  function _createOrRetrieveStream(inline) {
+    // build the stream processors if needed
+    if (!_streams.length) {
+      // append the $sink as the ultimate filter
+      $filters.push(function(_, inline) {return inline ? {init:$sink.init, decl:$sink.decl, done:$sink.done, err: $sink.err} : $sink});
+      for(var i = 0; i < 2; i++){ // 0 for j2c.sheet, 1 for j2c.inline
+        for (var j = $filters.length; j--;) {
+          _streams[i] = freeze(
+            defaults(
+              $filters[j](_streams[i], !!i),
+              _streams[i]
+            )
+          );
+        }
+      }
+    }
+    return _streams[inline]
+  }
+
+  /**
+   * Returns a localized version of a given name.
+   * Registers the pair in `instnace.name` if needed.
+   *
+   * @param {string} name - the name to localize
+   * @return {string} - the localized version
+   */
+  function _localize(name) {
+    if (!_instance.names[name]) _instance.names[name] = name + _instance.suffix;
+    return _instance.names[name].match(/^\S+/)
+  }
+
+  /**
+   * Used as second argument for str.replace(localizeRegex, replacer)
+   * `ignore`, `global` and `(dot, name)` are mutually exclusive
+   *
+   * @param {string} match - the whole match (ignored)
+   * @param {string|null} ignore - a comment or a string literal
+   * @param {string|null} global - a global name
+   * @param {string|null} dot - either '.' for a local class name or the empty string otherwise
+   * @param {string|null} name - the name to localize
+   * @return {string}
+   */
+  function _localizeReplacer(match, ignore, global$$1, dot, name) {
+    return ignore || global$$1 || dot + _localize(name)
+  }
+
+  _use(emptyArray.slice.call(arguments));
+  return _instance
+}
+
+module.exports = j2c;
+
+
+/***/ }),
+/* 14 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+var image_position = "56px";
+var toggle_size = "40px";
+
+/* harmony default export */ __webpack_exports__["a"] = ([{
+  ".mithril-infinite__scroll-view.images": {
+    margin: "0 auto",
+    background: "#fff",
+
+    " .mithril-infinite__scroll-content": {
+      " .mithril-infinite__before, .mithril-infinite__after": {
+        " .list-item": {
+          padding: "20px 70px 20px " + image_position,
+          fontSize: "16px",
+          minHeight: "60px"
+        }
+      },
+      " .mithril-infinite__page": {
+        minHeight: "400px" // prevent "after" content to show up on every scroll
+      },
+      " .mithril-infinite__page--odd": {
+        backgroundColor: "#f0f0f0",
+
+        " .list-item": {
+          borderBottom: "1px solid #ddd"
+        }
+      },
+      " .mithril-infinite__page--even": {
+        "background-color": "#e0e0e0",
+
+        " .list-item": {
+          borderBottom: "1px solid #ccc"
+        }
+      },
+      " .list-item": {
+        position: "relative",
+        display: "block",
+        cursor: "pointer",
+
+        ".open": {
+          height: "160px"
+        },
+        ".closed": {
+          height: "auto"
+        },
+        " .image": {
+          display: "block",
+          height: "100%",
+          position: "absolute",
+          left: image_position,
+          top: 0,
+          backgroundSize: "contain",
+          backgroundRepeat: "no-repeat"
+        },
+        " .pageNum, .toggle": {
+          position: "absolute",
+          top: "8px",
+          display: "block",
+          color: "#222",
+          width: toggle_size,
+          height: toggle_size,
+          textAlign: "center",
+          lineHeight: toggle_size
+        },
+        " .pageNum": {
+          left: "4px",
+          fontSize: "13px",
+          color: "#999"
+        },
+        " .toggle": {
+          right: "10px",
+          backgroundColor: "#fff"
+        }
+      }
+    }
+  }
+}]);
+
+/***/ }),
+/* 15 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_mithril__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_mithril___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_mithril__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__app_footer__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_mithril_infinite__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__app_styler__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__styles__ = __webpack_require__(16);
+
+
+
+// import "whatwg-fetch";
+
+
+
+Object(__WEBPACK_IMPORTED_MODULE_3__app_styler__["a" /* addStyle */])("grid", __WEBPACK_IMPORTED_MODULE_4__styles__["a" /* default */]);
+
+// const PAGE_ITEMS = 12;
+var IMAGE_SIZE = 190;
+
+var loadImage = function loadImage(el, imgUrl) {
+  var url = imgUrl.replace(/\/150\//, "/" + IMAGE_SIZE + "/");
+  var populate = function populate() {
+    el.style.backgroundImage = "url(" + url + ")";
+  };
+  var img = new Image();
+  img.onload = populate;
+  img.src = imgUrl;
+};
+
+var maybeLoadImage = function maybeLoadImage(vnode, data) {
+  if (vnode.state.inited) {
+    return;
+  }
+  if (__WEBPACK_IMPORTED_MODULE_2_mithril_infinite__["a" /* default */].isElementInViewport({ el: vnode.dom })) {
+    loadImage(vnode.dom, data.thumbnailUrl);
+    vnode.state.inited = true;
+  }
+};
+
+var item = function item(data) {
+  return __WEBPACK_IMPORTED_MODULE_0_mithril___default()("a.grid-item", __WEBPACK_IMPORTED_MODULE_0_mithril___default()(".image-holder", __WEBPACK_IMPORTED_MODULE_0_mithril___default()(".image", {
+    oncreate: function oncreate(vnode) {
+      return maybeLoadImage(vnode, data);
+    },
+    onupdate: function onupdate(vnode) {
+      return maybeLoadImage(vnode, data);
+    }
+  })));
+};
+
+// const dataUrl = pageNum =>
+//   `http://jsonplaceholder.typicode.com/photos?_start=${(pageNum - 1) * PAGE_ITEMS}&_end=${pageNum * PAGE_ITEMS}`;
+
+// const pageData = pageNum => 
+//   m.request({
+//     method: "GET",
+//     dataType: "jsonp",
+//     url: dataUrl(pageNum)
+//   });
+
+// const asyncPageData = async function(pageNum) {
+//   return await fetchPageData(pageNum);
+// };
+
+// const fetchPageData = pageNum => 
+//   fetch(dataUrl(pageNum))
+//     .then(function(response) {
+//       return response.json();
+//     }).then(function(json) {
+//       return json;
+//     }).catch(function() {
+//       //console.log('parsing failed', ex)
+//     });
+
+var returnData = function returnData() {
+  return data;
+};
+
+// const returnDelayedData = () =>
+//   new Promise(resolve =>
+//     setTimeout(() =>
+//       resolve(data)
+//     , 1000)
+//   );
+
+/* harmony default export */ __webpack_exports__["a"] = ({
+  view: function view() {
+    return __WEBPACK_IMPORTED_MODULE_0_mithril___default()(__WEBPACK_IMPORTED_MODULE_2_mithril_infinite__["a" /* default */], {
+      preloadPages: 3,
+      item: item,
+      // Different approaches for getting data:
+
+      // 1. Use m.request:
+      // pageData,
+
+      // 2. Use async/await with fetch:
+      // pageData: asyncPageData,
+
+      // 3. Return data directly
+      pageData: returnData,
+
+      // 4. Return data as a Promise
+      // pageData: returnDelayedData,
+
+      class: "grid",
+      after: Object(__WEBPACK_IMPORTED_MODULE_1__app_footer__["a" /* default */])()
+    });
+  }
+});
+
+var data = [{
+  "albumId": 1,
+  "id": 1,
+  "title": "accusamus beatae ad facilis cum similique qui sunt",
+  "url": "http://placehold.it/600/92c952",
+  "thumbnailUrl": "http://placehold.it/150/92c952"
+}, {
+  "albumId": 1,
+  "id": 2,
+  "title": "reprehenderit est deserunt velit ipsam",
+  "url": "http://placehold.it/600/771796",
+  "thumbnailUrl": "http://placehold.it/150/771796"
+}, {
+  "albumId": 1,
+  "id": 3,
+  "title": "officia porro iure quia iusto qui ipsa ut modi",
+  "url": "http://placehold.it/600/24f355",
+  "thumbnailUrl": "http://placehold.it/150/24f355"
+}, {
+  "albumId": 1,
+  "id": 4,
+  "title": "culpa odio esse rerum omnis laboriosam voluptate repudiandae",
+  "url": "http://placehold.it/600/d32776",
+  "thumbnailUrl": "http://placehold.it/150/d32776"
+}, {
+  "albumId": 1,
+  "id": 5,
+  "title": "natus nisi omnis corporis facere molestiae rerum in",
+  "url": "http://placehold.it/600/f66b97",
+  "thumbnailUrl": "http://placehold.it/150/f66b97"
+}, {
+  "albumId": 1,
+  "id": 6,
+  "title": "accusamus ea aliquid et amet sequi nemo",
+  "url": "http://placehold.it/600/56a8c2",
+  "thumbnailUrl": "http://placehold.it/150/56a8c2"
+}, {
+  "albumId": 1,
+  "id": 7,
+  "title": "officia delectus consequatur vero aut veniam explicabo molestias",
+  "url": "http://placehold.it/600/b0f7cc",
+  "thumbnailUrl": "http://placehold.it/150/b0f7cc"
+}, {
+  "albumId": 1,
+  "id": 8,
+  "title": "aut porro officiis laborum odit ea laudantium corporis",
+  "url": "http://placehold.it/600/54176f",
+  "thumbnailUrl": "http://placehold.it/150/54176f"
+}, {
+  "albumId": 1,
+  "id": 9,
+  "title": "qui eius qui autem sed",
+  "url": "http://placehold.it/600/51aa97",
+  "thumbnailUrl": "http://placehold.it/150/51aa97"
+}, {
+  "albumId": 1,
+  "id": 10,
+  "title": "beatae et provident et ut vel",
+  "url": "http://placehold.it/600/810b14",
+  "thumbnailUrl": "http://placehold.it/150/810b14"
+}, {
+  "albumId": 1,
+  "id": 11,
+  "title": "nihil at amet non hic quia qui",
+  "url": "http://placehold.it/600/1ee8a4",
+  "thumbnailUrl": "http://placehold.it/150/1ee8a4"
+}, {
+  "albumId": 1,
+  "id": 12,
+  "title": "mollitia soluta ut rerum eos aliquam consequatur perspiciatis maiores",
+  "url": "http://placehold.it/600/66b7d2",
+  "thumbnailUrl": "http://placehold.it/150/66b7d2"
+}];
+
+/***/ }),
+/* 16 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+var gridSpacing = 8;
+var itemWidth = 210;
+var itemWidthPx = itemWidth + "px";
+var imageHolderPadding = 10;
+var imageHolderPaddingPx = imageHolderPadding + "px";
+
+var makeMediaStyle = function makeMediaStyle(which, cols) {
+  return _defineProperty({}, "@media (" + which + "-width: " + ((cols + 1) * itemWidth + cols * gridSpacing) + "px)", {
+    ".mithril-infinite__scroll-view.grid": {
+      " .mithril-infinite__scroll-content": {
+        " .mithril-infinite__content": {
+          "width": cols * itemWidth + (cols - 1) * gridSpacing + "px"
+        }
+      }
+    }
+  });
+};
+
+/* harmony default export */ __webpack_exports__["a"] = ([makeMediaStyle("min", 4), makeMediaStyle("max", 4), makeMediaStyle("max", 3), makeMediaStyle("max", 2), makeMediaStyle("max", 1), {
+  ".mithril-infinite__scroll-view.grid": {
+    margin: "0 auto",
+
+    " .mithril-infinite__scroll-content": {
+      padding: 2 * gridSpacing + "px 0",
+
+      " .mithril-infinite__content": {
+        margin: "0 auto",
+        fontSize: 0,
+        lineHeight: 0,
+
+        " .mithril-infinite__page": {
+          margin: "0 " + -gridSpacing / 2 + "px"
+        },
+        " .grid-item": {
+          display: "inline-block",
+          height: itemWidthPx,
+          width: itemWidthPx,
+          backgroundColor: "#f0f0f0",
+          margin: [0, gridSpacing / 2, gridSpacing, gridSpacing / 2].map(function (v) {
+            return v + "px";
+          }).join(" "),
+
+          " .image-holder": {
+            height: itemWidth - 2 * imageHolderPadding + "px",
+            width: itemWidth - 2 * imageHolderPadding + "px",
+            overflow: "hidden",
+            position: "relative",
+            margin: imageHolderPaddingPx,
+
+            " .image": {
+              position: "absolute",
+              left: "auto",
+              top: 0,
+              right: "auto",
+              bottom: 0,
+              width: "100%",
+              backgroundSize: "contain",
+              backgroundRepeat: "no-repeat",
+              backgroundPositionX: "50%"
+            }
+          }
+        }
+      }
+    }
+  }
+}]);
+
+/***/ }),
+/* 17 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_mithril__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_mithril___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_mithril__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__app_footer__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_mithril_infinite__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__app_styler__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__styles__ = __webpack_require__(18);
+
+
+
+
+
+
+Object(__WEBPACK_IMPORTED_MODULE_3__app_styler__["a" /* addStyle */])("table", __WEBPACK_IMPORTED_MODULE_4__styles__["a" /* default */]);
+
+var item = function item(data, opts) {
+  return __WEBPACK_IMPORTED_MODULE_0_mithril___default()(".list-item", [__WEBPACK_IMPORTED_MODULE_0_mithril___default()("div", opts.pageNum), __WEBPACK_IMPORTED_MODULE_0_mithril___default()("div", data || __WEBPACK_IMPORTED_MODULE_0_mithril___default.a.trust("&nbsp;"))]);
+};
+
+/* harmony default export */ __webpack_exports__["a"] = ({
+  view: function view() {
+    return __WEBPACK_IMPORTED_MODULE_0_mithril___default()(__WEBPACK_IMPORTED_MODULE_2_mithril_infinite__["a" /* default */], {
+      maxPages: 10,
+      item: item,
+      pageUrl: function pageUrl(page) {
+        return "data/table/page-" + page + ".json";
+      },
+      class: "table",
+      after: Object(__WEBPACK_IMPORTED_MODULE_1__app_footer__["a" /* default */])()
+    });
+  }
+});
+
+/***/ }),
+/* 18 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony default export */ __webpack_exports__["a"] = ([{
+  ".mithril-infinite__scroll-view.table": {
+    minWidth: "320px",
+    margin: "0 auto",
+    background: "#eee",
+
+    " .mithril-infinite__scroll-content": {
+      " .mithril-infinite__page": {
+        display: "table",
+        width: "100%"
+      },
+      " .mithril-infinite__page--odd": {
+        backgroundColor: "#e4e4e4",
+
+        " .list-item": {
+          " > div": {
+            color: "rgba(0,0,0,.87)",
+            borderBottom: "1px solid rgba(0, 0, 0, .07)",
+
+            ":first-child": {
+              color: "rgba(0,0,0,.54)"
+            }
+          }
+        }
+      },
+      " .mithril-infinite__page--even": {
+        "background-color": "#f0f0f0"
+      },
+      " .list-item": {
+        width: "100%",
+        display: "table-row",
+
+        " > div": {
+          borderBottom: "1px solid rgba(0, 0, 0, .07)",
+          display: "table-cell",
+          verticalAlign: "top",
+          padding: "8px 16px",
+          minHeight: "1em",
+          width: "90%",
+
+          ":first-child": {
+            color: "#aaa",
+            width: "10%",
+            textAlign: "right"
+          }
+        }
+      }
+    }
+  }
+}]);
+
+/***/ }),
+/* 19 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_mithril__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_mithril___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_mithril__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_mithril_infinite__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__app_footer__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__app_styler__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__styles__ = __webpack_require__(20);
+
+
+
+
+
+
+Object(__WEBPACK_IMPORTED_MODULE_3__app_styler__["a" /* addStyle */])("short", __WEBPACK_IMPORTED_MODULE_4__styles__["a" /* default */]);
+
+var item = function item(data) {
+  var color = data[1] || "transparent";
+  var title = data[1] ? "" : __WEBPACK_IMPORTED_MODULE_0_mithril___default()(".title", data[0]);
+  return __WEBPACK_IMPORTED_MODULE_0_mithril___default()(".list-item", {
+    class: title ? "has-title" : "",
+    style: { "background-color": color }
+  }, title);
+};
+
+/* harmony default export */ __webpack_exports__["a"] = ({
+  view: function view() {
+    return __WEBPACK_IMPORTED_MODULE_0_mithril___default()(__WEBPACK_IMPORTED_MODULE_1_mithril_infinite__["a" /* default */], {
+      item: item,
+      maxPages: 21,
+      preloadSlots: 10,
+      pageUrl: function pageUrl(page) {
+        return "data/short/page-" + page + ".json";
+      },
+      class: "short",
+      pageChange: function pageChange(page) {
+        if (console) {
+          console.log("page", page); // eslint-disable-line no-console
+        }
+      },
+      after: Object(__WEBPACK_IMPORTED_MODULE_2__app_footer__["a" /* default */])()
+    });
+  }
+});
+
+/***/ }),
+/* 20 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony default export */ __webpack_exports__["a"] = ([{
+  ".mithril-infinite__scroll-view.short": {
+    minWidth: "320px",
+    margin: "0 auto",
+    background: "#eee",
+
+    " .mithril-infinite__scroll-content": {
+      " .list-item": {
+        height: "8px",
+
+        ".has-title": {
+          fontSize: "18px",
+          padding: "0 16px",
+          height: "32px",
+          lineHeight: "32px",
+          color: "#222"
+        }
+      }
+    }
+  }
+}]);
+
+/***/ }),
+/* 21 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_mithril__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_mithril___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_mithril__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__app_footer__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_mithril_infinite__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__app_variables__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__app_styler__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__styles__ = __webpack_require__(22);
+
+
+
+
+
+
+
+Object(__WEBPACK_IMPORTED_MODULE_4__app_styler__["a" /* addStyle */])("horizontal", __WEBPACK_IMPORTED_MODULE_5__styles__["a" /* default */]);
+
+var loadImage = function loadImage(el, imgUrl) {
+  var url = __WEBPACK_IMPORTED_MODULE_3__app_variables__["a" /* appVariables */].imageUrl + imgUrl;
+  var populate = function populate() {
+    el.style.backgroundImage = "url(" + url + ")";
+    el.style.opacity = 1;
+  };
+  var img = new Image();
+  img.onload = populate;
+  img.src = url;
+};
+
+var maybeLoadImage = function maybeLoadImage(vnode, data) {
+  if (vnode.state.inited) {
+    return;
+  }
+  if (__WEBPACK_IMPORTED_MODULE_2_mithril_infinite__["a" /* default */].isElementInViewport({ el: vnode.dom })) {
+    loadImage(vnode.dom, data.src);
+    vnode.state.inited = true;
+  }
+};
+
+var item = function item(data) {
+  return __WEBPACK_IMPORTED_MODULE_0_mithril___default()("a.grid-item", __WEBPACK_IMPORTED_MODULE_0_mithril___default()(".image-holder", __WEBPACK_IMPORTED_MODULE_0_mithril___default()(".image", {
+    oncreate: function oncreate(vnode) {
+      return maybeLoadImage(vnode, data);
+    },
+    onupdate: function onupdate(vnode) {
+      return maybeLoadImage(vnode, data);
+    }
+  })));
+};
+
+/* harmony default export */ __webpack_exports__["a"] = ({
+  view: function view() {
+    return [__WEBPACK_IMPORTED_MODULE_0_mithril___default()(__WEBPACK_IMPORTED_MODULE_2_mithril_infinite__["a" /* default */], {
+      maxPages: 16,
+      item: item,
+      pageUrl: function pageUrl(pageNum) {
+        return "data/horizontal/page-" + pageNum + ".json";
+      },
+      class: "horizontal",
+      axis: "x",
+      pageSize: function pageSize(content) {
+        return (content.length || 12) * (210 + 2 * 4);
+      }, // values from CSS including margins
+      pageChange: function pageChange(pageNum) {
+        if (console) {
+          console.log("page", pageNum); // eslint-disable-line no-console
+        }
+      }
+    }), Object(__WEBPACK_IMPORTED_MODULE_1__app_footer__["a" /* default */])()];
+  }
+});
+
+/***/ }),
+/* 22 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+var grid_spacing = 8;
+var item_size = 210;
+var item_size_px = item_size + "px";
+var image_padding = 10;
+var image_padding_px = image_padding + "px";
+
+/* harmony default export */ __webpack_exports__["a"] = ([{
+  ".mithril-infinite__scroll-view.horizontal": {
+    margin: 0,
+    height: item_size + 20 + "px", // add space for scrollbar
+    background: "#fff",
+
+    " .mithril-infinite__scroll-content": {
+      padding: 0,
+      margin: 0,
+      fontSize: 0,
+
+      " .mithril-infinite__content, .mithril-infinite__padding-before, .mithril-infinite__padding-after": {
+        display: "inline-block"
+      },
+      " .mithril-infinite__content": {
+        margin: 0,
+        fontSize: 0,
+
+        " .mithril-infinite__page": {
+          display: "inline-block",
+          height: item_size_px
+        },
+
+        " .grid-item": {
+          display: "inline-block",
+          height: item_size_px,
+          width: item_size_px,
+          backgroundColor: "#f0f0f0",
+          margin: "0 " + grid_spacing / 2 + "px",
+
+          " .image-holder": {
+            height: item_size - 2 * image_padding + "px",
+            width: item_size - 2 * image_padding + "px",
+            overflow: "hidden",
+            position: "relative",
+            margin: image_padding_px,
+
+            " .image": {
+              position: "absolute",
+              left: "auto",
+              top: 0,
+              right: "auto",
+              bottom: 0,
+              width: "100%",
+              backgroundSize: "contain",
+              backgroundRepeat: "no-repeat",
+              backgroundPositionX: "50%",
+              opacity: 0,
+              transition: "opacity .7s"
+            }
+          }
+        }
+      }
+    }
+  }
+}]);
+
+/***/ }),
+/* 23 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_mithril__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_mithril___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_mithril__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__app_footer__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_mithril_infinite__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__app_styler__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__styles__ = __webpack_require__(24);
+/*
+This example shows how to get the total page count from a request, and use that to calculate the total content height.
+*/
+
+
+
+
+
+
+Object(__WEBPACK_IMPORTED_MODULE_3__app_styler__["a" /* addStyle */])("fixed", __WEBPACK_IMPORTED_MODULE_4__styles__["a" /* default */]);
+
+var PAGE_ITEMS = 10;
+var ITEM_HEIGHT = 36 + 1; // include border
+var AFTER_CONTENT_HEIGHT = 133;
+var PAGE_COUNT = 10;
+
+var item = function item(data, opts) {
+  return __WEBPACK_IMPORTED_MODULE_0_mithril___default()(".list-item", [__WEBPACK_IMPORTED_MODULE_0_mithril___default()("div", opts.pageNum), __WEBPACK_IMPORTED_MODULE_0_mithril___default()("div", data.title)]);
+};
+
+/* harmony default export */ __webpack_exports__["a"] = ({
+  view: function view() {
+    return __WEBPACK_IMPORTED_MODULE_0_mithril___default()(__WEBPACK_IMPORTED_MODULE_2_mithril_infinite__["a" /* default */], {
+      pageData: function pageData() {
+        return data;
+      },
+      maxPages: PAGE_COUNT,
+      preloadPages: 3,
+      item: item,
+      class: "table fixed",
+      // set the size of each page
+      pageSize: function pageSize() {
+        return PAGE_ITEMS * ITEM_HEIGHT;
+      },
+      // set the total height
+      contentSize: PAGE_COUNT * PAGE_ITEMS * ITEM_HEIGHT + AFTER_CONTENT_HEIGHT,
+      after: Object(__WEBPACK_IMPORTED_MODULE_1__app_footer__["a" /* default */])()
+    });
+  }
+});
+
+var data = [{
+  "albumId": 1,
+  "id": 1,
+  "title": "accusamus beatae ad facilis cum similique qui sunt",
+  "url": "http://placehold.it/600/92c952",
+  "thumbnailUrl": "http://placehold.it/150/92c952"
+}, {
+  "albumId": 1,
+  "id": 2,
+  "title": "reprehenderit est deserunt velit ipsam",
+  "url": "http://placehold.it/600/771796",
+  "thumbnailUrl": "http://placehold.it/150/771796"
+}, {
+  "albumId": 1,
+  "id": 3,
+  "title": "officia porro iure quia iusto qui ipsa ut modi",
+  "url": "http://placehold.it/600/24f355",
+  "thumbnailUrl": "http://placehold.it/150/24f355"
+}, {
+  "albumId": 1,
+  "id": 4,
+  "title": "culpa odio esse rerum omnis laboriosam voluptate repudiandae",
+  "url": "http://placehold.it/600/d32776",
+  "thumbnailUrl": "http://placehold.it/150/d32776"
+}, {
+  "albumId": 1,
+  "id": 5,
+  "title": "natus nisi omnis corporis facere molestiae rerum in",
+  "url": "http://placehold.it/600/f66b97",
+  "thumbnailUrl": "http://placehold.it/150/f66b97"
+}, {
+  "albumId": 1,
+  "id": 6,
+  "title": "accusamus ea aliquid et amet sequi nemo",
+  "url": "http://placehold.it/600/56a8c2",
+  "thumbnailUrl": "http://placehold.it/150/56a8c2"
+}, {
+  "albumId": 1,
+  "id": 7,
+  "title": "officia delectus consequatur vero aut veniam explicabo molestias",
+  "url": "http://placehold.it/600/b0f7cc",
+  "thumbnailUrl": "http://placehold.it/150/b0f7cc"
+}, {
+  "albumId": 1,
+  "id": 8,
+  "title": "aut porro officiis laborum odit ea laudantium corporis",
+  "url": "http://placehold.it/600/54176f",
+  "thumbnailUrl": "http://placehold.it/150/54176f"
+}, {
+  "albumId": 1,
+  "id": 9,
+  "title": "qui eius qui autem sed",
+  "url": "http://placehold.it/600/51aa97",
+  "thumbnailUrl": "http://placehold.it/150/51aa97"
+}, {
+  "albumId": 1,
+  "id": 10,
+  "title": "beatae et provident et ut vel",
+  "url": "http://placehold.it/600/810b14",
+  "thumbnailUrl": "http://placehold.it/150/810b14"
+}, {
+  "albumId": 1,
+  "id": 11,
+  "title": "nihil at amet non hic quia qui",
+  "url": "http://placehold.it/600/1ee8a4",
+  "thumbnailUrl": "http://placehold.it/150/1ee8a4"
+}, {
+  "albumId": 1,
+  "id": 12,
+  "title": "mollitia soluta ut rerum eos aliquam consequatur perspiciatis maiores",
+  "url": "http://placehold.it/600/66b7d2",
+  "thumbnailUrl": "http://placehold.it/150/66b7d2"
+}];
+
+/***/ }),
+/* 24 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony default export */ __webpack_exports__["a"] = ([{
+  ".mithril-infinite__scroll-view.table.fixed": {
+    " .mithril-infinite__scroll-content": {
+      " .mithril-infinite__page": {
+        " .list-item": {
+          maxHeight: "36px",
+          overflowY: "hidden"
+        }
+      },
+      " .footer": {
+        height: "133px"
+      }
+    }
+  }
+}]);
+
+/***/ }),
+/* 25 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_mithril__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_mithril___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_mithril__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__app_footer__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_mithril_infinite__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__app_variables__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__app_styler__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__styles__ = __webpack_require__(26);
+
+
+
+
+
+
+
+Object(__WEBPACK_IMPORTED_MODULE_4__app_styler__["a" /* addStyle */])("paging", __WEBPACK_IMPORTED_MODULE_5__styles__["a" /* default */]);
+
+var item = function item(data) {
+  return __WEBPACK_IMPORTED_MODULE_0_mithril___default()("a.grid-item", __WEBPACK_IMPORTED_MODULE_0_mithril___default()(".image-holder", __WEBPACK_IMPORTED_MODULE_0_mithril___default()(".image", {
+    oncreate: function oncreate(_ref) {
+      var dom = _ref.dom;
+
+      dom.style.backgroundImage = "url(" + __WEBPACK_IMPORTED_MODULE_3__app_variables__["a" /* appVariables */].imageUrl + data.src + ")";
+    }
+  })));
+};
+
+var getData = function getData(pageNum) {
+  return __WEBPACK_IMPORTED_MODULE_0_mithril___default.a.request({
+    method: "GET",
+    url: "data/paging/page-" + pageNum + ".json"
+  });
+};
+
+/* harmony default export */ __webpack_exports__["a"] = ({
+  oninit: function oninit(vnode) {
+    var pageCount = 0;
+    var pageNum = __WEBPACK_IMPORTED_MODULE_0_mithril___default.a.route.param("p") ? parseInt(__WEBPACK_IMPORTED_MODULE_0_mithril___default.a.route.param("p"), 10) : 1;
+
+    var getPageData = function getPageData(pageNum) {
+      return getData(pageNum).then(function (response) {
+        return pageCount = response.length, response;
+      });
+    };
+
+    vnode.state = {
+      getPageData: getPageData,
+      pageNum: pageNum,
+      hasPrev: function hasPrev(num) {
+        return num > 1;
+      },
+      hasNext: function hasNext(num) {
+        return num < pageCount;
+      }
+    };
+  },
+  view: function view(vnode) {
+    var state = vnode.state;
+    var pageNum = __WEBPACK_IMPORTED_MODULE_0_mithril___default.a.route.param("p") ? parseInt(__WEBPACK_IMPORTED_MODULE_0_mithril___default.a.route.param("p"), 10) : state.pageNum;
+    return __WEBPACK_IMPORTED_MODULE_0_mithril___default()("div", [__WEBPACK_IMPORTED_MODULE_0_mithril___default()(".paging", [__WEBPACK_IMPORTED_MODULE_0_mithril___default()(".count", "Page " + pageNum), __WEBPACK_IMPORTED_MODULE_0_mithril___default()(__WEBPACK_IMPORTED_MODULE_2_mithril_infinite__["a" /* default */], {
+      item: item,
+      pageData: state.getPageData,
+      pageChange: function pageChange(num) {
+        return state.pageNum = num;
+      },
+      currentPage: pageNum,
+      autoSize: false // disabled because we are already setting the height in CSS
+    }), __WEBPACK_IMPORTED_MODULE_0_mithril___default()(".pager", [__WEBPACK_IMPORTED_MODULE_0_mithril___default()("a", {
+      class: !state.hasPrev(pageNum) ? "disabled" : "",
+      href: "/paging/" + (pageNum - 1),
+      oncreate: __WEBPACK_IMPORTED_MODULE_0_mithril___default.a.route.link
+    }, "Prev"), __WEBPACK_IMPORTED_MODULE_0_mithril___default()("a", {
+      class: !state.hasNext(pageNum) ? "disabled" : "",
+      href: "/paging/" + (pageNum + 1),
+      oncreate: __WEBPACK_IMPORTED_MODULE_0_mithril___default.a.route.link
+    }, "Next")])]), Object(__WEBPACK_IMPORTED_MODULE_1__app_footer__["a" /* default */])()]);
+  }
+});
+
+/***/ }),
+/* 26 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+var gridSpacing = 8;
+var pageWidth = 320;
+var itemSize = (320 - 2 * gridSpacing) / 3;
+var imageHolderPadding = 10;
+var imageHolderPaddingPx = imageHolderPadding + "px";
+
+/* harmony default export */ __webpack_exports__["a"] = ([{
+  ".paging": {
+    width: pageWidth + "px",
+    margin: "0 auto",
+
+    " .mithril-infinite__scroll-view.mithril-infinite__scroll-view--y": {
+      height: itemSize * 4 + gridSpacing * 3 + 2 * gridSpacing + "px"
+    },
+    " .mithril-infinite__page--placeholder": {
+      height: "0 !important"
+    },
+    " .mithril-infinite__scroll-content": {
+      margin: "0 auto",
+      width: pageWidth + "px",
+      padding: gridSpacing + "px 0 0",
+
+      " .mithril-infinite__content": {
+        margin: "0 auto",
+        fontSize: 0,
+        lineHeight: 0,
+
+        " .mithril-infinite__page": {
+          margin: "0 " + -gridSpacing / 2 + "px"
+        },
+        " .grid-item": {
+          display: "inline-block",
+          height: itemSize + "px",
+          width: itemSize + "px",
+          backgroundColor: "#f0f0f0",
+          margin: [0, gridSpacing / 2, gridSpacing, gridSpacing / 2].map(function (v) {
+            return v + "px";
+          }).join(" "),
+
+          " .image-holder": {
+            height: itemSize - 2 * imageHolderPadding + "px",
+            width: itemSize - 2 * imageHolderPadding + "px",
+            overflow: "hidden",
+            position: "relative",
+            margin: imageHolderPaddingPx,
+
+            " .image": {
+              position: "absolute",
+              left: "auto",
+              top: 0,
+              right: "auto",
+              bottom: 0,
+              width: "100%",
+              backgroundSize: "contain",
+              backgroundRepeat: "no-repeat",
+              backgroundPositionX: "50%"
+            }
+          }
+        }
+      }
+    },
+    " .count": {
+      fontSize: "14px",
+      lineHeight: 1,
+      padding: "20px 0 10px 0",
+      borderBottom: "1px solid #ddd"
+    },
+    " .pager": {
+      borderTop: "1px solid #ddd",
+      padding: "8px 0",
+      width: pageWidth + "px",
+
+      " a": {
+        display: "inline-block",
+        background: "#e0e0e0",
+        color: "#333",
+        padding: "10px 15px",
+        textAlign: "center",
+        fontSize: "15px",
+        lineHeight: 1,
+        margin: "0 5px 0 0",
+
+        "&.disabled": {
+          color: "#aaa",
+          background: "#f4f4f4",
+          pointerEvents: "none"
+        }
+      }
+    }
+
+  }
+}]);
+
+/***/ }),
+/* 27 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__variables__ = __webpack_require__(4);
+
+
+var styles = [{
+  " *": {
+    "box-sizing": "border-box"
+  },
+  " html, body, #app": {
+    minHeight: "100%",
+    height: "100%"
+  },
+  " body": {
+    margin: 0,
+    padding: 0,
+    fontFamily: "arial, sans-serif",
+    minWidth: __WEBPACK_IMPORTED_MODULE_0__variables__["b" /* styleVariables */].size_px
+  },
+  " h1": {
+    display: "block",
+    margin: "40px auto 0 auto",
+    width: "320px",
+    textAlign: "center",
+    fontSize: "28px",
+    fontWeight: "normal",
+    color: __WEBPACK_IMPORTED_MODULE_0__variables__["b" /* styleVariables */].text_color
+  },
+  " a": {
+    "&:link, &:visited": {
+      color: "#1E88E5",
+      textDecoration: "none"
+    }
+  }
+}];
+/* harmony default export */ __webpack_exports__["a"] = (styles);
+
+/***/ }),
+/* 28 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__app_variables__ = __webpack_require__(4);
+
+
+var textColorLight = "#90A4AE";
+var indexBlockBackgroundColor = "#CFD8DC";
+var indexBlockTextColor = "rgba(0,0,0,.85)";
+var indexBlockTextColorLight = "rgba(0,0,0,.4)";
+var menuWidthPx = __WEBPACK_IMPORTED_MODULE_0__app_variables__["b" /* styleVariables */].size_px;
+
+/* harmony default export */ __webpack_exports__["a"] = ([{
+  ".index": {
+    " h1": {
+      display: "block",
+      margin: "40px auto 0 auto",
+      width: __WEBPACK_IMPORTED_MODULE_0__app_variables__["b" /* styleVariables */].size + "px",
+      textAlign: "center",
+      fontSize: "28px",
+      fontWeight: "normal",
+      color: __WEBPACK_IMPORTED_MODULE_0__app_variables__["b" /* styleVariables */].text_color
+    },
+    " .menu": {
+      width: menuWidthPx,
+      margin: "20px auto",
+      padding: "0 0 20px 0",
+      listStyle: "none",
+
+      " li": {
+        margin: "0 0 1px 0",
+        padding: 0,
+
+        "&.header": {
+          fontSize: "18px",
+          color: textColorLight
+        },
+        "&.header, a": {
+          padding: "20px"
+        },
+        " a": {
+          display: "block",
+          textDecoration: "none",
+          backgroundColor: indexBlockBackgroundColor,
+
+          " .title": {
+            display: "block",
+            color: indexBlockTextColor,
+            fontSize: "18px",
+            lineHeight: 1.4 * 18 + "px"
+          },
+          " .subtitle": {
+            display: "block",
+            color: indexBlockTextColorLight,
+            fontSize: "14px"
+          }
+        }
+      }
+    }
+  }
+}]);
+
+/***/ })
+/******/ ]);
 //# sourceMappingURL=index.js.map

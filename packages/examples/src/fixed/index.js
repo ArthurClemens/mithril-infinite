@@ -29,7 +29,7 @@ export default {
       item,
       class: "table fixed",
       // set the size of each page
-      pageSize: () => PAGE_COUNT * ITEM_HEIGHT,
+      pageSize: () => PAGE_ITEMS * ITEM_HEIGHT,
       // set the total height
       contentSize: PAGE_COUNT * PAGE_ITEMS * ITEM_HEIGHT + AFTER_CONTENT_HEIGHT,
       after: footer()
