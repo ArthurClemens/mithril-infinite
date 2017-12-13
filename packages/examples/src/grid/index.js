@@ -1,13 +1,13 @@
 import m from "mithril";
 import footer from "../app/footer";
 import infinite from "mithril-infinite";
-import 'whatwg-fetch';
+// import "whatwg-fetch";
 
 import { addStyle } from "../app/styler";
 import styles from "./styles";
 addStyle("grid", styles);
 
-const PAGE_ITEMS = 12;
+// const PAGE_ITEMS = 12;
 const IMAGE_SIZE = 190;
 
 const loadImage = (el, imgUrl) => {
@@ -40,39 +40,39 @@ const item = data =>
     )
   );
 
-const dataUrl = pageNum =>
-  `http://jsonplaceholder.typicode.com/photos?_start=${(pageNum - 1) * PAGE_ITEMS}&_end=${pageNum * PAGE_ITEMS}`;
+// const dataUrl = pageNum =>
+//   `http://jsonplaceholder.typicode.com/photos?_start=${(pageNum - 1) * PAGE_ITEMS}&_end=${pageNum * PAGE_ITEMS}`;
 
-const pageData = pageNum => 
-  m.request({
-    method: "GET",
-    dataType: "jsonp",
-    url: dataUrl(pageNum)
-  });
+// const pageData = pageNum => 
+//   m.request({
+//     method: "GET",
+//     dataType: "jsonp",
+//     url: dataUrl(pageNum)
+//   });
 
-const asyncPageData = async function(pageNum) {
-  return await fetchPageData(pageNum);
-};
+// const asyncPageData = async function(pageNum) {
+//   return await fetchPageData(pageNum);
+// };
 
-const fetchPageData = pageNum => 
-  fetch(dataUrl(pageNum))
-    .then(function(response) {
-      return response.json();
-    }).then(function(json) {
-      return json;
-    }).catch(function() {
-      //console.log('parsing failed', ex)
-    });
+// const fetchPageData = pageNum => 
+//   fetch(dataUrl(pageNum))
+//     .then(function(response) {
+//       return response.json();
+//     }).then(function(json) {
+//       return json;
+//     }).catch(function() {
+//       //console.log('parsing failed', ex)
+//     });
 
 const returnData = () =>
   data;
 
-const returnDelayedData = () =>
-  new Promise(resolve =>
-    setTimeout(() =>
-      resolve(data)
-    , 1000)
-  );
+// const returnDelayedData = () =>
+//   new Promise(resolve =>
+//     setTimeout(() =>
+//       resolve(data)
+//     , 1000)
+//   );
 
 export default {
   view: () => 
@@ -82,13 +82,13 @@ export default {
       // Different approaches for getting data:
 
       // 1. Use m.request:
-      pageData,
+      // pageData,
 
       // 2. Use async/await with fetch:
       // pageData: asyncPageData,
 
       // 3. Return data directly
-      // pageData: returnData,
+      pageData: returnData,
 
       // 4. Return data as a Promise
       // pageData: returnDelayedData,

@@ -9,7 +9,8 @@
     "dev": "npm-run-all --parallel dev:watch dev:serve",
     "dev:serve": "webpack-dev-server --config scripts/webpack.config.dev.js",
     "dev:watch": "webpack --watch --config scripts/webpack.config.dev.js",
-    "build": "webpack -p --config scripts/webpack.config.js"
+    "build": "webpack -p --config scripts/webpack.config.js",
+    "github": "node scripts/github.js"
   },
   "dependencies": {
     "j2c": "^1.0.0-4",
@@ -21,6 +22,7 @@
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.2",
     "npm-run-all": "^4.1.2",
+    "shelljs": "^0.7.8",
     "webpack": "^3.9.1",
     "webpack-dev-server": "^2.9.5",
     "whatwg-fetch": "^2.0.3"
