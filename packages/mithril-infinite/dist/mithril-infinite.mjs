@@ -644,7 +644,7 @@ var view = function view(_ref) {
   }, attrs.before) : null, m("div", { class: classes.pages }, [prePages.map(function (pageNum) {
     return m(placeholder, {
       axis: axis,
-      key: numToId(pageNum),
+      key: (attrs.pageKey || numToId)(pageNum),
       pageId: numToId(pageNum),
       pageNum: pageNum,
       pageSizes: state.pageSizes
@@ -654,7 +654,7 @@ var view = function view(_ref) {
       autoSize: state.autoSize,
       axis: axis,
       item: attrs.item,
-      key: numToId(pageNum),
+      key: (attrs.pageKey || numToId)(pageNum),
       pageData: attrs.pageData,
       pageId: numToId(pageNum),
       pageNum: pageNum,

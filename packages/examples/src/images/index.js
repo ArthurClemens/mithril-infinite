@@ -10,6 +10,9 @@ addStyle("images", styles);
 const pageUrl = pageNum =>
   `data/images/page-${pageNum}.json`;
 
+const createPageKey = pageNum =>
+  `data/images/page-${pageNum}.json`;
+
 const vm = {
   expanded: {},
   dirty: {},
@@ -45,6 +48,7 @@ const item = (data, opts) => {
   const height = parseInt(data.height * heightFraction, 10);
   return m("a.list-item",
     {
+      key: id,
       style: { height: height + "px" },
       onclick: () => vm.toggle(id)
     }, [
@@ -64,12 +68,17 @@ const item = (data, opts) => {
 };
 
 export default {
-  view: () =>
+  oninit: vnode => {
+    vnode.state.currentPage = undefined;
+  },
+  view: vnode =>
     m(infinite, {
       maxPages: 20,
       item,
       pageUrl,
       preloadPages: 3,
+      pageKey: pageNum => createPageKey(pageNum), // for testing
+      currentPage: vnode.state.currentPage,
       class: "images",
       before: m("a",
         {
@@ -81,6 +90,16 @@ export default {
         },
         [
           m("div", m.trust("A list of pugs. Courtesy the <a href=\"http: //airbnb.io/infinity/demo-off.html\">AirBnb Infinity demo</a>.")),
+          m("a", {
+            onclick: () => {
+              vnode.state.currentPage = 6;
+              m.redraw();
+              setTimeout(() => {
+                document.querySelector("[data-page='000006']").scrollIntoView();
+                vnode.state.currentPage = undefined;
+              }, 1000);
+            }
+          }, "Go to page 6"),
           m(".toggle", vm.isExpanded("before") ? m.trust("&#150;") : m.trust("&#43;"))
         ]
       ),

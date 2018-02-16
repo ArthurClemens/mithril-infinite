@@ -236,7 +236,7 @@ const view = ({ state, attrs }) => {
             prePages.map(pageNum => 
               m(placeholder, {
                 axis,
-                key: numToId(pageNum),
+                key: (attrs.pageKey || numToId)(pageNum),
                 pageId: numToId(pageNum),
                 pageNum,
                 pageSizes: state.pageSizes
@@ -247,7 +247,7 @@ const view = ({ state, attrs }) => {
                 autoSize: state.autoSize,
                 axis,
                 item: attrs.item,
-                key: numToId(pageNum),
+                key: (attrs.pageKey || numToId)(pageNum),
                 pageData: attrs.pageData,
                 pageId: numToId(pageNum),
                 pageNum,
