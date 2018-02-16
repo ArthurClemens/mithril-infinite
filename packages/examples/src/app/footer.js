@@ -34,6 +34,6 @@ export default (opts = {}) =>
       href: "/",
       oncreate: m.route.link
     }, "All examples") : null,
-    m("hr"),
-    m.trust(`mithril-infinite, Infinite Scroll for Mithril on mobile and desktop. This site runs on version ${VERSION}. Project page on <a href=\"https://github.com/ArthurClemens/mithril-infinite\">Github</a>.`)
+  m("hr"),
+  m.trust(`mithril-infinite, Infinite Scroll for Mithril on mobile and desktop. This site runs on version ${VERSION}. Project page on <a href="https://github.com/ArthurClemens/mithril-infinite">Github</a>.`)
   ]);
