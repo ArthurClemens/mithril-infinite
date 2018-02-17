@@ -8,6 +8,7 @@ import short from "../short";
 import horizontal from "../horizontal";
 import fixed from "../fixed";
 import paging from "../paging";
+import filtering from "../filtering";
 
 import { addStyle } from "../app/styler";
 import commonStyle from "../app/common-style";
@@ -37,6 +38,11 @@ const menuData = [
     href: "/table",
     title: "Data table",
     subtitle: "Table rows of various heights"
+  },
+  {
+    href: "/filtering",
+    title: "Filtering",
+    subtitle: "Update results based on search query"
   },
   {
     href: "/short",
@@ -86,6 +92,7 @@ m.route(mountNode, "/", {
   "/images": images,
   "/grid": grid,
   "/table": table,
+  "/filtering": filtering,
   "/short": short,
   "/horizontal": horizontal,
   "/fixed": fixed,

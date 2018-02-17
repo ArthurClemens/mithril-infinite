@@ -10,9 +10,6 @@ addStyle("images", styles);
 const pageUrl = pageNum =>
   `data/images/page-${pageNum}.json`;
 
-const createPageKey = pageNum =>
-  `data/images/page-${pageNum}.json`;
-
 const vm = {
   expanded: {},
   dirty: {},
@@ -48,7 +45,6 @@ const item = (data, opts) => {
   const height = parseInt(data.height * heightFraction, 10);
   return m("a.list-item",
     {
-      key: id,
       style: { height: height + "px" },
       onclick: () => vm.toggle(id)
     }, [
@@ -77,7 +73,6 @@ export default {
       item,
       pageUrl,
       preloadPages: 3,
-      pageKey: pageNum => createPageKey(pageNum), // for testing
       currentPage: vnode.state.currentPage,
       class: "images",
       before: m("a",
