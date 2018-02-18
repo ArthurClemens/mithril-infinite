@@ -10,7 +10,7 @@
     "dev:serve": "webpack-dev-server --config scripts/webpack.config.dev.js",
     "dev:watch": "webpack --watch --config scripts/webpack.config.dev.js",
     "build": "webpack -p --config scripts/webpack.config.js",
-    "github": "node scripts/github.js"
+    "github": "yarn run build && node scripts/github.js"
   },
   "dependencies": {
     "faker": "^4.1.0",
