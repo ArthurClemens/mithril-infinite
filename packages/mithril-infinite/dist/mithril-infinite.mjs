@@ -494,7 +494,14 @@ var isPageInViewport = function isPageInViewport(page$$1, axis, state, scrollVie
 
 var updatePageSize = function updatePageSize(state) {
   return function (pageId, size) {
-    return state.pageSizes[pageId] = parseInt(size, 10), state.sortedKeys = Object.keys(state.pageSizes).sort(), calculatePreloadSlots(state);
+    var oldSize = state.pageSizes[pageId];
+    var newSize = parseInt(size, 10);
+    if (oldSize !== newSize) {
+      state.pageSizes[pageId] = newSize;
+      state.sortedKeys = Object.keys(state.pageSizes).sort();
+      calculatePreloadSlots(state);
+      setTimeout(m.redraw, 0);
+    }
   };
 };
 

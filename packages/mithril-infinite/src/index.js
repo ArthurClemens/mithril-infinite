@@ -51,11 +51,16 @@ const isPageInViewport = (page, axis, state, scrollView) => {
   return isElementInViewport({ el, axis });
 };
 
-const updatePageSize = state => (pageId, size) => (
-  state.pageSizes[pageId] = parseInt(size, 10),
-  state.sortedKeys = Object.keys(state.pageSizes).sort(),
-  calculatePreloadSlots(state)
-);
+const updatePageSize = state => (pageId, size) => {
+  const oldSize = state.pageSizes[pageId];
+  const newSize = parseInt(size, 10);
+  if (oldSize !== newSize) {
+    state.pageSizes[pageId] = newSize;
+    state.sortedKeys = Object.keys(state.pageSizes).sort();
+    calculatePreloadSlots(state);
+    setTimeout(m.redraw, 0);
+  }
+};
 
 const updatePart = (dom, whichSize, state, axis) => {
   const size = getElementSize(dom, axis);
@@ -183,7 +188,7 @@ const view = ({ state, attrs }) => {
   const isLastPageVisible = maxPageNum
     ? isPageInViewport(maxPageNum, axis, state, state.scrollView)
     : true;
-
+  
   return m("div",
     {
       oncreate: ({ dom }) => {
