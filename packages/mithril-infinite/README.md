@@ -23,7 +23,8 @@ Compatible with Mithril 1.x.
   - [Paging options](#paging-options)
   - [Options for infinite.isElementInViewport](#options-for-infiniteiselementinviewport)
 - [Styling](#styling)
-- [CSS classes](#css-classes)
+  - [CSS classes](#css-classes)
+  - [Fixed scroll and `overflow-anchor`](#fixed-scroll-and-overflow-anchor)
 - [Size](#size)
 - [Dependencies](#dependencies)
 - [Licence](#licence)
@@ -453,9 +454,8 @@ Note: The parent of "scroll-view" must have a height. Also make sure that `html`
 Styles are added using [j2c](https://github.com/pygy/j2c). This library is also used in the examples.
 
 
-
 <a name="css-classes"></a>
-## CSS classes
+### CSS classes
 
 | **Element**           | **Key**       |  **Class** |
 | --------------------- | ------------- | --------------- |
@@ -476,11 +476,18 @@ Styles are added using [j2c](https://github.com/pygy/j2c). This library is also 
 | Page, now placeholder | placeholder | `mithril-infinite__page--placeholder` |
 
 
+<a name="fixed-scroll-and-overflow-anchor"></a>
+### Fixed scroll and `overflow-anchor`
+
+Some browsers use [overflow-anchor](https://css-tricks.com/almanac/properties/o/overflow-anchor/) to prevent content from jumping as the page loads more data above the viewport. This may conflict how Infinite inserts content in "placeholder slots". 
+
+To prevent miscalculations of content size, the "scroll content" element has style `overflow-anchor: none`.
+
 
 <a name="size"></a>
 ## Size
 
-Minified and gzipped: ~ 3.7 Kb
+Minified and gzipped: ~ 3.9 Kb
 
 
 

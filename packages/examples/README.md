@@ -51,9 +51,16 @@ The trick here is to get neat blocks as "pages" by loading page data with 12 ima
 
 
 
+### Filtering
+
+A search field to filter a list of names.
+Demonstrates option `pageKey` to notify Mithril that pages need to be recreated.
+
+
+
 ### Table
 
-Demonstrating a list of simple table like data. To prevent redrawing issues, instead of `<table>` tags, we use divs with table styling.
+Demonstrates a list of simple table-like data. To prevent redrawing issues, instead of `<table>` tags, we use divs with table styling.
 
 
 

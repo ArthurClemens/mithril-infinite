@@ -604,14 +604,15 @@ var styles = [_defineProperty({}, "." + classes.scrollView, (_ref3 = {
   "-webkit-overflow-scrolling": "touch",
   height: "100%"
 
-}, _defineProperty(_ref3, "&." + classes.scrollViewY, _defineProperty({
+}, _defineProperty(_ref3, " ." + classes.scrollContent, {
+  overflowAnchor: "none"
+}), _defineProperty(_ref3, "&." + classes.scrollViewY, _defineProperty({
   overflowX: "hidden",
   overflowY: "auto",
   height: "100%"
 
 }, " ." + classes.scrollContent, {
-  height: "100%",
-  overflowAnchor: "none"
+  height: "100%"
 })), _defineProperty(_ref3, "&." + classes.scrollViewX, _defineProperty({
   overflowX: "auto",
   overflowY: "hidden",
