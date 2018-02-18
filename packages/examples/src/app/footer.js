@@ -3,7 +3,6 @@ import { addStyle } from "../app/styler";
 import { styleVariables } from "../app/variables";
 
 const SIDE_PADDING = 16;
-const VERSION = "1.0.0";
 
 const styles = [{
   ".footer": {
@@ -35,5 +34,5 @@ export default (opts = {}) =>
       oncreate: m.route.link
     }, "All examples") : null,
   m("hr"),
-  m.trust(`mithril-infinite, Infinite Scroll for Mithril on mobile and desktop. This site runs on version ${VERSION}. Project page on <a href="https://github.com/ArthurClemens/mithril-infinite">Github</a>.`)
+  m.trust("mithril-infinite, Infinite Scroll for Mithril on mobile and desktop. Project page on <a href=\"https://github.com/ArthurClemens/mithril-infinite\">Github</a>.")
   ]);
