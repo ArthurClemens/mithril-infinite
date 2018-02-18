@@ -2,19 +2,16 @@ import m from "mithril";
 import footer from "../app/footer";
 import infinite from "mithril-infinite";
 import stream from "mithril/stream";
-import random from "random-name";
+import faker from "faker";
 
 import { addStyle } from "../app/styler";
 import styles from "./styles";
 addStyle("filtering", styles);
 
 const createName = () =>
-  `${random.first()} ${random.middle()} ${random.last()}`;
+  faker.name.findName();
 
-// const createPlace = () =>
-//   random.place();
-
-const nameCount = 1000;
+const nameCount = 500;
 const data = Array.from(new Array(nameCount), createName).sort();
 
 const pageSize = 10;
@@ -28,12 +25,13 @@ const item = (data, opts, itemIndex) => {
   ]);
 };
 
-const searchView = {
+const Search = {
   view: () => {
     return m(".search-view", 
       m("input", {
         oninput: m.withAttr("value", query),
-        value: query()
+        value: query(),
+        placeholder: "Search name",
       })
     );
   }
@@ -58,8 +56,8 @@ export default {
         },
         pageKey: pageNum => `${pageNum}-${queryStr}`, // required to keep redraws working well
         class: "filtering",
-        before: m(searchView)
-        // after: footer()
+        before: m(Search),
+        after: footer(),
       })
       : null;
   }

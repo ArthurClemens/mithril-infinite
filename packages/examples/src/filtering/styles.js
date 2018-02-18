@@ -1,4 +1,4 @@
-const searchBarHeight = 54;
+const searchBarHeight = 60;
 
 export default [{
   ".mithril-infinite__scroll-view.filtering": {
@@ -11,13 +11,18 @@ export default [{
       height: `${searchBarHeight}px`,
       position: "fixed",
       width: "100%",
-      background: "#eee",
+      background: "#f5f5f5",
+      borderBottom: "1px solid rgba(0, 0, 0, .07)",
+      display: "flex",
+      flexDirection: "column",
+      justifyContent: "center",
 
       " input": {
         width: "100%",
         padding: ".5rem 1rem",
         fontSize: "16px",
-        outline: "none"
+        outline: "none",
+        border: "1px solid #ccc",
       }
     },
 
@@ -28,10 +33,8 @@ export default [{
     " .mithril-infinite__scroll-content": {
       " .mithril-infinite__page": {
         display: "table",
-        width: "100%"
-      },
-      " .mithril-infinite__page--odd": {
-        backgroundColor: "#e4e4e4",
+        width: "100%",
+        backgroundColor: "#fff",
 
         " .list-item": {
           " > div": {
@@ -44,9 +47,7 @@ export default [{
           }
         }
       },
-      " .mithril-infinite__page--even": {
-        "background-color": "#f0f0f0"
-      },
+      
       " .list-item": {
         width: "100%",
         display: "table-row",

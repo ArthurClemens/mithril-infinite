@@ -41,8 +41,8 @@ const menuData = [
   },
   {
     href: "/filtering",
-    title: "Filtering",
-    subtitle: "Update results based on search query"
+    title: "Dynamic data",
+    subtitle: "Filter infinite results"
   },
   {
     href: "/short",
