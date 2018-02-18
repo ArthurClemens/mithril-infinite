@@ -13,6 +13,7 @@
     "github": "node scripts/github.js"
   },
   "dependencies": {
+    "faker": "^4.1.0",
     "j2c": "^1.0.0-4",
     "j2c-plugin-prefix-browser": "^1.0.6",
     "mithril": "^1.1.6",

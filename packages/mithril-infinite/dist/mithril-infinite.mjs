@@ -424,14 +424,15 @@ var styles = [_defineProperty({}, "." + classes.scrollView, (_ref3 = {
   "-webkit-overflow-scrolling": "touch",
   height: "100%"
 
-}, _defineProperty(_ref3, "&." + classes.scrollViewY, _defineProperty({
+}, _defineProperty(_ref3, " ." + classes.scrollContent, {
+  overflowAnchor: "none"
+}), _defineProperty(_ref3, "&." + classes.scrollViewY, _defineProperty({
   overflowX: "hidden",
   overflowY: "auto",
   height: "100%"
 
 }, " ." + classes.scrollContent, {
-  height: "100%",
-  overflowAnchor: "none"
+  height: "100%"
 })), _defineProperty(_ref3, "&." + classes.scrollViewX, _defineProperty({
   overflowX: "auto",
   overflowY: "hidden",
@@ -494,7 +495,14 @@ var isPageInViewport = function isPageInViewport(page$$1, axis, state, scrollVie
 
 var updatePageSize = function updatePageSize(state) {
   return function (pageId, size) {
-    return state.pageSizes[pageId] = parseInt(size, 10), state.sortedKeys = Object.keys(state.pageSizes).sort(), calculatePreloadSlots(state);
+    var oldSize = state.pageSizes[pageId];
+    var newSize = parseInt(size, 10);
+    if (oldSize !== newSize) {
+      state.pageSizes[pageId] = newSize;
+      state.sortedKeys = Object.keys(state.pageSizes).sort();
+      calculatePreloadSlots(state);
+      setTimeout(m.redraw, 0);
+    }
   };
 };
 
@@ -644,7 +652,7 @@ var view = function view(_ref) {
   }, attrs.before) : null, m("div", { class: classes.pages }, [prePages.map(function (pageNum) {
     return m(placeholder, {
       axis: axis,
-      key: numToId(pageNum),
+      key: (attrs.pageKey || numToId)(pageNum),
       pageId: numToId(pageNum),
       pageNum: pageNum,
       pageSizes: state.pageSizes
@@ -654,7 +662,7 @@ var view = function view(_ref) {
       autoSize: state.autoSize,
       axis: axis,
       item: attrs.item,
-      key: numToId(pageNum),
+      key: (attrs.pageKey || numToId)(pageNum),
       pageData: attrs.pageData,
       pageId: numToId(pageNum),
       pageNum: pageNum,

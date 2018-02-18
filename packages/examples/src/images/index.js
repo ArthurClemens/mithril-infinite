@@ -64,12 +64,16 @@ const item = (data, opts) => {
 };
 
 export default {
-  view: () =>
+  oninit: vnode => {
+    vnode.state.currentPage = undefined;
+  },
+  view: vnode =>
     m(infinite, {
       maxPages: 20,
       item,
       pageUrl,
       preloadPages: 3,
+      currentPage: vnode.state.currentPage,
       class: "images",
       before: m("a",
         {
@@ -81,6 +85,16 @@ export default {
         },
         [
           m("div", m.trust("A list of pugs. Courtesy the <a href=\"http: //airbnb.io/infinity/demo-off.html\">AirBnb Infinity demo</a>.")),
+          m("a", {
+            onclick: () => {
+              vnode.state.currentPage = 6;
+              m.redraw();
+              setTimeout(() => {
+                document.querySelector("[data-page='000006']").scrollIntoView();
+                vnode.state.currentPage = undefined;
+              }, 1000);
+            }
+          }, "Go to page 6"),
           m(".toggle", vm.isExpanded("before") ? m.trust("&#150;") : m.trust("&#43;"))
         ]
       ),

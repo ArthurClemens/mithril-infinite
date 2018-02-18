@@ -6,6 +6,10 @@ const styles = [{
     "-webkit-overflow-scrolling": "touch",
     height: "100%",
 
+    [" ." + classes.scrollContent]: {
+      overflowAnchor: "none",
+    },
+
     ["&." + classes.scrollViewY]: {
       overflowX: "hidden",
       overflowY: "auto",
@@ -13,7 +17,6 @@ const styles = [{
 
       [" ." + classes.scrollContent]: {
         height: "100%",
-        overflowAnchor: "none",
       }
     },
 
