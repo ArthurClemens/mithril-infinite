@@ -49,6 +49,7 @@ export default {
     return data
       ? m(infinite, {
         maxPages: Math.ceil(filteredList.length / pageSize),
+        preloadPages: 3,
         item,
         pageData: pageNum => {
           const index = getIndex(pageNum);

@@ -32,8 +32,7 @@ const item = data =>
   m("a.grid-item",
     m(".image-holder",
       m(".image", {
-        oncreate: vnode => maybeLoadImage(vnode, data),
-        onupdate: vnode => maybeLoadImage(vnode, data)
+        oncreate: vnode => maybeLoadImage(vnode, data)
       })
     )
   );
