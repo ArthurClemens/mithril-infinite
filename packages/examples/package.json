@@ -1,6 +1,6 @@
 {
   "name": "examples",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "",
   "private": true,
   "main": "dist/js/examples.js",
