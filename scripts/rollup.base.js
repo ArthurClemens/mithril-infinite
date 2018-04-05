@@ -1,16 +1,14 @@
-/* globals process */
+/* global process */
 import fs from "fs";
 import babel from "rollup-plugin-babel";
 import eslint from "rollup-plugin-eslint";
 import resolve from "rollup-plugin-node-resolve";
-import commonjs from "rollup-plugin-commonjs";
-import pathmodify from "rollup-plugin-pathmodify";
+import commonjs from "@lhorie/rollup-plugin-commonjs";
 
-export const pkg = JSON.parse(fs.readFileSync("./package.json"));
-const external = Object.keys(pkg.dependencies || {});
 const env = process.env; // eslint-disable-line no-undef
-const entry = env.ENTRY || "index.js";
-const moduleName = env.MODULE || pkg.name;
+export const pkg = JSON.parse(fs.readFileSync("./package.json"));
+const external = Object.keys(pkg.dependencies || []);
+const name = env.MODULE_NAME || "polythene";
 
 const globals = {};
 external.forEach(ext => {
@@ -23,38 +21,33 @@ external.forEach(ext => {
   }
 });
 
-export const createConfig = ({ includeDepencies }) => ({
-  input: entry,
-  external: includeDepencies ? [] : external,
-  name: moduleName,
-  globals,
-  plugins: [
-
-    // Resolve libs in node_modules
-    resolve({
-      jsnext: true,
-      main: true
-    }),
-
-    pathmodify({
-      aliases: [
-        {
-          id: "mithril/stream",
-          resolveTo: "node_modules/mithril/stream.js"
-        }
-      ]
-    }),
-
-    // Convert CommonJS modules to ES6, so they can be included in a Rollup bundle
-    commonjs({
-      include: "node_modules/**"
-    }),
-
-    eslint({
-      cache: true
-    }),
-
-    babel()
-  ]
-});
-
+export const createConfig = ({ includeDepencies, lint }) => {
+  const config = {
+    input: process.env.ENTRY || "index.js",
+    external: includeDepencies ? ["mithril"] : external,
+    output: {
+      name,
+      globals,
+    },
+    plugins: []
+  };
+  config.plugins.push(resolve({
+    jsnext: true,
+    main: true,
+    browser: true,
+  }));
+  lint && config.plugins.push(eslint({
+    cache: true
+  }));
+  config.plugins.push(commonjs({
+    namedExports: {
+      "node_modules/react/index.js": ["Children", "Component", "PropTypes", "createElement", "createFactory"],
+      "node_modules/react-dom/index.js": ["render"]
+    }
+  }));
+  config.plugins.push(babel({
+    comments: true,
+    runtimeHelpers: true,
+  }));
+  return config;
+};

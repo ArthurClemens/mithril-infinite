@@ -34,7 +34,7 @@ const oninit = ({ state, attrs }) => {
   state.processPageData = processPageData;
 };
 
-const view = ({state, attrs}) => {
+const view = ({ state, attrs }) => {
   const pageId = attrs.pageId;
   const storedPageSize = attrs.pageSizes[pageId] || 0;
   let pageSize = 0;

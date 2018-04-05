@@ -1,5 +1,5 @@
-import m from 'mithril';
 import verge from 'verge';
+import m from 'mithril';
 import ResizeObserver from 'resize-observer-polyfill';
 import J2c from 'j2c';
 
@@ -50,9 +50,10 @@ function createCommonjsModule(fn, module) {
 	return module = { exports: {} }, fn(module, module.exports), module.exports;
 }
 
-var stream$2 = createCommonjsModule(function (module) {
-	/* eslint-disable */
-	(function () {
+var stream = createCommonjsModule(function (module) {
+(function () {
+		/* eslint-enable */
+
 		var guid = 0,
 		    HALT = {};
 		function createStream() {
@@ -237,7 +238,7 @@ var stream$2 = createCommonjsModule(function (module) {
 	})();
 });
 
-var stream = stream$2;
+var stream$1 = stream;
 
 var getPageData = function getPageData(url) {
   return m.request({
@@ -246,12 +247,12 @@ var getPageData = function getPageData(url) {
   });
 };
 
-var oninit$1 = function oninit(_ref) {
+var oninit = function oninit(_ref) {
   var state = _ref.state,
       attrs = _ref.attrs;
 
   var pageNum = attrs.pageNum;
-  var content = stream([]);
+  var content = stream$1([]);
 
   if (attrs.pageData) {
     var result = attrs.pageData(pageNum);
@@ -274,7 +275,7 @@ var oninit$1 = function oninit(_ref) {
   state.processPageData = processPageData;
 };
 
-var view$1 = function view(_ref2) {
+var view = function view(_ref2) {
   var state = _ref2.state,
       attrs = _ref2.attrs;
 
@@ -350,11 +351,11 @@ var view$1 = function view(_ref2) {
 };
 
 var page = {
-  oninit: oninit$1,
-  view: view$1
+  oninit: oninit,
+  view: view
 };
 
-var _extends$1 = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 var placeholder = {
   oninit: function oninit(vnode) {
@@ -373,7 +374,7 @@ var placeholder = {
     return m("div", {
       "data-page": pageId,
       class: [classes.placeholder, state.className].join(" "),
-      style: _extends$1({}, attrs.axis === "x" ? { width: storedPageSize + "px" } : { height: storedPageSize + "px" })
+      style: _extends({}, attrs.axis === "x" ? { width: storedPageSize + "px" } : { height: storedPageSize + "px" })
     });
   }
 };
@@ -444,7 +445,7 @@ var styles = [_defineProperty({}, "." + classes.scrollView, (_ref3 = {
 
 addStyle("mithril-infinite", styles);
 
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+var _extends$1 = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 var SEL_PADDING = "000000";
 
@@ -546,7 +547,7 @@ var getPageList = function getPageList(currentPageNum, fromPage, toPage, current
   return { pages: pages, prePages: prePages, maxPageNum: maxPageNum };
 };
 
-var oninit = function oninit(vnode) {
+var oninit$1 = function oninit(vnode) {
   var attrs = vnode.attrs;
   // Memoize some properties that do not change
   var axis = attrs.axis || "y";
@@ -583,7 +584,7 @@ var oninit = function oninit(vnode) {
   };
 };
 
-var view = function view(_ref) {
+var view$1 = function view(_ref) {
   var state = _ref.state,
       attrs = _ref.attrs;
 
@@ -638,7 +639,7 @@ var view = function view(_ref) {
     }
   }, m("div", {
     class: classes.scrollContent,
-    style: !state.autoSize ? null : _extends({}, axis === "x" ? { width: state.contentSize + "px" } : { height: state.contentSize + "px" }, attrs.contentSize ? axis === "x" ? { "min-width": attrs.contentSize + "px" } : { "min-height": attrs.contentSize + "px" } : {})
+    style: !state.autoSize ? null : _extends$1({}, axis === "x" ? { width: state.contentSize + "px" } : { height: state.contentSize + "px" }, attrs.contentSize ? axis === "x" ? { "min-width": attrs.contentSize + "px" } : { "min-height": attrs.contentSize + "px" } : {})
   }, [m(state.contentTag, { class: classes.content }, [attrs.before ? m("div", {
     class: classes.before,
     oncreate: function oncreate(_ref3) {
@@ -692,10 +693,10 @@ var view = function view(_ref) {
   }, attrs.after) : null])]));
 };
 
-var infinite$1 = {
-  oninit: oninit,
-  view: view,
+var infinite = {
+  oninit: oninit$1,
+  view: view$1,
   isElementInViewport: isElementInViewport
 };
 
-export default infinite$1;
+export default infinite;

@@ -11,6 +11,13 @@ Compatible with Mithril 1.x.
 - [Installation](#installation)
 - [Usage](#usage)
   - [Handling data](#handling-data)
+    - [Using `pageUrl` for referencing URLs](#using-pageurl-for-referencing-urls)
+    - [Data file structure](#data-file-structure)
+    - [Using `pageData` for server requests](#using-pagedata-for-server-requests)
+      - [With m.request](#with-mrequest)
+      - [With `async`](#with-async)
+      - [Returning data directly](#returning-data-directly)
+      - [Returning data as a Promise](#returning-data-as-a-promise)
   - [Handling dynamic data](#handling-dynamic-data)
   - [Advanced item function example](#advanced-item-function-example)
   - [Getting the total page count](#getting-the-total-page-count)
@@ -32,12 +39,14 @@ Compatible with Mithril 1.x.
 <!-- /MarkdownTOC -->
 
 <a name="examples"></a>
+<a id="examples"></a>
 ## Examples
 
 [Examples](https://github.com/ArthurClemens/mithril-infinite/tree/master/packages/examples)
 
 
 <a name="features"></a>
+<a id="features"></a>
 ## Features
 
 * Natural scrolling using browser defaults.
@@ -59,6 +68,7 @@ Not included (by design):
 
 
 <a name="installation"></a>
+<a id="installation"></a>
 ## Installation
 
 Use as npm module:
@@ -73,11 +83,13 @@ For working with the examples, see the [examples documentation](https://github.c
 
 
 <a name="usage"></a>
+<a id="usage"></a>
 ## Usage
 
 **Note:** The parent of "scroll-view" must have a height. Also make sure that `html` has a height (typically set to `100%`).
 
 <a name="handling-data"></a>
+<a id="handling-data"></a>
 ### Handling data
 
 Data can be provided:
@@ -86,6 +98,7 @@ Data can be provided:
 * With `pageData` for server requests
 
 
+<a id="using-pageurl-for-referencing-urls"></a>
 #### Using `pageUrl` for referencing URLs
 
 An example using data files:
@@ -123,6 +136,7 @@ The `item` function passes 3 parameters:
 3. `index`: the item index
 
 
+<a id="data-file-structure"></a>
 #### Data file structure
 
 Data is handled per "results" page. You are free to use any data format.
@@ -148,11 +162,13 @@ Or:
 ~~~
 
 
+<a id="using-pagedata-for-server-requests"></a>
 #### Using `pageData` for server requests
  
 In most real world situations an API server will provide the data. So while passing file URLs with `pageUrl` is a handy shortcut, we preferably use data requests.
 
 
+<a id="with-mrequest"></a>
 ##### With m.request
 
 ~~~javascript
@@ -181,6 +197,7 @@ const dataUrl = pageNum =>
 ~~~
 
 
+<a id="with-async"></a>
 ##### With `async`
 
 ~~~javascript
@@ -201,6 +218,7 @@ m(infinite, {
 })
 ~~~
 
+<a id="returning-data-directly"></a>
 ##### Returning data directly
 
 ~~~javascript
@@ -215,6 +233,7 @@ m(infinite, {
 })
 ~~~
 
+<a id="returning-data-as-a-promise"></a>
 ##### Returning data as a Promise
 
 ~~~javascript
@@ -234,6 +253,7 @@ m(infinite, {
 ~~~
 
 <a name="handling-dynamic-data"></a>
+<a id="handling-dynamic-data"></a>
 ### Handling dynamic data
 
 In situations where the Infinite component needs to show different items - for instance when filtering or sorting search results - we must provide a unique key for each page. The key will enable Mithril to properly distinguish the pages.
@@ -270,6 +290,7 @@ const MyComponent = {
 
 
 <a name="advanced-item-function-example"></a>
+<a id="advanced-item-function-example"></a>
 ### Advanced item function example
 
 To enhance the current loading behavior, we:
@@ -305,6 +326,7 @@ el.style.backgroundImage = `url(${url})`
 
 
 <a name="getting-the-total-page-count"></a>
+<a id="getting-the-total-page-count"></a>
 ### Getting the total page count
 
 How the total page count is delivered will differ per server. `jsonplaceholder.typicode.com` passes the info in the request header.
@@ -342,6 +364,7 @@ m(infinite, {
 
 
 <a name="using-images"></a>
+<a id="using-images"></a>
 ### Using images
 
 For a better loading experience (and data usage), images should be loaded only when they appear on the screen. To check if the image is in the viewport, you can use the function `infinite.isElementInViewport({ el })`. For example:
@@ -361,6 +384,7 @@ el.style.backgroundImage = `url(${url})`
 
 
 <a name="using-table-data"></a>
+<a id="using-table-data"></a>
 ### Using table data
 
 Using `<table>` tags causes reflow problems. Use divs instead, with CSS styling for table features. For example:
@@ -382,6 +406,7 @@ Using `<table>` tags causes reflow problems. Use divs instead, with CSS styling 
 
 
 <a name="pagination"></a>
+<a id="pagination"></a>
 ### Pagination
 
 See the "Paging" example.
@@ -389,9 +414,11 @@ See the "Paging" example.
 
 
 <a name="configuration-options"></a>
+<a id="configuration-options"></a>
 ## Configuration options
 
 <a name="appearance-options"></a>
+<a id="appearance-options"></a>
 ### Appearance options
 
 | **Parameter** |  **Mandatory** | **Type** | **Default** | **Description** |
@@ -404,13 +431,13 @@ See the "Paging" example.
 | **preloadPages** | optional | Number | 1 | Number of pages to preload when the app starts; if room is available, this number will increase automatically |
 | **axis** | optional | String | "y" | The scroll axis, either "y" or "x" |
 | **autoSize** | optional | Boolean | true | Set to `false` to not set the width or height in CSS |
-| **throttle** | optional | Number | .2 | The number of seconds between scroll updates |
 | **before** | optional | Mithril template or component | | Content shown before the pages; has class `mithril-infinite__before` |
 | **after** | optional | Mithril template or component | | Content shown after the pages; has class `mithril-infinite__after`; will be shown only when content exists and the last page is in view (when `maxPages` is defined) |
 | **contentSize** | optional | Number (pixels) |  | Use when you know the number of items to display and the height of the content, and when  predictable scrollbar behaviour is desired (without jumps when content is loaded); pass a pixel value to set the size (height or width) of the scroll content, thereby overriding the dynamically calculated height; use together with `pageSize`  |
 | **setDimensions** | optional | Function ({scrolled: Number, size: Number}) | | Sets the initial size and scroll position of `scrollView`; this function is called once |
 
 <a name="callback-functions"></a>
+<a id="callback-functions"></a>
 ### Callback functions
 
 | **Parameter** |  **Mandatory** | **Type** | **Default** | **Description** |
@@ -425,6 +452,7 @@ See the "Paging" example.
 | **pageKey** | optional | Function `(page: Number) => String` | key is based on page number | Function to provide a unique key for each Page component; use this when showing dynamic page data, for instance based on sorting or filtering |
 
 <a name="paging-options"></a>
+<a id="paging-options"></a>
 ### Paging options
 
 | **Parameter** |  **Mandatory** | **Type** | **Default** | **Description** |
@@ -434,6 +462,7 @@ See the "Paging" example.
 | **to** | optional | Number | | Not needed when only one page is shown (use `currentPage`); Use page data to this number and lower |
 
 <a name="options-for-infiniteiselementinviewport"></a>
+<a id="options-for-infiniteiselementinviewport"></a>
 ### Options for infinite.isElementInViewport
 
 All options are passed in an options object: `infinite.isElementInViewport({ el, leeway })`
@@ -447,6 +476,7 @@ All options are passed in an options object: `infinite.isElementInViewport({ el,
 
 
 <a name="styling"></a>
+<a id="styling"></a>
 ## Styling
 
 Note: The parent of "scroll-view" must have a height. Also make sure that `html` has a height (typically set to `100%`).
@@ -455,6 +485,7 @@ Styles are added using [j2c](https://github.com/pygy/j2c). This library is also 
 
 
 <a name="css-classes"></a>
+<a id="css-classes"></a>
 ### CSS classes
 
 | **Element**           | **Key**       |  **Class** |
@@ -477,6 +508,7 @@ Styles are added using [j2c](https://github.com/pygy/j2c). This library is also 
 
 
 <a name="fixed-scroll-and-overflow-anchor"></a>
+<a id="fixed-scroll-and-overflow-anchor"></a>
 ### Fixed scroll and `overflow-anchor`
 
 Some browsers use [overflow-anchor](https://css-tricks.com/almanac/properties/o/overflow-anchor/) to prevent content from jumping as the page loads more data above the viewport. This may conflict how Infinite inserts content in "placeholder slots". 
@@ -485,6 +517,7 @@ To prevent miscalculations of content size, the "scroll content" element has sty
 
 
 <a name="size"></a>
+<a id="size"></a>
 ## Size
 
 Minified and gzipped: ~ 3.9 Kb
@@ -492,6 +525,7 @@ Minified and gzipped: ~ 3.9 Kb
 
 
 <a name="dependencies"></a>
+<a id="dependencies"></a>
 ## Dependencies
 
 * [j2c](https://github.com/pygy/j2c) - for creating js stylesheets
@@ -501,6 +535,7 @@ Minified and gzipped: ~ 3.9 Kb
 
 
 <a name="licence"></a>
+<a id="licence"></a>
 ## Licence
 
 MIT

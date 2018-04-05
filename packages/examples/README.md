@@ -22,7 +22,7 @@
 * `lerna bootstrap`
 * `cd packages/examples`
 * `yarn run dev`
-* Open browser at [localhost:8080](http://localhost:8080/)
+* Open browser at [localhost:3000](http://localhost:3000/)
 
 
 
