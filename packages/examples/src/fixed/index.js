@@ -9,7 +9,7 @@ import { addStyle } from "../app/styler";
 import styles from "./styles";
 addStyle("fixed", styles);
 
-const PAGE_ITEMS =           10;
+const PAGE_ITEMS =           12;
 const ITEM_HEIGHT =          36 + 1; // include border
 const AFTER_CONTENT_HEIGHT = 133;
 const PAGE_COUNT =           10;
