@@ -84,7 +84,7 @@ export default {
           onclick: () => vm.toggle("before")
         },
         [
-          m("div", m.trust("A list of pugs. Courtesy the <a href=\"http: //airbnb.io/infinity/demo-off.html\">AirBnb Infinity demo</a>.")),
+          m("div", m.trust("A list of pugs.")),
           m("a", {
             onclick: () => {
               vnode.state.currentPage = 6;

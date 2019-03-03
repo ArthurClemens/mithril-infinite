@@ -6,14 +6,15 @@
   "description": "Infinite Scroll for Mithril",
   "scripts": {
     "clean": "rm -rf dist/*",
-    "build": "DEPS=false ../../node_modules/rollup/bin/rollup -c ../../scripts/rollup.umd.js && ../../node_modules/rollup/bin/rollup -c ../../scripts/rollup.es.js",
-    "build-standalone": "DEPS=1 MODULE=infinite DEST=./dist/mithril-infinite-standalone ../../node_modules/rollup/bin/rollup -c ../../scripts/rollup.umd-includes.js"
+    "build": "../../node_modules/rollup/bin/rollup -c ../../scripts/rollup.umd.js && ../../node_modules/rollup/bin/rollup -c ../../scripts/rollup.es.js"
   },
   "dependencies": {
     "j2c": "^1.0.0-4",
-    "mithril": "^1.1.6",
-    "resize-observer-polyfill": "^1.5.0",
+    "resize-observer-polyfill": "^1.5.1",
     "verge": "^1.10.2"
+  },
+  "peerDependencies": {
+    "mithril": "^1.1.6"
   },
   "keywords": [
     "scroll",
