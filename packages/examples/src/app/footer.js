@@ -7,9 +7,9 @@ const SIDE_PADDING = 16;
 const styles = [{
   ".footer": {
     width: (styleVariables.size - 2 * SIDE_PADDING) + "px",
-    margin: "32px auto 0 auto",
+    margin: "0 auto",
     textAlign: "left",
-    padding: "24px " + SIDE_PADDING + "px",
+    padding: "32px " + SIDE_PADDING + "px",
     fontSize: "14px",
     lineHeight: 1.3,
     color: "#90A4AE",

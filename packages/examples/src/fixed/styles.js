@@ -7,9 +7,6 @@ export default [{
           overflowY: "hidden",
         }
       },
-      " .footer": {
-        height: "133px"
-      }
     }
   }
 }];

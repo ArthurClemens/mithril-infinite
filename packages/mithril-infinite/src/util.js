@@ -4,13 +4,10 @@ import { classes } from "./classes";
 const LEEWAY = 300;
 
 export const getElementSize = (el, axis) => {
-  const styles = window.getComputedStyle(el);
   if (axis === "x") {
-    const margin = parseFloat(styles.marginLeft) + parseFloat(styles.marginRight);
-    return el.scrollWidth + margin;
+    return el.offsetWidth;
   } else {
-    const margin = parseFloat(styles.marginTop) + parseFloat(styles.marginBottom);
-    return el.scrollHeight + margin;
+    return el.offsetHeight;
   }
 };
 

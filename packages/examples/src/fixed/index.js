@@ -11,7 +11,6 @@ addStyle("fixed", styles);
 
 const PAGE_ITEMS =           12;
 const ITEM_HEIGHT =          36 + 1; // include border
-const AFTER_CONTENT_HEIGHT = 133;
 const PAGE_COUNT =           10;
 
 const item = (data, opts) => (
@@ -31,7 +30,7 @@ export default {
       // set the size of each page
       pageSize: () => PAGE_ITEMS * ITEM_HEIGHT,
       // set the total height
-      contentSize: PAGE_COUNT * PAGE_ITEMS * ITEM_HEIGHT + AFTER_CONTENT_HEIGHT,
+      contentSize: PAGE_COUNT * PAGE_ITEMS * ITEM_HEIGHT,
       after: footer()
     });
   }

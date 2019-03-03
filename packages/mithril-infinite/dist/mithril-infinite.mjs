@@ -54,15 +54,10 @@ var classes = {
 
 var LEEWAY = 300;
 var getElementSize = function getElementSize(el, axis) {
-  var styles = window.getComputedStyle(el);
-
   if (axis === "x") {
-    var margin = parseFloat(styles.marginLeft) + parseFloat(styles.marginRight);
-    return el.scrollWidth + margin;
+    return el.offsetWidth;
   } else {
-    var _margin = parseFloat(styles.marginTop) + parseFloat(styles.marginBottom);
-
-    return el.scrollHeight + _margin;
+    return el.offsetHeight;
   }
 }; // el, axis = "y", expand = LEEWAY
 
@@ -308,6 +303,10 @@ var calculateCurrentPageNum = function calculateCurrentPageNum(scrollAmount, sta
 
   return currentPageNum;
 };
+/**
+ * Calculates the content size without "before" and "after".
+ */
+
 
 var calculateContentSize = function calculateContentSize(from, to, state) {
   var fromIndex = Math.max(0, from - 1);
@@ -318,7 +317,7 @@ var calculateContentSize = function calculateContentSize(from, to, state) {
 
   var toIndex = to;
   var pageNumKeys = state.sortedKeys.slice(fromIndex, toIndex);
-  var size = state.before || 0;
+  var size = 0;
   size = pageNumKeys.reduce(function (total, pageKey) {
     return total + (state.pageSizes[pageKey] || 0);
   }, size);
@@ -414,8 +413,8 @@ var oninit$1 = function oninit(vnode) {
   var scroll = m.redraw;
 
   _extends(vnode.state, {
-    after: 0,
-    before: 0,
+    afterSize: 0,
+    beforeSize: 0,
     boundingClientRect: {},
     currentPageNum: 0,
     pageSizes: {},
@@ -490,13 +489,13 @@ var view$1 = function view(_ref) {
   }, m("div", {
     class: classes.scrollContent,
     style: !state.autoSize ? null : _extends({}, axis === "x" ? {
-      width: state.contentSize + "px"
+      width: state.contentSize + state.beforeSize + state.afterSize + "px"
     } : {
-      height: state.contentSize + "px"
+      height: state.contentSize + state.beforeSize + state.afterSize + "px"
     }, attrs.contentSize ? axis === "x" ? {
-      "min-width": attrs.contentSize + "px"
+      "min-width": attrs.contentSize + state.beforeSize + state.afterSize + "px"
     } : {
-      "min-height": attrs.contentSize + "px"
+      "min-height": attrs.contentSize + state.beforeSize + state.afterSize + "px"
     } : {})
   }, [m(state.contentTag, {
     class: classes.content
@@ -504,11 +503,11 @@ var view$1 = function view(_ref) {
     class: classes.before,
     oncreate: function oncreate(_ref3) {
       var dom = _ref3.dom;
-      return updatePart(dom, "before", state, axis);
+      return updatePart(dom, "beforeSize", state, axis);
     },
     onupdate: function onupdate(_ref4) {
       var dom = _ref4.dom;
-      return updatePart(dom, "before", state, axis);
+      return updatePart(dom, "beforeSize", state, axis);
     }
   }, attrs.before) : null, m("div", {
     class: classes.pages
@@ -545,11 +544,11 @@ var view$1 = function view(_ref) {
     },
     oncreate: function oncreate(_ref5) {
       var dom = _ref5.dom;
-      return updatePart(dom, "after", state, axis);
+      return updatePart(dom, "afterSize", state, axis);
     },
     onupdate: function onupdate(_ref6) {
       var dom = _ref6.dom;
-      return updatePart(dom, "after", state, axis);
+      return updatePart(dom, "afterSize", state, axis);
     }
   }, attrs.after) : null])]));
 };

@@ -27,6 +27,9 @@ const calculateCurrentPageNum = (scrollAmount, state) => {
   return currentPageNum;
 };
 
+/**
+ * Calculates the content size without "before" and "after".
+ */
 const calculateContentSize = (from, to, state) => {
   const fromIndex = Math.max(0, from - 1);
   if (to < fromIndex) {
@@ -34,7 +37,7 @@ const calculateContentSize = (from, to, state) => {
   }
   const toIndex = to;
   const pageNumKeys = state.sortedKeys.slice(fromIndex, toIndex);
-  let size = state.before || 0;
+  let size = 0;
   size = pageNumKeys.reduce((total, pageKey) => (
     total + (state.pageSizes[pageKey] || 0)
   ), size);
@@ -134,8 +137,8 @@ const oninit = vnode => {
   const scroll = m.redraw;
 
   Object.assign(vnode.state, {
-    after: 0,
-    before: 0,
+    afterSize: 0,
+    beforeSize: 0,
     boundingClientRect: {},
     currentPageNum: 0,
     pageSizes: {},
@@ -189,7 +192,7 @@ const view = ({ state, attrs }) => {
   const isLastPageVisible = maxPageNum
     ? isPageInViewport(maxPageNum, axis, state.scrollView)
     : true;
-  
+
   return m("div",
     {
       oncreate: ({ dom }) => {
@@ -220,12 +223,12 @@ const view = ({ state, attrs }) => {
           : Object.assign(
             {},
             axis === "x"
-              ? { width: state.contentSize + "px" }
-              : { height: state.contentSize + "px" },
+              ? { width: state.contentSize + state.beforeSize + state.afterSize + "px" }
+              : { height: state.contentSize + state.beforeSize + state.afterSize + "px" },
             attrs.contentSize
               ? axis === "x"
-                ? { "min-width": attrs.contentSize + "px" }
-                : { "min-height": attrs.contentSize + "px" }
+                ? { "min-width": attrs.contentSize + state.beforeSize + state.afterSize + "px" }
+                : { "min-height": attrs.contentSize + state.beforeSize + state.afterSize + "px" }
               : {}
           )
       },
@@ -234,8 +237,8 @@ const view = ({ state, attrs }) => {
           attrs.before
             ? m("div", {
               class: classes.before,
-              oncreate: ({ dom }) => updatePart(dom, "before", state, axis),
-              onupdate: ({ dom }) => updatePart(dom, "before", state, axis)
+              oncreate: ({ dom }) => updatePart(dom, "beforeSize", state, axis),
+              onupdate: ({ dom }) => updatePart(dom, "beforeSize", state, axis)
             }, attrs.before)
             : null,
           m("div", { class: classes.pages }, [
@@ -274,8 +277,8 @@ const view = ({ state, attrs }) => {
                 // to prevent flashes of after content when scrolling fast
                 visibility: isLastPageVisible ? "visible" : "hidden"
               },
-              oncreate: ({ dom }) => updatePart(dom, "after", state, axis),
-              onupdate: ({ dom }) => updatePart(dom, "after", state, axis),
+              oncreate: ({ dom }) => updatePart(dom, "afterSize", state, axis),
+              onupdate: ({ dom }) => updatePart(dom, "afterSize", state, axis),
             }, attrs.after)
             : null
         ])
