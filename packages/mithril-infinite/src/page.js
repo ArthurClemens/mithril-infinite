@@ -80,7 +80,6 @@ const view = ({ state, attrs }) => {
         }
       });
       ro.observe(dom);
-      // update(dom);
     },
     onupdate: ({ dom }) => update(dom)
   }, state.processPageData(state.content(), {

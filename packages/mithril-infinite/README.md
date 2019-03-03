@@ -270,7 +270,7 @@ const Search = {
   view: () =>
     m("div", 
       m("input", {
-        oninput: m.withAttr("value", query),
+        oninput: e => query(e.target.value),
         value: query()
       })
     )

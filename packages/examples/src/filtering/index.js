@@ -29,7 +29,7 @@ const Search = {
   view: () => {
     return m(".search-view", 
       m("input", {
-        oninput: m.withAttr("value", query),
+        oninput: e => query(e.target.value),
         value: query(),
         placeholder: "Search name",
       })

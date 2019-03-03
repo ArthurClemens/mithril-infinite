@@ -176,7 +176,7 @@ var view = function view(_ref2) {
           }
         }
       });
-      ro.observe(dom); // update(dom);
+      ro.observe(dom);
     },
     onupdate: function onupdate(_ref4) {
       var dom = _ref4.dom;
@@ -293,7 +293,7 @@ var calculateCurrentPageNum = function calculateCurrentPageNum(scrollAmount, sta
     return 1;
   }
 
-  var acc = state.beforeSize || 0;
+  var acc = state.before || 0;
   var currentPageNum = 1;
 
   for (var i = 0; i < pageNumKeys.length; i = i + 1) {
@@ -318,15 +318,14 @@ var calculateContentSize = function calculateContentSize(from, to, state) {
 
   var toIndex = to;
   var pageNumKeys = state.sortedKeys.slice(fromIndex, toIndex);
-  var size = state.beforeSize || 0;
+  var size = state.before || 0;
   size = pageNumKeys.reduce(function (total, pageKey) {
-    return total += state.pageSizes[pageKey] || 0;
+    return total + (state.pageSizes[pageKey] || 0);
   }, size);
-  size += state.afterSize || 0;
   return size;
 };
 
-var isPageInViewport = function isPageInViewport(page, axis, state, scrollView) {
+var isPageInViewport = function isPageInViewport(page, axis, scrollView) {
   if (!scrollView) {
     return false;
   }
@@ -348,7 +347,7 @@ var updatePageSize = function updatePageSize(state) {
       state.pageSizes[pageId] = newSize;
       state.sortedKeys = Object.keys(state.pageSizes).sort();
       calculatePreloadSlots(state);
-      setTimeout(m.redraw, 0);
+      setTimeout(m.redraw);
     }
   };
 };
@@ -374,7 +373,7 @@ var calculatePreloadSlots = function calculatePreloadSlots(state) {
 
   if (state.contentSize && state.preloadSlots < state.pageCount && state.preloadSlots <= state.attrsMaxPreloadSlots && state.contentSize < boundingClientRect.height) {
     state.preloadSlots++;
-    setTimeout(m.redraw, 0);
+    setTimeout(m.redraw);
   }
 };
 
@@ -412,14 +411,11 @@ var oninit$1 = function oninit(vnode) {
   var pageSize = attrs.pageSize;
   var contentTag = attrs.contentTag || "div";
   var classList = [classes.scrollView, axis === "x" ? classes.scrollViewX : classes.scrollViewY, attrs.class].join(" ");
+  var scroll = m.redraw;
 
-  var scroll = function scroll() {
-    return m.redraw();
-  };
-
-  vnode.state = {
-    afterSize: null,
-    beforeSize: null,
+  _extends(vnode.state, {
+    after: 0,
+    before: 0,
     boundingClientRect: {},
     currentPageNum: 0,
     pageSizes: {},
@@ -436,7 +432,7 @@ var oninit$1 = function oninit(vnode) {
     pageSize: pageSize,
     scroll: scroll,
     whichScroll: whichScroll
-  };
+  });
 };
 
 var view$1 = function view(_ref) {
@@ -466,8 +462,9 @@ var view$1 = function view(_ref) {
       maxPageNum = _getPageList.maxPageNum;
 
   state.contentSize = attrs.contentSize !== undefined ? attrs.contentSize : calculateContentSize(1, maxPageNum, state);
+  calculatePreloadSlots(state);
   state.pageCount = pages.length;
-  var isLastPageVisible = maxPageNum ? isPageInViewport(maxPageNum, axis, state, state.scrollView) : true;
+  var isLastPageVisible = maxPageNum ? isPageInViewport(maxPageNum, axis, state.scrollView) : true;
   return m("div", {
     oncreate: function oncreate(_ref2) {
       var dom = _ref2.dom;

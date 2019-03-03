@@ -37,12 +37,12 @@ export default {
         response
       ));
 
-    vnode.state = {
+    Object.assign(vnode.state, {
       getPageData,
       pageNum,
       hasPrev: num => num > 1,
       hasNext: num => num < pageCount
-    };
+    });
   },
   view: vnode => {
     const state = vnode.state;

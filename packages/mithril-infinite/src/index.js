@@ -15,7 +15,7 @@ const calculateCurrentPageNum = (scrollAmount, state) => {
   if (pageNumKeys.length === 0) {
     return 1;
   }
-  let acc = state.beforeSize || 0;
+  let acc = state.before || 0;
   let currentPageNum = 1;
   for (let i = 0; i < pageNumKeys.length; i = i + 1) {
     let pageKey = pageNumKeys[i];
@@ -34,15 +34,14 @@ const calculateContentSize = (from, to, state) => {
   }
   const toIndex = to;
   const pageNumKeys = state.sortedKeys.slice(fromIndex, toIndex);
-  let size = state.beforeSize || 0;
+  let size = state.before || 0;
   size = pageNumKeys.reduce((total, pageKey) => (
-    total += state.pageSizes[pageKey] || 0
+    total + (state.pageSizes[pageKey] || 0)
   ), size);
-  size += state.afterSize || 0;
   return size;
 };
 
-const isPageInViewport = (page, axis, state, scrollView) => {
+const isPageInViewport = (page, axis, scrollView) => {
   if (!scrollView) {
     return false;
   }
@@ -58,7 +57,7 @@ const updatePageSize = state => (pageId, size) => {
     state.pageSizes[pageId] = newSize;
     state.sortedKeys = Object.keys(state.pageSizes).sort();
     calculatePreloadSlots(state);
-    setTimeout(m.redraw, 0);
+    setTimeout(m.redraw);
   }
 };
 
@@ -87,7 +86,7 @@ const calculatePreloadSlots = state => {
     && (state.contentSize < boundingClientRect.height)
   ) {
     state.preloadSlots++;
-    setTimeout(m.redraw, 0);
+    setTimeout(m.redraw);
   }
 };
 
@@ -132,11 +131,11 @@ const oninit = vnode => {
     attrs.class
   ].join(" ");
 
-  const scroll = () => m.redraw();
+  const scroll = m.redraw;
 
-  vnode.state = {
-    afterSize: null,
-    beforeSize: null,
+  Object.assign(vnode.state, {
+    after: 0,
+    before: 0,
     boundingClientRect: {},
     currentPageNum: 0,
     pageSizes: {},
@@ -154,7 +153,7 @@ const oninit = vnode => {
     pageSize,
     scroll,
     whichScroll,
-  };
+  });
 };
 
 const view = ({ state, attrs }) => {
@@ -183,10 +182,12 @@ const view = ({ state, attrs }) => {
     ? attrs.contentSize
     : calculateContentSize(1, maxPageNum, state);
 
+  calculatePreloadSlots(state);
+
   state.pageCount = pages.length;
 
   const isLastPageVisible = maxPageNum
-    ? isPageInViewport(maxPageNum, axis, state, state.scrollView)
+    ? isPageInViewport(maxPageNum, axis, state.scrollView)
     : true;
   
   return m("div",
