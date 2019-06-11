@@ -132,7 +132,7 @@ var view = function view(_ref2) {
 
   return m(state.pageTag, {
     "data-page": pageId,
-    class: state.className,
+    "class": state.className,
     style: storedPageSize ? attrs.axis === "x" ? {
       width: cssSize
     } : {
@@ -161,8 +161,8 @@ var view = function view(_ref2) {
           _iteratorError = err;
         } finally {
           try {
-            if (!_iteratorNormalCompletion && _iterator.return != null) {
-              _iterator.return();
+            if (!_iteratorNormalCompletion && _iterator["return"] != null) {
+              _iterator["return"]();
             }
           } finally {
             if (_didIteratorError) {
@@ -201,7 +201,7 @@ var placeholder = {
     var storedPageSize = attrs.pageSizes[pageId] || 0;
     return m("div", {
       "data-page": pageId,
-      class: [classes.placeholder, state.className].join(" "),
+      "class": [classes.placeholder, state.className].join(" "),
       style: _extends({}, attrs.axis === "x" ? {
         width: storedPageSize + "px"
       } : {
@@ -409,7 +409,7 @@ var oninit$1 = function oninit(vnode) {
   var autoSize = attrs.autoSize !== undefined && attrs.autoSize === false ? false : true;
   var pageSize = attrs.pageSize;
   var contentTag = attrs.contentTag || "div";
-  var classList = [classes.scrollView, axis === "x" ? classes.scrollViewX : classes.scrollViewY, attrs.class].join(" ");
+  var classList = [classes.scrollView, axis === "x" ? classes.scrollViewX : classes.scrollViewY, attrs["class"]].join(" ");
   var scroll = m.redraw;
 
   _extends(vnode.state, {
@@ -487,7 +487,7 @@ var view$1 = function view(_ref) {
       return state.scrollView.removeEventListener("scroll", state.scroll);
     }
   }, m("div", {
-    class: classes.scrollContent,
+    "class": classes.scrollContent,
     style: !state.autoSize ? null : _extends({}, axis === "x" ? {
       width: state.contentSize + state.beforeSize + state.afterSize + "px"
     } : {
@@ -498,9 +498,9 @@ var view$1 = function view(_ref) {
       "min-height": attrs.contentSize + state.beforeSize + state.afterSize + "px"
     } : {})
   }, [m(state.contentTag, {
-    class: classes.content
+    "class": classes.content
   }, [attrs.before ? m("div", {
-    class: classes.before,
+    "class": classes.before,
     oncreate: function oncreate(_ref3) {
       var dom = _ref3.dom;
       return updatePart(dom, "beforeSize", state, axis);
@@ -510,7 +510,7 @@ var view$1 = function view(_ref) {
       return updatePart(dom, "beforeSize", state, axis);
     }
   }, attrs.before) : null, m("div", {
-    class: classes.pages
+    "class": classes.pages
   }, [prePages.map(function (pageNum) {
     return m(placeholder, {
       axis: axis,
@@ -536,7 +536,7 @@ var view$1 = function view(_ref) {
     });
   })]), // only show "after" when content is available
   attrs.after && state.contentSize ? m("div", {
-    class: classes.after,
+    "class": classes.after,
     style: {
       // visually hide this element until the last page is into view
       // to prevent flashes of after content when scrolling fast
