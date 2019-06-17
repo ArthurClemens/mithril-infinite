@@ -6,7 +6,7 @@ import resolve from "rollup-plugin-node-resolve";
 
 const env = process.env; // eslint-disable-line no-undef
 const pkg = JSON.parse(fs.readFileSync("./package.json"));
-const name = env.MODULE_NAME || "mithril-infinite";
+const name = env.MODULE_NAME || "mithrilInfinite";
 
 export default {
   input: env.ENTRY || "index.js",

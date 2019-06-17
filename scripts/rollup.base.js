@@ -7,7 +7,7 @@ import commonjs from "rollup-plugin-commonjs";
 const env = process.env;
 export const pkg = JSON.parse(fs.readFileSync("./package.json"));
 const external = Object.keys(pkg.dependencies || {});
-const name = env.MODULE_NAME || "mithril-infinite";
+const name = env.MODULE_NAME || "mithrilInfinite";
 
 const globals = {};
 external.forEach(ext => {
