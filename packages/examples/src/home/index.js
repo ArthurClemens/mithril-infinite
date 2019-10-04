@@ -64,9 +64,8 @@ const menuData = [
 const menu = m("ul.menu", [
   m("li.header", "Examples"),
   menuData.map(menuItem => {
-    return m("li", m("a", {
-      href: menuItem.href,
-      oncreate: m.route.link
+    return m("li", m(m.route.Link, {
+      href: menuItem.href
     }, [
       m("span.title", menuItem.title),
       m("span.subtitle", menuItem.subtitle)
@@ -99,6 +98,7 @@ m.route(mountNode, "/", {
   "/paging": paging,
   "/paging/:p": paging
 });
+
 
 // Debounce window resize
 let resizeTimer = 0;
