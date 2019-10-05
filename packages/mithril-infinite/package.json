@@ -14,7 +14,7 @@
     "verge": "^1.10.2"
   },
   "peerDependencies": {
-    "mithril": "^1.1.6"
+    "mithril": "^2.0.4"
   },
   "keywords": [
     "scroll",
