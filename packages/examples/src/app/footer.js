@@ -28,10 +28,9 @@ const styles = [{
 addStyle("footer", styles);
 
 export default (opts = {}) =>
-  m(".footer", [!opts.home ? m("a",
+  m(".footer", [!opts.home ? m(m.route.Link,
     {
       href: "/",
-      oncreate: m.route.link
     }, "All examples") : null,
   m("hr"),
   m.trust("mithril-infinite, Infinite Scroll for Mithril on mobile and desktop. Project page on <a href=\"https://github.com/ArthurClemens/mithril-infinite\">Github</a>.")

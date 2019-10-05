@@ -86,7 +86,9 @@ export default {
         [
           m("div", m.trust("A list of pugs.")),
           m("a", {
-            onclick: () => {
+            href: "#",
+            onclick: e => {
+              e.preventDefault();
               vnode.state.currentPage = 6;
               m.redraw();
               setTimeout(() => {

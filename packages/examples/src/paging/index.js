@@ -11,7 +11,7 @@ const item = data =>
   m("a.grid-item",
     m(".image-holder",
       m(".image", {
-        oncreate: ({dom}) => {
+        oncreate: ({ dom }) => {
           dom.style.backgroundImage = "url(" + appVariables.imageUrl + data.src + ")";
         }
       })
@@ -60,15 +60,13 @@ export default {
           autoSize: false // disabled because we are already setting the height in CSS
         }),
         m(".pager", [
-          m("a", {
+          m(m.route.Link, {
             class: !state.hasPrev(pageNum) ? "disabled" : "",
             href: "/paging/" + (pageNum - 1),
-            oncreate: m.route.link
           }, "Prev"),
-          m("a", {
+          m(m.route.Link, {
             class: !state.hasNext(pageNum) ? "disabled" : "",
             href: "/paging/" + (pageNum + 1),
-            oncreate: m.route.link
           }, "Next")
         ])
       ]),
