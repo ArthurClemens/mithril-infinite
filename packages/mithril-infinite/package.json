@@ -6,7 +6,7 @@
   "description": "Infinite Scroll for Mithril",
   "scripts": {
     "clean": "rm -rf dist/*",
-    "build": "../../node_modules/rollup/bin/rollup -c ../../scripts/rollup.umd.js && ../../node_modules/rollup/bin/rollup -c ../../scripts/rollup.es.js"
+    "build": "../../node_modules/rollup/dist/bin/rollup -c ../../scripts/rollup.umd.js && ../../node_modules/rollup/dist/bin/rollup -c ../../scripts/rollup.es.js"
   },
   "dependencies": {
     "j2c": "^1.0.0-4",
