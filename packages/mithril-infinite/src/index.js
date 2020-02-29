@@ -192,7 +192,7 @@ const view = ({ state, attrs }) => {
   const isLastPageVisible = maxPageNum
     ? isPageInViewport(maxPageNum, axis, state.scrollView)
     : true;
-
+  
   return m("div",
     {
       oncreate: ({ dom }) => {

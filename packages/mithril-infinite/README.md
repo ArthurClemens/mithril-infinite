@@ -433,7 +433,7 @@ See the "Paging" example.
 | **autoSize** | optional | Boolean | true | Set to `false` to not set the width or height in CSS |
 | **before** | optional | Mithril template or component | | Content shown before the pages; has class `mithril-infinite__before` |
 | **after** | optional | Mithril template or component | | Content shown after the pages; has class `mithril-infinite__after`; will be shown only when content exists and the last page is in view (when `maxPages` is defined) |
-| **contentSize** | optional | Number (pixels) |  | Use when you know the number of items to display and the height of the content, and when  predictable scrollbar behaviour is desired (without jumps when content is loaded); pass a pixel value to set the size (height or width) of the scroll content, thereby overriding the dynamically calculated height; use together with `pageSize`  |
+| **contentSize** | optional | Number (pixels) |  | Use when you know the number of items to display and the height of the content, and when predictable scrollbar behaviour is desired (without jumps when content is loaded); pass a pixel value to set the size (height or width) of the scroll content, thereby overriding the dynamically calculated height; use together with `pageSize`  |
 | **setDimensions** | optional | Function ({scrolled: Number, size: Number}) | | Sets the initial size and scroll position of `scrollView`; this function is called once |
 
 <a name="callback-functions"></a>
