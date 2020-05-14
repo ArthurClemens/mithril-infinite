@@ -142,13 +142,13 @@ const oninit = vnode => {
     boundingClientRect: {},
     currentPageNum: 0,
     pageSizes: {},
-    preloadSlots: attrs.preloadPages || 1,
+    preloadSlots: attrs.preloadPages !== undefined ? attrs.preloadPages : 1,
     scrollView: null,
     sortedKeys: [],
 
     // Memoized
     attrsMaxPreloadSlots: attrs.maxPreloadPages || Number.MAX_VALUE,
-    attrsPreloadSlots: attrs.preloadPages || 1,
+    attrsPreloadSlots: attrs.preloadPages !== undefined ? attrs.preloadPages : 1,
     autoSize,
     axis,
     classList,
