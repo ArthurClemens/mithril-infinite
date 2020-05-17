@@ -374,8 +374,6 @@ var calculatePreloadSlots = function calculatePreloadSlots(state) {
     state.preloadSlots++;
     setTimeout(m.redraw);
   }
-
-  console.log("state.preloadSlots", state.preloadSlots);
 };
 
 var getPageList = function getPageList(currentPageNum, fromPage, toPage, currentPage, preloadSlots, maxPages) {
@@ -383,14 +381,9 @@ var getPageList = function getPageList(currentPageNum, fromPage, toPage, current
   var maxPageNum = toPage ? parseInt(toPage, 10) : currentPage ? currentPage : maxPages;
   var pages = [];
   var prePages = [];
-  console.log("fromPage", fromPage, "toPage", toPage);
-  console.log("minPageNum", minPageNum, "maxPageNum", maxPageNum);
-  console.log("preloadSlots", preloadSlots);
-  console.log("maxPages", maxPages);
 
   for (var i = -preloadSlots; i <= preloadSlots; i = i + 1) {
     var pageNum = currentPageNum + i;
-    console.log("i", i, "pageNum", pageNum);
 
     if (pageNum >= minPageNum && pageNum <= maxPageNum) {
       pages.push(pageNum);
@@ -468,15 +461,8 @@ var view$1 = function view(_ref) {
       maxPageNum = _getPageList.maxPageNum;
 
   state.contentSize = attrs.contentSize !== undefined ? attrs.contentSize : calculateContentSize(1, maxPageNum, state);
-  console.log("attrs.from", attrs.from);
-  console.log("attrs.to", attrs.to);
-  console.log("currentPageNum", currentPageNum);
-  console.log("pages", pages);
-  console.log("prePages", prePages);
-  console.log("maxPageNum", maxPageNum);
   calculatePreloadSlots(state);
   state.pageCount = pages.length;
-  console.log("state.pageCount", state.pageCount);
   var isLastPageVisible = maxPageNum ? isPageInViewport(maxPageNum, axis, state.scrollView) : true;
   return m("div", {
     oncreate: function oncreate(_ref2) {
