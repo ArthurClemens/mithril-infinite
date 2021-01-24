@@ -2,7 +2,7 @@
   "name": "mithril-infinite",
   "main": "dist/mithril-infinite",
   "module": "dist/mithril-infinite.mjs",
-  "version": "1.2.11",
+  "version": "1.3.0",
   "description": "Infinite Scroll for Mithril",
   "scripts": {
     "clean": "rm -rf dist/*",
