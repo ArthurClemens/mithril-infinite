@@ -70,11 +70,14 @@ export default {
   view: vnode =>
     m(infinite, {
       maxPages: 20,
-      item,
+      // item,
       pageUrl,
       preloadPages: 3,
       currentPage: vnode.state.currentPage,
       class: "images",
+      // processPageData: (content, options)  => {
+      //   return m(".my-page", content.map((data, index) => item(data, options, index)));
+      // },
       before: m("a",
         {
           class: [

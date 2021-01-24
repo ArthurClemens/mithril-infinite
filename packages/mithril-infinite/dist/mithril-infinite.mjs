@@ -531,6 +531,7 @@ var view$1 = function view(_ref) {
       pageSize: state.pageSize,
       pageSizes: state.pageSizes,
       pageTag: attrs.pageTag,
+      processPageData: attrs.processPageData,
       pageUrl: attrs.pageUrl,
       updatePageSize: updatePageSize(state)
     });
