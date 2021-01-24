@@ -8,7 +8,7 @@
   "scripts": {
     "clean": "rm -rf dist/js/*",
     "dev": "npm-run-all --parallel dev:watch dev:serve",
-    "dev:serve": "webpack-dev-server --config scripts/webpack.config.dev.js --port 3000 --host 0.0.0.0",
+    "dev:serve": "node_modules/.bin/webpack serve --config scripts/webpack.config.dev.js --port 3000 --host 0.0.0.0",
     "dev:watch": "webpack-cli --watch --config scripts/webpack.config.dev.js",
     "webpack": "webpack-cli --config scripts/webpack.config.prod.js",
     "build": "npm run clean && npm run webpack",
@@ -16,23 +16,23 @@
     "github": "npm run build && node scripts/github.js"
   },
   "dependencies": {
-    "faker": "^4.1.0",
+    "faker": "^5.1.0",
     "j2c": "^1.0.0-4",
     "j2c-plugin-prefix-browser": "^1.0.7",
     "mithril": "^2.0.4",
     "mithril-infinite": "^1.2.11"
   },
   "devDependencies": {
-    "babel-loader": "^8.0.6",
-    "compression-webpack-plugin": "^3.1.0",
-    "http-server": "^0.12.1",
-    "mini-css-extract-plugin": "0.9.0",
+    "babel-loader": "^8.2.2",
+    "compression-webpack-plugin": "^7.1.2",
+    "http-server": "^0.12.3",
+    "mini-css-extract-plugin": "1.3.4",
     "npm-run-all": "^4.1.5",
-    "shelljs": "^0.8.3",
-    "webpack": "^4.41.6",
-    "webpack-cli": "^3.3.11",
-    "webpack-dev-server": "^3.10.3",
-    "whatwg-fetch": "^3.0.0"
+    "shelljs": "^0.8.4",
+    "webpack": "^5.17.0",
+    "webpack-cli": "^4.4.0",
+    "webpack-dev-server": "^3.11.2",
+    "whatwg-fetch": "^3.5.0"
   },
   "repository": {},
   "author": "",

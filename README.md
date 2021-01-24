@@ -464,10 +464,10 @@ m(infinite, {
 | ------------- | -------------- | -------- | ----------- | --------------- |
 | **pageUrl** | either `pageData` or `pageUrl` | Function `(page: Number) => String` | | Function that accepts a page number and returns a URL String |
 | **pageData** | either `pageData` or `pageUrl` | Function `(page: Number) => Promise` | | Function that fetches data; accepts a page number and returns a promise |
-| **item** | required | Function `(data: Array, options: Object, index: Number) => Mithril Template` | | Function that creates a Mithril element from received data |
+| **item** | required: either `item` or `processPageData` | Function `(data: Array, options: Object, index: Number) => Mithril Template` | | Function that creates a Mithril element from received data |
 | **pageSize** | optional | Function `(content: Array) => Number` | Pass a pixel value to set the size (height or width) of each page; the function accepts the page content and returns the size |
 | **pageChange** | optional | Function `(page: Number)` | | Get notified when a new page is shown |
-| **processPageData** | optional | Function `(data: Array, options: Object) => Array` | | Function that maps over the page data and returns an item for each |
+| **processPageData** | required: either `item` or `processPageData` | Function `(data: Array, options: Object) => Array` | | Function that maps over the page data and returns an item for each |
 | **getDimensions** | optional | Function `() => {scrolled: Number, size: Number}` | | Returns an object with state dimensions of `scrollView`: `scrolled` (either scrollTop or scrollLeft) and `size` (either height or width); this function is called on each view update | 
 | **pageKey** | optional | Function `(page: Number) => String` | key is based on page number | Function to provide a unique key for each Page component; use this when showing dynamic page data, for instance based on sorting or filtering |
 

@@ -70,7 +70,7 @@ export default {
   view: vnode =>
     m(infinite, {
       maxPages: 20,
-      // item,
+      item,
       pageUrl,
       preloadPages: 3,
       currentPage: vnode.state.currentPage,
